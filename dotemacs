@@ -1,0 +1,697 @@
+;;; ~/.emacs: Emacs configuration file.                     -*-emacs-lisp-*-
+;;
+;; Jason Blevins <jrblevin@sdf.lonestar.org>
+;; http://jblevins.org/
+;;
+;; Created: Raleigh, May 29, 2004
+;; Last Modified: March 12, 2008
+;;
+;; Set the following in ~/.Xresources:
+;;
+;; Emacs.menuBar:		off
+;; Emacs.verticalScrollBars:    off
+;; Emacs.toolBar:          	off
+;; Emacs.internalBorder:      	1
+;; Emacs.geometry:		80x35+5+5
+;; Emacs.Font:                  fontset-terminus
+;; Emacs.Fontset-0: \
+;; -xos4-terminus-medium-r-normal--20-200-72-72-c-100-fontset-terminus,\
+;; mule-unicode-0100-24ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
+;; mule-unicode-2500-33ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
+;; mule-unicode-e000-ffff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1
+
+
+;;
+;; Workarounds
+;; -----------
+
+;; Fix for custom-autoload errors: http://edward.oconnor.cx/config/.emacs
+(unless (fboundp 'custom-autoload)
+  (defun custom-autoload (symbol load)
+    "Mark SYMBOL as autoloaded custom variable and add dependency LOAD."
+    (put symbol 'custom-autoload t)
+    (custom-add-load symbol load)))
+
+
+;;
+;; Basic Configuration
+;; -------------------
+
+;; Disable loading of "default.el" at startup
+(setq inhibit-default-init t)
+
+;; Set the load path
+(setq load-path (cons "~/.emacs.d/lisp" load-path))
+
+;; Keep customized settings somewhere else
+(if (file-exists-p
+     (setq custom-file
+           (concat "~/.emacs.d/custom-"
+                   (int-to-string emacs-major-version))))
+    (load-file custom-file))
+
+;; Disable startup screen
+(setq inhibit-startup-message t)
+
+;; Enable automatic file uncocompress
+(auto-compression-mode 1)
+
+;; Default printer
+;(setq ps-printer-name "brother")
+
+;; Enable Narrow to region
+(put 'narrow-to-region 'disabled nil)
+
+;; Enable scrolling via the mouse wheel
+(mouse-wheel-mode 1)
+
+;; Wrap lines at column 72
+(setq-default fill-column 72)
+
+;; Automatically wrap lines while writing.
+; (auto-fill-mode 1)
+
+;; Start comments at column 50
+(setq-default comment-column 50)
+
+;; Set standard indent to 2, rather than 4.
+(setq standard-indent 2)
+
+;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
+(setq-default indent-tabs-mode nil)
+(setq tab-width 8)
+
+;; Synchronize Emacs kill buffer with X clipboard.
+(setq x-select-enable-clipboard t)
+
+;; Ask whether to add a final newline to text files.
+(setq require-final-newline 'query)
+
+
+;;
+;; Appearance
+;; ----------
+
+;; Choose a color theme.
+(require 'color-theme)
+; (color-theme-dark-laptop)
+(color-theme-clarity)
+
+;; Flash the screen to alert.
+(setq visible-bell t)
+
+;; Highlight the current selection.
+(transient-mark-mode 1)
+
+;; Enable syntax highlighting.
+(global-font-lock-mode 1 nil)
+(setq font-lock-maximum-decoration t)
+
+;; Show matching parentheses.
+(show-paren-mode 1)
+
+;; Show the time in 24-hour format.
+(display-time-mode 1)
+(setq display-time-24hr-format t)
+
+;; Show the current line and column in the mode line.
+(line-number-mode 1)
+(column-number-mode 1)
+
+;; Prepare shell-mode to handle color output
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+
+;;
+;; Browser
+;; -------
+
+;; Use Firefox as browser
+(setq browse-url-generic-program "firefox"
+      browse-url-browser-function 'browse-url-generic)
+
+;; Use elinks as browser
+; (setq browse-url-generic-program "elinks"
+;       browse-url-browser-function 'browse-url-generic
+;       browse-url-generic-args '("-remote"))
+
+;; Use w3m as browser
+; (setq browse-url-browser-function 'browse-url-w3m)
+
+
+;;
+;; Emacs Server
+;; ------------
+
+;; server-start unless it is already running somewhere
+(unless (= 0 (call-process "emacsclient" nil nil
+                           nil "--eval" "nil" "-a" "false"))
+  (server-start))
+
+; This hook raises the Emacs frame when emacsclient is run
+(add-hook 'server-visit-hook 'raise-frame)
+
+
+;;
+;; Abbreviations
+;; -------------
+
+;; Enable abbrev-mode.
+(setq-default abbrev-mode t)
+
+;; Don't ask about saving my abbreviations.
+(setq save-abbrevs nil)
+
+
+;;
+;; PGP
+;; ---
+;;
+;; Using gpg.el: http://www.mew.org/~kazu/proj/prog/gpg.el
+
+; (autoload 'gpg-after-find-file "gpg" nil t)
+; (add-hook 'find-file-hooks 'gpg-after-find-file)
+
+
+;;
+;; AUCTeX
+;; ------
+
+;(require 'tex-site)
+;(setq TeX-parse-self t)                    ; Enable parse on load.
+;(setq TeX-auto-save t)                     ; Enable parse on save.
+;(setq TeX-auto-untabify t)                 ; Convert tabs to spaces on save
+;(setq TeX-PDF-mode t)                      ; Enable PDF mode by default
+;(setq TeX-source-specials-mode t)          ; Enable source-specials by default
+;(setq-default TeX-master nil)              ; Query for master file
+
+;(setq TeX-mode-hook '(lambda ()
+;                       (auto-fill-mode 1)
+;                       (LaTeX-math-mode 1)))
+
+;(setq TeX-open-quote "\`\`")               ; Standard quoting
+;(setq TeX-close-quote "\'\'")
+;(setq TeX-quote-after-quote nil)           ; If non-nil, insert literal " first
+
+;(setq LaTeX-german-open-quote "\,\,")      ; German quoting
+;(setq LaTeX-german-close-quote "\`\`")
+;(setq LaTeX-german-quote-after-quote nil)  ; If non-nil, insert literal " first
+
+;(setq TeX-output-view-style
+;      (quote
+;       (
+;        ("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 5 %d")
+;        ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d")
+;        ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
+;        ("^pdf$" "." "xpdf %o"))))
+
+
+;;
+;; BibTeX
+;; ------
+
+;; (setq bibtex-user-optional-fields
+;;       '(("keywords" "Item tags and keywords")
+;;         ("url" "A URL where the item can be found"))
+;;       bibtex-align-at-equal-sign t
+;;       bibtex-autokey-name-year-separator ""
+;;       bibtex-autokey-year-title-separator ""
+;;       bibtex-autokey-titleword-first-ignore '("the" "a" "if" "and" "an")
+;;       bibtex-autokey-titleword-length 30
+;;       bibtex-autokey-titlewords 1
+;;       bibtex-contline-indentation 17)
+
+;; (defun my-bibtex-mode-hook-fn ()
+;;   "Function added to `bibtex-mode-hook'."
+;;   (setq fill-column 77))
+
+;; (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
+
+
+;;
+;; GNU Octave 
+;; ----------
+
+(autoload 'octave-mode "octave-mod" nil t)
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+
+;;
+;; Cascading Style Sheets
+;; ----------------------
+
+(autoload 'css-mode "css-mode" nil t)
+(setq auto-mode-alist
+      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
+
+
+;;
+;; Big Brother Database
+;; --------------------
+
+(require 'bbdb)
+(require 'bbdb-autoloads)
+(setq bbdb-file "~/.bbdb")
+(setq bbdb-default-area-code 919)
+(setq bbdb-north-american-phone-numbers-p t)
+(setq bbdb-default-country "USA")
+(setq bbdb-dwim-net-address-allow-redundancy t)
+
+
+;;
+;; Perl
+;; ----
+
+(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
+
+(add-hook 'cperl-mode-hook 'n-cperl-mode-hook t)
+(defun n-cperl-mode-hook ()
+  (setq cperl-indent-level 4)
+  (setq cperl-continued-statement-offset 2)
+  (setq cperl-extra-newline-before-brace t))
+
+
+;;
+;; Gnus
+;; ----
+
+(setq gnus-init-file "~/.emacs.d/dotgnus")
+
+
+;;
+;; C and C++
+;; ---------
+
+(autoload 'c++-mode "cc-mode" "C++ Editing Mode" t)
+(autoload 'c-mode   "cc-mode" "C Editing Mode" t)
+
+(setq auto-mode-alist
+      (append '(("\\.cpp$" . c++-mode)
+		("\\.cc$" . c++-mode)
+		("\\.hh$" . c++-mode)
+		("\\.c$" . c-mode)
+		("\\.h$" . c-mode)) auto-mode-alist))
+
+;; (defun my-c-mode-common-hook ()
+;;   (c-set-style "stroustrup")
+;;   (setq c-basic-offset 4)
+;;   (c-set-offset 'substatement-open '0)
+;;   (c-set-offset 'case-label '+)
+;;   (c-set-offset 'innamespace '0)
+;;   (setq compilation-window-height 8)
+;;   (c-toggle-auto-hungry-state 0)
+;;   (c-toggle-hungry-state 0)
+;;   (c-toggle-auto-state t))
+;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;; ;; Automatically insert [], {}, and () pairs.
+;; (defun my-c-mode-auto-pair ()
+;;   (interactive)
+;;   (make-local-variable 'skeleton-pair-alist)
+;;   (setq skeleton-pair-alist
+;;         '((?\( _ ")")
+;;           (?{ \n _ "\n}")
+;;           (?\[ _ "]")))
+;;   (setq skeleton-pair t)
+;;   (local-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+;;   (local-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+;;   (local-set-key (kbd "`") 'skeleton-pair-insert-maybe)
+;;   (local-set-key (kbd "[") 'skeleton-pair-insert-maybe))
+;; (add-hook 'c-mode-hook   'my-c-mode-auto-pair)
+;; (add-hook 'c++-mode-hook 'my-c-mode-auto-pair)
+
+
+;;
+;; Calendar and Diary
+;; ------------------
+;;
+;; See the following:
+;;
+;; http://www.dotemacs.de/dotfiles/JasonRumney.emacs.html
+;; http://www.zvon.org/other/elisp/Output/index.html
+;; http://www.coling.uni-freiburg.de/~schauer/resources/emacs/config/calendar-stuff.el.html
+;; http://www.charlescurley.com/emacs.init.html
+
+;; Add ISO format to date formats allowed in diary
+(require 'diary-lib)
+(require 'calendar)
+
+(setq diary-file (expand-file-name "~/.diary")
+      calendar-week-start-day 1
+      mark-diary-entries-in-calendar t
+      mark-holidays-in-calendar t
+      view-diary-entries-initially nil
+      mark-diary-entries-in-calendar t
+      number-of-diary-entries 7)
+
+(add-hook 'diary-display-hook 'fancy-diary-display)
+(add-hook 'today-visible-calendar-hook 'calendar-mark-today)
+(add-hook 'list-diary-entries-hook 'sort-diary-entries t)
+
+(setq diary-date-forms
+      '((year "-" month "-" day "[^/0-9]")
+        (month "/" day "[^/0-9]")
+        (month "/" day "/" year "[^0-9]")
+        (monthname " *" day "[^,0-9]")
+        (monthname " *" day ", *" year "[^0-9]")
+        (dayname "\\W")))
+(setq calendar-date-display-form
+      (quote ((format "%04s-%02d-%02d" year (string-to-int month)
+                      (string-to-int day)))))
+(setq calendar-time-display-form
+      (quote (24-hours ":" minutes (if time-zone " (")
+                       time-zone (if time-zone ")"))))
+
+
+;;
+;; Cron
+;; ----
+
+(autoload 'crontab-mode "crontab-mode" "crontab-mode" t)
+(add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode))
+
+
+;;
+;; Fortran
+;; -------
+
+(autoload 'f90-mode "f90" "Fortran 90 mode" t)
+(add-hook 'f90-mode-hook 'my-f90-mode-hook)
+
+(defun my-f90-mode-hook ()
+  (setq f90-do-indent 3
+	f90-if-indent 3
+	f90-type-indent 3
+	f90-program-indent 2
+	f90-continuation-indent 5
+	f90-comment-region "!!$"
+	f90-directive-comment nil
+	f90-indented-comment "!"
+	f90-break-delimiters "[-+\\*/,><=% \t]"
+	f90-break-before-delimiters t
+	f90-beginning-ampersand t
+	f90-smart-end 'blink
+	f90-auto-keyword-case nil
+	f90-leave-line-no nil
+	f90-startup-message t
+	indent-tabs-mode nil
+	f90-font-lock-keywords f90-font-lock-keywords-3
+	comment-column 50)
+  (abbrev-mode 1)			; turn on abbreviation mode
+  (turn-on-font-lock)			; for highlighting
+  (auto-fill-mode 0))			; turn off auto-filling
+
+
+;;
+;; Markdown
+;; --------
+
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode to edit Markdown files" t)
+
+(setq auto-mode-alist
+      (cons '("\\.text$" . markdown-mode) auto-mode-alist))
+
+
+;;
+;; Planner
+;; -------
+
+(require 'planner)
+(require 'planner-multi)
+(require 'planner-id)
+
+(setq planner-project "WikiPlanner")
+
+(setq muse-project-alist
+      '(("WikiPlanner"
+         ("~/projects/gtd/plans"
+          :default "@Inbox"
+          :major-mode planner-mode
+          :visit-link planner-visit-link)
+         (:base "planner-xhtml" :path "~/public_html/plans"))))
+
+; Carry unfinished tasks forward to the next day page indefinitely (0)
+(setq planner-carry-tasks-forward 0)
+
+; Ask planner to use the full screen by default
+(setq planner-use-other-window nil)
+
+; Do not number tasks (reduce clutter)
+(setq planner-use-task-numbers nil)
+
+;; Task IDs
+(setq planner-id-tracking-file "~/.emacs.d/.planner-id")
+(setq planner-id-update-automatically t)
+
+;; Remember
+(require 'remember)
+(require 'remember-planner)
+(setq remember-handler-functions '(remember-planner-append))
+(setq remember-annotation-functions planner-annotation-functions)
+(setq remember-append-to-planner-hook
+      '(remember-planner-add-timestamp))
+;(require 'planner-gnus)
+;(planner-gnus-insinuate)
+;(require 'planner-bbdb)
+;(require 'planner-w3m)
+
+;; Diary interation
+(require 'planner-diary)
+(setq planner-diary-use-diary t)
+(planner-insinuate-diary)
+(planner-insinuate-calendar)
+(setq planner-diary-number-of-days 3)
+(setq planner-diary-number-of-diary-entries 10)
+(setq planner-diary-file diary-file)
+
+;;;; Timeclock integration
+;(load-file "/usr/share/emacs/site-lisp/planner-el/contrib/schedule.el")
+;(require 'planner-timeclock)
+;(require 'planner-timeclock-summary)
+;(require 'planner-timeclock-summary-proj)
+
+;; Display work day time remaining in modeline
+;(timeclock-modeline-display)
+
+;; Automatically update the timeclock summary section of day pages
+;(planner-timeclock-summary-insinuate)
+
+;;;; Task organization
+(require 'planner-trunk)
+(setq planner-trunk-rule-list
+      '(;; Day pages: Trunk by context
+        ("\\`[0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]\\'" nil
+         (("@Computer" "@Computer\n") ("@Office" "@Office\n")
+          ("@Email" "@Email\n") ("@Calls" "@Calls\n") ("@Home" "@Home\n")
+          ("@Errands" "@Errands\n") ("@WaitingFor" "@WaitingFor\n")))
+        ;; Context pages: Separate completed tasks
+        ("@.*" "Completed Tasks" nil)))
+
+;; Keybindings
+(planner-install-extra-task-keybindings)
+(global-set-key (kbd "C-x C-n") 'remember)
+(global-set-key (kbd "C-c C-t C-e") 'planner-edit-task-description)
+(global-set-key (kbd "C-c C-t C-m") 'planner-replan-task)
+(global-set-key (kbd "C-c C-t C-a") 'planner-create-note-from-task)
+(global-set-key (kbd "C-c C-r") 'planner-trunk-tasks)
+
+;; Template
+(setq planner-day-page-template
+      "* Tasks\n\n\n* Diary\n\n\n* Schedule\n\n\n* Notes\n\n")
+
+;; Context page link regexp
+(defvar jrb-planner-context-link-regexp
+ "\\[\\[\\(@[^][ \n]+\\)\\]\\(?:\\[\\([^][\n]+\\)\\]\\)?\\]")
+
+;; Hide task IDs
+(defun jrb-planner-hide-task-ids (beg end verbose)
+  (goto-char beg)
+  (while (re-search-forward "{{[^}\n]+}}" end t)
+    (planner-highlight-region
+     (match-beginning 0) (1+ (match-end 0))
+     'planner-id 49
+     (list 'invisible t))))
+
+(defun jrb-planner-mode-hook-impl ()
+  (add-hook 'muse-colors-buffer-hook 'jrb-planner-hide-task-ids t t))
+(add-hook 'planner-mode-hook 'jrb-planner-mode-hook-impl)
+
+
+;;=============================================================================
+;; Diary integration with planner-mode.  Slightly modified version of code
+;; by Jody Klymak, http://saturna.seos.uvic.ca/~jklymak/PlannerMode.html.
+
+(defun planner-diary-add-entry (date time text)
+  "Prompt for a diary entry to add to `diary-file'.  Will run
+    planner-annotations to make hyper links"
+  (interactive (list (planner-read-date)
+                     (read-string "Time: ")
+                     (read-string "Diary entry: ")))
+  (save-excursion
+    (save-window-excursion
+      (make-diary-entry
+       (concat
+        (let ((cal-date (planner-filename-to-calendar-date date)))
+            (format "%d-%02d-%02d"
+                    (elt cal-date 2)
+                    (elt cal-date 0)
+                    (elt cal-date 1)))
+        " " time " " text " "
+        (run-hook-with-args-until-success
+         'planner-annotation-functions))))))
+
+(define-key global-map [?\C-x ?\C-d] 'planner-diary-add-entry)
+
+
+;;
+;; W3M
+;; ---
+
+;; (require 'w3m-load)
+
+;; (setq browse-url-browser-function 'w3m-browse-url)
+;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+;; (global-set-key "\C-xm" 'browse-url-at-point)
+
+;; (setq w3m-use-cookies t)
+
+;; (setq w3m-coding-system 'utf-8
+;;       w3m-file-coding-system 'utf-8
+;;       w3m-file-name-coding-system 'utf-8
+;;       w3m-input-coding-system 'utf-8
+;;       w3m-output-coding-system 'utf-8
+;;       w3m-terminal-coding-system 'utf-8)
+
+;; (global-set-key (kbd "<f7>") 'w3m-download)
+
+
+;;
+;; Timestamps
+;; ----------
+
+(require 'time-stamp)
+(add-hook 'write-file-hooks 'time-stamp)
+(setq time-stamp-active t)
+(setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
+(setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|meta-modified:[ \t]+\\)")
+(setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
+(setq time-stamp-line-limit 10)
+
+(defun insert-year ()
+  "Insert the current year."
+  (interactive "*")
+  (insert (format-time-string "%Y")))
+
+(defun insert-date ()
+  "Insert the current date."
+  (interactive "*")
+  (insert (format-time-string "%B %e, %Y")))
+
+(defun insert-date-time ()
+  "Insert the current date and time."
+  (interactive "*")
+  (insert (format-time-string "%B %e, %Y %02H:%02M %Z")))
+
+
+;;
+;; Global keybindings
+;; ------------------
+
+(global-set-key [f3] 'insert-date-time)
+(global-set-key [f5] 'skeleton-weblog-header)
+(global-set-key [f6] 'calendar)
+(global-set-key [f7] 'markdown-mode)
+(global-set-key [f8] 'plan)
+(global-set-key [f9] 'planner-create-task-from-buffer)
+
+
+;;
+;; AMPL
+;; ----
+
+;; (setq auto-mode-alist
+;;       (cons '("\\.mod$" . ampl-mode) auto-mode-alist))
+;; (setq auto-mode-alist
+;;       (cons '("\\.dat$" . ampl-mode) auto-mode-alist))
+;; (setq auto-mode-alist
+;;       (cons '("\\.ampl$" . ampl-mode) auto-mode-alist))
+;; (setq interpreter-mode-alist
+;;       (cons '("ampl" . ampl-mode)
+;;             interpreter-mode-alist))
+
+;; (autoload 'ampl-mode "ampl-mode" "AMPL editing mode." t)
+
+
+;;
+;; SES
+;; ---
+
+; (autoload 'ses-mode "ses.el" "Spreadsheet mode" t)
+; (add-to-list 'auto-mode-alist '("\\.ses$" . ses-mode))
+
+
+;;
+;; Stata
+;; -----
+;;
+;; [ado-mode]: http://www.louisville.edu/~wrrisi01/Stata/
+
+;; (setq load-path (cons "~/.emacs.d/lisp/ado-mode/lisp" load-path))
+;; (cond ((fboundp 'global-font-lock-mode)
+;;        (global-font-lock-mode t)
+;;        (setq font-lock-maximum-decoration t)))
+;; ;(setq ado-site-template-dir "/Universal/Custom/emacs/ado-mode/templates/")
+;; (load-library "ado-mode")
+;; (autoload 'ado-mode "ado-mode.el"  "Major mode to edit Stata files" t)
+;; (setq ado-claim-name "Jason Blevins")
+;; (setq ado-signature-file "~/.emacs.d/.ado-signature")
+;; (setq ado-new-dir "~/ado/new/")
+;; ;;(setq ado-label-dir "~/Custom/Stata/labels/")
+;; (autoload 'make-regexp "make-regexp"
+;;   "Return a regexp to match a string item in STRINGS.")
+;; (autoload 'make-regexps "make-regexp"
+;;   "Return a regexp to REGEXPS.")
+;; (setq ado-confirm-overwrite-flag nil)
+;; (setq auto-mode-alist
+;;      (cons '("\\.do\\'" . ado-mode) auto-mode-alist))
+
+
+;;
+;; Org mode
+;; --------
+;;
+;; [org-mode]: http://staff.science.uva.nl/~dominik/Tools/org/
+
+;; (require 'org-install)
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; (define-key global-map "\C-cl" 'org-store-link)
+;; (define-key global-map "\C-ca" 'org-agenda)
+;; (setq org-log-done t)
+
+
+;;
+;; Mutt
+;; ----
+
+; (autoload 'muttrc-mode "muttrc-mode.el"
+;   "Major mode to edit muttrc files" t)
+; (setq auto-mode-alist
+;       (append '(("muttrc\\'" . muttrc-mode))
+;              auto-mode-alist))
+
+;; Use post-mode for composing email in Mutt.
+; (load "post")
+; (defun post-custom()
+;   "post-hook"
+;   (load "mutt-alias")
+;   (local-set-key "\C-ci" 'mutt-alias-insert)
+;   (flyspell-mode 0))
+; (add-hook 'post-mode-hook '(lambda() (post-custom)))
+; (setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
+
+

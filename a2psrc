@@ -1,0 +1,52 @@
+# ~/.a2ps/a2psrc: Customized a2ps configuration.
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+
+# Default Behavior
+Options: --medium=Letter
+Options: --pretty-print
+Options: -2
+Options: --borders no
+
+# By default, single sided printing.
+Options: --sides 2
+
+# Name of the document is the list of files
+# (Don't put too many of them: it breaks some PS interpreters)
+#Options: --title='#10!f|$n|, |'
+Options: --title=
+
+# Header is the client of the job
+#Options: --header=#{user.login}
+Options: --header=
+
+# Title of the page is the (short) name of the current file
+# or the first tagged text if there is
+Options: --center-title=#?1|$t1|$n|
+
+# Left part of the title is the mod. date of the file
+# or empty is there is a tag2
+Options: --left-title='#?2||$e $T|'
+
+# Right part of the title is the page number
+# or tag2 if there is
+Options: --right-title='#?2|$t2|$Q|'
+
+# If in landscape, print date on the left hand side
+# If portrait, then print date on recto, and sheet # on verso
+Options: --left-footer=
+
+# Center footer is the list of files on this sheet if landscape
+Options: --footer=
+
+# If in landscape, print date on the right hand side
+# If portrait, then print date on verso, and sheet # on recto
+Options: --right-footer=
+
+# We want the %%Page comments to be instructive.
+# There are two predefined choices: #{pl.short} and #{pl.long}
+PageLabelFormat: #{pl.short}
+
+# Report the number of lines which were wrapped.
+Variable: cfg.wrapped 1
+

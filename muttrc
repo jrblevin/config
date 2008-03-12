@@ -1,0 +1,159 @@
+## ~/.muttrc                                           -*-muttrc-*-
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Created: Durham, January 14, 2006
+# Last Modified: March 11, 2008
+
+# Identity
+# --------
+
+set envelope_from
+
+# My displayed name.
+set realname="Jason Blevins"
+
+# Help people find my PGP key.
+my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
+
+# Addresses at which I receive email.
+alternates "jrb11@duke.edu|jason.r.blevins@duke.edu|jasonrblevins@yahoo.com|jrblevin@sdf.lonestar.org|jrblevin@gmail.com|jrblevin@hotmail.com"
+
+# Sutomatically verify signed messages.
+set crypt_verify_sig=yes
+
+
+# Profiles
+# --------
+
+# Load the default profile.
+source ~/config/common/mutt/profile.duke
+
+# Macros to invoke other profiles (with Emacs-style C-x C-p prefix).
+macro index "\Cx\Cpd" ":source ~/config/common/mutt/profile.duke\n" "Load profile: duke"
+macro index "\Cx\Cps" ":source ~/config/common/mutt/profile.sdf\n" "Load profile: sdf"
+
+
+# Mailboxes
+# ---------
+
+set spoolfile="imaps://jrblevin@imap.gmail.com/"
+set folder="imaps://jrblevin@imap.gmail.com/"
+# Gmail's SMTP server automatically stores a copy of each outgoing message.
+#set record="=[Gmail]/Sent Mail";
+set postponed="=[Gmail]/Drafts"
+set mbox="="
+
+
+# External Programs
+# -----------------
+
+# Compose mail using an existing Emacs session (or start a new one).
+set editor="/usr/bin/emacsclient -a emacs"
+
+# How to print things
+set print_command="muttprint -p - > ~/inbox/muttprint.ps"
+
+# Use the Little Brother Database to look up addresses (see also ~/.lbdbrc).
+set query_command="lbdbq '%s'"
+
+# Use esmtp to forward outgoing mail to the relevant SMTP server.
+set sendmail="/usr/bin/esmtp -v -X /tmp/esmtp.log"
+
+
+# Generic Settings
+# ----------------
+
+# Enable caching of IMAP headers.
+set header_cache = "~/.mutt-cache/headers"
+
+# Ignore HTML email if possible.
+alternative_order text/enriched text/plain text/html
+
+unset arrow_cursor		# highlight whole line or use -> 
+set autoedit=no			# go to the editor right away when composing
+set noconfirmappend		# don't ask me if i want to append 
+set confirmcreate		# prompt when creating new filesd
+set copy=no			# always save a copy of outgoing messages
+set delete=yes			# purge deleted messages without asking
+set edit_headers=yes		# let me edit the message header when composing
+set use_from=yes		# Allow mutt to generate from headers
+set fast_reply=yes		# skip initial prompts when replying
+set hdrs			# include `my_hdr' lines in outgoing messages
+set followup_to=yes		# Generate Mail-Follow-To on group/lists
+set nohelp			# Do not show the help lines
+set include			# always include messages when replying
+set nomark_old			# i don't care about whether a message is old
+set mail_check=600		# how often to poll for new mail
+set metoo			# remove my address when replying
+set write_bcc=yes		# Do not remove BCC header (unused)
+set mime_forward=no		# use message/rfc822 type to forward messages
+set move=no			# don't ask about moving messages, just do it
+set pager_index_lines=6 	# how many index lines to show in the pager
+set pager_stop			# don't move to the next message on next-page
+set noprompt_after		# ask for a command after external pager exits
+set read_inc=25			# show progress when reading a mailbox
+set reply_to=yes		# always use reply-to if present
+set ignore_list_reply_to=yes	# Ignore Mailing List replyto, use "L" instead
+set reverse_alias		# attempt to look up my names for people
+set reverse_name		# use my address as it appears in the message
+set save_empty			# remove files when no messages are left
+set envelope_from=yes		# Set sendmail sender -f flag
+set sort=date			# primary sorting method
+set sort_browser=reverse-date	# how to sort files in the dir browser
+unset status_on_top		# some people prefer the status bar on top
+set tilde			# virtual lines to pad blank lines in the pager
+set nouse_domain		# don't qualify local addresses with $domain
+set write_inc=25		# show progress while writing mailboxes
+set timeout=15			# How often to check for new email
+set charset=utf-8		# Enable Display of UTF-8 Characters.
+set implicit_autoview=yes	# Always use the mime-types defined in .mailcap
+set index_format="%4C %Z %{%m.%d} %-15.15F (%4c) %s" # format of the index
+set indent_string=">"		# Quote with User Initials in quotestring
+
+# Use fancy threading characters.
+set ascii_chars=no
+
+# Display a + on wrapped lines
+set markers=yes
+
+# Don't collapse threads with new messages.
+set collapse_unread=no
+
+
+# IMAP Settings
+# -------------
+
+#set imap_idle=no
+set imap_keepalive=300
+
+
+# Headers
+# -------
+
+# Ignore everything not listed below.
+ignore *
+
+# Show user agent / mailer.
+unignore user-agent: x-agent: x-mailer:
+
+# Show from, date, subject, to, cc, reply-to headers.
+unignore from date subject to cc reply-to:
+
+# Display headers in this order:
+hdr_order From: Reply-to: To: Cc: Subject: Date: User-Agent: X-Mailer:
+
+
+# Other config files
+# ------------------
+
+# Define auto_views
+source ~/config/common/mutt/auto_views
+
+# GnuPG Encryption
+source ~/config/common/mutt/crypto
+
+# Color theme
+source ~/config/common/mutt/colors
+
+# Email aliases
+source ~/config/private/mutt/aliases

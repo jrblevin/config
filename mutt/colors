@@ -1,0 +1,65 @@
+## ~/config/common/mutt/colors                                  -*-muttrc-*-
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+#
+# Created: Durham, January 15, 2006
+# Last Modified: March 11, 2008
+#
+# Format: color object foreground background [condition].
+# Colors: white, black, green, magenta, blue, cyan, yellow, red, default.
+
+# Index and application
+color status        black          brightblue     # status bar
+color error         white	   brightred   	  # error messages
+color indicator     white  	   brightblue  	  # selected message
+color markers       red    	   default
+color message       blue           default        # Mutt messages
+color tree          red    	   default        # Thread tree
+
+# Message display
+color normal        white          default	  # Normal pager text
+color attachment    green   	   default  	  # Attachment info
+color hdrdefault    red   	   default  	  # Pager header
+color signature     red            default  	  # Signature
+color tilde         cyan    	   default  	  # Tilde color
+color search        brightyellow   default        # Search patterns
+
+# Important headers
+color header  	    brightred      default        ^(From|Subject|Date):
+
+# Levels of quoted text
+color quoted        yellow         default
+color quoted1       cyan           default
+color quoted2       red            default
+color quoted3       green          default
+
+# Emphasis
+color bold          red            default
+color underline     yellow         default
+
+# Color definitions when on a mono screen.
+mono  bold          bold
+mono  underline     underline
+mono  indicator     reverse
+mono  error         bold
+
+# Colorize smileys:  :-)  ;-)  :-/  :-(
+color body  yellow default "[;:]-[)/(|]"
+color body  yellow default "[;:][)/(|]"
+
+# *bold*
+color body brightwhite  default "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
+mono  body bold                "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
+
+# _underline_
+color body brightwhite  default "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
+mono  body underline           "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
+
+# /italic/
+color body brightwhite  default "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
+mono  body underline           "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
+
+# URLs and email addresses
+color body magenta default "(ftp|http|git)://[^ ]+"
+color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+
+

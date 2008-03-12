@@ -1,0 +1,41 @@
+;;; ~/.emacs-mutt                                            -*-emacs-lisp-*-
+;;
+;; A lightweight Emacs session for composing email with Mutt.
+;;
+;; Jason Blevins <jrblevin@sdf.lonestar.org>
+;;
+;; Created: Durham, January 15, 2006
+;; Last Modified: March 11, 2008
+
+(setq load-path (cons "~/emacs/lisp" load-path))
+(setq ispell-program-name "aspell")
+
+(setq inhibit-startup-message t)
+(setq font-lock-maximum-decoration t)
+(setq visible-bell t)
+(setq default-indicate-buffer-boundaries t)
+(when window-system (msb-mode 1))
+(transient-mark-mode 1)
+(mouse-wheel-mode 1)
+(show-paren-mode 1)
+(auto-compression-mode 1)
+(global-font-lock-mode 1 nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'iconify-or-deiconify-frame 'disabled t)
+(display-time-mode 1)
+(column-number-mode 1)
+(auto-fill-mode 1)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(setq-default indent-tabs-mode nil)
+
+
+;; Post mode for composing email.
+(load "post")
+(defun post-custom()
+  "Pouziti v post-hook"
+  (load "mutt-alias")
+  (local-set-key "\C-ci" 'mutt-alias-insert)
+  (flyspell-mode 0))
+(add-hook 'post-mode-hook '(lambda() (post-custom)))
+(setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))

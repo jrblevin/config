@@ -1,0 +1,74 @@
+!! ~/.Xresources
+!
+! Created: Raleigh, July 10, 2004
+! Last Modified: March 12, 2008
+! Jason Blevins <jrblevin@sdf.lonestar.org>
+
+!! Emacs
+Emacs.menuBar:			off
+Emacs.verticalScrollBars:       off
+Emacs.toolBar:          	off
+Emacs.internalBorder:      	1
+Emacs.geometry:			80x35+5+5
+!Emacs.font:                     -xos4-terminus-medium-r-normal--24-240-72-72-c-120-iso8859-1
+!Emacs.font:			terminus-20
+Emacs.Font:                     fontset-terminus
+Emacs.Fontset-0: \
+-xos4-terminus-medium-r-normal--20-200-72-72-c-100-fontset-terminus,\
+mule-unicode-2500-33ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
+mule-unicode-e000-ffff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
+mule-unicode-0100-24ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1
+
+!! XTerm
+XTerm*font:			-xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso8859-1
+XTerm*boldFont:			-xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso8859-1
+XTerm*geometry:			80x24
+XTerm*saveLines:		1000
+XTerm*background:		black
+XTerm*foreground:		gray90
+XTerm*loginShell:		true
+XTerm*cursorColor: 		rgb:00/80/00
+XTerm*borderColor: 		white
+XTerm*scrollColor: 		black
+XTerm*visualBell: 		true
+XTerm*scrollBar:		off
+XTerm*allowSendEvents: 		true
+XTerm*sessionMgt: 		true
+XTerm*color0: 			black
+XTerm*color1: 			red3
+XTerm*color2: 			green3
+XTerm*color3: 			yellow3
+XTerm*color4: 			DodgerBlue1
+XTerm*color5: 			magenta3
+XTerm*color6: 			cyan3
+XTerm*color7: 			gray90
+XTerm*color8: 			gray50
+XTerm*color9: 			red
+XTerm*color10: 			green
+XTerm*color11: 			yellow
+XTerm*color12: 			blue
+XTerm*color13: 			magenta
+XTerm*color14: 			cyan
+XTerm*color15: 			white
+XTerm*colorUL: 			yellow
+XTerm*colorBD: 			white
+XTerm*showBlinkAsBold:		true
+XTerm*cursorBlink:		on
+XTerm*cursorOnTime:		500
+XTerm*cursorOffTime:		500
+XTerm*messages:                 true
+XTerm*metaSendsEscape:		true
+XTerm*utf8:			1
+XTerm*eightBitInput:            false
+
+!! Xdvi
+xdvi.geometry:     950x700+25-25
+xdvi.shrinkFactor: 4
+xdvi.paper:        us
+xdvi.expert:       1
+xdvi.background:   LightYellow
+xdvi.editor: emacsclient --no-wait +%l %f
+xdvi.linkstyle: 3
+xdvi.highlight: Blue
+xdvi.linkColor: DarkBlue
+xdvi.visitedLinkColor: Purple3

@@ -1,0 +1,16 @@
+## ~/.lbdbrc: Little Brother Database Configuration                  -*-conf-*-
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Last Modified: March 2, 2008 10:22 EST
+
+METHODS="m_muttalias m_bbdb"
+
+# Look for mutt aliases in MUTTALIAS_FILES in MUTT_DIRECTORY:
+MUTT_DIRECTORY="$HOME/.mutt"
+MUTTALIAS_FILES=".muttrc .mail_aliases muttrc aliases"
+
+# Which emacs to use for BBDB aliases.
+EMACS="emacs"
+
+# To use private modules set MODULES_PATH (space-separated):
+#MODULES_PATH="/usr/lib/lbdb $HOME/.lbdb/modules"

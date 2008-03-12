@@ -1,0 +1,5 @@
+## ~/config/common/mutt/profile.sdf                               -*-muttrc-*-
+
+set from="jrblevin@sdf.lonestar.org"
+set signature='~/config/common/signatures/sdf'
+

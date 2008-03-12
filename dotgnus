@@ -1,0 +1,135 @@
+;;; ~/.gnus: Gnus configuration file.                        -*-emacs-lisp-*-
+;;
+;; Jason Blevins <jrblevin@sdf.lonestar.org>
+;; Created: Durham, August 28, 2006
+;; Last Modified: March 12, 2008
+
+;; Gmail workaround.
+(setq gnus-invalid-group-regexp "[:`'\"]\\|^$")
+
+;;
+;; Profiles
+;; --------
+
+(setq user-full-name "Jason Blevins")
+(setq user-mail-address "jrblevin@sdf.lonestar.org")
+
+(setq message-alternative-emails
+      (regexp-opt (cons user-mail-address
+                        '("jrblevin@sdf.lonestar.org"
+			  "jrb11@duke.edu"
+                          "jrblevin@gmail.com"
+                          "jasonrblevins@yahoo.com"
+                          "jrblevin@hotmail.com"
+                          "jason.r.blevins@duke.edu"))))
+
+(setq gnus-posting-styles
+      '((".*" ;; default
+         (name "Jason Blevins")
+         (address "jrb11@duke.edu")
+         (signature-file "~/config/common/signatures/duke"))
+        ;; For mail sent to SDF account
+        ((header "to" "jrblevin@sdf.lonestar.org")
+         (address "jrblevin@sdf.lonestar.org")
+         (signature-file "~/config/common/signatures/sdf"))
+        ;; Usenet news
+        ((message-news-p)
+         (address "jrblevin@sdf.lonestar.org")
+         (signature-file "~/config/common/signatures/sdf"))))
+
+
+;;
+;; Email
+;; -----
+
+(load-library "nnimap")
+(load-library "smtpmail")
+(load-library "starttls")
+
+(setq gnus-select-method
+      '(nnimap "gmail"
+	       (nnimap-address "imap.gmail.com")
+	       (nnimap-server-port 993)
+	       (nnimap-stream ssl)
+	       (nnimap-authinfo-file "~/config/private/authinfo")))
+
+(setq smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+      send-mail-function 'smtpmail-send-it
+      message-send-mail-function 'smtpmail-send-it
+      smtpmail-smtp-service 587
+      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "jrblevin@gmail.com" nil)))
+
+;;
+;; News
+;; ----
+
+;; No news configuration
+(setq gnus-secondary-select-methods nil)
+(setq gnus-check-new-newsgroups nil)
+
+
+;;
+;; Behavior
+;; --------
+
+(add-hook 'message-mode-hook
+	  (lambda ()
+	    (setq fill-column 72)
+	    (turn-on-auto-fill)))
+
+;; Use browse-url-generic to open URLs.
+(setq gnus-button-url 'browse-url-generic)
+
+;; Citation function (On April 1, 2008 foobar wrote...).
+(setq message-citation-line-function 'my-message-insert-citation-line)
+
+;; Quoting function
+(setq message-cite-function 'message-cite-original-without-signature)
+
+;; Display html emails via emacs-w3m
+;(setq mm-text-html-renderer 'w3m)
+
+;; Prefer plain text over HTML or RTF.
+(setq mm-discouraged-alternatives '("text/html" "text/richtext"))
+
+;; Integration with bbdb and dired
+;(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+
+
+;;
+;; Appearance
+;; ----------
+
+(setq gnus-summary-line-format "%U%R%d %(%{%-20,20n%}%) %B%s% \n")
+(when window-system
+  (setq gnus-sum-thread-tree-indent "  ")
+  (setq gnus-sum-thread-tree-root "● ")
+  (setq gnus-sum-thread-tree-false-root "◯ ")
+  (setq gnus-sum-thread-tree-single-indent "◎ ")
+  (setq gnus-sum-thread-tree-leaf-with-other "├─► ")
+  (setq gnus-sum-thread-tree-vertical "│")
+  (setq gnus-sum-thread-tree-single-leaf "╰─► "))
+
+
+;;
+;; Functions
+;; ---------
+
+;; Quoting messages when replying
+(defun my-message-insert-citation-line ()
+  "Insert a citation line with time and date."
+  (when message-reply-headers
+    (let*
+        ((addr (mail-extract-address-components
+                (mail-header-from message-reply-headers)))
+         (name (car addr))
+         (email (cadr addr))
+         (date (mail-header-date message-reply-headers)))
+      (insert "On ")
+      (insert (format-time-string "%b %e, %Y, at %l:%M %p, " (gnus-date-get-time date)))
+      (if name
+          (insert name)
+        (insert email))
+      (insert " wrote:\n"))))

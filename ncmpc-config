@@ -1,0 +1,79 @@
+## ~/.ncmpc/config
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Created: Durham, March 30, 2006
+# Last Modified: March 10, 2008
+
+# Screen list: navigate with Tab (next) and Shift+Tab (previous)
+# [possible values: playlist browse help artist clock].
+screen-list = playlist browse artist clock help
+
+# Center the current track in the playlist?
+auto-center = no
+
+# Highlight the entire line?
+wide-cursor = yes
+
+# Should the cursor wrap back to the top when it reaches the bottom?
+wrap-around = no
+
+# Should searches wrap?
+find-wrap = yes
+
+# Keep the previous find pattern?
+find-show-last = yes
+
+# Playlist format.
+list-format = "%name%|[%artist% - ]%title%|%file%"
+
+# Status line format.
+status-format = "[%artist% - ]%title%|%shortfile%"
+
+# Sound an audible bell on alerts?
+audible-bell = no
+
+# Use a visual bell on alerts?
+visible-bell = yes
+
+# Hide the playlist cursor after x seconds (use 0 to disable).
+hide-cursor = 0
+
+# Change the xterm title?
+set-xterm-title = no
+
+# Xterm title format.
+xterm-title-format = "ncmpc: [ %name%|[%artist% - ]%title%|%file%]"
+
+# Enable the mouse?
+enable-mouse = no
+
+# Seek time (default 1s).
+seek-time = 3
+
+# Crossfade time (when enabled).
+crossfade-time = 10
+
+# Use a color interface?
+enable-colors = yes
+
+# Color scheme.
+#
+# Background: black, red, green, yellow, blue, magenta, cyan, white, or none.
+#
+# Text: black, red, green, yellow, blue, magenta, cyan, white, brightblack,
+#     brightred, brightgreen, brightyellow, brightblue, brightmagenta,
+#     brightcyan, or brightwhite.
+
+color background = none
+color title = yellow
+color title-bold = brightyellow
+color line = white
+color line-flags = brightwhite
+color list = green
+color list-bold = brightgreen
+color progressbar = white
+color status-state = brightyellow
+color status-song  = yellow
+color status-time  = red
+color alert = brightred
+

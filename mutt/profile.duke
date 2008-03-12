@@ -1,0 +1,5 @@
+## ~/config/common/mutt/profile.duke                              -*-muttrc-*-
+
+set from="jrb11@duke.edu"
+set signature='~/config/common/signatures/duke'
+

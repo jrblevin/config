@@ -1,0 +1,15 @@
+exec xsetroot -solid black
+defbargravity center
+defborder 0
+defpadding 0 0 0 0
+defbarpadding 0 0 0 0
+
+bind e exec emacs
+bind f exec firefox -chrome chrome://conkeror/content
+
+# Change escape key to 
+escape C-backslash
+
+# Screenshots
+alias sshot exec import -window root ~/screenshot-`date +%F`.jpg
+definekey top M-C-Print sshot
