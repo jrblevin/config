@@ -695,3 +695,9 @@
 ; (setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
 
 
+;; EasyPG
+;; ------
+
+(require 'epa-file)
+(epa-file-enable)
+
