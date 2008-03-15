@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 #
 # Created: Raleigh, June 4, 2004
-# Last Modified: March 11, 2008
+# Last Modified: March 13, 2008 22:06 EDT
 
 ## General stuff
 
@@ -130,3 +130,10 @@ fi
 
 export PATH=/var/lib/gems/1.8/bin:$PATH
 export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
+
+
+# Password Manager
+# ----------------
+
+export PW_FILE=~/config/private/pwsafe.gpg
+export PW_LEN=16
