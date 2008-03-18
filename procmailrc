@@ -1,0 +1,21 @@
+:0 H:
+* 1^0 ^Content-Type:.*attachment*
+* 1^0 ^Content-Type:.*multipart*
+/arpa/gm/j/jrblevin/mail/attachments
+:0 B:
+* 1^0 .*<html>*
+* 1^0 .*<font>*
+* 1^0 .*<body>*
+* 1^0 .*<table>*
+* 1^0 .*<a href*
+* 1^0 .*to unsubscribe*
+* 1^0 .*unsolicited*
+* 1^0 .*removal link*
+* 1^0 .*removal instructions*
+* 1^0 .*click here*
+/arpa/gm/j/jrblevin/mail/bulk
+:0fw
+| /usr/pkg/bin/bmf -p
+:0:
+* ^X-Spam-Status: Yes
+/arpa/gm/j/jrblevin/mail/spam
