@@ -6,39 +6,37 @@
 # Identity
 # --------
 
-set envelope_from
-
-# My displayed name.
 set realname="Jason Blevins"
-
-# Addresses at which I receive email.
+set from="jrb11@duke.edu"
 alternates "jrb11@duke.edu|jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
 
-# Sutomatically verify signed messages.
-set crypt_verify_sig=yes
+# Read alias file
+source ~/.mutt-aliases
+set alias_file="~/.mutt-aliases"
 
+# Use Duke SMTP server
+#unset sendmail
+#set smtp_url="smtp://jrb11@smtp.duke.edu:587/"
 
-# Profiles
-# --------
+# SSH to SDF to send mail
+#set from="jrblevin@sdf.lonestar.org"
+#unset smtp_url
+#set sendmail="ssh sverige.freeshell.org /usr/sbin/sendmail -oew"
 
-# Load the default profile.
-source ~/config/common/mutt/profile.duke
-
-# Macros to invoke other profiles (with Emacs-style C-p prefix).
-macro index "\Cpd" ":source ~/config/common/mutt/profile.duke\n" "Load profile: duke"
-macro index "\Cps" ":source ~/config/common/mutt/profile.sdf\n" "Load profile: sdf"
+# Use esmtp to forward outgoing mail to the relevant SMTP server.
+set sendmail="/usr/bin/esmtp -v -X /tmp/esmtp.log"
 
 
 # Mailboxes
 # ---------
 
-# Gmail Inbox
+# Inbox
 set spoolfile="imaps://jrblevin@mail.freeshell.org/"
 
-# Gmail folder prefix
+# Folder prefix
 set folder="imaps://jrblevin@mail.freeshell.org/mail/"
 
-# Gmail Sent Mail folder
+# Sent mail folder
 set record="=sent"
 
 # Gmail Drafts folder
@@ -58,14 +56,13 @@ set edit_headers=yes
 set use_from=yes
 
 # Set sendmail sender -f flag.
-set envelope_from=yes
+#set envelope_from=yes
 
 # Include `my_hdr' lines in outgoing messages.
 set hdrs
 
 # Help people find my PGP key.
 my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
-
 
 
 # External Programs
@@ -79,9 +76,6 @@ set print_command="muttprint -p - > ~/inbox/muttprint.ps"
 
 # Use the Little Brother Database to look up addresses (see also ~/.lbdbrc).
 set query_command="lbdbq '%s'"
-
-# Use esmtp to forward outgoing mail to the relevant SMTP server.
-#set sendmail="/usr/bin/esmtp -v -X /tmp/esmtp.log"
 
 
 # Appearance
@@ -108,18 +102,8 @@ set sort=threads
 # Do not show help lines.
 set nohelp
 
-# Show progress when reading a mailbox.
-set read_inc=25
-
-# Show progress while writing mailboxes.
-set write_inc=25
-
 # Enable Display of UTF-8 Characters.
 set charset=utf-8
-
-# I don't care about whether a message is old.
-set nomark_old
-
 
 
 # Behavior
@@ -135,13 +119,16 @@ set noconfirmappend
 set confirmcreate
 
 # Always save a copy of outgoing messages?
-set copy=no
+set copy=yes
 
 # Purge deleted messages without asking.
 set delete=yes
 
 # Skip initial prompts when replying.
 set fast_reply=yes
+
+# Simple quotation text.
+set attribution="%n wrote:"
 
 # When forwarding messages, set the subject to Fwd: subject.
 set forw_format="Fwd: %s"
@@ -173,9 +160,8 @@ unset fcc_attach
 # When replying to a message sent by me, reply to the recipients instead.
 unset reply_self
 
-# Don't move to the next message on next-page.
-set pager_stop
-
+# Automatically display as text for mailcap entries with copiousoutput,.
+set implicit_autoview
 
 
 # MIME
@@ -240,17 +226,126 @@ unignore from date subject to cc reply-to:
 hdr_order From: Reply-to: To: Cc: Subject: Date: User-Agent: X-Mailer:
 
 
-# Other config files
-# ------------------
+# Color Theme
+# -----------
 
-# Define auto_views
-source ~/config/common/mutt/auto_views
+# Format: color object foreground background [condition].
+# Colors: white, black, green, magenta, blue, cyan, yellow, red, default.
 
-# GnuPG Encryption
-source ~/config/common/mutt/crypto
+# Index and application
+color status        black          brightblue     # status bar
+color error         white	   brightred   	  # error messages
+color indicator     white  	   brightblue  	  # selected message
+color markers       red    	   default
+color message       blue           default        # Mutt messages
+color tree          red    	   default        # Thread tree
 
-# Color theme
-source ~/config/common/mutt/colors
+# Message display
+color normal        white          default	  # Normal pager text
+color attachment    green   	   default  	  # Attachment info
+color hdrdefault    red   	   default  	  # Pager header
+color signature     red            default  	  # Signature
+color tilde         cyan    	   default  	  # Tilde color
+color search        brightyellow   default        # Search patterns
 
-# Email aliases
-source ~/config/private/mutt/aliases
+# Important headers
+color header  	    brightred      default        ^(From|Subject|Date):
+
+# Levels of quoted text
+color quoted        yellow         default
+color quoted1       cyan           default
+color quoted2       red            default
+color quoted3       green          default
+
+# Emphasis
+color bold          red            default
+color underline     yellow         default
+
+# Color definitions when on a mono screen.
+mono  bold          bold
+mono  underline     underline
+mono  indicator     reverse
+mono  error         bold
+
+# Colorize smileys:  :-)  ;-)  :-/  :-(
+color body  yellow default "[;:]-[)/(|]"
+color body  yellow default "[;:][)/(|]"
+
+# *bold*
+color body brightwhite  default "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
+mono  body bold                "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
+
+# _underline_
+color body brightwhite  default "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
+mono  body underline           "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
+
+# /italic/
+color body brightwhite  default "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
+mono  body underline           "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
+
+# URLs and email addresses
+color body magenta default "(ftp|http|git)://[^ ]+"
+color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+
+
+
+# GPG Support
+# -----------
+
+# Automatically verify signed messages.
+set crypt_verify_sig=yes
+
+# Some definitions:
+# %p - The empty string when no passphrase is needed, the string
+#      "PGPPASSFD=0" if one is needed.
+# %f - File name on which to operate.
+# %s - Temporary file containing detached signature.
+# %a - Expands to $pgp_sign_as.
+# %r - Expands to a list of key IDs.
+
+set pgp_autosign=no
+set pgp_sign_as=0x7F569169
+set pgp_replyencrypt=yes
+set pgp_timeout=1800
+set pgp_verify_sig=yes
+
+# Decode application/pgp.
+set pgp_decode_command="/usr/bin/gpg --charset utf-8 --status-fd=2 %?p?--passphrase-fd 0? --no-verbose --quiet  --batch  --output - %f"
+
+# Verify a signature.
+set pgp_verify_command="/usr/bin/gpg --no-verbose --charset utf-8 --batch -o - --verify %s %f"
+
+# Decrypt a pgp/mime attachment.
+set pgp_decrypt_command="/usr/bin/gpg   --status-fd=2 %?p?--passphrase-fd 0? --no-verbose --quiet  --batch  --output - %f"
+
+# Create a pgp/mime signed attachment.
+set pgp_sign_command="/usr/bin/gpg --no-verbose --batch --quiet   --output - %?p?--passphrase-fd 0? --armor --detach-sign --textmode %?a?-u %a? %f"
+
+# Create a application/pgp signed (old-style) message.
+set pgp_clearsign_command="/usr/bin/gpg --charset utf-8 --no-verbose --batch --quiet   --output - %?p?--passphrase-fd 0? --armor --textmode --clearsign %?a?-u %a? %f"
+
+# Create a pgp/mime encrypted attachment.
+set pgp_encrypt_only_command="/usr/lib/mutt/pgpewrap /usr/bin/gpg  --charset utf-8 --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust -- -r %r -- %f"
+
+# Create a pgp/mime encrypted and signed attachment.
+set pgp_encrypt_sign_command="/usr/lib/mutt/pgpewrap /usr/bin/gpg --charset utf-8 %?p?--passphrase-fd 0? --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust -- -r %r -- %f"
+
+# Import a key into the public key ring.
+set pgp_import_command="/usr/bin/gpg --no-verbose --import %f"
+
+# Export a key from the public key ring.
+set pgp_export_command="/usr/bin/gpg --no-verbose --export --armor %r"
+
+# Verify a key.
+set pgp_verify_key_command="/usr/bin/gpg --verbose --batch --fingerprint --check-sigs %r"
+
+# Read in the public key ring.
+set pgp_list_pubring_command="gpg --no-verbose --batch --quiet --with-colons --list-keys %r"
+
+# Read in the secret key ring.
+set pgp_list_secring_command="/usr/bin/gpg --no-verbose --batch --quiet --with-colons --list-secret-keys %r"
+
+# Fetch keys
+set pgp_getkeys_command="/usr/bin/gpg --recv-keys %r 2> /dev/null"
+
+# Pattern for good signatures.
+set pgp_good_sign="^gpg: Good signature from"

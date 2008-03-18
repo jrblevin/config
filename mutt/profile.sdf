@@ -1,9 +1,0 @@
-## ~/config/common/mutt/profile.sdf                               -*-muttrc-*-
-
-set from="jrblevin@sdf.lonestar.org"
-set signature='~/config/common/signatures/sdf'
-
-my_hdr Reply-To: Jason Blevins <jrblevin@sdf.lonestar.org>
-
-unset smtp_url
-set sendmail="ssh sverige.freeshell.org /usr/sbin/sendmail -oew"
