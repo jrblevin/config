@@ -93,8 +93,8 @@ set tilde
 # Format of the index.
 set index_format="%4C %Z %{%m.%d} %-15.15F (%4c) %s"
 
-# Display a + on wrapped lines.
-set markers=yes
+# Don't display a + on wrapped lines.
+unset markers
 
 # Default sorting method.
 set sort=threads
@@ -104,6 +104,9 @@ set nohelp
 
 # Enable Display of UTF-8 Characters.
 set charset=utf-8
+
+# Don't let Page Down move to the next message.
+set pager_stop
 
 
 # Behavior
@@ -358,4 +361,4 @@ set pgp_good_sign="^gpg: Good signature from"
 macro index S "|ssh sverige.freeshell.org bmf -S\n<save-message>=spam\n" "SPAM"
 macro index H "|ssh sverige.freeshell.org bmf -N\n" "HAM"
 macro pager S "|ssh sverige.freeshell.org bmf -S\n<save-message>=spam\n" "SPAM"
-macro pager H "|ssh sverige.freeshell.org bmf -N" "HAM"
+macro pager H "|ssh sverige.freeshell.org bmf -N\n" "HAM"
