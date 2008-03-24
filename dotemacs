@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: March 12, 2008
+;; Last Modified: March 24, 2008 09:27 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -210,16 +210,16 @@
 ;; BibTeX
 ;; ------
 
-;; (setq bibtex-user-optional-fields
-;;       '(("keywords" "Item tags and keywords")
-;;         ("url" "A URL where the item can be found"))
-;;       bibtex-align-at-equal-sign t
-;;       bibtex-autokey-name-year-separator ""
-;;       bibtex-autokey-year-title-separator ""
-;;       bibtex-autokey-titleword-first-ignore '("the" "a" "if" "and" "an")
-;;       bibtex-autokey-titleword-length 30
-;;       bibtex-autokey-titlewords 1
-;;       bibtex-contline-indentation 17)
+(setq bibtex-user-optional-fields
+      '(("keywords" "Item tags and keywords")
+        ("url" "A URL where the item can be found"))
+      bibtex-align-at-equal-sign t
+      bibtex-autokey-name-year-separator ""
+      bibtex-autokey-year-title-separator ""
+      bibtex-autokey-titleword-first-ignore '("the" "a" "if" "and" "an")
+      bibtex-autokey-titleword-length 30
+      bibtex-autokey-titlewords 1
+      bibtex-contline-indentation 17)
 
 ;; (defun my-bibtex-mode-hook-fn ()
 ;;   "Function added to `bibtex-mode-hook'."
