@@ -1,0 +1,17 @@
+# data.prf: Unison preferences.
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Chapel Hill, March 26, 2008
+
+root = /home/jrblevin
+root = ssh://roark.no-ip.org//home/jrblevin
+
+ignore = Name *~
+ignore = Name *.o
+
+path = projects
+path = inbox
+path = config
+
+include default
+

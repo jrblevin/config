@@ -1,0 +1,9 @@
+# default.prf: Unison defaults.
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Chapel Hill, March 26, 2008
+
+log = true
+logfile = /home/jrblevin/.unison/unison.log
+rshargs = -C
+
