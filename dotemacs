@@ -413,10 +413,8 @@
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode to edit Markdown files" t)
 
-(setq auto-mode-alist
-      (cons '(("\\.text$" . markdown-mode)
-              ("\\.mdwn$" . markdown-mode)) auto-mode-alist))
-
+(setq auto-mode-alist (cons '("\\.text$" . markdown-mode)) auto-mode-alist)
+(setq auto-mode-alist (cons '("\\.mdwn$" . markdown-mode)) auto-mode-alist)
 
 ;;
 ;; Planner
