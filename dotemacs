@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: March 25, 2008 19:17 EDT
+;; Last Modified: March 26, 2008 13:26 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -44,7 +44,7 @@
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 
 ;; Bookmark file
-(setq bookmark-default-file (cons "~/.emacs.d/emacs.bmk" load-path))
+(setq bookmark-default-file "~/.emacs.d/emacs.bmk")
 
 ;; Keep customized settings somewhere else
 (if (file-exists-p
