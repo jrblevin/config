@@ -43,6 +43,9 @@
 ;; Set the load path
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 
+;; Bookmark file
+(setq bookmark-default-file (cons "~/.emacs.d/emacs.bmk" load-path))
+
 ;; Keep customized settings somewhere else
 (if (file-exists-p
      (setq custom-file
@@ -87,6 +90,11 @@
 ;; Ask whether to add a final newline to text files.
 (setq require-final-newline 'query)
 
+;; Store backup files in one place.
+;; http://inamidst.com/config/emacs
+(if (file-directory-p "~/.emacs.d/backup")
+    (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
+    (message "Directory does not exist: ~/.emacs.d/backup"))
 
 ;;
 ;; Appearance
@@ -413,8 +421,8 @@
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode to edit Markdown files" t)
 
-(setq auto-mode-alist (cons '("\\.text$" . markdown-mode)) auto-mode-alist)
-(setq auto-mode-alist (cons '("\\.mdwn$" . markdown-mode)) auto-mode-alist)
+(setq auto-mode-alist (cons '("\\.text$" . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.mdwn$" . markdown-mode) auto-mode-alist))
 
 ;;
 ;; Planner
