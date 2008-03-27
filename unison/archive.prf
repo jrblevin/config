@@ -1,0 +1,12 @@
+# archive.prf: Unison archive preferences.
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Durham, March 27, 2008
+
+root = /archive
+root = ssh://roark.no-ip.org//archive
+
+path = /media/music
+path = /library
+
+include default
