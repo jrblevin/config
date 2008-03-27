@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: March 26, 2008 13:26 EDT
+;; Last Modified: March 27, 2008 13:48 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -643,29 +643,16 @@
 
 
 ;;
-;; Stata
-;; -----
+;; ado-mode
+;; --------
 ;;
-;; [ado-mode]: http://www.louisville.edu/~wrrisi01/Stata/
+;; http://www.bellarmine.edu/faculty/wrising/Stata/
 
-;; (setq load-path (cons "~/.emacs.d/lisp/ado-mode/lisp" load-path))
-;; (cond ((fboundp 'global-font-lock-mode)
-;;        (global-font-lock-mode t)
-;;        (setq font-lock-maximum-decoration t)))
-;; ;(setq ado-site-template-dir "/Universal/Custom/emacs/ado-mode/templates/")
-;; (load-library "ado-mode")
-;; (autoload 'ado-mode "ado-mode.el"  "Major mode to edit Stata files" t)
-;; (setq ado-claim-name "Jason Blevins")
-;; (setq ado-signature-file "~/.emacs.d/.ado-signature")
-;; (setq ado-new-dir "~/ado/new/")
-;; ;;(setq ado-label-dir "~/Custom/Stata/labels/")
-;; (autoload 'make-regexp "make-regexp"
-;;   "Return a regexp to match a string item in STRINGS.")
-;; (autoload 'make-regexps "make-regexp"
-;;   "Return a regexp to REGEXPS.")
-;; (setq ado-confirm-overwrite-flag nil)
-;; (setq auto-mode-alist
-;;      (cons '("\\.do\\'" . ado-mode) auto-mode-alist))
+(load-library "ado-mode") 
+(setq ado-claim-name "Jason Blevins")
+(setq ado-signature-file "~/.emacs.d/.ado-signature")
+(setq ado-confirm-overwrite-flag nil)
+(setq auto-mode-alist (cons '("\\.do\\'" . ado-mode) auto-mode-alist))
 
 
 ;;
