@@ -6,7 +6,7 @@
 root = /archive
 root = ssh://roark.no-ip.org//archive
 
-path = /media/music
-path = /library
+path = media/music
+path = library
 
 include default
