@@ -1,0 +1,9 @@
+# music.prf: Unison preferences for music archive.
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Durham, March 27, 2008
+
+root = /archive/media/music
+root = ssh://roark.no-ip.org//archive/media/music
+
+include default
