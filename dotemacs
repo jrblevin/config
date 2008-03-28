@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: March 27, 2008 13:48 EDT
+;; Last Modified: March 28, 2008 18:56 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -648,11 +648,11 @@
 ;;
 ;; http://www.bellarmine.edu/faculty/wrising/Stata/
 
-(load-library "ado-mode") 
-(setq ado-claim-name "Jason Blevins")
-(setq ado-signature-file "~/.emacs.d/.ado-signature")
-(setq ado-confirm-overwrite-flag nil)
-(setq auto-mode-alist (cons '("\\.do\\'" . ado-mode) auto-mode-alist))
+;; (load-library "ado-mode") 
+;; (setq ado-claim-name "Jason Blevins")
+;; (setq ado-signature-file "~/.emacs.d/.ado-signature")
+;; (setq ado-confirm-overwrite-flag nil)
+;; (setq auto-mode-alist (cons '("\\.do\\'" . ado-mode) auto-mode-alist))
 
 
 ;;
