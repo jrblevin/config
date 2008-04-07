@@ -56,7 +56,7 @@ set edit_headers=yes
 set use_from=yes
 
 # Set sendmail sender -f flag.
-#set envelope_from=yes
+set envelope_from=yes
 
 # Include `my_hdr' lines in outgoing messages.
 set hdrs
@@ -210,7 +210,7 @@ set header_cache = "~/.mutt-cache/headers"
 set mail_check=600
 
 # Maximum time in seconds before polling open IMAP connections.
-set imap_keepalive=60
+set imap_keepalive=30
 
 
 # Displayed Headers
