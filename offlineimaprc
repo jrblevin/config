@@ -1,0 +1,29 @@
+# offlineimap configuration
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Carrboro, April 7, 2008
+#
+# Mail is stored on the server in mbox format in my home directory.
+# My inbox is ~/INBOX and individual folders are stored under ~/mail.
+# Locally, everything is stored in Maildir format in ~/Mail.
+
+[general]
+accounts = jrblevin
+
+[Account jrblevin]
+localrepository = local
+remoterepository = sdf
+autorefresh = 15
+
+[Repository local]
+type = Maildir
+localfolders = ~/Mail/
+
+[Repository sdf]
+type = IMAP
+remotehost = mail.freeshell.org
+ssl = yes
+remoteuser = jrblevin
+remotepassfile = /home/jrblevin/config/private/.imappass
+folderfilter = lambda foldername: re.search('(^INBOX$|^mail)', foldername)
+nametrans = lambda foldername: re.sub('^mail/', '', foldername)

@@ -8,20 +8,11 @@
 
 set realname="Jason Blevins"
 set from="jrb11@duke.edu"
-alternates "jrb11@duke.edu|jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
+alternates "jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
 
 # Read alias file
 source ~/.mutt-aliases
 set alias_file="~/.mutt-aliases"
-
-# Use Duke SMTP server
-#unset sendmail
-#set smtp_url="smtp://jrb11@smtp.duke.edu:587/"
-
-# SSH to SDF to send mail
-#set from="jrblevin@sdf.lonestar.org"
-#unset smtp_url
-#set sendmail="ssh sverige.freeshell.org /usr/sbin/sendmail -oew"
 
 # Use esmtp to forward outgoing mail to the relevant SMTP server.
 set sendmail="/usr/bin/esmtp -v -X /tmp/esmtp.log"
@@ -30,11 +21,14 @@ set sendmail="/usr/bin/esmtp -v -X /tmp/esmtp.log"
 # Mailboxes
 # ---------
 
+# Mail is stored in Maildir format
+set mbox_type=Maildir
+
 # Inbox
-set spoolfile="imaps://jrblevin@mail.freeshell.org/"
+set spoolfile="~/Mail/INBOX/"
 
 # Folder prefix
-set folder="imaps://jrblevin@mail.freeshell.org/mail/"
+set folder="~/Mail/"
 
 # Sent mail folder
 set record="=sent"
@@ -44,6 +38,10 @@ set postponed="=drafts"
 
 # Don't remove read mail from inbox.
 set mbox="="
+
+# Where new mail may be received
+mailboxes ! + blosxom-devel + blosxom-users + markdown-discuss + \
+          planner-el-discuss + the-efficient-academic
 
 
 # Outgoing Headers
