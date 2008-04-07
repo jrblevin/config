@@ -1,0 +1,132 @@
+# Newsbeuter subscriptions
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Chapel Hill, April 5, 2008
+
+# alerts
+http://www.duke.edu/today/rss/alert.php alerts
+
+# news
+http://online.wsj.com/xml/rss/3_7011.xml news
+http://www.jeffersonpost.com/?rss=news news
+
+# econ
+http://repec.org/blog/?feed=rss2 econ
+http://gregmankiw.blogspot.com/feeds/posts/default econ
+http://www.marginalrevolution.com/marginalrevolution/index.rdf econ
+http://delong.typepad.com/sdj/index.rdf econ
+http://feeds.feedburner.com/EconomicPrincipals econ
+http://freakonomics.blogs.nytimes.com/atom.xml econ
+http://krugman.blogs.nytimes.com/atom.xml econ
+
+# research
+http://www.citeulike.org/rss/tag/economics research
+http://www.citeulike.org/rss/tag/empirical_io research
+http://www.citeulike.org/rss/tag/io research
+http://www.citeulike.org/rss/tag/microeconomics research
+http://www.citeulike.org/rss/tag/industrial_organisation research
+
+# scicomp
+http://trichech.us/?feed=rss2 scicomp
+http://groups.google.com/group/ampl/feed/atom_v1_0_msgs.xml?num=50 scicomp
+http://openopt.blogspot.com/feeds/posts/default scicomp
+http://sourceforge.net/export/rss2_projnews.php?group_id=126795 scicomp
+http://planet.scipy.org/rss20.xml scicomp
+
+# stocks
+http://finance.google.com/finance?morenews=10&rating=1&q=AMEX:SPY&output=rss stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=LOOP stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=MRVC stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=HPY stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=MIDD stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=BWLD stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=WFMI stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=MRH stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=RDK stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=FMD stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=VTIV stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=VWO stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=VEU stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=LQDT stocks
+http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=GWR stocks
+http://rafesspace.blogspot.com/feeds/posts/default stocks
+
+# opensource
+http://slashdot.org/slashdot.rss opensource
+http://www.advogato.org/rss/articles.xml opensource
+http://tinyapps.org/weblog/index.atom opensource
+
+# blogs
+http://yourkelly.blogspot.com/feeds/posts/default blogs
+http://golem.ph.utexas.edu/~distler/blog/atom10.xml blogs
+http://golem.ph.utexas.edu/~distler/blog/comments.atom blogs
+http://diveintomark.org/public/2004/05/atom.xml blogs
+http://intertwingly.net/blog/index.atom blogs
+http://intertwingly.net/blog/comments.atom blogs
+http://homesteadharvest.blogspot.com/feeds/posts/default blogs
+http://feeds.feedburner.com/raleigh/ blogs
+http://feeds.feedburner.com/butshesagirl blogs
+http://diveintomark.org/feed/ blogs
+http://ofb.net/~andrewc/serenepia/index.cgi/index.atom blogs
+http://www.diyplanner.com/node/feed blogs
+http://simulacra.in/feed/ blogs
+http://daringfireball.net/index.xml blogs
+http://decafbad.com/blog/feed blogs
+http://www.artima.com/weblogs/feeds/bloggers/guido.rss blogs
+http://tech.agilitynerd.com/blog/index.atom blogs
+http://noone.org/blog/index.rss blogs
+http://lion.taoriver.net/?feed=atom blogs
+http://bitworking.org/news/feed/ blogs
+http://feeds.feedburner.com/untonet blogs
+http://www.alistapart.com/feed/rss.xml blogs
+http://blog.whatwg.org/feed blogs
+http://www.openfusion.net/atom blogs
+http://www.phdcomics.com/gradfeed.php blogs
+http://kevin.scaldeferri.com/blog/index.rss blogs
+http://www.wasab.dk/morten/blog/feed/atom/ blogs
+http://feeds.feedburner.com/typepad/levenger/well_read_life blogs
+http://jwz.livejournal.com/data/rss blogs
+http://feeds.feedburner.com/codinghorror blogs
+http://blog.hecker.org/feed/ blogs
+http://plasmasturm.org/feeds/plasmasturm/ blogs
+http://xkcd.com/atom.xml blogs
+
+# devel
+http://code.jblevins.org/spark/index.atom devel
+http://golem.ph.utexas.edu/~distler/code/itexToMML.atom devel instiki
+http://bzr.mfd-consult.dk/bzr-feed-global.atom devel bzr-feed
+http://golem.ph.utexas.edu/~distler/code/bzr-feed.atom devel bzr-feed
+http://code.jblevins.org/bzr-feed/index.atom devel bzr-feed self
+http://code.jblevins.org/instiki/index.atom devel instiki self
+http://golem.ph.utexas.edu/~distler/code/instiki/svn.atom devel instiki
+http://golem.ph.utexas.edu/instiki/atom_with_content devel instiki
+http://instiki.org/rss_with_content devel
+http://blosxom.ookee.com/blog/index.rss devel
+http://code.jblevins.org/logfeed/index.atom devel
+http://sphinx.net.ru/hg/elisp/atom-log devel
+http://blog.lighttpd.net/xml/atom/feed.xml devel
+http://fletcherpenney.net/?action=atom; devel
+http://ikiwiki.info/recentchanges/index.rss devel
+http://forums.a2hosting.com/syndication.php?limit=15 devel
+
+# productivity
+http://www.rousette.org.uk/projects/forums/atom/10/ productivity
+http://www.rousette.org.uk/projects/wiki/Special:Recentchanges_RSS productivity
+http://www.43folders.com/feed/ productivity
+http://groups.google.com/group/43Folders/feed/rss_v2_0_msgs.xml?num=50 productivity
+http://groups.google.com/group/The-Efficient-Academic/feed/rss_v2_0_msgs.xml?num=100 productivity
+
+# finance
+http://feeds.feedburner.com/Mymoneyblog finance
+http://www.iwillteachyoutoberich.com/blog/feed finance
+
+# self
+http://xbeta.org/wiki/atom_with_content self
+http://xbeta.org/jrblevin/atom_with_content self
+http://jblevins.org/index.atom self
+http://jblevins.org/feeds/visitors.atom self
+http://jblevins.org/feeds/readers.atom self
+http://jblevins.org/feeds/referrers.atom self
+http://pipes.yahoo.com/pipes/pipe.run?_id=SpHc_L_J3BGtl8nfX0sBXw&_render=rss self
+http://jblevins.org/accum/atom.xml self
+
