@@ -72,15 +72,6 @@ export PATH=${HOME}/bin:${PATH}
 export MANPATH=/usr/share/man:/usr/local/share/man
 
 
-# LaTeX, BibTeX, and bibtool
-# --------------------------
-
-export BIBINPUTS=.:${HOME}/projects/biblio:
-export TEXINPUTS=.:${HOME}/projects/latex/common:/usr/share/texmf:/usr/share/texmf-tetex:/var/lib/texmf:/var/cache/fonts:
-export BIBTOOLRSC=${HOME}/projects/biblio/bibtool/default.rsc
-export BIBTOOL=${HOME}/projects/biblio/bibtool
-
-
 # AMPL
 # ----
 

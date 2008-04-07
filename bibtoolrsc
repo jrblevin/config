@@ -1,0 +1,35 @@
+# BibTool default resource file
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Durham, August 26, 2005
+
+# Place symlinks to all bibtex files in ~/.bib
+bibtex.search.path      = { "/home/jrblevin/.bib" }
+
+# Words to ignore for key generation
+ignored.word		= "on"
+ignored.word 		= "the"
+ignored.word 		= "a"
+ignored.word 		= "an"
+ignored.word 		= "if"
+
+print.all.strings	= on
+fmt.et.al 	  	= {}
+print.align.key   	= 0
+sort 			= on
+print.use.tab 		= off
+print.align.string      = 20
+print.align             = 17
+print.comma.at.end      = on
+print.line.length       = 77
+
+# Remove duplicate entries
+check.double 		= on
+check.double.delete 	= on
+
+# Key format
+key.generation 		= on
+key.number.separator 	= {}
+key.base 		= {digit}
+key.format 		= {{%s(key) # %-1p(author) # %-1p(editor) # %-5.1W(institution) # %-5.1W(organization) } %2d(year)%-T(title)}
+
