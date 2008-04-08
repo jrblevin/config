@@ -27,3 +27,11 @@ remoteuser = jrblevin
 remotepassfile = /home/jrblevin/config/private/.imappass
 folderfilter = lambda foldername: re.search('(^INBOX$|^mail)', foldername)
 nametrans = lambda foldername: re.sub('^mail/', '', foldername)
+
+[mbnames]
+enabled = yes
+filename = ~/.muttrc-mailboxes
+header = "mailboxes "
+peritem = "+%(foldername)s"
+sep = " "
+footer = "\n"

@@ -39,9 +39,8 @@ set postponed="=drafts"
 # Don't remove read mail from inbox.
 set mbox="="
 
-# Where new mail may be received
-mailboxes ! + blosxom-devel + blosxom-users + markdown-discuss + \
-          planner-el-discuss + the-efficient-academic
+# Where new mail may be received (created by offlineimap)
+source ~/.muttrc-mailboxes
 
 
 # Outgoing Headers
@@ -196,19 +195,6 @@ unset ascii_chars
 
 # Don't collapse threads with new messages.
 set collapse_unread=no
-
-
-# IMAP Settings
-# -------------
-
-# Enable caching of IMAP headers.
-set header_cache = "~/.mutt-cache/headers"
-
-# Poll for mail every mail_check seconds.
-set mail_check=600
-
-# Maximum time in seconds before polling open IMAP connections.
-set imap_keepalive=30
 
 
 # Displayed Headers
