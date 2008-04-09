@@ -4,9 +4,6 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Durham, August 26, 2005
 
-# Place symlinks to all bibtex files in ~/.bib
-bibtex.search.path = {/home/jrblevin/.bib}
-
 # Words to ignore for key generation
 ignored.word		= "on"
 ignored.word 		= "the"
@@ -42,5 +39,6 @@ key.number.separator 	= {}
 key.base 		= {digit}
 key.format 		= {{%s(key) # %-1p(author) # %-1p(editor) # %-5.1W(institution) # %-5.1W(organization) } %2d(year)%-T(title)}
 
-input {research}
+# Include my main bibtex database by default
+input {/home/jrblevin/.bib/research.bib}
 
