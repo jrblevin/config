@@ -90,6 +90,7 @@ http://feeds.feedburner.com/codinghorror blogs
 http://blog.hecker.org/feed/ blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
 http://xkcd.com/atom.xml blogs
+http://ln.hixie.ch/rss/html blogs
 
 # devel
 http://code.jblevins.org/spark/index.atom devel
