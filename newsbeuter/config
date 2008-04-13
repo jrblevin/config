@@ -3,5 +3,4 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Chapel Hill, April 5, 2008
 
-browser elinks
-
+browser sensible-browser
