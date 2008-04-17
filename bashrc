@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 #
 # Created: Raleigh, June 4, 2004
-# Last Modified: March 13, 2008 22:06 EDT
+# Last Modified: April 17, 2008 10:33 EDT
 
 ## General stuff
 
@@ -12,6 +12,9 @@
 
 # Don't put duplicate lines in the history (needs bash version 3).
 export HISTCONTROL=erasedups
+
+# Prevent concurrent bash sessions from overwriting the history.
+shopt -s histappend
 
 # Check the window size after each command and update if necessary.
 shopt -s checkwinsize
