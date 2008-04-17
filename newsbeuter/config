@@ -8,3 +8,8 @@ browser sensible-browser
 
 # On exit, remove items for feeds no longer subscribed to.
 cleanup-on-quit yes
+
+# Keybindings
+bind-key  k           up
+bind-key  j           down
+bind-key  BACKSPACE   pageup
