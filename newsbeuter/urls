@@ -32,6 +32,7 @@ http://groups.google.com/group/ampl/feed/atom_v1_0_msgs.xml?num=50 scicomp
 http://openopt.blogspot.com/feeds/posts/default scicomp
 http://sourceforge.net/export/rss2_projnews.php?group_id=126795 scicomp
 http://planet.scipy.org/rss20.xml scicomp
+http://groups.google.com/group/comp.lang.fortran/feed/atom_v1_0_msgs.xml scicomp
 
 # stocks
 http://finance.google.com/finance?morenews=10&rating=1&q=AMEX:SPY&output=rss stocks

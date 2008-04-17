@@ -3,4 +3,8 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Chapel Hill, April 5, 2008
 
+# Choose browser based on context (console, X, etc.).
 browser sensible-browser
+
+# On exit, remove items for feeds no longer subscribed to.
+cleanup-on-quit
