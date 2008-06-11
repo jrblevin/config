@@ -702,3 +702,8 @@
 (require 'epa-file)
 (epa-file-enable)
 
+
+;; External files
+;; --------------
+
+(load-file "~/.emacs.d/skel.el")
