@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: March 28, 2008 18:56 EDT
+;; Last Modified: June 13, 2008 10:22 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -185,33 +185,32 @@
 ;; AUCTeX
 ;; ------
 
-;(require 'tex-site)
-;(setq TeX-parse-self t)                    ; Enable parse on load.
-;(setq TeX-auto-save t)                     ; Enable parse on save.
-;(setq TeX-auto-untabify t)                 ; Convert tabs to spaces on save
-;(setq TeX-PDF-mode t)                      ; Enable PDF mode by default
-;(setq TeX-source-specials-mode t)          ; Enable source-specials by default
-;(setq-default TeX-master nil)              ; Query for master file
+(require 'tex-site)
+(setq TeX-parse-self t)                 ; Enable parse on load.
+(setq TeX-auto-save nil)                ; Do not save parsing info.
+(setq TeX-auto-untabify t)              ; Convert tabs to spaces when saving.
+(setq TeX-PDF-mode nil)                 ; Disable PDF mode by default.
+(setq TeX-source-specials-mode nil)     ; Disable source-specials by default.
+(setq-default TeX-master nil)           ; Do not query for master file
 
-;(setq TeX-mode-hook '(lambda ()
-;                       (auto-fill-mode 1)
-;                       (LaTeX-math-mode 1)))
+(setq TeX-mode-hook '(lambda ()
+                       (auto-fill-mode 1)
+                       (LaTeX-math-mode 1)))
 
-;(setq TeX-open-quote "\`\`")               ; Standard quoting
-;(setq TeX-close-quote "\'\'")
-;(setq TeX-quote-after-quote nil)           ; If non-nil, insert literal " first
+(setq TeX-open-quote "\`\`")               ; Standard quoting
+(setq TeX-close-quote "\'\'")
+(setq TeX-quote-after-quote nil)           ; If non-nil, insert literal " first
 
-;(setq LaTeX-german-open-quote "\,\,")      ; German quoting
-;(setq LaTeX-german-close-quote "\`\`")
-;(setq LaTeX-german-quote-after-quote nil)  ; If non-nil, insert literal " first
+(setq LaTeX-german-open-quote "\,\,")      ; German quoting
+(setq LaTeX-german-close-quote "\`\`")
+(setq LaTeX-german-quote-after-quote nil)  ; If non-nil, insert literal " first
 
-;(setq TeX-output-view-style
-;      (quote
-;       (
-;        ("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 5 %d")
-;        ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d")
-;        ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
-;        ("^pdf$" "." "xpdf %o"))))
+(setq TeX-output-view-style
+      (quote
+       (("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 7 %d")
+        ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d")
+        ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
+        ("^pdf$" "." "xpdf %o"))))
 
 
 ;;
