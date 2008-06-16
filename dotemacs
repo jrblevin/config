@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: June 13, 2008 10:22 EDT
+;; Last Modified: June 14, 2008 01:23 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -131,20 +131,11 @@
 
 
 ;;
-;; Browser
-;; -------
+;; Browsers
+;; --------
 
-;; Use Firefox as browser
-(setq browse-url-generic-program "firefox"
-      browse-url-browser-function 'browse-url-generic)
-
-;; Use elinks as browser
-; (setq browse-url-generic-program "elinks"
-;       browse-url-browser-function 'browse-url-generic
-;       browse-url-generic-args '("-remote"))
-
-;; Use w3m as browser
-; (setq browse-url-browser-function 'browse-url-w3m)
+;; Use debian-sensible-browser as generic browser
+(setq browse-url-generic-program "debian-sensible-browser")
 
 
 ;;
@@ -169,16 +160,6 @@
 
 ;; Don't ask about saving my abbreviations.
 (setq save-abbrevs nil)
-
-
-;;
-;; PGP
-;; ---
-;;
-;; Using gpg.el: http://www.mew.org/~kazu/proj/prog/gpg.el
-
-; (autoload 'gpg-after-find-file "gpg" nil t)
-; (add-hook 'find-file-hooks 'gpg-after-find-file)
 
 
 ;;
@@ -565,23 +546,31 @@
 ;; W3M
 ;; ---
 
-;; (require 'w3m-load)
+(require 'w3m-load)
 
-;; (setq browse-url-browser-function 'w3m-browse-url)
-;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-;; (global-set-key "\C-xm" 'browse-url-at-point)
+(setq w3m-home-page "http://jblevins.org/"
+      w3m-use-cookies t
+      w3m-cookie-accept-bad-cookies t
+      w3m-coding-system 'utf-8
+      w3m-file-coding-system 'utf-8
+      w3m-file-name-coding-system 'utf-8
+      w3m-input-coding-system 'utf-8
+      w3m-output-coding-system 'utf-8
+      w3m-terminal-coding-system 'utf-8)
 
-;; (setq w3m-use-cookies t)
+(setq browse-url-browser-function 'w3m-browse-url)
+(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+(global-set-key "\C-xm" 'browse-url-at-point)
 
-;; (setq w3m-coding-system 'utf-8
-;;       w3m-file-coding-system 'utf-8
-;;       w3m-file-name-coding-system 'utf-8
-;;       w3m-input-coding-system 'utf-8
-;;       w3m-output-coding-system 'utf-8
-;;       w3m-terminal-coding-system 'utf-8)
 
-;; (global-set-key (kbd "<f7>") 'w3m-download)
-
+;; http://www.emacswiki.org/cgi-bin/wiki/WThreeMDelicious
+(defun jrb-delicious-url ()
+  "Bookmark this page with del.icio.us."
+  (interactive)
+  (w3m-goto-url
+   (concat "http://del.icio.us/jrblevin?"
+           "url="    (w3m-url-encode-string w3m-current-url)
+           "&title=" (w3m-url-encode-string w3m-current-title))))
 
 ;;
 ;; Timestamps
@@ -649,19 +638,6 @@
 
 
 ;;
-;; ado-mode
-;; --------
-;;
-;; http://www.bellarmine.edu/faculty/wrising/Stata/
-
-;; (load-library "ado-mode") 
-;; (setq ado-claim-name "Jason Blevins")
-;; (setq ado-signature-file "~/.emacs.d/.ado-signature")
-;; (setq ado-confirm-overwrite-flag nil)
-;; (setq auto-mode-alist (cons '("\\.do\\'" . ado-mode) auto-mode-alist))
-
-
-;;
 ;; Org mode
 ;; --------
 ;;
@@ -678,21 +654,14 @@
 ;; Mutt
 ;; ----
 
-; (autoload 'muttrc-mode "muttrc-mode.el"
-;   "Major mode to edit muttrc files" t)
-; (setq auto-mode-alist
-;       (append '(("muttrc\\'" . muttrc-mode))
-;              auto-mode-alist))
-
-;; Use post-mode for composing email in Mutt.
-; (load "post")
-; (defun post-custom()
-;   "post-hook"
-;   (load "mutt-alias")
-;   (local-set-key "\C-ci" 'mutt-alias-insert)
-;   (flyspell-mode 0))
-; (add-hook 'post-mode-hook '(lambda() (post-custom)))
-; (setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
+(defun post-custom()
+  "post-hook"
+  (load "mutt-alias")
+  (setq mutt-alias-file-list '("~/.mutt-aliases"))
+  (local-set-key "\C-ci" 'mutt-alias-insert)
+  (flyspell-mode 0))
+(add-hook 'post-mode-hook '(lambda() (post-custom)))
+(setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
 
 
 ;; EasyPG
