@@ -74,6 +74,8 @@ set print_command="muttprint -p - > ~/inbox/muttprint.ps"
 # Use the Little Brother Database to look up addresses (see also ~/.lbdbrc).
 set query_command="lbdbq '%s'"
 
+# Use offlineimap to check for new mail.
+macro index "\Cx\Cn" "<shell-escape>offlineimap -o -q -u Noninteractive.Basic<enter>"
 
 # Appearance
 # ----------
