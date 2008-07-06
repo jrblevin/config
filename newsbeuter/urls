@@ -28,11 +28,6 @@ http://www.citeulike.org/rss/tag/microeconomics research
 http://www.citeulike.org/rss/tag/industrial_organisation research
 
 # scicomp
-http://trichech.us/?feed=rss2 scicomp
-http://groups.google.com/group/ampl/feed/atom_v1_0_msgs.xml?num=50 scicomp
-http://openopt.blogspot.com/feeds/posts/default scicomp
-http://sourceforge.net/export/rss2_projnews.php?group_id=126795 scicomp
-http://planet.scipy.org/rss20.xml scicomp
 http://groups.google.com/group/comp.lang.fortran/feed/atom_v1_0_msgs.xml scicomp
 
 # stocks
@@ -68,18 +63,15 @@ http://intertwingly.net/blog/comments.atom blogs
 http://homesteadharvest.blogspot.com/feeds/posts/default blogs
 http://feeds.feedburner.com/raleigh/ blogs
 http://diveintomark.org/feed/ blogs
-http://daringfireball.net/index.xml blogs
 http://decafbad.com/blog/feed blogs
 http://tech.agilitynerd.com/blog/index.atom blogs
 http://noone.org/blog/index.rss blogs
 http://bitworking.org/news/feed/ blogs
 http://feeds.feedburner.com/untonet blogs
-http://www.alistapart.com/feed/rss.xml blogs
 http://blog.whatwg.org/feed blogs
 http://www.openfusion.net/atom blogs
 http://www.phdcomics.com/gradfeed.php blogs
 http://kevin.scaldeferri.com/blog/index.rss blogs
-http://www.wasab.dk/morten/blog/feed/atom/ blogs
 http://feeds.feedburner.com/typepad/levenger/well_read_life blogs
 http://jwz.livejournal.com/data/rss blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
@@ -112,10 +104,6 @@ http://www.43folders.com/feed/ productivity
 http://groups.google.com/group/43Folders/feed/rss_v2_0_msgs.xml?num=50 productivity
 http://groups.google.com/group/The-Efficient-Academic/feed/rss_v2_0_msgs.xml?num=100 productivity
 http://feeds.feedburner.com/ToolsForThought productivity
-
-# finance
-http://feeds.feedburner.com/Mymoneyblog finance
-http://www.iwillteachyoutoberich.com/blog/feed finance
 
 # self
 http://xbeta.org/wiki/atom_with_content self
