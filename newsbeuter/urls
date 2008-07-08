@@ -19,34 +19,8 @@ http://feeds.feedburner.com/EconomicPrincipals econ
 http://freakonomics.blogs.nytimes.com/atom.xml econ
 http://krugman.blogs.nytimes.com/atom.xml econ
 http://feeds.feedburner.com/Econbrowser econ
-
-# research
-http://www.citeulike.org/rss/tag/economics research
-http://www.citeulike.org/rss/tag/empirical_io research
-http://www.citeulike.org/rss/tag/io research
-http://www.citeulike.org/rss/tag/microeconomics research
-http://www.citeulike.org/rss/tag/industrial_organisation research
-
-# scicomp
-http://groups.google.com/group/comp.lang.fortran/feed/atom_v1_0_msgs.xml scicomp
-
-# stocks
-http://finance.google.com/finance?morenews=10&rating=1&q=AMEX:SPY&output=rss stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=LOOP stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=MRVC stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=HPY stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=MIDD stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=BWLD stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=WFMI stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=MRH stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=RDK stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=FMD stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=VTIV stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=VWO stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=VEU stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=LQDT stocks
-http://finance.google.com/finance?morenews=10&rating=1&output=rss&q=GWR stocks
-http://rafesspace.blogspot.com/feeds/posts/default stocks
+http://econlog.econlib.org/index.xml
+http://feeds.feedburner.com/StatisticalModelingCausalInferenceAndSocialScience
 
 # opensource
 http://slashdot.org/slashdot.rss opensource
@@ -80,38 +54,25 @@ http://ln.hixie.ch/rss/html blogs
 http://www.davidcross.us/cgi-bin/blosxom.cgi/index.rss blogs
 
 # devel
-http://code.jblevins.org/spark/index.atom devel
 http://golem.ph.utexas.edu/~distler/code/itexToMML.atom devel instiki
 http://bzr.mfd-consult.dk/bzr-feed-global.atom devel bzr-feed
 http://golem.ph.utexas.edu/~distler/code/bzr-feed.atom devel bzr-feed
-http://code.jblevins.org/bzr-feed/index.atom devel bzr-feed self
-http://code.jblevins.org/instiki/index.atom devel instiki self
 http://golem.ph.utexas.edu/~distler/code/instiki/svn.atom devel instiki
 http://golem.ph.utexas.edu/instiki/atom_with_content devel instiki
 http://instiki.org/rss_with_content devel
 http://blosxom.ookee.com/blog/index.rss devel
-http://code.jblevins.org/logfeed/index.atom devel
 http://sphinx.net.ru/hg/elisp/atom-log devel
-http://blog.lighttpd.net/xml/atom/feed.xml devel
-http://fletcherpenney.net/?action=atom; devel
 http://ikiwiki.info/recentchanges/index.rss devel
-http://forums.a2hosting.com/syndication.php?limit=15 devel
 
 # productivity
-http://www.rousette.org.uk/projects/forums/atom/10/ productivity
-http://www.rousette.org.uk/projects/wiki/Special:Recentchanges_RSS productivity
 http://www.43folders.com/feed/ productivity
 http://groups.google.com/group/43Folders/feed/rss_v2_0_msgs.xml?num=50 productivity
 http://groups.google.com/group/The-Efficient-Academic/feed/rss_v2_0_msgs.xml?num=100 productivity
 http://feeds.feedburner.com/ToolsForThought productivity
 
 # self
-http://xbeta.org/wiki/atom_with_content self
-http://xbeta.org/jrblevin/atom_with_content self
 http://jblevins.org/index.atom self
 http://jblevins.org/feeds/visitors.atom self
 http://jblevins.org/feeds/readers.atom self
 http://jblevins.org/feeds/referrers.atom self
-http://pipes.yahoo.com/pipes/pipe.run?_id=SpHc_L_J3BGtl8nfX0sBXw&_render=rss self
 http://jblevins.org/accum/atom.xml self
-
