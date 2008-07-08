@@ -175,8 +175,8 @@ alternative_order text/enriched text/plain text/html
 # Always use the mime-types defined in .mailcap.
 set implicit_autoview=yes
 
-# Use message/rfc822 type to forward messages.
-set mime_forward=no
+# Ask whether to use message/rfc822 type to forward messages.
+set mime_forward=ask-no
 
 
 # Mailing Lists
