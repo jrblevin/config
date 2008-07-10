@@ -28,17 +28,14 @@ http://tinyapps.org/weblog/index.atom opensource
 # blogs
 http://yourkelly.blogspot.com/feeds/posts/default blogs
 http://golem.ph.utexas.edu/~distler/blog/atom10.xml blogs
-http://golem.ph.utexas.edu/~distler/blog/comments.atom blogs
 http://diveintomark.org/public/2004/05/atom.xml blogs
 http://intertwingly.net/blog/index.atom blogs
-http://intertwingly.net/blog/comments.atom blogs
 http://homesteadharvest.blogspot.com/feeds/posts/default blogs
 http://feeds.feedburner.com/raleigh/ blogs
 http://diveintomark.org/feed/ blogs
 http://decafbad.com/blog/feed blogs
 http://tech.agilitynerd.com/blog/index.atom blogs
 http://noone.org/blog/index.rss blogs
-http://bitworking.org/news/feed/ blogs
 http://www.openfusion.net/atom blogs
 http://www.phdcomics.com/gradfeed.php blogs
 http://kevin.scaldeferri.com/blog/index.rss blogs
@@ -59,7 +56,6 @@ http://sphinx.net.ru/hg/elisp/atom-log devel
 http://ikiwiki.info/recentchanges/index.rss devel
 
 # productivity
-http://www.43folders.com/feed/ productivity
 http://groups.google.com/group/43Folders/feed/rss_v2_0_msgs.xml?num=50 productivity
 http://groups.google.com/group/The-Efficient-Academic/feed/rss_v2_0_msgs.xml?num=100 productivity
 http://feeds.feedburner.com/ToolsForThought productivity
