@@ -11,8 +11,8 @@ bind c exec xterm
 bind C-c exec xterm
 bind C-exclam colon exec xterm -e 
 
-# Change escape key to backslash
-escape backslash
+# Change escape key to C-backslash
+escape C-backslash
 
 # Screenshots
 alias sshot exec import -window root ~/screenshot-`date +%F`.jpg
