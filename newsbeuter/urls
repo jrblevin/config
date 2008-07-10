@@ -11,12 +11,10 @@ http://online.wsj.com/xml/rss/3_7011.xml news
 http://www.jeffersonpost.com/?rss=news news
 
 # econ
-http://repec.org/blog/?feed=rss2 econ
 http://gregmankiw.blogspot.com/feeds/posts/default econ
 http://www.marginalrevolution.com/marginalrevolution/index.rdf econ
 http://delong.typepad.com/sdj/index.rdf econ
 http://feeds.feedburner.com/EconomicPrincipals econ
-http://freakonomics.blogs.nytimes.com/atom.xml econ
 http://krugman.blogs.nytimes.com/atom.xml econ
 http://feeds.feedburner.com/Econbrowser econ
 http://econlog.econlib.org/index.xml
@@ -41,13 +39,9 @@ http://decafbad.com/blog/feed blogs
 http://tech.agilitynerd.com/blog/index.atom blogs
 http://noone.org/blog/index.rss blogs
 http://bitworking.org/news/feed/ blogs
-http://feeds.feedburner.com/untonet blogs
-http://blog.whatwg.org/feed blogs
 http://www.openfusion.net/atom blogs
 http://www.phdcomics.com/gradfeed.php blogs
 http://kevin.scaldeferri.com/blog/index.rss blogs
-http://feeds.feedburner.com/typepad/levenger/well_read_life blogs
-http://jwz.livejournal.com/data/rss blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
 http://xkcd.com/atom.xml blogs
 http://ln.hixie.ch/rss/html blogs
