@@ -1,4 +1,16 @@
 #!/bin/sh
-xrdb -load .Xresources
+
+# Load local modmap
+test -r $HOME/.Xmodmap && xmodmap $HOME/.Xmodmap
+
+# Load .Xresources
+test -r $HOME/.Xresources && xrdb -load .Xresources
+
+# Start ssh-agent
+eval `ssh-agent -s`
+
+# Start ratpoison
 exec ratpoison
 
+# Terminate ssh-agent
+eval `ssh-agent -k`
