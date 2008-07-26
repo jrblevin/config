@@ -9,8 +9,12 @@ test -r $HOME/.Xresources && xrdb -load .Xresources
 # Start ssh-agent
 eval `ssh-agent -s`
 
+# Start emacs
+emacs &
+
 # Start ratpoison
 exec ratpoison
 
 # Terminate ssh-agent
 eval `ssh-agent -k`
+
