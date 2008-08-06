@@ -9,12 +9,14 @@ test -r $HOME/.Xresources && xrdb -load .Xresources
 # Start ssh-agent
 eval `ssh-agent -s`
 
+# Set the background color
+xsetroot -solid Grey20
+
 # Start emacs
 emacs &
 
-# Start ratpoison
-exec ratpoison
+# Start awesome
+exec awesome
 
 # Terminate ssh-agent
 eval `ssh-agent -k`
-
