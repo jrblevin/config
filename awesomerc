@@ -30,12 +30,8 @@ screen 0
     layouts
     {
         layout tile { image = "/usr/share/awesome/icons/layouts/tilew.png" }
-        layout tileleft { image = "/usr/share/awesome/icons/layouts/tileleftw.png" }
         layout tilebottom { image = "/usr/share/awesome/icons/layouts/tilebottomw.png" }
-        layout tiletop { image = "/usr/share/awesome/icons/layouts/tiletopw.png" }
         layout max { image = "/usr/share/awesome/icons/layouts/maxw.png" }
-        layout spiral { image = "/usr/share/awesome/icons/layouts/spiralw.png" }
-        layout dwindle { image = "/usr/share/awesome/icons/layouts/dwindlew.png" }
         layout floating { image = "/usr/share/awesome/icons/layouts/floatingw.png" }
     }
     statusbar mystatusbar
@@ -157,22 +153,6 @@ rules
 
 mouse
 {
-    root
-    {
-        button = "3"
-        command = "spawn"
-        arg = "exec x-terminal-emulator"
-    }
-    root
-    {
-        button = "4"
-        command = "tag_viewnext"
-    }
-    root
-    {
-        button = "5"
-        command = "tag_viewprev"
-    }
     client
     {
         modkey = {"Mod4"}
@@ -188,16 +168,6 @@ mouse
     client
     {
         modkey = {"Mod4"}
-        button = "3"
-        command = "client_resizemouse"
-    }
-    titlebar
-    {
-        button = "1"
-        command = "client_movemouse"
-    }
-    titlebar
-    {
         button = "3"
         command = "client_resizemouse"
     }
