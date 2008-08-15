@@ -11,11 +11,8 @@ http://online.wsj.com/xml/rss/3_7011.xml news
 http://www.jeffersonpost.com/?rss=news news
 
 # econ
-http://gregmankiw.blogspot.com/feeds/posts/default econ
 http://www.marginalrevolution.com/marginalrevolution/index.rdf econ
-http://delong.typepad.com/sdj/index.rdf econ
 http://feeds.feedburner.com/EconomicPrincipals econ
-http://krugman.blogs.nytimes.com/atom.xml econ
 http://feeds.feedburner.com/Econbrowser econ
 http://econlog.econlib.org/index.xml
 http://feeds.feedburner.com/StatisticalModelingCausalInferenceAndSocialScience
@@ -42,7 +39,6 @@ http://blosxom.ookee.com/blog/index.rss devel
 http://ikiwiki.info/recentchanges/index.rss devel
 
 # productivity
-http://groups.google.com/group/The-Efficient-Academic/feed/rss_v2_0_msgs.xml?num=100 productivity
 http://feeds.feedburner.com/ToolsForThought productivity
 
 # self
