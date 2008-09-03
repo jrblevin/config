@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: June 14, 2008 01:23 EDT
+;; Last Modified: September 2, 2008 21:53 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -185,6 +185,8 @@
 (setq LaTeX-german-open-quote "\,\,")      ; German quoting
 (setq LaTeX-german-close-quote "\`\`")
 (setq LaTeX-german-quote-after-quote nil)  ; If non-nil, insert literal " first
+
+(setq font-latex-match-slide-title-keywords '("foilhead"))
 
 (setq TeX-output-view-style
       (quote
@@ -669,6 +671,19 @@
 
 (require 'epa-file)
 (epa-file-enable)
+
+
+;; Ado-mode
+;; --------
+
+;(setq load-path (cons "/usr/local/share/emacs/site-lisp/ado-mode/lisp" load-path))
+(load-library "ado-mode")
+(setq ado-claim-name "Jason Blevins")
+(setq ado-signature-file "~/.emacs.d/.ado-signature")
+
+
+(setq ado-site-template-dir "/usr/local/share/emacs/ado-mode/templates/")
+(setq ado-date-format "%B %-e, %Y")
 
 
 ;; External files
