@@ -1,18 +1,7 @@
 // ~/.conkerorrc: Conkeror configuration.
 
-// Web shortcuts
-add_webjump("g", "http://google.com/search?q=%s");
-add_webjump("d", "http://del.icio.us/tag/%s");
-
 // Set up del.icio.us
 add_delicious_webjumps ("jrblevin");
-
-// Regular Firefox (non-conkeror)
-function firefox (arg)
-{
-   window.openDialog("chrome://browser/content/");
-}
-add_command ("ff", firefox, []);
 
 // Reload .conkeror RC file
 function reinit()
@@ -20,35 +9,3 @@ function reinit()
  load_rc_file("/home/jrblevin/.conkerorrc");
 }
 add_command("reinit", reinit, []);
-
-// Customized Numbering                  // Defaults
-//
-// See http://dev.technomancy.us/conkeror/wiki/Tips
-nl_color = "black";                      // black
-nl_image_backgroundColor = "pink";       // pink
-nl_link_backgroundColor = "lightgrey";   // lightgray
-nl_fontWeight = "normal";                // normal
-nl_fontFamily = "monospace";             // sans-serif 
-nl_fontSize = "smaller";                 // small
-nl_borderWidth = "0.0px";                // 1.0
-nl_borderColor = "gray";                 // black
-nl_floater_opacity = "0.75";             // 1.0
-
-// Turn on eod_space automatically
-toggle_eod_space ();
-
-// AdBlock
-//
-// Note the string begins with a space, and the patterns are delimited by
-// spaces. There is no space at the end of the string. Deviation from this
-// format will make Conkeror grumpy.
-
-var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-
-var block_patterns =
-     " doubleclick.net" +
-     " advertising.com" +
-     " ads.guardian.co.uk";
-    
-prefManager.setCharPref ("conkeror.adblock", block_patterns);
-
