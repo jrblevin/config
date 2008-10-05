@@ -12,9 +12,6 @@ eval `ssh-agent -s`
 # Set the background color
 xsetroot -solid Grey20
 
-# Start emacs
-emacs &
-
 # Start awesome
 exec awesome
 
