@@ -65,8 +65,8 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 # External Programs
 # -----------------
 
-# Compose mail using an existing Emacs session (or start a new one).
-set editor="/usr/bin/emacsclient -a emacs"
+# Compose mail using vim
+set editor="vi"
 
 # How to print things
 set print_command="muttprint -p - > ~/inbox/muttprint.ps"
@@ -76,6 +76,9 @@ set query_command="lbdbq '%s'"
 
 # Use offlineimap to check for new mail.
 macro index "\Cx\Cn" "<shell-escape>offlineimap -o -q -u Noninteractive.Basic<enter>"
+
+# Use aspell to check spelling
+set ispell="aspell -e -c"
 
 # Appearance
 # ----------
