@@ -22,3 +22,4 @@ endif
 " Fortran settings
 au BufNewFile,BufRead *.f90
 \ setlocal tabstop=3
+let fortran_do_enddo=1
