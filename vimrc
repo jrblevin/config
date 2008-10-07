@@ -9,6 +9,8 @@ set hlsearch                            " Highlight search patterns.
 set expandtab                           " Spaces instead of tabs.
                                         " Use CTRL-V TAB to insert a tab.
 set tabstop=4                           " Set the tab width to four spaces.
+set exrc                                " Load directory-specific vimrc.
+set visualbell                          " Flash the screen on errors.
 
 set wildmode=longest:full               " Tab completion of filenames.
 set wildmenu                            " Show completions in a status bar.
@@ -23,3 +25,8 @@ endif
 au BufNewFile,BufRead *.f90
 \ setlocal tabstop=3
 let fortran_do_enddo=1
+
+augroup mkd
+  autocmd BufRead *.mdwn  set ai formatoptions=tcroqn2 comments=n:>
+  autocmd BufRead *.text  set ai formatoptions=tcroqn2 comments=n:>
+augroup END
