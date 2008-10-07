@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: September 2, 2008 21:53 EDT
+;; Last Modified: October 7, 2008 19:12 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -88,7 +88,7 @@
 (setq x-select-enable-clipboard t)
 
 ;; Ask whether to add a final newline to text files.
-(setq require-final-newline 'query)
+(setq require-final-newline 't)
 
 ;; Store backup files in one place.
 ;; http://inamidst.com/config/emacs
@@ -102,14 +102,10 @@
 
 ;; Choose a color theme.
 (require 'color-theme)
-; (color-theme-dark-laptop)
-(color-theme-clarity)
+(color-theme-late-night)
 
 ;; Flash the screen to alert.
 (setq visible-bell t)
-
-;; Highlight the current selection.
-(transient-mark-mode 1)
 
 ;; Enable syntax highlighting.
 (global-font-lock-mode 1 nil)
@@ -228,15 +224,6 @@
 
 
 ;;
-;; Cascading Style Sheets
-;; ----------------------
-
-(autoload 'css-mode "css-mode" nil t)
-(setq auto-mode-alist
-      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
-
-
-;;
 ;; Big Brother Database
 ;; --------------------
 
@@ -275,16 +262,6 @@
 ;;
 ;; C and C++
 ;; ---------
-
-(autoload 'c++-mode "cc-mode" "C++ Editing Mode" t)
-(autoload 'c-mode   "cc-mode" "C Editing Mode" t)
-
-(setq auto-mode-alist
-      (append '(("\\.cpp$" . c++-mode)
-		("\\.cc$" . c++-mode)
-		("\\.hh$" . c++-mode)
-		("\\.c$" . c-mode)
-		("\\.h$" . c-mode)) auto-mode-alist))
 
 ;; (defun my-c-mode-common-hook ()
 ;;   (c-set-style "stroustrup")
@@ -355,14 +332,6 @@
 (setq calendar-time-display-form
       (quote (24-hours ":" minutes (if time-zone " (")
                        time-zone (if time-zone ")"))))
-
-
-;;
-;; Cron
-;; ----
-
-(autoload 'crontab-mode "crontab-mode" "crontab-mode" t)
-(add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode))
 
 
 ;;
