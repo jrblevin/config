@@ -59,14 +59,19 @@ complete -o default -W "${SSH_COMPLETE[*]}" ssh
 # Letter friendly ps2pdf:
 alias ps2pdf='ps2pdf -sPAPERSIZE=letter'
 
-
-# Editor setup: fast Emacs
-# ------------------------
-
-export EDITOR="emacs -q -nw --no-site --no-splash"
+# Fast Emacs
 alias e="emacs -q -nw --no-splash"
 alias ee="emacs -q -nw --no-site --no-splash"
 
+
+# Editor setup
+# ------------
+
+export EDITOR="vi"
+
+
+# Paths
+# -----
 
 # Provide a more convenient PATH
 export PATH=${HOME}/bin:${PATH}
