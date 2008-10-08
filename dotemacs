@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: October 7, 2008 22:23 EDT
+;; Last Modified: October 7, 2008 23:09 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -24,14 +24,8 @@
 ;; Basic Configuration
 ;; -------------------
 
-;; Disable loading of "default.el" at startup
-(setq inhibit-default-init t)
-
 ;; Set the load path
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
-
-;; Bookmark file
-(setq bookmark-default-file "~/.emacs.d/emacs.bmk")
 
 ;; Keep customized settings somewhere else
 (if (file-exists-p
@@ -40,42 +34,12 @@
                    (int-to-string emacs-major-version))))
     (load-file custom-file))
 
-;; Disable startup screen
-(setq inhibit-startup-message t)
-
-;; Enable automatic file uncocompress
-(auto-compression-mode 1)
-
-;; Default printer
-;(setq ps-printer-name "brother")
-
-;; Enable Narrow to region
-(put 'narrow-to-region 'disabled nil)
-
-;; Enable scrolling via the mouse wheel
-(mouse-wheel-mode 1)
-
-;; Wrap lines at column 72
-(setq-default fill-column 72)
-
-;; Automatically wrap lines while writing.
-; (auto-fill-mode 1)
-
-;; Start comments at column 50
-(setq-default comment-column 50)
-
-;; Set standard indent to 2, rather than 4.
-(setq standard-indent 2)
-
 ;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
 (setq-default indent-tabs-mode nil)
 (setq tab-width 8)
 
 ;; Synchronize Emacs kill buffer with X clipboard.
 (setq x-select-enable-clipboard t)
-
-;; Ask whether to add a final newline to text files.
-(setq require-final-newline 't)
 
 ;; Store backup files in one place.
 ;; http://inamidst.com/config/emacs
@@ -91,13 +55,6 @@
 (require 'color-theme)
 (color-theme-late-night)
 
-;; Flash the screen to alert.
-(setq visible-bell t)
-
-;; Enable syntax highlighting.
-(global-font-lock-mode 1 nil)
-(setq font-lock-maximum-decoration t)
-
 ;; Show matching parentheses.
 (show-paren-mode 1)
 
@@ -105,12 +62,8 @@
 (display-time-mode 1)
 (setq display-time-24hr-format t)
 
-;; Show the current line and column in the mode line.
-(line-number-mode 1)
+;; Show the column number in the mode line.
 (column-number-mode 1)
-
-;; Prepare shell-mode to handle color output
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 
 ;;
