@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: October 7, 2008 23:09 EDT
+;; Last Modified: October 7, 2008 23:12 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -65,23 +65,11 @@
 ;; Show the column number in the mode line.
 (column-number-mode 1)
 
-
-;;
-;; Browsers
-;; --------
-
 ;; Use debian-sensible-browser as generic browser
 (setq browse-url-generic-program "debian-sensible-browser")
 
-
-;;
-;; Emacs Server
-;; ------------
-
-;; server-start unless it is already running somewhere
-(unless (= 0 (call-process "emacsclient" nil nil
-                           nil "--eval" "nil" "-a" "false"))
-  (server-start))
+;; Start the Emacs server
+(server-start)
 
 ; This hook raises the Emacs frame when emacsclient is run
 (add-hook 'server-visit-hook 'raise-frame)
