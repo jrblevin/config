@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: October 7, 2008 23:12 EDT
+;; Last Modified: October 7, 2008 23:16 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -20,19 +20,8 @@
 ;; mule-unicode-2500-33ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
 ;; mule-unicode-e000-ffff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1
 
-;;
-;; Basic Configuration
-;; -------------------
-
 ;; Set the load path
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
-
-;; Keep customized settings somewhere else
-(if (file-exists-p
-     (setq custom-file
-           (concat "~/.emacs.d/custom-"
-                   (int-to-string emacs-major-version))))
-    (load-file custom-file))
 
 ;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
 (setq-default indent-tabs-mode nil)
@@ -46,10 +35,6 @@
 (if (file-directory-p "~/.emacs.d/backup")
     (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
     (message "Directory does not exist: ~/.emacs.d/backup"))
-
-;;
-;; Appearance
-;; ----------
 
 ;; Choose a color theme.
 (require 'color-theme)
@@ -70,21 +55,6 @@
 
 ;; Start the Emacs server
 (server-start)
-
-; This hook raises the Emacs frame when emacsclient is run
-(add-hook 'server-visit-hook 'raise-frame)
-
-
-;;
-;; Abbreviations
-;; -------------
-
-;; Enable abbrev-mode.
-(setq-default abbrev-mode t)
-
-;; Don't ask about saving my abbreviations.
-(setq save-abbrevs nil)
-
 
 ;;
 ;; AUCTeX
@@ -561,13 +531,6 @@
   (flyspell-mode 0))
 (add-hook 'post-mode-hook '(lambda() (post-custom)))
 (setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
-
-
-;; EasyPG
-;; ------
-
-(require 'epa-file)
-(epa-file-enable)
 
 
 ;; Ado-mode
