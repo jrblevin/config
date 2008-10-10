@@ -1,7 +1,7 @@
 !! ~/.Xresources
 !
 ! Created: Raleigh, July 10, 2004
-! Last Modified: March 12, 2008
+! Last Modified: October 10, 2008 10:04 EDT
 ! Jason Blevins <jrblevin@sdf.lonestar.org>
 
 !! Emacs
@@ -27,35 +27,13 @@ XTerm*saveLines:		1000
 XTerm*background:		black
 XTerm*foreground:		gray90
 XTerm*loginShell:		true
-XTerm*cursorColor: 		rgb:00/80/00
-XTerm*borderColor: 		white
-XTerm*scrollColor: 		black
+XTerm*cursorColor: 		yellow
 XTerm*visualBell: 		true
 XTerm*scrollBar:		off
 XTerm*allowSendEvents: 		true
 XTerm*sessionMgt: 		true
-XTerm*color0: 			black
-XTerm*color1: 			red3
-XTerm*color2: 			green3
-XTerm*color3: 			yellow3
-XTerm*color4: 			DodgerBlue1
-XTerm*color5: 			magenta3
-XTerm*color6: 			cyan3
-XTerm*color7: 			gray90
-XTerm*color8: 			gray50
-XTerm*color9: 			red
-XTerm*color10: 			green
-XTerm*color11: 			yellow
-XTerm*color12: 			blue
-XTerm*color13: 			magenta
-XTerm*color14: 			cyan
-XTerm*color15: 			white
-XTerm*colorUL: 			yellow
-XTerm*colorBD: 			white
 XTerm*showBlinkAsBold:		true
 XTerm*cursorBlink:		on
-XTerm*cursorOnTime:		500
-XTerm*cursorOffTime:		500
 XTerm*messages:                 true
 XTerm*metaSendsEscape:		true
 XTerm*utf8:			1
