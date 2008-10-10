@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: October 7, 2008 23:49 EDT
+;; Last Modified: October 10, 2008 10:18 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -240,22 +240,7 @@
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
 
 (defun my-f90-mode-hook ()
-  (setq f90-do-indent 3
-	f90-if-indent 3
-	f90-type-indent 3
-	f90-program-indent 2
-	f90-continuation-indent 5
-	f90-comment-region "!!$"
-	f90-directive-comment nil
-	f90-indented-comment "!"
-	f90-break-delimiters "[-+\\*/,><=% \t]"
-	f90-break-before-delimiters t
-	f90-beginning-ampersand t
-	f90-smart-end 'blink
-	f90-auto-keyword-case nil
-	f90-leave-line-no nil
-	f90-startup-message t
-	indent-tabs-mode nil
+  (setq f90-beginning-ampersand nil
 	f90-font-lock-keywords f90-font-lock-keywords-3
 	comment-column 50)
   (abbrev-mode 1)			; turn on abbreviation mode
