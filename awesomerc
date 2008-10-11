@@ -4,20 +4,20 @@ screen 0
     {
         normal
         {
-            font = "sans 8"
-            fg = "#dddddd"
-            bg = "#444444"
-            border = "#555555"
+            font = "terminus 8"
+            fg = "#aaaaaa"
+            bg = "#000000"
+            border = "#000000"
         }
         focus
         {
-            fg = "#000000"
-            bg = "#535d6c"
-            border = "#535d6c"
+            fg = "#dddddd"
+            bg = "#222222"
+            border = "#000000"
         }
         urgent
         {
-            fg = "#111111"
+            fg = "#000000"
             bg = "#ff4500"
         }
     }
