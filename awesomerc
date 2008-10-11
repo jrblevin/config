@@ -23,9 +23,9 @@ screen 0
     }
     tags
     {
-        tag work { }
-        tag play { }
-        tag misc { }
+        tag work { layout = "max" }
+        tag play { layout = "max" }
+        tag misc { layout = "max" }
     }
     layouts
     {
@@ -52,9 +52,6 @@ screen 0
 rules
 {
     rule { name = "Gimp" float = true }
-    rule { name = "MPlayer" float = true }
-    rule { name = "Acroread" float = true }
-    rule { name = "pinentry" float = true }
 }
 
 mouse
