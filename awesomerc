@@ -86,7 +86,7 @@ keys
         modkey = {"Mod4"}
         key = "F1"
         command = "spawn"
-        arg = "x-terminal-emulator -e \"man `for i in /usr/share/man/man?;do ls $i; done | cut -d. -f1 | awesome-menu 'See manual page for:'`\""
+        arg = "xterm -e \"man `for i in /usr/share/man/man?;do ls $i; done | cut -d. -f1 | awesome-menu 'See manual page for:'`\""
     }
     key
     {
@@ -100,14 +100,14 @@ keys
         modkey = {"Mod4"}
         key = "F3"
         command = "spawn"
-        arg = "x-terminal-emulator -e \"ssh `cut -d' ' -f1 ~/.ssh/known_hosts | cut -d, -f1 | awesome-menu 'ssh to:'`\""
+        arg = "xterm -e \"ssh `cut -d' ' -f1 ~/.ssh/known_hosts | cut -d, -f1 | awesome-menu 'ssh to:'`\""
     }
     key
     {
         modkey = {"Mod4"}
         key = "Return"
         command = "spawn"
-        arg = "exec x-terminal-emulator"
+        arg = "exec xterm"
     }
     key
     {
