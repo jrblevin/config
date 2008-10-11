@@ -10,7 +10,10 @@ test -r $HOME/.Xresources && xrdb -load .Xresources
 eval `ssh-agent -s`
 
 # Set the background color
-xsetroot -solid Grey20
+xsetroot -solid Black
+
+# Start an xterm
+xterm &
 
 # Start awesome
 exec awesome
