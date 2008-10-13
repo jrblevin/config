@@ -17,7 +17,7 @@ emacs &
 xterm -e screen -R &
 
 # Start awesome
-exec awesome
+awesome
 
 # Terminate ssh-agent
 eval `ssh-agent -k`
