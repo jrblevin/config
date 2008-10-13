@@ -12,8 +12,9 @@ eval `ssh-agent -s`
 # Set the background color
 xsetroot -solid Black
 
-# Start an xterm
-xterm &
+# Start Emacs and an xterm running screen
+emacs &
+xterm -e screen -R &
 
 # Start awesome
 exec awesome
