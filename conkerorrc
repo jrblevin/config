@@ -2,3 +2,6 @@
 
 // Set up del.icio.us
 add_delicious_webjumps ("jrblevin");
+
+// Use emacsclient as the external editor
+define_variable("editor_shell_command", "/usr/bin/emacsclient -a /usr/bin/emacs")
