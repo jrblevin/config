@@ -2,25 +2,17 @@
 ;;
 ;; Jason Blevins <jrblevin@sdf.lonestar.org>
 ;; Created: Durham, August 28, 2006
-;; Last Modified: March 12, 2008
+;; Last Modified: October 22, 2008 12:03 EDT
 
-;; Gmail workaround.
-(setq gnus-invalid-group-regexp "[:`'\"]\\|^$")
-
-;;
-;; Profiles
-;; --------
-
+;; Profile
 (setq user-full-name "Jason Blevins")
 (setq user-mail-address "jrblevin@sdf.lonestar.org")
 
 (setq message-alternative-emails
       (regexp-opt (cons user-mail-address
                         '("jrblevin@sdf.lonestar.org"
-			  "jrb11@duke.edu"
+                          "jrb11@duke.edu"
                           "jrblevin@gmail.com"
-                          "jasonrblevins@yahoo.com"
-                          "jrblevin@hotmail.com"
                           "jason.r.blevins@duke.edu"))))
 
 (setq gnus-posting-styles
@@ -38,46 +30,23 @@
          (signature-file "~/config/common/signatures/sdf"))))
 
 
-;;
-;; Email
-;; -----
-
-(load-library "nnimap")
-(load-library "smtpmail")
-(load-library "starttls")
-
-(setq gnus-select-method
-      '(nnimap "gmail"
-	       (nnimap-address "imap.gmail.com")
-	       (nnimap-server-port 993)
-	       (nnimap-stream ssl)
-	       (nnimap-authinfo-file "~/config/private/authinfo")))
-
-(setq smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-default-smtp-server "smtp.gmail.com"
-      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-      send-mail-function 'smtpmail-send-it
-      message-send-mail-function 'smtpmail-send-it
-      smtpmail-smtp-service 587
-      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "jrblevin@gmail.com" nil)))
-
-;;
 ;; News
-;; ----
+(setq gnus-select-method '(nntp "news.duke.edu"))
 
-;; No news configuration
-(setq gnus-secondary-select-methods nil)
-(setq gnus-check-new-newsgroups nil)
-
-
-;;
-;; Behavior
-;; --------
-
-(add-hook 'message-mode-hook
-	  (lambda ()
-	    (setq fill-column 72)
-	    (turn-on-auto-fill)))
+;; Email
+; (setq gnus-secondary-select-methods
+;        '((nnmaildir "" (directory "~/Mail")
+;                     (create-directory "~/Mail/")
+;                     (directory-files nnheader-directory-files-safe)
+;                     (get-new-mail t))))
+; 
+; (setq mail-sources `((maildir)))
+; (setq mail-source-directory "~/Mail/")
+;
+; (add-hook 'message-mode-hook
+; 	  (lambda ()
+; 	    (setq fill-column 72)
+; 	    (turn-on-auto-fill)))
 
 ;; Use browse-url-generic to open URLs.
 (setq gnus-button-url 'browse-url-generic)
@@ -97,11 +66,7 @@
 ;; Integration with bbdb and dired
 ;(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
 
-
-;;
 ;; Appearance
-;; ----------
-
 (setq gnus-summary-line-format "%U%R%d %(%{%-20,20n%}%) %B%s% \n")
 (when window-system
   (setq gnus-sum-thread-tree-indent "  ")
@@ -111,11 +76,6 @@
   (setq gnus-sum-thread-tree-leaf-with-other "├─► ")
   (setq gnus-sum-thread-tree-vertical "│")
   (setq gnus-sum-thread-tree-single-leaf "╰─► "))
-
-
-;;
-;; Functions
-;; ---------
 
 ;; Quoting messages when replying
 (defun my-message-insert-citation-line ()
