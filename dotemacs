@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: October 22, 2008 12:32 EDT
+;; Last Modified: October 22, 2008 16:47 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -55,6 +55,13 @@
 
 ;; Start the Emacs server
 (server-start)
+(add-hook 'server-switch-hook
+          (lambda nil
+            (let ((server-buf (current-buffer)))
+              (bury-buffer)
+              (switch-to-buffer-other-frame server-buf))))
+(setq server-kill-new-buffers t)
+(add-hook 'server-done-hook (lambda () (delete-frame)))
 
 ;; Don't print a header
 (setq ps-print-header nil)
