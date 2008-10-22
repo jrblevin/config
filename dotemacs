@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: October 10, 2008 10:18 EDT
+;; Last Modified: October 22, 2008 12:32 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -55,6 +55,15 @@
 
 ;; Start the Emacs server
 (server-start)
+
+;; Don't print a header
+(setq ps-print-header nil)
+
+;; Suppress beeps
+(setq visible-bell t)
+
+;; Disable startup screen
+(setq inhibit-startup-message t)
 
 ;;
 ;; AUCTeX
