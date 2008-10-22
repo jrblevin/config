@@ -2,10 +2,3 @@
 
 // Set up del.icio.us
 add_delicious_webjumps ("jrblevin");
-
-// Reload .conkeror RC file
-function reinit()
-{
- load_rc_file("/home/jrblevin/.conkerorrc");
-}
-add_command("reinit", reinit, []);
