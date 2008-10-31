@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: October 22, 2008 16:47 EDT
+;; Last Modified: October 31, 2008 10:52 EDT
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -71,6 +71,35 @@
 
 ;; Disable startup screen
 (setq inhibit-startup-message t)
+
+;;
+;; Custom functions
+;; ----------------
+
+(defun fill-sentence ()
+  (interactive)
+  (save-excursion
+    (forward-char)
+    (forward-to-indentation)
+    (forward-sentence -1)
+    (indent-for-tab-command)
+    ;; Make sure the sentence begins on a separate line
+    (unless (looking-back "\\(^\s *\\|\n\\)")
+      ;; Insert a line break and remove any leftover trailing whitespace
+      (insert "\n")
+      (forward-line -1)
+      (beginning-of-line)
+      (while (re-search-forward "\s +$" nil t)
+        (replace-match "" nil nil)))
+    ;; Indent and fill the current sentence
+    (let ((beg (point)))
+      (forward-sentence)
+      (fill-region-as-paragraph beg (point)))
+    ;; Make sure the ends on a separate line
+    (unless (looking-back "\n")
+      (forward-char))
+    (unless (or (looking-back "\n") (looking-at "$"))
+      (insert "\n"))))
 
 ;;
 ;; AUCTeX
@@ -480,6 +509,7 @@
 (global-set-key [f7] 'markdown-mode)
 (global-set-key [f8] 'plan)
 (global-set-key [f9] 'planner-create-task-from-buffer)
+(global-set-key "\ej" 'fill-sentence)
 
 
 ;;
