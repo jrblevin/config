@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 #
 # Created: Raleigh, June 4, 2004
-# Last Modified: October 10, 2008 09:32 EDT
+# Last Modified: October 22, 2008 16:11 EDT
 
 # If not running interactively, don't do anything.
 [ -z "$PS1" ] && return
@@ -38,3 +38,6 @@ fi
 # SSH hostname completion.
 SSH_COMPLETE=( $(cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | egrep -v [0123456789]) )
 complete -o default -W "${SSH_COMPLETE[*]}" ssh
+
+# Editor setup
+export EDITOR="vi"
