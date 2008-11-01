@@ -25,6 +25,8 @@ endif
 au BufNewFile,BufRead *.f90
 \ setlocal tabstop=3
 let fortran_do_enddo=1
+let fortran_free_source=1
+let fortran_fold=1
 
 augroup mkd
   autocmd BufRead *.mdwn  set ai formatoptions=tcroqn2 comments=n:>
