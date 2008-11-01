@@ -456,6 +456,7 @@
 (global-set-key "\C-xm" 'browse-url-at-point)
 
 
+;; del.icio.us bookmarks in w3m:
 ;; http://www.emacswiki.org/cgi-bin/wiki/WThreeMDelicious
 (defun jrb-delicious-url ()
   "Bookmark this page with del.icio.us."
@@ -464,6 +465,9 @@
    (concat "http://del.icio.us/jrblevin?"
            "url="    (w3m-url-encode-string w3m-current-url)
            "&title=" (w3m-url-encode-string w3m-current-title))))
+
+ (eval-after-load "w3m"
+   '(define-key w3m-info-like-map "a" 'jrb-delicious-url))
 
 ;;
 ;; Timestamps
