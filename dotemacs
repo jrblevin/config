@@ -197,13 +197,6 @@
 
 
 ;;
-;; Gnus
-;; ----
-
-(setq gnus-init-file "~/.emacs.d/dotgnus")
-
-
-;;
 ;; C and C++
 ;; ---------
 
