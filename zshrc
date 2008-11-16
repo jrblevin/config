@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Carrboro, November 16, 2008 09:36 EST
 #
-# Last Modified: November 16, 2008 10:36 EST
+# Last Modified: November 16, 2008 10:42 EST
 
 # history
 HISTFILE=~/.zsh_history
@@ -43,11 +43,3 @@ compinit
 # colorful completion listings
 zmodload -i zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# prompt
-#export PS1="%m:%~%# "
-
-PS1="%m%% "
-RPS1="(%~)"
-export PS1
-export RPS1
