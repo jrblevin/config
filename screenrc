@@ -2,7 +2,7 @@
 #
 # Jason R. Blevins <jrblevin@sdf.lonestar.org>
 # Created: Durham, January 19, 2007
-# Last Modified: March 10, 2008 22:32 EDT
+# Last Modified: November 16, 2008 09:34 EST
 #
 # Parts taken from the following sources:
 # * http://texnatse.blogsome.com/2005/09/01/my-screenrc/
@@ -17,9 +17,6 @@ startup_message off
 # Use a large scrolling buffer.
 defscrollback 5000
 
-# Use bash as the default shell.
-shell /bin/bash
-
 # Change the escape character to `.
 escape ``
 
@@ -28,4 +25,3 @@ autodetach on
 
 # Set the caption to include the window list, time, and date.
 caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= %{dg}%M %d %c"
-
