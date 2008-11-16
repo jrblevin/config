@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Carrboro, November 16, 2008 09:36 EST
 #
-# Last Modified: November 16, 2008 10:42 EST
+# Last Modified: November 16, 2008 15:15 EST
 
 # history
 HISTFILE=~/.zsh_history
@@ -43,3 +43,9 @@ compinit
 # colorful completion listings
 zmodload -i zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Don't treat slashes as part of words
+WORDCHARS="${WORDCHARS:s#/#}"
+
+# Provide a more convenient PATH
+export PATH=${HOME}/bin:${PATH}
