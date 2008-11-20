@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: October 31, 2008 10:52 EDT
+;; Last Modified: November 20, 2008 09:02 EST
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -276,6 +276,7 @@
 ;; -------
 
 (autoload 'f90-mode "f90" "Fortran 90 mode" t)
+(autoload 'f90-mode "f03" "Fortran 90 mode" t)
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
 
 (defun my-f90-mode-hook ()
