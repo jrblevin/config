@@ -44,8 +44,9 @@ compinit
 zmodload -i zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# Don't treat slashes as part of words
-WORDCHARS="${WORDCHARS:s#/#}"
+# Special characters that are to be considered part of words.
+# Default: WORDCHARS="*?_-.[]~=&;!#$%^(){}<>/"
+WORDCHARS="*?.[]~&;!%^(){}<>"
 
 # Provide a more convenient PATH
 export PATH=${HOME}/bin:${PATH}
