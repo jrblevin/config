@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: November 21, 2008 12:39 EST
+;; Last Modified: November 26, 2008 17:45 EST
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -534,6 +534,12 @@
 
 ; (autoload 'ses-mode "ses.el" "Spreadsheet mode" t)
 ; (add-to-list 'auto-mode-alist '("\\.ses$" . ses-mode))
+
+;;
+;; css-mode
+;; --------
+
+(setq cssm-indent-function #'cssm-c-style-indenter)
 
 
 ;;
