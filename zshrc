@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Carrboro, November 16, 2008 09:36 EST
 #
-# Last Modified: November 16, 2008 15:15 EST
+# Last Modified: December 1, 2008 10:12 EST
 
 # history
 HISTFILE=~/.zsh_history
@@ -46,7 +46,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Special characters that are to be considered part of words.
 # Default: WORDCHARS="*?_-.[]~=&;!#$%^(){}<>/"
-WORDCHARS="*?.[]~&;!%^(){}<>"
+WORDCHARS="*?[]~&;!%^(){}<>"
 
 # Provide a more convenient PATH
 export PATH=${HOME}/bin:${PATH}
