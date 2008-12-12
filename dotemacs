@@ -286,6 +286,20 @@
   (setq markdown-command "markdown | smartypants"))
 (add-hook 'markdown-mode-hook '(lambda() (markdown-custom)))
 
+;; Unreleased local customizations
+(load-library "markdown-wiki")
+(setq markdown-wiki-directories
+      (list
+       "/home/jrblevin/projects/ikiwiki/ikiwiki/doc/"
+       "/home/jrblevin/projects/fortranwiki/"
+       "/home/jrblevin/projects/colab/"
+       "/home/jrblevin/projects/notes/"))
+
+(load-library "markdown-gtd")
+(global-set-key [f11] 'markdown-make-next-action)
+(global-set-key [f12] 'markdown-mark-next-action-complete)
+
+
 ;;
 ;; Planner
 ;; -------
