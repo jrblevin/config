@@ -1,10 +1,7 @@
 ;;; ~/.emacs: Emacs configuration file.                     -*-emacs-lisp-*-
 ;;
 ;; Jason Blevins <jrblevin@sdf.lonestar.org>
-;; http://jblevins.org/
-;;
-;; Created: Raleigh, May 29, 2004
-;; Last Modified: December 11, 2008 20:43 EST
+;; Raleigh, May 29, 2004
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
