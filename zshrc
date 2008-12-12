@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Carrboro, November 16, 2008 09:36 EST
 #
-# Last Modified: December 12, 2008 15:05 EST
+# Last Modified: December 12, 2008 15:34 EST
 
 # history
 HISTFILE=~/.zsh_history
@@ -14,7 +14,6 @@ SAVEHIST=1000
 bindkey -e
 
 # settings
-setopt correct_all              # correct misspelled commands
 setopt autocd                   # cd by typing directory name
 setopt hist_ignore_dups         # ignore repeated commands
 setopt nobeep                   # stop yelling at me
@@ -23,9 +22,6 @@ setopt nobeep                   # stop yelling at me
 export EDITOR=vi                # default editor
 
 # aliases
-alias mv='nocorrect mv'
-alias cp='nocorrect cp'
-alias mkdir='nocorrect mkdir'
 if ls -F --color=auto >&/dev/null; then
   eval `dircolors -b`
   alias ls="ls --color=auto -F"
