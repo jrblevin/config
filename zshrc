@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Carrboro, November 16, 2008 09:36 EST
 #
-# Last Modified: December 11, 2008 20:33 EST
+# Last Modified: December 12, 2008 15:05 EST
 
 # history
 HISTFILE=~/.zsh_history
@@ -49,7 +49,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 WORDCHARS="*?[]~&;!%^(){}<>"
 
 # Provide a more convenient PATH
-export PATH=${HOME}/bin:${PATH}
+export PATH=${HOME}/bin:/var/lib/gems/1.8/bin:${PATH}
 
 # pw script
 export PW_FILE=/home/jrblevin/config/private/pwsafe.gpg
