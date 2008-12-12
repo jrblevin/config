@@ -4,7 +4,7 @@
 # Chapel Hill, March 26, 2008
 
 root = /home/jrblevin
-root = ssh://roark.no-ip.org//home/jrblevin
+root = ssh://roark//home/jrblevin
 
 ignore = Name *~
 ignore = Name *.o
