@@ -4,7 +4,7 @@
 ;; http://jblevins.org/
 ;;
 ;; Created: Raleigh, May 29, 2004
-;; Last Modified: November 26, 2008 17:45 EST
+;; Last Modified: December 11, 2008 20:43 EST
 ;;
 ;; Set the following in ~/.Xresources:
 ;;
@@ -106,25 +106,9 @@
 ;; AUCTeX
 ;; ------
 
-(require 'tex-site)
-(setq TeX-parse-self t)                 ; Enable parse on load.
-(setq TeX-auto-save nil)                ; Do not save parsing info.
-(setq TeX-auto-untabify t)              ; Convert tabs to spaces when saving.
-(setq TeX-PDF-mode nil)                 ; Disable PDF mode by default.
-(setq TeX-source-specials-mode nil)     ; Disable source-specials by default.
-(setq-default TeX-master nil)           ; Do not query for master file
-
 (setq TeX-mode-hook '(lambda ()
                        (auto-fill-mode 1)
                        (LaTeX-math-mode 1)))
-
-(setq TeX-open-quote "\`\`")               ; Standard quoting
-(setq TeX-close-quote "\'\'")
-(setq TeX-quote-after-quote nil)           ; If non-nil, insert literal " first
-
-(setq LaTeX-german-open-quote "\,\,")      ; German quoting
-(setq LaTeX-german-close-quote "\`\`")
-(setq LaTeX-german-quote-after-quote nil)  ; If non-nil, insert literal " first
 
 (setq font-latex-match-slide-title-keywords '("foilhead"))
 
