@@ -553,14 +553,11 @@
 ;; Ado-mode
 ;; --------
 
-;(setq load-path (cons "/usr/local/share/emacs/site-lisp/ado-mode/lisp" load-path))
 (load-library "ado-mode")
 (setq ado-claim-name "Jason Blevins")
 (setq ado-signature-file "~/.emacs.d/.ado-signature")
-
-
 (setq ado-site-template-dir "/usr/local/share/emacs/ado-mode/templates/")
-(setq ado-date-format "%B %-e, %Y")
+(setq ado-date-format "%Y-%m-%d")
 
 
 ;; External files
