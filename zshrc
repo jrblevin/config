@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Carrboro, November 16, 2008 09:36 EST
 #
-# Last Modified: December 12, 2008 15:34 EST
+# Last Modified: December 13, 2008 10:15 EST
 
 # history
 HISTFILE=~/.zsh_history
@@ -43,6 +43,18 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Special characters that are to be considered part of words.
 # Default: WORDCHARS="*?_-.[]~=&;!#$%^(){}<>/"
 WORDCHARS="*?[]~&;!%^(){}<>"
+
+# current Git branch
+git_branch() {
+    ref=$(git-symbolic-ref HEAD 2> /dev/null) || return
+    echo " :${ref#refs/heads/}"
+}
+
+# prompt
+autoload -U colors
+colors
+setopt prompt_subst
+PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%c%{$fg[yellow]%}$(git_branch)%{$reset_color%} %% '
 
 # Provide a more convenient PATH
 export PATH=${HOME}/bin:/var/lib/gems/1.8/bin:${PATH}
