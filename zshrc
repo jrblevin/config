@@ -66,3 +66,15 @@ ARCH=`uname -m`
 # Ruby
 export PATH=/var/lib/gems/1.8/bin:$PATH
 export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
+
+# GFortran
+if [[ ${ARCH} == "x86_64" ]]; then
+    LIB64="64"
+fi
+
+if [ -z "$LD_LIBRARY_PATH" ]; then
+  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}"
+else
+  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:$LD_LIBRARY_PATH"
+fi
+export LD_LIBRARY_PATH
