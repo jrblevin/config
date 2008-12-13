@@ -1,9 +1,7 @@
 #!/usr/bin/zsh
 #
 # Jason Blevins <jrblevin@sdf.lonestar.org>
-# Carrboro, November 16, 2008 09:36 EST
-#
-# Last Modified: December 13, 2008 10:15 EST
+# Carrboro, November 16, 2008
 
 # history
 HISTFILE=~/.zsh_history
@@ -57,7 +55,11 @@ setopt prompt_subst
 PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%c%{$fg[yellow]%}$(git_branch)%{$reset_color%} %% '
 
 # Provide a more convenient PATH
-export PATH=${HOME}/bin:/var/lib/gems/1.8/bin:${PATH}
+export PATH=${HOME}/bin:${PATH}
 
 # pw script
 export PW_FILE=/home/jrblevin/config/private/pwsafe.gpg
+
+# Ruby
+export PATH=/var/lib/gems/1.8/bin:$PATH
+export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
