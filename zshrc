@@ -60,6 +60,9 @@ export PATH=${HOME}/bin:${PATH}
 # pw script
 export PW_FILE=/home/jrblevin/config/private/pwsafe.gpg
 
+# determine platform
+ARCH=`uname -m`
+
 # Ruby
 export PATH=/var/lib/gems/1.8/bin:$PATH
 export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
