@@ -54,9 +54,6 @@ colors
 setopt prompt_subst
 PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%c%{$fg[yellow]%}$(git_branch)%{$reset_color%} %% '
 
-# Provide a more convenient PATH
-export PATH=${HOME}/bin:${PATH}
-
 # pw script
 export PW_FILE=/home/jrblevin/config/private/pwsafe.gpg
 
@@ -80,3 +77,6 @@ else
   LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:$LD_LIBRARY_PATH"
 fi
 export LD_LIBRARY_PATH
+
+# Anything in ~/bin has priority
+export PATH=${HOME}/bin:${PATH}
