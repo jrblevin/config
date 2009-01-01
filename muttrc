@@ -18,26 +18,21 @@ set alias_file="~/.mutt-aliases"
 # Mailboxes
 # ---------
 
-# Mail is stored in Maildir format
-set mbox_type=Maildir
-
-# Inbox
-set spoolfile="~/Mail/INBOX/"
-
 # Folder prefix
-set folder="~/Mail/"
+set folder="~/mail/"
 
 # Sent mail folder
 set record="=sent"
 
-# Gmail Drafts folder
+# Drafts folder
 set postponed="=drafts"
 
 # Don't remove read mail from inbox.
 set mbox="="
 
-# Where new mail may be received (created by offlineimap)
-source ~/.muttrc-mailboxes
+# Where new mail may be received
+mailboxes ! + spam + blosxom-users + blosxom-devel + markdown-discuss + \
+  pandoc-discuss + latexml
 
 
 # Outgoing Headers
@@ -72,7 +67,7 @@ set print_command="muttprint -p - > ~/inbox/muttprint.ps"
 set query_command="lbdbq '%s'"
 
 # Use offlineimap to check for new mail.
-macro index "\Cx\Cn" "<shell-escape>offlineimap -o -q -u Noninteractive.Basic<enter>"
+macro index "\Cx\Cn" "<shell-escape>fetchmail<enter>"
 
 # Use aspell to check spelling
 set ispell="aspell -e -c"
@@ -344,7 +339,7 @@ set pgp_good_sign="^gpg: Good signature from"
 # --------------------------
 
 # Pipe mail to SDF and classify as spam or ham.
-macro index S "|ssh sverige.freeshell.org bmf -S\n<save-message>=spam\n" "SPAM"
-macro index H "|ssh sverige.freeshell.org bmf -N\n" "HAM"
-macro pager S "|ssh sverige.freeshell.org bmf -S\n<save-message>=spam\n" "SPAM"
-macro pager H "|ssh sverige.freeshell.org bmf -N\n" "HAM"
+macro index S "|bmf -S\n<save-message>=spam\n" "SPAM"
+macro index H "|bmf -N\n" "HAM"
+macro pager S "|bmf -S\n<save-message>=spam\n" "SPAM"
+macro pager H "|bmf -N\n" "HAM"
