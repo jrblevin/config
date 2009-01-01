@@ -14,9 +14,6 @@ alternates "jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
 source ~/.mutt-aliases
 set alias_file="~/.mutt-aliases"
 
-# Use esmtp to forward outgoing mail to the relevant SMTP server.
-#set sendmail="/usr/bin/esmtp -v -X /tmp/esmtp.log"
-
 
 # Mailboxes
 # ---------
