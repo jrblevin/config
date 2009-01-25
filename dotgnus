@@ -2,7 +2,7 @@
 ;;
 ;; Jason Blevins <jrblevin@sdf.lonestar.org>
 ;; Created: Durham, August 28, 2006
-;; Last Modified: October 22, 2008 12:03 EDT
+;; Last Modified: December 13, 2008 12:03 EST
 
 ;; Profile
 (setq user-full-name "Jason Blevins")
@@ -19,15 +19,13 @@
       '((".*" ;; default
          (name "Jason Blevins")
          (address "jrb11@duke.edu")
-         (signature-file "~/config/common/signatures/duke"))
+         (signature-file "~/config/common/signature"))
         ;; For mail sent to SDF account
         ((header "to" "jrblevin@sdf.lonestar.org")
-         (address "jrblevin@sdf.lonestar.org")
-         (signature-file "~/config/common/signatures/sdf"))
+         (address "jrblevin@sdf.lonestar.org"))
         ;; Usenet news
         ((message-news-p)
-         (address "jrblevin@sdf.lonestar.org")
-         (signature-file "~/config/common/signatures/sdf"))))
+         (address "jrblevin@sdf.lonestar.org"))))
 
 
 ;; News
