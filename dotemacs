@@ -567,11 +567,13 @@
 ;; Ado-mode
 ;; --------
 
-(load-library "ado-mode")
-(setq ado-claim-name "Jason Blevins")
-(setq ado-signature-file "~/.emacs.d/.ado-signature")
-(setq ado-site-template-dir "/usr/local/share/emacs/ado-mode/templates/")
-(setq ado-date-format "%Y-%m-%d")
+(defun ado-custom()
+  "ado-mode-hook"
+  (setq ado-claim-name "Jason Blevins")
+  (setq ado-signature-file "~/.emacs.d/.ado-signature")
+  (setq ado-site-template-dir "/usr/local/share/emacs/ado-mode/templates/")
+  (setq ado-date-format "%Y-%m-%d"))
+(add-hook 'ado-mode-hook '(lambda() (ado-custom)))
 
 
 ;; External files
