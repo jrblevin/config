@@ -1,5 +1,33 @@
+MAILDIR=$HOME/mail
+LOGFILE=$HOME/.procmail.log
+
 :0fw
-| /usr/pkg/bin/bmf -p
+| /usr/local/bin/bmf -p
+
 :0:
 * ^X-Spam-Status: Yes
-/arpa/gm/j/jrblevin/mail/spam
+spam
+
+:0:
+* ^TO_jrb11@acpub.duke.edu
+spam
+
+:0:
+* ^TO_blosxom-users
+blosxom-users
+
+:0:
+* ^TO_blosxom-devel
+blosxom-devel
+
+:0:
+* ^TO_markdown-discuss
+markdown-discuss
+
+:0:
+* ^TO_pandoc-discuss
+pandoc-discuss
+
+:0:
+* ^TO_project-latexml
+latexml
