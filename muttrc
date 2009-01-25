@@ -31,8 +31,8 @@ set postponed="=drafts"
 set mbox="="
 
 # Where new mail may be received
-mailboxes ! + spam + blosxom-users + blosxom-devel + markdown-discuss + \
-  pandoc-discuss + latexml
+mailboxes ! + =spam + =blosxom-users + =blosxom-devel + =markdown-discuss \
+    + =pandoc-discuss + =latexml
 
 
 # Outgoing Headers
