@@ -82,12 +82,12 @@
     (forward-sentence -1)
     (indent-for-tab-command)
     ;; Make sure the sentence begins on a separate line
-    (unless (looking-back "\\(^\s *\\|\n\\)")
+    (unless (looking-back "\\(^\\s *\\|\n\\)")
       ;; Insert a line break and remove any leftover trailing whitespace
       (insert "\n")
       (forward-line -1)
       (beginning-of-line)
-      (while (re-search-forward "\s +$" nil t)
+      (while (re-search-forward "\\s +$" nil t)
         (replace-match "" nil nil)))
     ;; Indent and fill the current sentence
     (let ((beg (point)))
