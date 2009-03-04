@@ -1,8 +1,4 @@
-!! ~/.Xresources
-!
-! Created: Raleigh, July 10, 2004
-! Last Modified: March 4, 2009 15:39 EST
-! Jason Blevins <jrblevin@sdf.lonestar.org>
+!! ~/.Xresources --- Jason R. Blevins <jrblevin@sdf.lonestar.org>
 
 !! Emacs
 Emacs.menuBar:			off
