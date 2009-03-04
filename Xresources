@@ -1,7 +1,7 @@
 !! ~/.Xresources
 !
 ! Created: Raleigh, July 10, 2004
-! Last Modified: October 10, 2008 10:04 EDT
+! Last Modified: March 4, 2009 15:39 EST
 ! Jason Blevins <jrblevin@sdf.lonestar.org>
 
 !! Emacs
@@ -25,9 +25,9 @@ XTerm*boldFont:			-xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso8859-1
 XTerm*geometry:			80x24
 XTerm*saveLines:		1000
 XTerm*background:		black
-XTerm*foreground:		gray90
+XTerm*foreground:		#EEEEEC
 XTerm*loginShell:		true
-XTerm*cursorColor: 		yellow
+XTerm*cursorColor: 		#FCE94F
 XTerm*visualBell: 		true
 XTerm*scrollBar:		off
 XTerm*allowSendEvents: 		true
@@ -50,3 +50,30 @@ xdvi.linkstyle: 3
 xdvi.highlight: Blue
 xdvi.linkColor: DarkBlue
 xdvi.visitedLinkColor: Purple3
+
+!! Tango Colors
+
+! Black
+*color0:  #2E3436
+*color8:  #555753
+! Red
+*color1:  #CC0000
+*color9:  #EF2929
+! Green
+*color2:  #4E9A06
+*color10: #8AE234
+! Yellow
+*color3:  #C4A000
+*color11: #FCE94F
+! Blue
+*color4:  #3465A4
+*color12: #729FCF
+! Purple
+*color5:  #75507B
+*color13: #AD7FA8
+! Cyan
+*color6:  #06989A
+*color14: #34E2E2
+! White
+*color7:  #D3D7CF
+*color15: #EEEEEC
