@@ -1,5 +1,5 @@
 syntax on                               " Enable syntax highlighting.
-colorscheme less                        " Select a color scheme.
+colorscheme tango                       " Select a color scheme.
 set textwidth=78                        " Wrap text at column 78.
 set showcmd                             " Show commands as they are typed.
 set ruler                               " Show line and column numbers.
