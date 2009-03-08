@@ -10,33 +10,23 @@ http://www.duke.edu/today/rss/alert.php alerts
 http://online.wsj.com/xml/rss/3_7011.xml news
 http://www.jeffersonpost.com/?rss=news news
 
-# econ
-http://www.marginalrevolution.com/marginalrevolution/index.rdf econ
-http://feeds.feedburner.com/EconomicPrincipals econ
-http://feeds.feedburner.com/Econbrowser econ
-http://econlog.econlib.org/index.xml
-http://feeds.feedburner.com/StatisticalModelingCausalInferenceAndSocialScience
-
 # blogs
 http://yourkelly.blogspot.com/feeds/posts/default blogs
-http://homesteadharvest.blogspot.com/feeds/posts/default blogs
 http://golem.ph.utexas.edu/~distler/blog/atom10.xml blogs
-http://diveintomark.org/public/2004/05/atom.xml blogs
 http://intertwingly.net/blog/index.atom blogs
-http://noone.org/blog/index.rss blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
-http://xkcd.com/atom.xml blogs
 http://www.davidcross.us/cgi-bin/blosxom.cgi/index.rss blogs
-http://www.aaronsw.com/2002/feeds/pgessays.rss blogs
+http://fluff.info/blog/rss_feed blogs
+http://jonahgelbach.blogspot.com/feeds/posts/default blogs
 
 # devel
 http://golem.ph.utexas.edu/~distler/code/itexToMML.atom devel instiki
-http://bzr.mfd-consult.dk/bzr-feed-global.atom devel bzr-feed
-http://golem.ph.utexas.edu/~distler/code/bzr-feed.atom devel bzr-feed
-http://golem.ph.utexas.edu/~distler/code/instiki/svn.atom devel instiki
+http://github.com/feeds/parasew/commits/instiki/master devel instiki
+http://code.jblevins.org/instiki/index.atom devel instiki
 http://golem.ph.utexas.edu/instiki/atom_with_content devel instiki
 http://blosxom.ookee.com/blog/index.rss devel
 http://ikiwiki.info/recentchanges/index.rss devel
+http://hjemli.net/git/cgit/atom/?h=master devel
 
 # productivity
 http://feeds.feedburner.com/ToolsForThought productivity
@@ -44,7 +34,7 @@ http://feeds.feedburner.com/ToolsForThought productivity
 # self
 http://jblevins.org/index.atom self
 http://jblevins.org/feeds/visitors.atom self
-http://jblevins.org/feeds/readers.atom self
 http://jblevins.org/feeds/referrers.atom self
-http://jblevins.org/feeds/files.atom self
+http://jblevins.org/feeds/research.atom self
 http://jblevins.org/accum/atom.xml self
+http://xbeta.org/wiki/atom_with_content self
