@@ -35,8 +35,8 @@
 
 ;; Choose a color theme.
 (require 'color-theme)
-(load-library "color-theme-less")
-(color-theme-less)
+(require 'color-theme-subdued)
+(color-theme-subdued)
 
 ;; Show matching parentheses.
 (show-paren-mode 1)
