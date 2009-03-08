@@ -432,40 +432,6 @@
 
 
 ;;
-;; W3M
-;; ---
-
-(require 'w3m-load)
-
-(setq w3m-home-page "http://jblevins.org/"
-      w3m-use-cookies t
-      w3m-cookie-accept-bad-cookies t
-      w3m-coding-system 'utf-8
-      w3m-file-coding-system 'utf-8
-      w3m-file-name-coding-system 'utf-8
-      w3m-input-coding-system 'utf-8
-      w3m-output-coding-system 'utf-8
-      w3m-terminal-coding-system 'utf-8)
-
-(setq browse-url-browser-function 'w3m-browse-url)
-(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-(global-set-key "\C-xm" 'browse-url-at-point)
-
-
-;; del.icio.us bookmarks in w3m:
-;; http://www.emacswiki.org/cgi-bin/wiki/WThreeMDelicious
-(defun jrb-delicious-url ()
-  "Bookmark this page with del.icio.us."
-  (interactive)
-  (w3m-goto-url
-   (concat "http://del.icio.us/jrblevin?"
-           "url="    (w3m-url-encode-string w3m-current-url)
-           "&title=" (w3m-url-encode-string w3m-current-title))))
-
- (eval-after-load "w3m"
-   '(define-key w3m-info-like-map "a" 'jrb-delicious-url))
-
-;;
 ;; Timestamps
 ;; ----------
 
