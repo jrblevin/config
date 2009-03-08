@@ -273,6 +273,8 @@
 ;; Markdown
 ;; --------
 
+(setq markdown-enable-math t)
+
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode to edit Markdown files" t)
 
