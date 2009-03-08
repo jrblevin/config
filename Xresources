@@ -50,7 +50,7 @@ xdvi.visitedLinkColor: Purple3
 !! Tango Colors
 
 ! Black
-*color0:  #2E3436
+*color0:  #000000
 *color8:  #555753
 ! Red
 *color1:  #CC0000
