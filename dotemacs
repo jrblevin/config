@@ -74,7 +74,7 @@
 ;; Custom functions
 ;; ----------------
 
-(defun fill-sentence ()
+(defun my-fill-sentence ()
   (interactive)
   (save-excursion
     (forward-char)
@@ -314,17 +314,17 @@
 (setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
 (setq time-stamp-line-limit 10)
 
-(defun insert-year ()
+(defun my-insert-year ()
   "Insert the current year."
   (interactive "*")
   (insert (format-time-string "%Y")))
 
-(defun insert-date ()
+(defun my-insert-date ()
   "Insert the current date."
   (interactive "*")
   (insert (format-time-string "%B %e, %Y")))
 
-(defun insert-date-time ()
+(defun my-insert-date-time ()
   "Insert the current date and time."
   (interactive "*")
   (insert (format-time-string "%B %e, %Y %02H:%02M %Z")))
@@ -334,13 +334,13 @@
 ;; Global keybindings
 ;; ------------------
 
-(global-set-key [f3] 'insert-date-time)
+(global-set-key [f3] 'my-insert-date-time)
 (global-set-key [f5] 'skeleton-weblog-header)
 (global-set-key [f6] 'calendar)
 (global-set-key [f7] 'markdown-mode)
 (global-set-key [f8] 'plan)
 (global-set-key [f9] 'planner-create-task-from-buffer)
-(global-set-key "\ej" 'fill-sentence)
+(global-set-key "\ej" 'my-fill-sentence)
 
 
 ;;
