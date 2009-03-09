@@ -256,7 +256,7 @@
 ;; Fortran
 ;; -------
 
-(autoload 'f90-mode "f90" "Fortran 90 mode" t)
+(require 'f90)
 (setq auto-mode-alist (cons '("\\.f03$" . f90-mode) auto-mode-alist))
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
 
