@@ -31,3 +31,7 @@ pandoc-discuss
 :0:
 * ^TO_project-latexml
 latexml
+
+:0:
+* ^TO_debian-devel-announce
+debian-devel-announce
