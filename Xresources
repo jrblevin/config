@@ -1,4 +1,7 @@
-!! ~/.Xresources --- Jason R. Blevins <jrblevin@sdf.lonestar.org>
+! .Xresources --- X server resource database
+!
+! Created July 10, 2004
+! Jason Blevins <jrblevin@sdf.lonestar.org>
 
 !! Emacs
 Emacs.menuBar:			off
