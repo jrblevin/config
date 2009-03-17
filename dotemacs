@@ -338,8 +338,7 @@
 (global-set-key [f5] 'skeleton-weblog-header)
 (global-set-key [f6] 'calendar)
 (global-set-key [f7] 'markdown-mode)
-(global-set-key [f8] 'plan)
-(global-set-key [f9] 'planner-create-task-from-buffer)
+(global-set-key [f8] 'markdown-gtd-today)
 (global-set-key "\ej" 'my-fill-sentence)
 
 
