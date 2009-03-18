@@ -339,6 +339,7 @@
 (global-set-key [f6] 'calendar)
 (global-set-key [f7] 'markdown-mode)
 (global-set-key [f8] 'markdown-gtd-today)
+(global-set-key [f9] 'compile)
 (global-set-key "\ej" 'my-fill-sentence)
 
 
