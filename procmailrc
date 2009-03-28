@@ -47,3 +47,11 @@ help-gsl
 :0:
 * ^TO_info-gsl
 info-gsl
+
+:0:
+* ^TO_instiki-devel
+instiki-devel
+
+:0:
+* ^TO_instiki-users
+instiki-users
