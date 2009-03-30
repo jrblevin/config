@@ -21,10 +21,11 @@ http://jonahgelbach.blogspot.com/feeds/posts/default blogs
 http://modelingwithdata.org/modeling.xml blogs
 
 # devel
-http://golem.ph.utexas.edu/~distler/code/itexToMML.atom devel instiki
+http://golem.ph.utexas.edu/~distler/code/itexToMML/atom devel instiki
 http://github.com/feeds/parasew/commits/instiki/master devel instiki
 http://code.jblevins.org/instiki/index.atom devel instiki
 http://golem.ph.utexas.edu/instiki/atom_with_content devel instiki
+http://instiki.org/atom_with_content devel instiki
 http://blosxom.ookee.com/blog/index.rss devel
 http://ikiwiki.info/recentchanges/index.rss devel
 http://hjemli.net/git/cgit/atom/?h=master devel
@@ -37,5 +38,4 @@ http://jblevins.org/index.atom self
 http://jblevins.org/feeds/visitors.atom self
 http://jblevins.org/feeds/referrers.atom self
 http://jblevins.org/feeds/research.atom self
-http://jblevins.org/accum/atom.xml self
 http://xbeta.org/wiki/atom_with_content self
