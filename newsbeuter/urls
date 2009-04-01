@@ -25,7 +25,6 @@ http://golem.ph.utexas.edu/~distler/code/itexToMML/atom devel instiki
 http://github.com/feeds/parasew/commits/instiki/master devel instiki
 http://golem.ph.utexas.edu/instiki/atom_with_content devel instiki
 http://instiki.org/atom_with_content devel instiki
-http://blosxom.ookee.com/blog/index.rss devel
 http://ikiwiki.info/recentchanges/index.rss devel
 http://hjemli.net/git/cgit/atom/?h=master devel
 
@@ -38,3 +37,47 @@ http://jblevins.org/feeds/visitors.atom self
 http://jblevins.org/feeds/referrers.atom self
 http://jblevins.org/feeds/research.atom self
 http://xbeta.org/wiki/atom_with_content self
+
+# research
+http://page2rss.com/atom?url=www.econ.ucla.edu/ackerber/&title=Daniel%20Ackerberg research
+http://page2rss.com/atom?url=individual.utoronto.ca/vaguirre/wpapers/research.html&title=Victor%20Aguirregabiria research
+http://page2rss.com/atom?url=www.econ.duke.edu/~psarcidi/&title=Peter%20Arcidiacono research
+http://page2rss.com/atom?url=kuznets.fas.harvard.edu/~athey/&title=Susan%20Athey research
+http://page2rss.com/atom?url=www.econ.duke.edu/~pb29/papers.htm&title=Patrick%20Bayer research
+http://page2rss.com/atom?url=www.stanford.edu/~lanierb/&title=Lanier%20Benkard research
+http://page2rss.com/atom?url=www.econ.duke.edu/~arie/&title=Arie%20Beresteanu research
+http://page2rss.com/atom?url=www.econ.yale.edu/~steveb/&title=Steve%20Berry research
+http://page2rss.com/atom?url=jblevins.org/research/&title=Jason%20Blevins research
+http://page2rss.com/atom?url=www.stanford.edu/~tbres/research.htm&title=Timothy%20Bresnahan research
+http://page2rss.com/atom?url=people.virginia.edu/~fc3p/papers/Papers.htm&title=Federico%20Ciliberto research
+http://page2rss.com/atom?url=www.economics.harvard.edu/faculty/doraszelski/papers_doraszelski&title=Ulrich%20Doraszelski research
+http://page2rss.com/atom?url=www.stanford.edu/~leinav/papers.htm&title=Liran%20Einav research
+http://page2rss.com/atom?url=www.econ.duke.edu/~paule/research.html&title=Paul%20Ellickson research
+http://page2rss.com/atom?url=www.econ.duke.edu/~hf14/research/&title=Hanming%20Fang research
+http://page2rss.com/atom?url=www.econ.upenn.edu/~jesusfv/research.html&title=Jesus%20Fernandez-Villaverde research
+http://page2rss.com/atom?url=www.columbia.edu/~brg2114/research.html&title=Brett%20Gordon research
+http://page2rss.com/atom?url=www.u.arizona.edu/~gowrisan/&title=Gautam%20Gowrisankaran research
+http://page2rss.com/atom?url=www.econ.ucla.edu/hahn/&title=Jinyong%20Hahn research
+http://page2rss.com/atom?url=faculty.wcas.northwestern.edu/~ieh758/index.html&title=Igal%20Hendel research
+http://page2rss.com/atom?url=www.econ.umn.edu/~holmes/research.html&title=Tom%20Holmes research
+http://page2rss.com/atom?url=www.stanford.edu/~doubleh/research.htm&title=Han%20Hong research
+http://page2rss.com/atom?url=www.princeton.edu/~honore/papers/&title=Bo%20Honore research
+http://page2rss.com/atom?url=www.ssc.wisc.edu/~houdejf/research.html&title=Jean-Francois%20Houde research
+http://page2rss.com/atom?url=www.economics.harvard.edu/faculty/imbens/papers_imbens&title=Guido%20Imbens research
+http://page2rss.com/atom?url=bucky.stanford.edu/defaultmain.htm&title=Ken%20Judd research
+http://page2rss.com/atom?url=www.econ.duke.edu/~shakeebk/Personal_Homepage.html&title=Shakeeb%20Khan research
+http://page2rss.com/atom?url=emlab.berkeley.edu/~nekipelov/&title=Denis%20Nekipelov research
+http://page2rss.com/atom?url=www.economics.harvard.edu/faculty/pakes/pakespapers&title=Ariel%20Pakes research
+http://page2rss.com/atom?url=econ.lse.ac.uk/staff/mpesend/index_own.html&title=Martin%20Pesendorfer research
+http://page2rss.com/atom?url=www.econ.berkeley.edu/~powell/index.shtml&title=James%20Powell research
+http://page2rss.com/atom?url=www.stanford.edu/~preiss/research.htm&title=Peter%20Reiss research
+http://page2rss.com/atom?url=www.homepages.ucl.ac.uk/~uctparo/research/index.html&title=Adam%20Rosen research
+http://page2rss.com/atom?url=www.econ.duke.edu/~jfr23/research.html&title=Juan%20Rubio-Ramirez research
+http://page2rss.com/atom?url=gemini.econ.umd.edu/jrust/papers.html&title=John%20Rust research
+http://page2rss.com/atom?url=www.princeton.edu/~anorets/&title=Andriy%20Norets research
+http://page2rss.com/atom?url=www.mgmt.purdue.edu/faculty/rsiebert/publications.asp&title=Ralph%20Siebert research
+http://page2rss.com/atom?url=www.hss.caltech.edu/~mshum/res.html&title=Matthew%20Shum research
+http://page2rss.com/atom?url=www.econ.duke.edu/~atsweet/researchpage.html&title=Andrew%20Sweeting research
+http://page2rss.com/atom?url=faculty.wcas.northwestern.edu/~ett094/&title=Elie%20Tamer research
+http://page2rss.com/atom?url=www.stanford.edu/~wolak/&title=Frank%20Wolak research
+http://page2rss.com/atom?url=homepage.univie.ac.at/christine.zulehner/research.html&title=Christine%20Zulehner research
