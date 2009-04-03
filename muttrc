@@ -32,7 +32,8 @@ set mbox="="
 
 # Where new mail may be received
 mailboxes ! + =spam + =blosxom-users + =blosxom-devel + =markdown-discuss \
-    + =pandoc-discuss + =latexml
+    + =pandoc-discuss + =latexml + =debian-devel-announce + =debian-news \
+    + =gsl-discuss + =help-gsl + =instiki-devel + =instiki-users
 
 
 # Outgoing Headers
