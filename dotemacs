@@ -70,34 +70,6 @@
 ;; Disable startup screen
 (setq inhibit-startup-message t)
 
-;;
-;; Custom functions
-;; ----------------
-
-(defun my-fill-sentence ()
-  (interactive)
-  (save-excursion
-    (forward-char)
-    (forward-to-indentation)
-    (forward-sentence -1)
-    (indent-for-tab-command)
-    ;; Make sure the sentence begins on a separate line
-    (unless (looking-back "\\(^\\s *\\|\n\\)")
-      ;; Insert a line break and remove any leftover trailing whitespace
-      (insert "\n")
-      (forward-line -1)
-      (beginning-of-line)
-      (while (re-search-forward "\\s +$" nil t)
-        (replace-match "" nil nil)))
-    ;; Indent and fill the current sentence
-    (let ((beg (point)))
-      (forward-sentence)
-      (fill-region-as-paragraph beg (point)))
-    ;; Make sure the ends on a separate line
-    (unless (looking-back "\n")
-      (forward-char))
-    (unless (or (looking-back "\n") (looking-at "$"))
-      (insert "\n"))))
 
 ;;
 ;; AUCTeX
@@ -340,7 +312,6 @@
 (global-set-key [f7] 'markdown-mode)
 (global-set-key [f8] 'markdown-gtd-today)
 (global-set-key [f9] 'compile)
-(global-set-key "\ej" 'my-fill-sentence)
 
 
 ;;
