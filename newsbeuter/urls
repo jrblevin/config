@@ -8,10 +8,9 @@ http://www.duke.edu/today/rss/alert.php alerts
 
 # news
 http://online.wsj.com/xml/rss/3_7011.xml news
-http://www.jeffersonpost.com/?rss=news news
+http://jeffersonpost.com/rss/home/News?content_type=article
 
 # blogs
-http://yourkelly.blogspot.com/feeds/posts/default blogs
 http://golem.ph.utexas.edu/~distler/blog/atom10.xml blogs
 http://intertwingly.net/blog/index.atom blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
