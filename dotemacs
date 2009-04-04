@@ -70,6 +70,9 @@
 ;; Disable startup screen
 (setq inhibit-startup-message t)
 
+;; IDO mode <http://www.cua.dk/ido.html>
+(require 'ido)
+(ido-mode t)
 
 ;;
 ;; AUCTeX
