@@ -8,6 +8,8 @@
         co = checkout
         ci = commit
         rlog = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\"
+        lg = log -p
+        df = diff
 
 [color]
         ui = auto
