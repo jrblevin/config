@@ -175,6 +175,14 @@ set implicit_autoview=yes
 set mime_forward=ask-no
 
 
+# Character set
+# -------------
+
+charset-hook ^us-ascii$ cp1252
+charset-hook ^iso-8859-1$ cp1252
+set assumed_charset="cp1252"
+
+
 # Mailing Lists
 # -------------
 
