@@ -53,13 +53,7 @@
 
 ;; Start the Emacs server
 (server-start)
-(add-hook 'server-switch-hook
-          (lambda nil
-            (let ((server-buf (current-buffer)))
-              (bury-buffer)
-              (switch-to-buffer-other-frame server-buf))))
 (setq server-kill-new-buffers t)
-(add-hook 'server-done-hook (lambda () (delete-frame)))
 
 ;; Don't print a header
 (setq ps-print-header nil)
