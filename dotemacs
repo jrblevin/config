@@ -81,7 +81,7 @@
 (setq TeX-output-view-style
       (quote
        (("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 7 %d")
-        ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d")
+        ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d -keep -sidemargin 1in -topmargin 1in")
         ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
         ("^pdf$" "." "evince %o %(outpage)"))))
 
