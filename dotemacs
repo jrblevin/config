@@ -89,7 +89,7 @@
        (("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 7 %d")
         ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d")
         ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
-        ("^pdf$" "." "xpdf %o"))))
+        ("^pdf$" "." "evince %o %(outpage)"))))
 
 
 ;;
