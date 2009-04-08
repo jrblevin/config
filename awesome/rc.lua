@@ -9,11 +9,8 @@ require("naughty")
 require("debian.menu")
 
 -- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
--- The default is a dark theme
-theme_path = "/usr/share/awesome/themes/default/theme"
--- Uncommment this for a lighter theme
--- theme_path = "/usr/share/awesome/themes/sky/theme"
+-- Theme
+theme_path = "/home/jrblevin/.config/awesome/theme"
 
 -- Actually load theme
 beautiful.init(theme_path)
@@ -24,24 +21,14 @@ editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
+    awful.layout.suit.tile,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.floating
 }
 
@@ -77,8 +64,8 @@ tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     tags[s] = {}
-    -- Create 9 tags per screen.
-    for tagnumber = 1, 9 do
+    -- Create 3 tags per screen.
+    for tagnumber = 1, 3 do
         tags[s][tagnumber] = tag(tagnumber)
         -- Add tags to screen one by one
         tags[s][tagnumber].screen = s
