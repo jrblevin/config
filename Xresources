@@ -66,13 +66,15 @@ XTerm*color7:  #D3D7CF
 XTerm*color15: #EEEEEC
 
 !! Xdvi
-xdvi.geometry:     950x700+25-25
-xdvi.shrinkFactor: 4
+xdvi.geometry:     850x1000-0+0
+xdvi.shrinkFactor: 5
 xdvi.paper:        us
 xdvi.expert:       1
 xdvi.background:   LightYellow
 xdvi.editor: emacsclient --no-wait +%l %f
-xdvi.linkstyle: 3
+xdvi.linkstyle: 2
 xdvi.highlight: Blue
 xdvi.linkColor: DarkBlue
 xdvi.visitedLinkColor: Purple3
+xdvi.sidemargin 1in
+xdvi.topmargin 1in
