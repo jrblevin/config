@@ -5,7 +5,7 @@
 # Default Behavior
 Options: --medium=Letter
 Options: --pretty-print
-Options: -2
+Options: -1
 Options: --borders no
 
 # By default, single sided printing.
