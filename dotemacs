@@ -72,18 +72,26 @@
 ;; AUCTeX
 ;; ------
 
-(setq TeX-mode-hook '(lambda ()
-                       (auto-fill-mode 1)
-                       (LaTeX-math-mode 1)))
+(load "auctex.el" nil t t)
 
-(setq font-latex-match-slide-title-keywords '("foilhead"))
+(setq TeX-parse-self t)
+(setq TeX-auto-save t)
 
-(setq TeX-output-view-style
-      (quote
-       (("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 7 %d")
-        ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d -keep -sidemargin 1in -topmargin 1in")
-        ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
-        ("^pdf$" "." "evince %o %(outpage)"))))
+(defun my-TeX-mode-hook-fn ()
+  "Function added to `TeX-mode-hook'."
+  (auto-fill-mode 1)
+  (LaTeX-math-mode 1)
+
+  (setq font-latex-match-slide-title-keywords '("foilhead"))
+
+  (setq TeX-output-view-style
+        (quote
+         (("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 7 %d")
+          ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d -keep -sidemargin 1in -topmargin 1in")
+          ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
+          ("^pdf$" "." "evince %o %(outpage)")))))
+
+(add-hook 'TeX-mode-hook 'my-TeX-mode-hook-fn)
 
 
 ;;
