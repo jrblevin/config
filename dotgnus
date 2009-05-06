@@ -2,7 +2,7 @@
 ;;
 ;; Jason Blevins <jrblevin@sdf.lonestar.org>
 ;; Created: Durham, August 28, 2006
-;; Last Modified: December 13, 2008 12:03 EST
+;; Last Modified: May 6, 2009 15:14 EDT
 
 ;; Profile
 (setq user-full-name "Jason Blevins")
@@ -66,6 +66,7 @@
 
 ;; Appearance
 (setq gnus-summary-line-format "%U%R%d %(%{%-20,20n%}%) %B%s% \n")
+(setq gnus-treat-display-smileys nil)
 (when window-system
   (setq gnus-sum-thread-tree-indent "  ")
   (setq gnus-sum-thread-tree-root "● ")
