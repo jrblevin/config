@@ -55,3 +55,11 @@ instiki-devel
 :0:
 * ^TO_instiki-users
 instiki-users
+
+:0:
+* ^TO_comp-fortran-90
+comp-fortran-90
+
+:0:
+* ^TO_fortran
+gfortran
