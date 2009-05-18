@@ -1,7 +1,4 @@
-# Newsbeuter configuration
-#
-# Jason Blevins <jrblevin@sdf.lonestar.org>
-# Chapel Hill, April 5, 2008
+# ~/.newsbeuter/config
 
 # Choose browser based on context (console, X, etc.).
 browser sensible-browser
@@ -16,3 +13,7 @@ cleanup-on-quit yes
 bind-key  k           up
 bind-key  j           down
 bind-key  BACKSPACE   pageup
+
+# Automatic reloading
+reload-time 30
+reload-threads 4
