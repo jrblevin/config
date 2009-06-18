@@ -69,12 +69,15 @@ export PATH=/opt/gcc-trunk/bin:${PATH}
 
 if [[ ${ARCH} == "x86_64" ]]; then
     LIB64="64"
+    IFC_LIB="intel64"
+else
+    IFC_LIB="ia32"
 fi
 
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}"
+  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/usr/local/intel/Compiler/current/lib/${IFC_LIB}"
 else
-  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:$LD_LIBRARY_PATH"
+  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/usr/local/intel/Compiler/current/lib/${IFC_LIB}:$LD_LIBRARY_PATH"
 fi
 export LD_LIBRARY_PATH
 
