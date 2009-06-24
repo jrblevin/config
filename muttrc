@@ -31,10 +31,21 @@ set postponed="=drafts"
 set mbox="="
 
 # Where new mail may be received
-mailboxes ! + =spam + =blosxom-users + =blosxom-devel + =markdown-discuss \
-    + =pandoc-discuss + =latexml + =debian-devel-announce + =debian-news \
-    + =gsl-discuss + =help-gsl + =instiki-devel + =instiki-users \
-    + =comp-fortran-90 + =gfortran
+mailboxes ! \
+    + =blosxom-devel \
+    + =blosxom-users \
+    + =comp-fortran-90 \
+    + =debian-devel-announce \
+    + =debian-news \
+    + =gfortran \
+    + =gsl-discuss \
+    + =help-gsl \
+    + =instiki-devel \
+    + =instiki-users \
+    + =latexml \
+    + =markdown-discuss \
+    + =pandoc-discuss \
+    + =spam \
 
 
 # Outgoing Headers
