@@ -1,0 +1,6 @@
+root = /archive
+root = ssh://roark//archive
+
+path = library
+
+include default
