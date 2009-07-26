@@ -4,12 +4,10 @@
 http://www.duke.edu/today/rss/alert.php alerts
 
 # news
-http://online.wsj.com/xml/rss/3_7011.xml news
 http://jeffersonpost.com/rss/home/News?content_type=article
 
 # blogs
 http://golem.ph.utexas.edu/~distler/blog/atom10.xml blogs
-http://intertwingly.net/blog/index.atom blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
 http://www.davidcross.us/cgi-bin/blosxom.cgi/index.rss blogs
 http://fluff.info/blog/rss_feed blogs
@@ -23,13 +21,13 @@ http://golem.ph.utexas.edu/instiki/atom_with_content devel instiki
 http://instiki.org/atom_with_content devel instiki
 http://hjemli.net/git/cgit/atom/?h=master devel
 
-# productivity
-http://feeds.feedburner.com/ToolsForThought productivity
-
 # self
 http://jblevins.org/index.atom self
 http://xbeta.org/wiki/atom_with_content self
+http://fortranwiki.org/fortran/atom_with_content self
 http://gauss.xbeta.org/feeds/jblevins.org/404.atom self
 http://gauss.xbeta.org/feeds/jblevins.org/visitors.atom self
 http://gauss.xbeta.org/feeds/jblevins.org/referrers.atom self
 http://gauss.xbeta.org/feeds/jblevins.org/research.atom self
+http://gauss.xbeta.org/feeds/fortranwiki.org/visitors.atom self
+http://gauss.xbeta.org/feeds/fortranwiki.org/referrers.atom self
