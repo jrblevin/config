@@ -85,7 +85,6 @@
 
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
-  (auto-fill-mode 1)
   (LaTeX-math-mode 1)
 
   (setq font-latex-match-slide-title-keywords '("foilhead"))
