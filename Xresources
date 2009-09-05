@@ -76,5 +76,5 @@ xdvi.linkstyle: 2
 xdvi.highlight: Blue
 xdvi.linkColor: DarkBlue
 xdvi.visitedLinkColor: Purple3
-xdvi.sidemargin 1in
-xdvi.topmargin 1in
+xdvi.sidemargin: 1in
+xdvi.topmargin: 1in
