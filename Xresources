@@ -78,3 +78,10 @@ xdvi.linkColor: DarkBlue
 xdvi.visitedLinkColor: Purple3
 xdvi.sidemargin: 1in
 xdvi.topmargin: 1in
+
+!! Xfig
+xfig.inches: on
+xfig.latexfonts: on
+xfig.specialtext: on
+xfig.startfontsize: 11
+xfig.paper_size: Letter
