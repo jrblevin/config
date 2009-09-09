@@ -83,6 +83,7 @@
 
 (setq TeX-parse-self t)
 (setq TeX-auto-save t)
+(setq TeX-source-specials-mode t)
 
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
