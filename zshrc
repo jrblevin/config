@@ -17,7 +17,8 @@ setopt hist_ignore_dups         # ignore repeated commands
 setopt nobeep                   # stop yelling at me
 
 # programs
-export EDITOR=vi                # default editor
+export EDITOR="emacsclient -t"  # default editor
+export ALTERNATE_EDITOR="vi"    # alternate editor
 
 # aliases
 if ls -F --color=auto >&/dev/null; then
