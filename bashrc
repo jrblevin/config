@@ -3,7 +3,7 @@
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 #
 # Created: Raleigh, June 4, 2004
-# Last Modified: October 22, 2008 16:11 EDT
+# Last Modified: September 9, 2009 09:06 EDT
 
 # If not running interactively, don't do anything.
 [ -z "$PS1" ] && return
@@ -40,4 +40,6 @@ SSH_COMPLETE=( $(cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | un
 complete -o default -W "${SSH_COMPLETE[*]}" ssh
 
 # Editor setup
-export EDITOR="vi"
+export EDITOR="emacsclient -t"
+export VISUAL="emacsclient -t"
+export ALTERNATE_EDITOR='vi'
