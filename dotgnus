@@ -2,7 +2,7 @@
 ;;
 ;; Jason Blevins <jrblevin@sdf.lonestar.org>
 ;; Created: Durham, August 28, 2006
-;; Last Modified: May 6, 2009 15:14 EDT
+;; Last Modified: September 9, 2009 12:38 EDT
 
 ;; Profile
 (setq user-full-name "Jason Blevins")
@@ -29,7 +29,7 @@
 
 
 ;; News
-(setq gnus-select-method '(nntp "news.duke.edu"))
+(setq gnus-select-method '(nntp "news.sunsite.dk"))
 
 ;; Email
 ; (setq gnus-secondary-select-methods
