@@ -20,8 +20,9 @@
 ;; Set the load path
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 
-;; Disable the menu bar
+;; Disable the menu bar and toolbar
 (menu-bar-mode 0)
+(tool-bar-mode 0)
 
 ;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
 (setq-default indent-tabs-mode nil)
