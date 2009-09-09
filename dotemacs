@@ -38,9 +38,9 @@
 
 ;; Choose a color theme.
 (require 'color-theme)
+(require 'color-theme-subdued)
 (if window-system
     (progn
-      (require 'color-theme-subdued)
       (color-theme-subdued))
   (color-theme-dark-laptop))
 
