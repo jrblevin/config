@@ -1,4 +1,4 @@
-font          = terminus 8
+font          = 'terminus 8'
 
 bg_normal     = #111111
 bg_focus      = #333333
