@@ -308,6 +308,11 @@
   (interactive "*")
   (insert (format-time-string "%B %e, %Y %02H:%02M %Z")))
 
+(defun my-insert-rfc-3339 ()
+  "Insert the current date and time formatted according to RFC 3339."
+  (interactive "*")
+  (insert (format-time-string "%Y-%02m-%02dT%02H:%02M:%02SZ" (current-time) t)))
+
 
 ;;
 ;; Global keybindings
