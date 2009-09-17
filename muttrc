@@ -177,8 +177,9 @@ set implicit_autoview
 # MIME
 # ----
 
-# Ignore HTML email if possible.
+# Ignore HTML email if possible.  Convert it if we must.
 alternative_order text/enriched text/plain text/html
+auto_view text/html
 
 # Always use the mime-types defined in .mailcap.
 set implicit_autoview=yes
