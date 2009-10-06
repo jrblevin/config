@@ -91,6 +91,7 @@
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
   (LaTeX-math-mode 1)
+  (flyspell-mode)
 
   (setq font-latex-match-slide-title-keywords '("foilhead"))
 
