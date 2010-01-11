@@ -11,8 +11,9 @@ http://golem.ph.utexas.edu/~distler/blog/atom10.xml blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
 http://www.davidcross.us/cgi-bin/blosxom.cgi/index.rss blogs
 http://fluff.info/blog/rss_feed blogs
-http://jonahgelbach.blogspot.com/feeds/posts/default blogs
 http://modelingwithdata.org/modeling.xml blogs
+http://jonahgelbach.blogspot.com/feeds/posts/default blogs
+http://alewbel.livejournal.com/data/atom blogs
 
 # devel
 http://golem.ph.utexas.edu/~distler/code/itexToMML/atom devel instiki
