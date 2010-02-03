@@ -164,8 +164,8 @@ unset metoo
 # Don't ask about moving messages, just do it.
 set move=no
 
-# Don't save outgoing attachments.
-unset fcc_attach
+# Save outgoing attachments.
+set fcc_attach
 
 # When replying to a message sent by me, reply to the recipients instead.
 unset reply_self
