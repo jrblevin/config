@@ -18,7 +18,7 @@ setopt nobeep                   # stop yelling at me
 
 # programs
 export EDITOR="emacsclient -t"  # default editor
-export ALTERNATE_EDITOR="vi"    # alternate editor
+export ALTERNATE_EDITOR=""      # alternate editor
 
 # aliases
 if ls -F --color=auto >&/dev/null; then
