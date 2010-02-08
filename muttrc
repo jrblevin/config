@@ -11,24 +11,32 @@ set from="jrb11@duke.edu"
 alternates "jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
 
 # Read alias file
-source ~/.mutt-aliases
 set alias_file="~/.mutt-aliases"
+set sort_alias= alias
+set reverse_alias=yes
+source $alias_file
+
+# Gmail IMAP+SMTP
+# ---------------
+
+set imap_user = "jrblevin"
+set smtp_url = "smtp://jrblevin@smtp.gmail.com:587/"
+
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+set trash = "imaps://imap.gmail.com:993/[Gmail]/Trash"
+
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+
+set move = no
+set imap_keepalive = 60
 
 
 # Mailboxes
 # ---------
-
-# Folder prefix
-set folder="~/mail/"
-
-# Sent mail folder
-set record="=sent"
-
-# Drafts folder
-set postponed="=drafts"
-
-# Don't remove read mail from inbox.
-set mbox="="
 
 # Where new mail may be received
 mailboxes ! \
@@ -44,8 +52,7 @@ mailboxes ! \
     + =instiki-users \
     + =latexml \
     + =markdown-discuss \
-    + =pandoc-discuss \
-    + =spam \
+    + =pandoc-discuss
 
 
 # Outgoing Headers
@@ -71,16 +78,13 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 # -----------------
 
 # Compose mail using vim
-set editor="vi"
+set editor='vi + -c "set textwidth=72" -c "set wrap" -c "?^$"'
 
 # How to print things
 set print_command="muttprint -p - > ~/inbox/muttprint.ps"
 
 # Use the Little Brother Database to look up addresses (see also ~/.lbdbrc).
 set query_command="lbdbq '%s'"
-
-# Use offlineimap to check for new mail.
-macro index "\Cx\Cn" "<shell-escape>fetchmail<enter>"
 
 # Use aspell to check spelling
 set ispell="aspell -e -c"
@@ -357,11 +361,12 @@ set pgp_getkeys_command="/usr/bin/gpg --recv-keys %r 2> /dev/null"
 set pgp_good_sign="^gpg: Good signature from"
 
 
-# Bayesian Mail Filter (bmf)
-# --------------------------
+# Gmail keybindings
+# -----------------
 
-# Pipe mail to SDF and classify as spam or ham.
-macro index S "|bmf -S\n<save-message>=spam\n" "SPAM"
-macro index H "|bmf -N\n" "HAM"
-macro pager S "|bmf -S\n<save-message>=spam\n" "SPAM"
-macro pager H "|bmf -N\n" "HAM"
+bind editor <space> noop
+macro index gi "<change-folder>=INBOX<enter>
+macro index ga "<change-folder>=[Gmail]/All Mail<enter>"
+macro index gs "<change-folder>=[Gmail]/Starred<enter>"
+macro index gt "<change-folder>=[Gmail]/Sent Mail<enter>"
+macro index gd "<change-folder>=[Gmail]/Drafts<enter>"
