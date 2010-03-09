@@ -20,12 +20,12 @@ source $alias_file
 # ---------------
 
 set imap_user = "jrblevin"
-set smtp_url = "smtp://jrblevin@smtp.gmail.com:587/"
 
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 set trash = "imaps://imap.gmail.com:993/[Gmail]/Trash"
+set record = "+[Gmail]/Sent Mail"
 
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
