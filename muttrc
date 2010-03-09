@@ -365,8 +365,13 @@ set pgp_good_sign="^gpg: Good signature from"
 # -----------------
 
 bind editor <space> noop
-macro index gi "<change-folder>=INBOX<enter>
+macro index gi "<change-folder>=INBOX<enter>"
 macro index ga "<change-folder>=[Gmail]/All Mail<enter>"
 macro index gs "<change-folder>=[Gmail]/Starred<enter>"
 macro index gt "<change-folder>=[Gmail]/Sent Mail<enter>"
 macro index gd "<change-folder>=[Gmail]/Drafts<enter>"
+macro index,pager gY "<save-message>=[Gmail]/All Mail<enter>" "Archive message"
+macro index,pager gD "<save-message>=[Gmail]/Trash<enter>" "Trash message"
+macro index,pager gS "<save-message>=[Gmail]/Starred<enter>" "Star message"
+macro index,pager S "<save-message>=[Gmail]/Spam<enter>" "Mark message as spam"
+macro index,pager H "<save-message>=INBOX<enter>" "Mark message as ham"
