@@ -274,9 +274,8 @@
 (setq markdown-wiki-directories
       (list
        "/home/jrblevin/projects/ikiwiki/ikiwiki/doc/"
-       "/home/jrblevin/projects/fortranwiki/"
-       "/home/jrblevin/projects/colab/"
-       "/home/jrblevin/projects/notes/"))
+       "/home/jrblevin/projects/jblevins.org/"
+       "/home/jrblevin/projects/gtd/"))
 
 (load-library "markdown-gtd")
 (global-set-key [f11] 'markdown-make-next-action)
