@@ -43,10 +43,8 @@
 ;; Choose a color theme.
 (require 'color-theme)
 (require 'color-theme-subdued)
-(if window-system
-    (progn
-      (color-theme-subdued))
-  (color-theme-dark-laptop))
+(require 'color-theme-less)
+(color-theme-subdued)
 
 ;; Show matching parentheses.
 (show-paren-mode 1)
