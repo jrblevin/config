@@ -135,19 +135,6 @@
 
 
 ;;
-;; Big Brother Database
-;; --------------------
-
-(require 'bbdb)
-(require 'bbdb-autoloads)
-(setq bbdb-file "~/.bbdb")
-(setq bbdb-default-area-code 919)
-(setq bbdb-north-american-phone-numbers-p t)
-(setq bbdb-default-country "USA")
-(setq bbdb-dwim-net-address-allow-redundancy t)
-
-
-;;
 ;; Perl
 ;; ----
 
