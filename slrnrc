@@ -1,0 +1,354 @@
+% -*- slang -*-
+
+% Identity
+set username "jrblevin"
+set hostname "sdf.lonestar.org"
+set realname "Jason Blevins"
+set organization "Duke University"
+set signature "/home/jrblevin/.signature"
+
+% Server
+server "localhost" ".jnewsrc"
+set server_object "nntp"
+set post_object "nntp"
+set generate_message_id 0
+
+% External programs
+set editor_command "vim -c %d '%s'"
+set non_Xbrowser "elinks '%s'"
+set Xbrowser "firefox '%s' &"
+set printer_name "lpr"
+set generate_email_from 1
+
+% Directory / file names
+set save_posts "News/My_Posts"
+set save_replies "News/My_Replies"
+
+% Character mapping / MIME support
+charset display "utf8"
+charset outgoing "utf8"
+
+% General usage
+
+% confirm_actions:
+% 1     confirm marking groups as read or un-read.
+% 2     confirm printing an article.
+% 4     confirm posts, followups, replies and supersedes.
+% 8     confirm leaving a group by following a news: URL.
+% 16    confirm quitting slrn.
+set confirm_actions 7
+
+% Some preferences for the header window (see the manual for more)
+
+% These sorting methods are available:
+% If 0, do not sort.  If 1, perform threading.  If 2, sort by subject.
+% If 3, thread then sort result by subject.
+% If 4, sort by score.  If 5, thread then sort by score.
+% If 6, sort by score and subject.
+% If 7, thread, then sort by score and subject.
+% If 8, sort by date with most recent first.
+% If 9, thread, then sort by date with most recent first.
+% If 10, sort by date with most recent last.
+% If 11, thread then sort by date with most recent last.
+% If 12, use the value of the custom_sort_order variable.
+set sorting_method 11
+
+% Some preferences for the article pager (see the manual for more)
+
+visible_headers "From:,Subject:,Newsgroups:,Followup-To:,Reply-To:,Date:,X-Newsreader:"
+
+
+%% Format settings (help lines, status lines, formats)
+
+% help lines
+% set art_help_line           "   Press '?' for help"
+% set group_help_line         "   Press '?' for help"
+% set header_help_line        "   Press '?' for help"
+
+% top/article/group/header status line
+set top_status_line         "slrn %v -- %s: %n"
+set group_status_line       "-%D- [group list] Server: %s %-20g -- %L (%P)"
+set art_status_line         "%p%n : [%r] %s %-20g -- %L (%P)"
+set header_status_line      "%p[%u/%t unread] Group: %n%-20g -- %L (%P)"
+
+% formats
+set overview_date_format "%d %b"
+%header_display_format   0   " %F%C [%-4S] [%-25r] [%D] (%-4l) %t%s"
+header_display_format   0   " %F %D %17r %t%s"
+% group_display_format    0   "   %F %45n %80d [%-6u/%-6t]"
+% group_display_format    1   "   %F %45n [%-6u/%-6t] %d"
+% group_display_format    2   "   %F [%-6u/%-6t] %-45n       %d"
+
+%% Display / color settings
+
+% Draw cursor bar ala tin instead of slrn "->" cursor?
+set display_cursor_bar	1
+
+% This color object is only used when highlight_unread_subjects is set to 2
+% (see the reference manual for details):
+color unread_subject	"white"		"black"	"bold"
+mono  unread_subject	"bold"
+
+% These settings are used for color terminals:
+color article		"lightgray"	"black"
+color author		"magenta"	"black"
+color boldtext		"brightblue"	"black"	"bold"
+color box		"black"		"white"
+color cursor		"yellow"	        "blue"
+color date		"lightgray"	"black"  
+color description	"lightgray"	"black"
+color error		"red"		"black"	"bold"
+color frame		"yellow"	"blue"
+color from_myself	"brightmagenta"	"black"	"bold"
+color group		"lightgray"	"black"	"bold"
+color grouplens_display	"lightgray"	"black"
+color header_name	"green"		"black"	"bold"
+color header_number	"green"		"black"
+color headers		"brightcyan"	"black"
+color neg_score		"green"		"black"
+color pos_score		"blue"		"black"
+color high_score	"red"		"black"	"bold"
+color italicstext	"magenta"	"black"	"bold"
+color menu		"yellow"	"blue"
+color menu_press	"lightgray"	"yellow"
+color message		"lightgray"	"black"
+color normal		"lightgray"	"black"
+color pgpsignature	"lightgray"	"black"
+color quotes		"red"		"black"
+color quotes1		"magenta"	"black"
+color quotes2		"brown"		"black"
+color quotes3		"brown"		"black"
+color quotes4		"brown"		"black"
+color quotes5		"brown"		"black"
+color quotes6		"brown"		"black"
+color quotes7		"brown"		"black"
+color response_char	"green"		"black"	"bold"
+color signature		"red"		"black"
+color selection		"yellow"	"blue"	"bold"
+color status		"yellow"	"blue"
+color subject		"lightgray"	"black"
+color thread_number	"lightgray"	"black"	"bold"
+color tilde		"green"		"black"	"bold"
+color tree		"red"		"black"	"bold"
+color underlinetext	"cyan"		"black"	"underline"
+color url		"white"		"black"	"bold"
+color verbatim		"green"		"black"
+
+% These attributes are for terminals that cannot display color:
+mono article		"none"
+mono author		"none"
+mono boldtext		"bold"
+mono cursor		"bold"	"reverse"
+mono date		"none"
+mono description	"none"
+mono error		"bold"
+mono frame		"reverse"
+mono from_myself	"bold"
+mono group		"bold"
+mono grouplens_display	"none"
+mono header_name	"bold"
+mono header_number	"none"
+mono headers		"none"
+mono high_score		"bold"
+mono italicstext	"bold"
+mono menu		"reverse"
+mono menu_press		"none"
+mono neg_score		"none"
+mono normal		"none"
+mono pgpsignature	"none"
+mono pos_score		"reverse"
+mono quotes		"none"
+mono quotes1		"none"
+mono quotes2		"none"
+mono quotes3		"none"
+mono quotes4		"none"
+mono quotes5		"none"
+mono quotes6		"none"
+mono quotes7		"none"
+mono response_char	"bold"
+mono selection		"bold"  
+mono signature		"none"
+mono status		"reverse"
+mono subject		"none"
+mono thread_number	"bold"
+mono tilde		"bold"
+mono tree		"none"
+mono underlinetext	"underline"
+mono url		"bold"
+mono verbatim	        "none"
+
+%% Group mode key bindings
+
+% Cursor movement:
+setkey group line_down        "<Down>"   % Go to the next group
+setkey group line_down        "j"
+setkey group line_up          "<Up>"   % Go to the previous group
+setkey group line_up          "k"
+setkey group page_down        "^V"     % Scroll to the next page
+setkey group page_down        "<PageDown>"
+setkey group page_down        "^D"
+setkey group page_up          "<Esc>V"    % Scroll to the previous page
+setkey group page_up          "<PageUp>"
+setkey group page_up          "^U"
+setkey group bob              "<Esc><"    % Go to the bottom of the list
+setkey group bob              "^K<Up>"
+setkey group eob              "<Esc>>"    % Go to the top of the list
+setkey group eob              "^K<Down>"
+setkey group group_search_backward "\\"% Group keyword search backward
+setkey group group_search_forward  "/" % Group keyword search forward
+
+% Actions:
+setkey group select_group     "<Space>"      % Enter the current newsgroup
+setkey group select_group     "<Return>"
+setkey group post             "P"      % Post an article
+setkey group post_postponed   "<Esc>P"    % Post or edit a postponed article
+setkey group refresh_groups   "G"      % Get new news from server
+setkey group toggle_scoring   "K"      % Select scoring mode
+setkey group repeat_last_key  "."      % Repeat last key sequence
+setkey group evaluate_cmd     "^X<Esc>"   % Read line and interpret it as S-Lang
+setkey group suspend          "^Z"     % Suspend slrn
+setkey group quit             "Q"      % Quit slrn
+
+% Group management:
+setkey group catchup          "C"      % Mark all articles as read
+setkey group uncatchup        "<Esc>u"    % Mark all articles as unread
+setkey group add_group        "a"      % Add a new newsgroup
+setkey group subscribe        "S"      % Subscribe to the current newsgroup
+setkey group unsubscribe      "U"      % Unsubscribe from the current newsgroup
+setkey group move_group       "m"      % Move newsgroup to a different location
+setkey group transpose_groups "^X^T"   % Transpose position of groups
+setkey group save_newsrc      "X"      % Force a save of the newsrc file
+
+% Display:
+setkey group toggle_group_formats "<Esc>A" % Toggle group display formats
+setkey group toggle_hidden    "l"      % Toggle display of hidden groups
+setkey group toggle_list_all  "L"      % Toggle listing of unsubscribed groups
+setkey group redraw           "^L"     % Redraw the screen
+setkey group redraw           "^R"
+setkey group help             "?"      % Display a help screen
+
+%% Article mode key bindings
+
+% General movement:
+setkey article next                    "n"  % next unread article
+setkey article previous                "p"  % previous unread article
+setkey article skip_to_next_group      "N"  % go to the next group
+setkey article skip_to_next_group      "<Esc><Right>"
+setkey article skip_to_previous_group  "<Esc><Left>"  % go to the previous group
+setkey article next_high_score         "!"  % next article with high score
+setkey article next_same_subject       "="  % next article with same subject
+setkey article goto_last_read          "L"  % go to the last read article
+
+% Actions:
+setkey article post                 "P"		% Post a new article
+setkey article post_postponed       "<Esc>P"	% Post/edit a postponed article
+setkey article followup             "f"		% Post a followup
+setkey article reply                "r"		% Reply to poster
+setkey article forward              "F"		% Forward posting via mail
+setkey article supersede            "<Esc>^S"	% Supersede article
+setkey article cancel               "<Esc>^C"	% Cancel article
+setkey article save                 "O"		% Save article
+setkey article pipe                 "|"		% Pipe article
+setkey article print                "y"		% Print article
+setkey article decode               ":"		% Decode article
+setkey article suspend              "^Z"	% Suspend slrn
+setkey article quit                 "q"		% Quit slrn
+setkey article fast_quit            "Q"		% Quit slrn immediately
+
+% Moving in the article pager:
+setkey article article_line_down    "<Esc><Down>"	% Scroll article down one line
+setkey article article_line_down    "<Return>"
+setkey article article_line_up      "<Esc><Up>"	% Scroll article up one line
+setkey article article_page_down    "<Space>"	% Scroll article down one page
+setkey article article_page_up      "<Backspace>"	% Scroll article up one page
+setkey article article_page_up      "b"		% Scroll article up one page
+setkey article article_eob          ">"		% Move to the end of the article
+setkey article article_bob          "<"		% Move to the beginning
+setkey article article_left         "<Left>"	% Pan article to the left
+setkey article article_right        "<Right>"	% Pan article to the right
+setkey article article_search       "/"		% Search forward in the article
+setkey article skip_quotes          "<Tab>"	% Skip beyond quoted text
+setkey article forward_digest       "g"		% Skip to next digest
+
+% Moving in the header display:
+setkey article header_line_down      "<Down>"	% Move to next article
+setkey article header_line_down      "j"
+setkey article header_line_up        "<Up>"	% Move to previous article
+setkey article header_line_up        "k"
+setkey article header_page_down      "^V"       % Scroll down one page
+setkey article header_page_down      "<PageDown>"
+setkey article header_page_down      "^D"
+setkey article header_page_up        "<Esc>V"	% Scroll up one page
+setkey article header_page_up        "<PageUp>"
+setkey article header_page_up        "^U"
+setkey article header_eob            "<Esc>>"	% Go to last article in group
+setkey article header_bob            "<Esc><"	% Go to first article in group
+setkey article goto_article          "g"	% Move to article (number)
+setkey article author_search_forward   "a"	% Author search forward
+setkey article author_search_backward  "A"	% Author search backward
+setkey article subject_search_forward  "s"	% Subject search forward
+setkey article subject_search_backward "S"	% Subject search backward
+
+% Marking as read/unread:
+setkey article delete                  "d"	% Mark article as read
+setkey article undelete                "u"	% Mark article as unread
+setkey article delete_thread           "D"	% Mark (Sub-)Thread as read
+setkey article catchup_all             "c"	% Mark all articles as read
+setkey article catchup_all             "<Esc>c"
+setkey article catchup                 "<Esc>C"	% Catchup (up to this article)
+setkey article uncatchup_all           "<Esc>u"	% Mark all articles as unread
+setkey article uncatchup               "<Esc>U"	% Uncatchup (up to this article)
+setkey article expunge                 "x"	% Remove all read articles
+
+% Display properties:
+setkey article toggle_headers          "t"	% Full headers (on/off)
+setkey article toggle_rot13            "<Esc>R"	% Toggle ROT-13 decryption
+setkey article toggle_quotes           "T"	% Display quoted lines (on/off)
+setkey article toggle_signature        "\\"	% Show signature (on/off)
+setkey article wrap_article            "W"	% Wrap long lines (on/off)
+setkey article show_spoilers           "<Esc>?"	% Reveal spoilers (on/off)
+setkey article toggle_pgpsignature     "]"	% Show PGP signature (on/off)
+setkey article toggle_verbatim_marks   "["	% Show verbatim marks (on/off)
+setkey article enlarge_article_window  "^"	% Enlarge the article window
+setkey article shrink_article_window   "^^"	% Shrink the article window
+setkey article zoom_article_window     "z"	% Maximize/Unmaximize article
+setkey article hide_article            "h"	% Hide/Show the article window
+setkey article browse_url              "U"	% Search for URL and follow it
+setkey article toggle_sort             "<Esc>S"	% Select threading method
+setkey article toggle_collapse_threads "<Esc>t"	% Collapse/Uncollapse thread
+setkey article toggle_header_formats   "<Esc>a"	% Toggle header display formats
+setkey article redraw                  "^L"	% Redraw screen
+setkey article redraw                  "^R"	% Redraw screen
+setkey article help                    "?"	% Display help screen
+
+% Miscellaneous actions:
+setkey article create_score            "K"	% Create a scorefile entry
+setkey article view_scores             "v"      % Show which rules matched
+setkey article locate_article          "<Esc>l"	% Locate article by Message-ID
+setkey article get_children_headers    "<Esc>^P"% Find all children
+setkey article get_parent_header       "<Esc>p"	% Reconstruct thread
+setkey article mark_spot               ";"	% Mark current article position
+setkey article exchange_mark           ","	% Return to marked article
+setkey article tag_header              "#"	% Numerically tag article
+setkey article untag_headers           "<Esc>#"	% Remove all numerical tags
+setkey article toggle_header_tag       "*"	% Set/remove header tag
+setkey article repeat_last_key         "."	% Repeat last key sequence
+setkey article grouplens_rate_article  "0"	% Rate article with grouplens
+setkey article evaluate_cmd            "^X<Esc>"% Interpret line as S-Lang
+
+%% Command prompt key bindings
+
+setkey readline bol		 "^A"		% Beginning of line
+setkey readline eol		 "^E"		% End of line
+setkey readline right		 "^F"		% Move right
+setkey readline left		 "^B"   	% Move left
+setkey readline bdel		 "^H"		% Delete backward
+setkey readline bdel		 "^?"		% Delete Backward
+setkey readline del		 "^D"		% Delete Foreword
+setkey readline delbol		 "^U"		% Delete to Beginning of line
+setkey readline delbow		 "^W"		% Delete to Beginning of word
+setkey readline deleol		 "^K"		% Delete to End of line
+setkey readline trim		 "<Esc>/"	% Trim whitespace
+setkey readline quoted_insert	 "^Q"		% Quoted insert
+setkey readline complete	 "<Tab>"	% Complete filename
+setkey readline cycle		 " "		% Cycle among filenames
