@@ -182,8 +182,10 @@ mono verbatim	        "none"
 % Cursor movement:
 setkey group line_down        "<Down>"   % Go to the next group
 setkey group line_down        "j"
+setkey group line_down        "n"
 setkey group line_up          "<Up>"   % Go to the previous group
 setkey group line_up          "k"
+setkey group line_up          "p"
 setkey group page_down        "^V"     % Scroll to the next page
 setkey group page_down        "<PageDown>"
 setkey group page_down        "^D"
