@@ -382,6 +382,32 @@
 (add-hook 'ado-mode-hook '(lambda() (ado-custom)))
 
 
+;; Line Movement
+;; -------------
+;;
+;; Courtesy of Michael Schuerig
+
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines 1))
+    (next-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+(global-set-key [\M-down] 'move-line-down)
+(global-set-key [\M-up] 'move-line-up)
+
+
 ;; External files
 ;; --------------
 
