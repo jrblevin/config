@@ -78,6 +78,7 @@
 ;; IDO mode <http://www.cua.dk/ido.html>
 (require 'ido)
 (ido-mode t)
+(setq ido-enable-flex-matching t)
 
 ;;
 ;; AUCTeX
