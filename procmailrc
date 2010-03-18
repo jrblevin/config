@@ -37,6 +37,14 @@ latexml
 debian-devel-announce
 
 :0:
+* ^TO_debian-news
+debian-news
+
+:0:
+* ^X-Debian-Package: emacs-goodies-el
+emacs-goodies-el
+
+:0:
 * ^TO_gsl-discuss
 gsl-discuss
 
