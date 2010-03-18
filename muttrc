@@ -16,23 +16,18 @@ set sort_alias= alias
 set reverse_alias=yes
 source $alias_file
 
-# Gmail IMAP+SMTP
-# ---------------
 
-set imap_user = "jrblevin"
+# Mailboxes
+# ---------
 
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set postponed = "+[Gmail]/Drafts"
-unset trash
-set record = "+[Gmail]/Sent Mail"
+set folder="~/mail/"
+set record = "=archive"
+set postponed = "=drafts"
+set mbox="="                      # don't remove read mail from inbox
 
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
-
-set move = no
-set imap_keepalive = 60
 
 
 # Mailboxes
@@ -52,8 +47,15 @@ mailboxes ! \
     + =instiki-users \
     + =latexml \
     + =markdown-discuss \
-    + =pandoc-discuss
+    + =pandoc-discuss \
+    + =spam
 
+# Mailing lists
+# -------------
+
+subscribe markdown-discuss@six.pairlist.net
+subscribe gsl-discuss@sourceware.org
+subscribe pandoc-discuss@googlegroups.com
 
 # Outgoing Headers
 # ----------------
@@ -88,6 +90,9 @@ set query_command="lbdbq '%s'"
 
 # Use aspell to check spelling
 set ispell="aspell -e -c"
+
+# Use fetchmail to check for new mail.
+macro index "\Cx\Cn" "<shell-escape>fetchmail<enter>"
 
 # Appearance
 # ----------
@@ -359,3 +364,13 @@ set pgp_getkeys_command="/usr/bin/gpg --recv-keys %r 2> /dev/null"
 
 # Pattern for good signatures.
 set pgp_good_sign="^gpg: Good signature from"
+
+
+# Bayesian Mail Filter (bmf)
+# --------------------------
+
+# Pipe mail to SDF and classify as spam or ham.
+macro index S "|bmf -S\n<save-message>=spam\n" "SPAM"
+macro index H "|bmf -N\n" "HAM"
+macro pager S "|bmf -S\n<save-message>=spam\n" "SPAM"
+macro pager H "|bmf -N\n" "HAM"
