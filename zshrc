@@ -31,6 +31,9 @@ alias grep='grep --color=auto'
 alias ll='ls -l'
 alias ee="emacs -nw"
 
+# less input preprocessor
+eval `lessfile`
+
 # tab completion
 autoload -U compinit
 compinit
