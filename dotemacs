@@ -17,6 +17,9 @@
 ;; mule-unicode-2500-33ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
 ;; mule-unicode-e000-ffff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1
 
+;; Personal information
+(setq user-mail-address "jrblevin@sdf.lonestar.org")
+
 ;; Set the load path
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 
