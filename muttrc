@@ -374,3 +374,10 @@ macro index S "|bmf -S\n<save-message>=spam\n" "SPAM"
 macro index H "|bmf -N\n" "HAM"
 macro pager S "|bmf -S\n<save-message>=spam\n" "SPAM"
 macro pager H "|bmf -N\n" "HAM"
+
+
+# Keybindings
+# -----------
+
+macro index Y "<save-message>=archive\n" "Archive message"
+macro pager Y "<save-message>=archive\n" "Archive message"
