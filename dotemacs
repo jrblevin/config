@@ -33,6 +33,9 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
+;; Blinking cursor
+(blink-cursor-mode 1)
+
 ;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
 (setq-default indent-tabs-mode nil)
 (setq tab-width 8)
