@@ -38,3 +38,7 @@ http://gauss.xbeta.org/feeds/fortranwiki.org/visitors.atom self
 http://gauss.xbeta.org/feeds/fortranwiki.org/referrers.atom self
 http://gauss.xbeta.org/feeds/libosl.org/visitors.atom self
 http://gauss.xbeta.org/feeds/libosl.org/referrers.atom self
+
+# podcasts
+http://www.npr.org/rss/podcast.php?id=510053 podcast
+http://feeds.feedburner.com/TheSoundOpinionsPodcast podcast
