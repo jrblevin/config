@@ -61,10 +61,6 @@ PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%c%{$fg[yellow]%}$(git_branch)%{$reset_col
 # pw script
 export PW_FILE=/home/jrblevin/config/private/pwsafe.gpg
 
-# mpdlogger
-export MPDLOGGER_FILE=/home/jrblevin/.playlist.txt
-export MPDLOGGER_INTERVAL=60
-
 # determine platform
 ARCH=`uname -m`
 
