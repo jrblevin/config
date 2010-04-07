@@ -1,0 +1,88 @@
+# ~/.muttprintrc --- muttprint configuration
+
+# printer
+#PRINTER="TO_FILE:/home/berwal/test.ps"
+#PRINTER="lp"
+
+# command for printing
+#PRINT_COMMAND="lpr -P$PRINTER"
+PRINT_COMMAND="lpr"
+
+# path to penguin image
+PENGUIN="off"
+
+# printing of X-Face picture (on/off)
+XFACE="off"
+
+# duplex printing (on/off) (or "printer" for Postscript duplexing)
+DUPLEX="on"
+
+# printing 2 pages on 1 sheet (on/off)
+PAPERSAVE="off"
+
+# Here you can set the printing speed in seconds per page
+SPEED="30"
+
+# Header font: Latex, Latex-bright, Times, Utopia, Palatino, Charter, Bookman
+FONT="Charter"
+
+# Header style
+FRONTSTYLE="border"
+
+# Should there be a rule after the header (not first page)
+HEADRULE="on"
+
+# Should there be a rule over the footer
+FOOTRULE="on"
+
+# paper format (if not specified look in /etc/papersize)
+#PAPER="A4"
+
+# prints no signatures
+REM_SIG="off"
+# how does a signature look like?
+SIG_REGEXP="^-- $"
+
+# prints no quoting
+REM_QUOTE="off"
+
+# Printed headers (separation with "_", /italic/, *bold*)
+PRINTED_HEADERS="Date_To_From_CC_Newsgroups_*Subject*"
+
+# write error messages to /tmp/muttprint.log
+DEBUG="0"
+
+# Font size: 10pt, 11pt or 12pt
+FONTSIZE="10pt"
+
+# Longest line
+WRAPMARGIN="80"
+
+# margins
+TOPMARGIN="19"
+BOTTOMMARGIN="22"
+LEFTMARGIN="20"
+RIGHTMARGIN="20"
+
+# Date (format of printed date)
+# original, local (needs Date::Parse from libtimedate-perl)
+DATE="original"
+
+# Date format string (only if DATE=local)
+# See strftime(3) for details
+DATE_FORMAT="%c"
+
+# pass special options to the verbatim environment, see texdoc fancyvrvb
+VERBATIMNORMAL=""
+VERBATIMSIG="fontshape=it"
+
+# how should the address be printed out?
+ADDRESSFORMAT="%r <%a>,\n"
+
+# own LaTeX code to be inserted
+LATEXCODE="\usepackage[scaled=0.95]{beramono}"
+LATEXCODE1=""
+LATEXCODE2=""
+LATEXCODE3=""
+LATEXCODE4=""
+LATEXCODE5=""
