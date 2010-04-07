@@ -41,7 +41,6 @@ mailboxes ! \
     + =debian-devel-announce \
     + =debian-news \
     + =gfortran \
-    + =golang-nuts \
     + =gsl-discuss \
     + =help-gsl \
     + =instiki-devel \

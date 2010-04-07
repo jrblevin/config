@@ -45,10 +45,6 @@ debian-news
 emacs-goodies-el
 
 :0:
-* ^TO_golang-nuts
-golang-nuts
-
-:0:
 * ^TO_gsl-discuss
 gsl-discuss
 
