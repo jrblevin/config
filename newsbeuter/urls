@@ -6,6 +6,9 @@ http://www.duke.edu/today/rss/alert.php alerts
 # news
 http://jeffersonpost.com/rss/home/News?content_type=article
 
+# community
+http://germanvillage.com/feed
+
 # blogs
 http://golem.ph.utexas.edu/~distler/blog/atom10.xml blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
