@@ -33,12 +33,6 @@ delete.field {url}
 check.double 		= on
 check.double.delete 	= on
 
-# Key format
-key.generation 		= off
-key.number.separator 	= {}
-key.base 		= {digit}
-key.format 		= {{%s(key) # %-1p(author) # %-1p(editor) # %-5.1W(institution) # %-5.1W(organization) } %2d(year)%-T(title)}
-
 # Include my main bibtex database by default
 input {/home/jrblevin/.bib/research.bib}
 
