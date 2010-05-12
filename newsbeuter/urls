@@ -19,8 +19,11 @@ http://jonahgelbach.blogspot.com/feeds/posts/default blogs
 http://alewbel.livejournal.com/data/atom blogs
 http://cheeptalk.wordpress.com/feed/ blogs
 http://orthogonalprojections.typepad.com/orthogonal_projections/atom.xml blogs
+http://ascii.textfiles.com/feed/atom blogs
 
 # devel
+http://blog.golang.org/feeds/posts/default devel golang
+http://plnews.org/index.atom devel fortran
 http://golem.ph.utexas.edu/~distler/code/itexToMML/atom devel instiki
 http://github.com/feeds/parasew/commits/instiki/master devel instiki
 http://golem.ph.utexas.edu/instiki/atom_with_content devel instiki
