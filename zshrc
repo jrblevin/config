@@ -56,7 +56,7 @@ git_branch() {
 autoload -U colors
 colors
 setopt prompt_subst
-PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%c%{$fg[yellow]%}$(git_branch)%{$reset_color%} %% '
+PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%~%{$fg[yellow]%}$(git_branch) %{$reset_color%}%% '
 
 # pw script
 export PW_FILE=/home/jrblevin/config/private/pwsafe.gpg
