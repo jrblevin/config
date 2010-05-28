@@ -1,7 +1,8 @@
 ! .Xresources --- X server resource database
 !
 ! Created July 10, 2004
-! Jason Blevins <jrblevin@sdf.lonestar.org>
+! Last Modified May 27, 2010
+! Jason Blevins <jrblevin@sdf.org>
 
 !! Emacs
 Emacs.menuBar:			off
