@@ -9,18 +9,12 @@ Emacs.verticalScrollBars:       off
 Emacs.toolBar:          	off
 Emacs.internalBorder:      	1
 Emacs.geometry:			80x35+5+5
-!Emacs.font:                     -xos4-terminus-medium-r-normal--24-240-72-72-c-120-iso8859-1
-!Emacs.font:			terminus-20
-Emacs.Font:                     fontset-terminus
-Emacs.Fontset-0: \
--xos4-terminus-medium-r-normal--20-200-72-72-c-100-fontset-terminus,\
-mule-unicode-2500-33ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
-mule-unicode-e000-ffff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
-mule-unicode-0100-24ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1
+Emacs.FontBackend:              xft
+Emacs.font:                     Inconsolata-15
 
 !! XTerm
-XTerm*font:			-xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso8859-1
-XTerm*boldFont:			-xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso8859-1
+XTerm*faceName:                 Inconsolata
+XTerm*faceSize:                 15
 XTerm*geometry:			80x24
 XTerm*saveLines:		1000
 XTerm*background:		black
