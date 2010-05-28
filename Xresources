@@ -21,7 +21,7 @@ XTerm*saveLines:		1000
 XTerm*background:		black
 XTerm*foreground:		#EEEEEC
 XTerm*loginShell:		true
-XTerm*cursorColor: 		#FCE94F
+XTerm*cursorColor: 		#73D216
 XTerm*visualBell: 		true
 XTerm*scrollBar:		off
 XTerm*allowSendEvents: 		true
