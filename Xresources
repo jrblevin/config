@@ -17,7 +17,7 @@ Emacs.font:                     Inconsolata-15
 XTerm*faceName:                 Inconsolata
 XTerm*faceSize:                 15
 XTerm*geometry:			80x24
-XTerm*saveLines:		1000
+XTerm*saveLines:		5000
 XTerm*background:		black
 XTerm*foreground:		#EEEEEC
 XTerm*loginShell:		true
