@@ -80,7 +80,7 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 # -----------------
 
 # Compose mail using vim
-set editor='vi + -c "set textwidth=72" -c "set wrap" -c "?^$" -c "noh"'
+set editor='emacsclient'
 
 # How to print things
 set print_command="muttprint"
@@ -150,7 +150,7 @@ set delete=yes
 set fast_reply=yes
 
 # Simple quotation text.
-set attribution="%n wrote:"
+set attribution="On %d, %n wrote:"
 
 # When forwarding messages, set the subject to Fwd: subject.
 set forw_format="Fwd: %s"
