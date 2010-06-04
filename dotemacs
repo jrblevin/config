@@ -81,10 +81,6 @@
 ;; Disable startup screen
 (setq inhibit-startup-message t)
 
-;; IDO mode <http://www.cua.dk/ido.html>
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t)
 
 ;;
 ;; AUCTeX
@@ -416,6 +412,14 @@
 
 (global-set-key [\M-down] 'move-line-down)
 (global-set-key [\M-up] 'move-line-up)
+
+
+;; IDO mode
+;; --------
+
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t)
 
 
 ;; External files
