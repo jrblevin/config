@@ -95,7 +95,7 @@ set query_command="lbdbq '%s'"
 set ispell="aspell -e -c"
 
 # Use fetchmail to check for new mail.
-macro index "\Cx\Cn" "<shell-escape>fetchmail -v -v<enter>"
+macro index "\Cx\Cn" "<shell-escape>fetchmail<enter>"
 
 # Appearance
 # ----------
