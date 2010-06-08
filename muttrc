@@ -8,7 +8,7 @@
 
 set realname="Jason Blevins"
 set from="jrb11@duke.edu"
-alternates "jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
+alternates "jrblevin@sdf.org|jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
 
 # Read alias file
 set alias_file="~/.mutt-aliases"
