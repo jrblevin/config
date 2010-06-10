@@ -1,8 +1,8 @@
-## ~/.screenrc: GNU Screen configuration.
+## ~/.screenrc: GNU Screen configuration.                      -*-conf-*-
 #
-# Jason R. Blevins <jrblevin@sdf.lonestar.org>
+# Jason R. Blevins <jrblevin@sdf.org>
 # Created: Durham, January 19, 2007
-# Last Modified: November 16, 2008 09:34 EST
+# Last Modified: June 10, 2010 14:37 EDT
 #
 # Parts taken from the following sources:
 # * http://texnatse.blogsome.com/2005/09/01/my-screenrc/
