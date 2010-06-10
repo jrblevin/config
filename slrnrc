@@ -16,7 +16,7 @@ set generate_message_id 0
 % External programs
 set editor_command "emacsclient"
 set non_Xbrowser "elinks '%s'"
-set Xbrowser "firefox '%s' &"
+set Xbrowser "sensible-browser '%s' &"
 set printer_name "lpr"
 set generate_email_from 1
 
