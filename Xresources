@@ -1,7 +1,7 @@
 ! .Xresources --- X server resource database
 !
 ! Created July 10, 2004
-! Last Modified May 27, 2010
+! Last Modified June 10, 2010
 ! Jason Blevins <jrblevin@sdf.org>
 
 !! Emacs
@@ -20,15 +20,10 @@ XTerm*geometry:			80x30
 XTerm*saveLines:		5000
 XTerm*background:		black
 XTerm*foreground:		#EEEEEC
-XTerm*loginShell:		true
 XTerm*cursorColor: 		#73D216
 XTerm*visualBell: 		true
 XTerm*scrollBar:		off
-XTerm*allowSendEvents: 		true
-XTerm*sessionMgt: 		true
-XTerm*showBlinkAsBold:		true
 XTerm*cursorBlink:		on
-XTerm*messages:                 true
 XTerm*metaSendsEscape:		true
 XTerm*utf8:			1
 XTerm*eightBitInput:            false
