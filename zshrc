@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 #
-# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
 
 # history
@@ -87,3 +87,8 @@ export LD_LIBRARY_PATH
 
 # Anything in ~/bin has priority
 export PATH=${HOME}/bin:${PATH}
+
+# Set the xterm title
+if [[ $TERM == "xterm" ]]; then
+    print -Pn "\e]2;$USER@$HOST\a"
+fi
