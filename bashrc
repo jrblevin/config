@@ -1,9 +1,9 @@
 ## ~/.bashrc                                      -*-shell-script-*-
 #
-# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Jason Blevins <jrblevin@sdf.org>
 #
 # Created: Raleigh, June 4, 2004
-# Last Modified: September 9, 2009 09:06 EDT
+# Last Modified: June 10, 2010 14:58 EDT
 
 # If not running interactively, don't do anything.
 [ -z "$PS1" ] && return
@@ -16,6 +16,11 @@ shopt -s histappend
 
 # Check the window size after each command and update if necessary.
 shopt -s checkwinsize
+
+# xterm titlebar
+if [[ $TERM == "xterm" ]]; then
+    echo -ne "\033]0;$USER@$HOSTNAME\007"
+fi
 
 # Set the prompt
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
