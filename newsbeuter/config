@@ -16,7 +16,7 @@ bind-key  BACKSPACE   pageup
 
 # Automatic reloading
 reload-time 30
-reload-threads 4
+#reload-threads 4
 
 # podbeuter
 download-path /home/jrblevin/podcasts
