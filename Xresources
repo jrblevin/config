@@ -19,7 +19,7 @@ XTerm*faceSize:                 15
 XTerm*geometry:			80x30
 XTerm*saveLines:		5000
 XTerm*background:		black
-XTerm*foreground:		#EEEEEC
+XTerm*foreground:		#DDDDDB
 XTerm*cursorColor: 		#73D216
 XTerm*visualBell: 		true
 XTerm*scrollBar:		off
@@ -52,8 +52,8 @@ XTerm*color13: #AD7FA8
 XTerm*color6:  #06989A
 XTerm*color14: #34E2E2
 ! White
-XTerm*color7:  #D3D7CF
-XTerm*color15: #EEEEEC
+XTerm*color7:  #C2C6BE
+XTerm*color15: #DDDDDB
 
 !! Xdvi
 xdvi.geometry:     850x1000-0+0
