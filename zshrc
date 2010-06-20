@@ -32,6 +32,7 @@ alias grep='grep --color=auto'
 alias ll='ls -l'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
+alias acsn='apt-cache search --names-only'
 
 # less input preprocessor
 eval `lessfile`
