@@ -1,8 +1,8 @@
-## ~/.ncmpc/config
+## ~/.ncmpc/config                                              -*-conf-*-
 #
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Created: Durham, March 30, 2006
-# Last Modified: March 10, 2008
+# Last Modified: June 19, 2010 22:47 EDT
 
 # Screen list: navigate with Tab (next) and Shift+Tab (previous)
 # [possible values: playlist browse help artist clock].
@@ -76,4 +76,3 @@ color status-state = brightyellow
 color status-song  = yellow
 color status-time  = red
 color alert = brightred
-
