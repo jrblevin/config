@@ -1,0 +1,171 @@
+# ~/.twmrc                                                          -*-conf-*-
+
+NoGrabServer             # don't grab server during menus, etc.
+RestartPreviousState     # reiconify iconified things on startup
+DecorateTransients       # put titlebars on transients
+TitleFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+MenuFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+IconFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
+IconManagerFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*"
+ResizeFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*"
+BorderWidth 1            # set the border width of all applications
+
+NoDefaults               # turn off iconify and resize button
+LeftTitleButton "menu12" = f.menu "windowmenu" # add a menu to each window
+TitleButtonBorderWidth 0 # don't want to see box around button
+ButtonIndent 0           # button doesn't have to be smaller
+
+OpaqueMove               # actually move window instead of outline
+NoRaiseOnMove            # allow moving under other windows
+NoRaiseOnResize          # allow resizing under other windows
+RandomPlacement          # determine window placement automatically
+UsePPosition "on"        # use program-specified size hints accepted
+NoSaveUnders             # faster to just repaint then save
+NoHighlight              # do not highlight borders with focus
+#NoTitleHighlight         # do not highlight tile bars with focus
+AutoRelativeResize       # don't require resize to cross border to start
+#SqueezeTitle
+
+#
+# Colors
+#
+
+Pixmaps
+{
+    TitleHighlight "dimple1"
+}
+
+Color
+{
+    DefaultBackground "Dark Red"
+    DefaultForeground "gray70"
+    BorderColor "black"
+    TitleBackground "Dark Red"
+    TitleForeground "gray85"
+    MenuBackground "Dark Red"
+    MenuForeground "gray85"
+    MenuTitleBackground "gray70"
+    MenuTitleForeground "Dark Red"
+    IconBackground "Dark Red"
+    IconForeground "gray85"
+    IconBorderColor "gray85"
+    IconManagerBackground "Dark Red"
+    IconManagerForeground "gray85"
+}
+
+Monochrome
+{
+    IconManagerHighlight  "white"
+    BorderColor "black"
+}
+
+#
+# Key bindings
+#
+
+"Tab" = m : all : f.warpring "next"
+"Tab" = s : all : f.warpring "prev"
+"F11" = m : all : f.fullzoom
+
+MoveDelta 3                 # need to move this much before takes effect
+Function "move-or-raise"    # simulate uwm action
+{
+    f.move
+    f.deltastop
+    f.raise
+}
+
+DefaultFunction f.nop       # ignore extraneous events
+
+Button1 =       : root                          : f.menu "twmops"
+Button2 =       : root                          : f.menu "windowops"
+Button3 =       : root                          : f.menu "TwmWindows"
+Button1 =       : title                         : f.function "move-or-raise"
+Button1 =       : icon                          : f.iconify
+Button1 =       : iconmgr                       : f.iconify
+Button1 = m     : window|icon|frame|title       : f.function "move-or-raise"
+Button3 = m     : window|icon|frame|title       : f.resize
+
+NoTitle                         # little programs that look like icons
+{
+    "xclock"
+    "xbiff"
+    "xload"
+    "TWM Icon Manager"
+    "xcutsel"
+}
+
+#
+# Window Ring
+#
+
+WindowRing                      # f.warpring acts along these windows
+{
+    "xterm"
+    "emacs"
+    "Minefield"
+    "Iceweasel"
+    "Evince"
+    "xpdf"
+    "xdvi"
+}
+
+#
+# Menus
+#
+
+menu "twmops"
+{
+    "System"        f.title
+    "Restart Twm"   f.restart
+    "Exit Twm"      f.quit
+    ""              f.nop
+    "xterm"         !"xterm &"
+    "screen"        !"xterm -e 'screen -d -R' &"
+    "sdf"           !"xterm -e 'ssh otaku.freeshell.org' &"
+    ""              f.nop
+    "emacsclient"   !"emacsclient -c &"
+    "firefox"       !"/opt/firefox/firefox &"
+    ""              f.nop
+    "Kill"          f.menu "kill"
+    ""              f.nop
+    "Logout"        f.warpto "xlogout"
+}
+
+menu "windowops"
+{
+    "Windows"           f.title
+    "Kill"              f.menu "kill"
+    "Save"              f.saveyourself
+    "Refresh"           f.refresh
+    ""                  f.nop
+    "Iconify"           f.iconify
+    "Resize"            f.resize
+    "Move"              f.move
+    "Raise"             f.raise
+    "Lower"             f.lower
+    "Info"              f.identify
+    "Focus"             f.focus
+    "Unfocus"           f.unfocus
+    ""                  f.nop
+    "Show Iconmgr"      f.showiconmgr
+    "Hide Iconmgr"      f.hideiconmgr
+    "Prev Iconmgr"      f.previconmgr
+    "Next Iconmgr"      f.nexticonmgr
+}
+
+menu "windowmenu"
+{
+    "Iconify"           f.iconify
+    "RaiseLower"        f.raiselower
+    "Refresh"           f.winrefresh
+    "Focus"             f.focus
+    ""                  f.nop
+    "Kill"              f.menu "kill"
+}
+
+menu "kill"
+{
+    "Send Delete"       f.delete
+    "Kill Window"       f.destroy
+}
