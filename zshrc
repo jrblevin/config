@@ -68,6 +68,10 @@ export PW_FILE=/home/jrblevin/config/private/pwsafe.gpg
 export PATH=/var/lib/gems/1.8/bin:$PATH
 export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
 
+# mpd
+export MPD_HOST=127.0.0.1
+export MPD_PORT=6600
+
 # GFortran
 export PATH=/opt/gcc-trunk/bin:${PATH}
 
