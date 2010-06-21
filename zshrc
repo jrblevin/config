@@ -85,7 +85,7 @@ else
 fi
 
 # Intel Compilers
-export PATH="/opt/intel/Compiler/current/bin/${ICS_ARCH}"
+export PATH=/opt/intel/Compiler/current/bin/${ICS_ARCH}:${PATH}
 
 # Library path
 if [ -z "$LD_LIBRARY_PATH" ]; then
