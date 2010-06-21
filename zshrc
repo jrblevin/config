@@ -64,9 +64,6 @@ PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%~%{$fg[yellow]%}$(git_branch) %{$reset_co
 # pw script
 export PW_FILE=/home/jrblevin/config/private/pwsafe.gpg
 
-# determine platform
-ARCH=`uname -m`
-
 # Ruby
 export PATH=/var/lib/gems/1.8/bin:$PATH
 export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
@@ -74,17 +71,23 @@ export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
 # GFortran
 export PATH=/opt/gcc-trunk/bin:${PATH}
 
+# Architecture-specific settings
+ARCH=`uname -m`
 if [[ ${ARCH} == "x86_64" ]]; then
     LIB64="64"
-    IFC_LIB="intel64"
+    ICS_ARCH="intel64"
 else
-    IFC_LIB="ia32"
+    ICS_ARCH="ia32"
 fi
 
+# Intel Compilers
+export PATH="/opt/intel/Compiler/current/bin/${ICS_ARCH}"
+
+# Library path
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/usr/local/intel/Compiler/current/lib/${IFC_LIB}"
+  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/opt/intel/Compiler/current/lib/${ICS_ARCH}"
 else
-  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/usr/local/intel/Compiler/current/lib/${IFC_LIB}:$LD_LIBRARY_PATH"
+  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/opt/intel/Compiler/current/lib/${ICS_ARCH}:$LD_LIBRARY_PATH"
 fi
 export LD_LIBRARY_PATH
 
