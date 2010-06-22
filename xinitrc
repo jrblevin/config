@@ -10,14 +10,13 @@ test -r $HOME/.Xresources && xrdb -load .Xresources
 eval `ssh-agent -s`
 
 # Set the background color
-xsetroot -solid Black
+xsetroot -solid '#111111'
 
-# Start Emacs and an xterm running screen
-emacs &
-xterm -e screen -R &
+# Start an xterm running screen
+xterm -e 'screen -d -R' &
 
-# Start awesome
-awesome
+# Start twm
+twm
 
 # Terminate ssh-agent
 eval `ssh-agent -k`
