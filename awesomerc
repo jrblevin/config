@@ -4,7 +4,7 @@ screen 0
     {
         normal
         {
-            font = "terminus 8"
+            font = "Inconsolata 12"
             fg = "#aaaaaa"
             bg = "#000000"
             border = "#000000"
@@ -23,9 +23,9 @@ screen 0
     }
     tags
     {
-        tag work { layout = "max" }
-        tag play { layout = "max" }
-        tag misc { layout = "max" }
+        tag eins { layout = "max" }
+        tag zwei { layout = "max" }
+        tag drei { layout = "max" }
     }
     layouts
     {
