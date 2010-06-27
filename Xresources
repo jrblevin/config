@@ -75,3 +75,12 @@ xfig.latexfonts: on
 xfig.specialtext: on
 xfig.startfontsize: 11
 xfig.paper_size: Letter
+
+!! xclock
+
+xclock*background:  #111111
+xclock*foreground:  #DDDDDB
+xclock*render:      true
+xclock*sharp:       true
+xclock*analog:      false
+xclock*geometry:    -0-0
