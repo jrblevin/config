@@ -8,7 +8,7 @@ set organization "The Ohio State University"
 set signature "/home/jrblevin/.signature"
 
 % Server
-server "nntp.service.ohio-state.edu" ".jnewsrc"
+server "localhost" ".jnewsrc"
 set server_object "nntp"
 set post_object "nntp"
 set generate_message_id 0
