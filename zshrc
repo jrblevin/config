@@ -19,7 +19,6 @@ setopt nobeep                   # stop yelling at me
 # set common environment variables
 export EDITOR="emacsclient -t"  # default editor
 export ALTERNATE_EDITOR=""      # alternate editor
-export NNTPSERVER="nntp.service.ohio-state.edu"
 
 # aliases
 if ls -F --color=auto >&/dev/null; then
