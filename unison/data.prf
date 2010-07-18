@@ -1,10 +1,10 @@
-# data.prf: Unison preferences.
+# data.prf: Unison preferences
 #
 # Jason Blevins <jrblevin@sdf.lonestar.org>
 # Chapel Hill, March 26, 2008
 
-root = /home/jrblevin
-root = ssh://roark//home/jrblevin
+root = /home/jblevins
+root = ssh://blevins//home/jblevins
 
 ignore = Name *~
 ignore = Name *.o
@@ -14,4 +14,3 @@ path = inbox
 path = config
 
 include default
-
