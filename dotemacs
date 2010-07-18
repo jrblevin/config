@@ -1,6 +1,6 @@
 ;;; ~/.emacs: Emacs configuration file.                     -*-emacs-lisp-*-
 ;;
-;; Jason Blevins <jrblevin@sdf.lonestar.org>
+;; Jason Blevins <jrblevin@sdf.org>
 ;; Raleigh, May 29, 2004
 ;;
 ;; Set the following in ~/.Xresources:
@@ -266,9 +266,9 @@
 (load-library "markdown-wiki")
 (setq markdown-wiki-directories
       (list
-       "/home/jrblevin/projects/ikiwiki/ikiwiki/doc/"
-       "/home/jrblevin/projects/jblevins.org/"
-       "/home/jrblevin/projects/gtd/"))
+       "/home/jblevins/projects/ikiwiki/ikiwiki/doc/"
+       "/home/jblevins/projects/jblevins.org/"
+       "/home/jblevins/projects/gtd/"))
 
 (load-library "markdown-gtd")
 (global-set-key [f11] 'markdown-make-next-action)
