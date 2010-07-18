@@ -4,6 +4,5 @@
 # Chapel Hill, March 26, 2008
 
 log = true
-logfile = /home/jrblevin/.unison/unison.log
+logfile = /home/jblevins/.unison/unison.log
 rshargs = -C
-
