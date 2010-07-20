@@ -7,8 +7,8 @@
 # --------
 
 set realname="Jason Blevins"
-set from="jrb11@duke.edu"
-alternates "jrblevin@sdf.org|jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
+set from="blevins.141@osu.edu"
+alternates "jrb11@duke.edu|jrblevin@sdf.org|jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
 
 # Read alias file
 set alias_file="~/.mutt-aliases"
@@ -43,6 +43,7 @@ mailboxes ! \
     + =gfortran \
     + =gsl-discuss \
     + =help-gsl \
+    + =info-gsl \
     + =instiki-devel \
     + =instiki-users \
     + =latexml \
