@@ -60,7 +60,7 @@ xdvi.geometry:     850x1000-0+0
 xdvi.shrinkFactor: 5
 xdvi.paper:        us
 xdvi.expert:       1
-xdvi.background:   LightYellow
+xdvi.background:   #DDDDDB
 xdvi.editor: emacsclient --no-wait +%l %f
 xdvi.linkstyle: 2
 xdvi.highlight: Blue
