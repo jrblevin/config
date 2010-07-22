@@ -71,3 +71,7 @@ comp-fortran-90
 :0:
 * ^TO_fortran
 gfortran
+
+:0:
+* ^TO_econ-snde
+econ-snde
