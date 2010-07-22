@@ -23,9 +23,9 @@ screen 0
     }
     tags
     {
-        tag eins { layout = "max" }
-        tag zwei { layout = "max" }
-        tag drei { layout = "max" }
+        tag term { layout = "tile" }
+        tag emacs { layout = "tile" }
+        tag net { layout = "tile" }
     }
     layouts
     {
@@ -334,5 +334,3 @@ keys
         arglist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
     }
 }
-
-# vim: filetype=conf
