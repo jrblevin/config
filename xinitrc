@@ -16,7 +16,7 @@ xsetroot -solid '#111111'
 xterm -e 'screen -d -R' &
 
 # Start twm
-twm
+awesome
 
 # Terminate ssh-agent
 eval `ssh-agent -k`
