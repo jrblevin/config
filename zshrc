@@ -33,6 +33,17 @@ alias ee="emacs -nw"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
 
+# Suffix Aliases
+alias -s c=vim
+alias -s f90=vim
+alias -s txt=vim
+alias -s tex=vim
+alias -s text=vim
+alias -s html=elinks
+alias -s com=elinks
+alias -s net=elinks
+alias -s org=elinks
+
 # less input preprocessor
 eval `lessfile`
 
