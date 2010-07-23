@@ -1,0 +1,1 @@
+text/x-patch; /bin/cat '%s'; copiousoutput; description=Patch; nametemplate=%s.diff
