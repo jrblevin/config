@@ -13,5 +13,3 @@ ignore = Name *.o
 path = projects
 path = inbox
 path = config
-
-include default
