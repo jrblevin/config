@@ -1,8 +1,8 @@
-# default.prf: Unison defaults.
-#
-# Jason Blevins <jrblevin@sdf.lonestar.org>
-# Chapel Hill, March 26, 2008
+# default.prf: default Unison preferences
 
 log = true
 logfile = /home/jblevins/.unison/unison.log
 rshargs = -C
+
+root = /home/jblevins
+root = ssh://blevins//home/jblevins

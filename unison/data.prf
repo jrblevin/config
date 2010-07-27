@@ -1,16 +1,5 @@
-# data.prf: Unison preferences
-#
-# Jason Blevins <jrblevin@sdf.lonestar.org>
-# Chapel Hill, March 26, 2008
+# data.prf: Unison preferences for ~/data archive
 
-root = /home/jblevins
-root = ssh://blevins//home/jblevins
-
-ignore = Name *~
-ignore = Name *.o
-
-path = projects
-path = inbox
-path = config
+path = data
 
 include default

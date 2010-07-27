@@ -1,0 +1,5 @@
+# archive.prf: Unison preferences for ~/archive/
+
+path = archive
+
+include default

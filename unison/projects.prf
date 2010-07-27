@@ -1,0 +1,13 @@
+# data.prf: Unison preferences
+#
+# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Chapel Hill, March 26, 2008
+
+ignore = Name *~
+ignore = Name *.o
+
+path = projects
+path = inbox
+path = config
+
+include default
