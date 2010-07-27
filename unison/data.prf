@@ -1,5 +1,17 @@
-# data.prf: Unison preferences for ~/data archive
+# data.prf: Unison preferences for current projects and configuration
 
-path = data
+log = true
+logfile = /home/jblevins/.unison/unison.log
+rshargs = -C
+
+root = /home/jblevins
+root = ssh://blevins//home/jblevins
+
+ignore = Name *~
+ignore = Name *.o
+
+path = projects
+path = inbox
+path = config
 
 include default

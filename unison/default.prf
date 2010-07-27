@@ -1,8 +1,0 @@
-# default.prf: default Unison preferences
-
-log = true
-logfile = /home/jblevins/.unison/unison.log
-rshargs = -C
-
-root = /home/jblevins
-root = ssh://blevins//home/jblevins
