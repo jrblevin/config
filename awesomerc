@@ -25,6 +25,7 @@ screen 0
     {
         tag term { layout = "tile" }
         tag emacs { layout = "tile" }
+        tag read { layout = "max" }
         tag net { layout = "tile" }
     }
     layouts
