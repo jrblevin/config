@@ -14,12 +14,17 @@ http://golem.ph.utexas.edu/~distler/blog/atom10.xml blogs
 http://plasmasturm.org/feeds/plasmasturm/ blogs
 http://www.davidcross.us/cgi-bin/blosxom.cgi/index.rss blogs
 http://fluff.info/blog/rss_feed blogs
-http://modelingwithdata.org/modeling.xml blogs
 http://jonahgelbach.blogspot.com/feeds/posts/default blogs
 http://alewbel.livejournal.com/data/atom blogs
 http://cheeptalk.wordpress.com/feed/ blogs
 http://orthogonalprojections.typepad.com/orthogonal_projections/atom.xml blogs
 http://ascii.textfiles.com/feed/atom blogs
+
+# scientific computing
+http://modelingwithdata.org/modeling.xml scicomp
+http://blogsearch.google.com/blogsearch_feeds?hl=en&q=fortran&as_drrb=q&as_qdr=d&ie=utf-8&num=10&output=atom scicomp
+http://apenwarr.ca/log/rss.php scicomp
+http://dpcarlisle.blogspot.com/feeds/posts/default scicomp
 
 # devel
 http://blog.golang.org/feeds/posts/default devel golang
