@@ -15,7 +15,7 @@ PENGUIN="off"
 XFACE="off"
 
 # duplex printing (on/off) (or "printer" for Postscript duplexing)
-DUPLEX="on"
+DUPLEX="printer"
 
 # printing 2 pages on 1 sheet (on/off)
 PAPERSAVE="off"
