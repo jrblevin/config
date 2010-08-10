@@ -9,7 +9,7 @@ Options: -1
 Options: --borders no
 
 # By default, single sided printing.
-Options: --sides 2
+Options: --sides=duplex
 
 # Name of the document is the list of files
 # (Don't put too many of them: it breaks some PS interpreters)
