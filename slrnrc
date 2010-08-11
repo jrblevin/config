@@ -5,7 +5,7 @@ set username "jrblevin"
 set hostname "sdf.org"
 set realname "Jason Blevins"
 set organization "The Ohio State University"
-set signature "/home/jrblevin/.signature"
+set signature "/home/jblevins/.signature"
 
 % Server
 server "localhost" ".jnewsrc"
