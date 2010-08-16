@@ -238,7 +238,6 @@
   (setq f90-beginning-ampersand nil
 	f90-font-lock-keywords f90-font-lock-keywords-3
 	comment-column 50)
-  (modify-syntax-entry ?_ "_" f90-mode-syntax-table)
   (abbrev-mode 1)			; turn on abbreviation mode
   (turn-on-font-lock)			; for highlighting
   (auto-fill-mode 0))			; turn off auto-filling
