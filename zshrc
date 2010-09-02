@@ -99,9 +99,9 @@ export PATH=/opt/intel/Compiler/current/bin/${ICS_ARCH}:${PATH}
 
 # Library path
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/opt/intel/Compiler/current/lib/${ICS_ARCH}"
+  LD_LIBRARY_PATH="/usr/local/lib/atlas:/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/intel/Compiler/current/lib/${ICS_ARCH}"
 else
-  LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/opt/intel/Compiler/current/lib/${ICS_ARCH}:$LD_LIBRARY_PATH"
+  LD_LIBRARY_PATH="/usr/local/lib/atlas:/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/intel/Compiler/current/lib/${ICS_ARCH}:$LD_LIBRARY_PATH"
 fi
 export LD_LIBRARY_PATH
 
