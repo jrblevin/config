@@ -49,11 +49,23 @@
     (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
     (message "Directory does not exist: ~/.emacs.d/backup"))
 
-;; Choose a color theme.
+;; Color themes
 (require 'color-theme)
 (require 'color-theme-subdued)
 (require 'color-theme-less)
+(setq color-theme-is-global nil)
 (color-theme-subdued)
+
+;; Selects the appropriate color theme for each frame based on whether
+;; the client is running in console mode or windowed mode.
+(defun my-select-color-theme(frame)
+  (select-frame frame)
+  (if (window-system frame)
+      (color-theme-subdued)
+    (color-theme-less)))
+
+;; Hook to run after making a new frame
+(add-hook 'after-make-frame-functions 'my-select-color-theme)
 
 ;; Show matching parentheses.
 (show-paren-mode 1)
