@@ -41,6 +41,7 @@ mailboxes ! \
     + =debian-devel-announce \
     + =debian-news \
     + =econ-snde \
+    + =emacs-goodies-el \
     + =gfortran \
     + =gsl-discuss \
     + =help-gsl \
