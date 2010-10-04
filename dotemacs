@@ -267,13 +267,6 @@
 (setq auto-mode-alist (cons '("\\.text$" . markdown-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.mdwn$" . markdown-mode) auto-mode-alist))
 
-(defun markdown-custom ()
-  "markdown-mode-hook"
-  ;; Support SmartyPants.pl (installed as, say, /usr/local/bin/smartypants)
-  ;; http://daringfireball.net/projects/smartypants/
-  (setq markdown-command "markdown | smartypants"))
-(add-hook 'markdown-mode-hook '(lambda() (markdown-custom)))
-
 ;; Unreleased local customizations
 (load-library "markdown-wiki")
 (setq markdown-wiki-directories
