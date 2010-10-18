@@ -32,6 +32,7 @@ alias ll='ls -l'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
+alias ag='cal -3 ; echo "" ; agenda ~/projects/gtd/calendar.txt 7'
 
 # Suffix Aliases
 alias -s c=vim
