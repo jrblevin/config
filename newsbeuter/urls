@@ -27,7 +27,6 @@ http://apenwarr.ca/log/rss.php scicomp
 http://dpcarlisle.blogspot.com/feeds/posts/default scicomp
 
 # devel
-http://blog.golang.org/feeds/posts/default devel golang
 http://plnews.org/index.atom devel fortran
 http://golem.ph.utexas.edu/~distler/code/itexToMML/atom devel instiki
 http://github.com/feeds/parasew/commits/instiki/master devel instiki
