@@ -274,6 +274,7 @@
        "/home/jblevins/projects/ikiwiki/ikiwiki/doc/"
        "/home/jblevins/projects/jblevins.org/"
        "/home/jblevins/research/notes/"
+       "/home/jblevins/gtd/"
        "/home/jblevins/projects/gtd/"))
 
 (load-library "markdown-gtd")
