@@ -113,3 +113,15 @@ export PATH=${HOME}/bin:${PATH}
 if [[ $TERM == "xterm" ]]; then
     print -Pn "\e]2;$USER@$HOST\a"
 fi
+
+# Completion for gtd command
+function lstproj {
+    pushd -q ~/projects/gtd;
+    reply=($(ls *.text | sed -e "s/\.text//"));
+    popd -q;
+}
+
+compctl -k '(list show head projects overview)' -x \
+    'c[-1,show],c[-1,head]' -K lstproj - \
+    'c[-1,list],c[-1,projects],c[-1,overview]' -f \
+    -- gtd
