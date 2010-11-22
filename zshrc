@@ -115,13 +115,8 @@ if [[ $TERM == "xterm" ]]; then
 fi
 
 # Completion for gtd command
-function lstproj {
-    pushd -q ~/projects/gtd;
-    reply=($(ls *.text | sed -e "s/\.text//"));
-    popd -q;
-}
-
-compctl -k '(list show head projects overview)' -x \
-    'c[-1,show],c[-1,head]' -K lstproj - \
-    'c[-1,list],c[-1,projects],c[-1,overview]' -f \
+compctl -k '(na list show head projects overview contexts)' -x \
+    'c[-1,na]' -k "(`gtd contexts`)" - \
+    'c[-1,show],c[-1,head]' -k "(`gtd projects`)" - \
+    'c[-1,na],c[-1,list],c[-1,projects],c[-1,overview],c[-1,contexts]' -k "()" \
     -- gtd
