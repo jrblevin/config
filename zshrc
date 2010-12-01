@@ -32,7 +32,6 @@ alias ll='ls -l'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
-alias ag='cal -3 ; echo "" ; agenda ~/projects/gtd/calendar.txt 7'
 
 # Suffix Aliases
 alias -s c=vim
@@ -113,10 +112,3 @@ export PATH=${HOME}/bin:${PATH}
 if [[ $TERM == "xterm" ]]; then
     print -Pn "\e]2;$USER@$HOST\a"
 fi
-
-# Completion for gtd command
-compctl -k '(na list show head projects overview contexts)' -x \
-    'c[-1,na]' -k "(`gtd contexts`)" - \
-    'c[-1,show],c[-1,head]' -k "(`gtd projects`)" - \
-    'c[-1,na],c[-1,list],c[-1,projects],c[-1,overview],c[-1,contexts]' -k "()" \
-    -- gtd
