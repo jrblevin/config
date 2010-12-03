@@ -71,9 +71,6 @@ colors
 setopt prompt_subst
 PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%~%{$fg[yellow]%}$(git_branch) %{$reset_color%}%% '
 
-# pw script
-export PW_FILE=$HOME/config/private/pwsafe.gpg
-
 # Ruby
 export PATH=/var/lib/gems/1.8/bin:$PATH
 export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
