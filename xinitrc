@@ -15,8 +15,8 @@ xsetroot -solid '#111111'
 # Start an xterm running screen
 xterm -e 'screen -d -R' &
 
-# Start twm
-awesome
+# Start window manager
+xfce4-session
 
 # Terminate ssh-agent
 eval `ssh-agent -k`
