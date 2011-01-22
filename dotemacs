@@ -51,10 +51,13 @@
 
 ;; Color themes
 (require 'color-theme)
-(require 'color-theme-subdued)
-(require 'color-theme-less)
-(setq color-theme-is-global nil)
-(color-theme-subdued)
+(eval-after-load "color-theme"
+    '(progn
+        (color-theme-initialize)
+        (setq color-theme-is-global nil)
+        (require 'color-theme-subdued)
+        (require 'color-theme-less)
+        (color-theme-subdued)))
 
 ;; Selects the appropriate color theme for each frame based on whether
 ;; the client is running in console mode or windowed mode.
