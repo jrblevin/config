@@ -92,13 +92,13 @@ else
 fi
 
 # Intel Compilers
-export PATH=/opt/intel/Compiler/current/bin/${ICS_ARCH}:${PATH}
+export PATH=/opt/intel/bin:${PATH}
 
 # Library path
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH="/usr/local/lib/atlas:/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/intel/Compiler/current/lib/${ICS_ARCH}"
+  LD_LIBRARY_PATH="/usr/local/lib/atlas:/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/intel/lib/${ICS_ARCH}:$LD_LIBRARY_PATH"
 else
-  LD_LIBRARY_PATH="/usr/local/lib/atlas:/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/intel/Compiler/current/lib/${ICS_ARCH}:$LD_LIBRARY_PATH"
+  LD_LIBRARY_PATH="/usr/local/lib/atlas:/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/intel/lib/${ICS_ARCH}:$LD_LIBRARY_PATH"
 fi
 export LD_LIBRARY_PATH
 
