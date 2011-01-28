@@ -2,7 +2,7 @@
 #
 # Jason R. Blevins <jrblevin@sdf.org>
 # Created: Durham, January 19, 2007
-# Last Modified: June 10, 2010 15:03 EDT
+# Last Modified: January 28, 2011 12:33 EST
 #
 # Parts taken from the following sources:
 # * http://texnatse.blogsome.com/2005/09/01/my-screenrc/
@@ -33,4 +33,4 @@ hardstatus off
 termcapinfo xterm hs:ts=\E]0;:fs=\007:ds=\E]0;\007
 
 # use this for the hard status string
-hardstatus string "screen: %n.%t@%H"
+hardstatus string "screen@%H"
