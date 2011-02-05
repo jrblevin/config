@@ -24,7 +24,7 @@ escape ``
 autodetach on
 
 # Set the caption to include the window list, time, and date.
-caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= %{dg}%M %d %c"
+caption always "%{= dw}%-w%{= BW}%n %t%{-}%+w %-= %{dg}%M %d %c"
 
 # turn sending of screen messages to hardstatus off
 hardstatus off
