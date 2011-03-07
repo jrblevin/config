@@ -446,16 +446,6 @@
 (setq ido-enable-flex-matching t)
 
 
-;; Simplenote
-;; ----------
-
-(require 'simplenote)
-(setq simplenote-email "jrblevin@sdf.org")
-(setq simplenote-password nil)
-(setq simplenote-notes-mode 'markdown-mode)
-(simplenote-setup)
-
-
 ;; External files
 ;; --------------
 
