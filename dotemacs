@@ -326,6 +326,15 @@
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
 
+(defun fill-sentence ()
+  (interactive)
+  (save-excursion
+    (unless (bolp)
+      (forward-sentence -1))
+    (let ((beg (point)))
+      (forward-sentence)
+      (fill-region-as-paragraph beg (point)))))
+
 (global-set-key [f3] 'my-insert-date-time)
 (global-set-key [f4] 'revert-buffer-no-confirm)
 (global-set-key [f5] 'skeleton-weblog-header)
@@ -333,6 +342,7 @@
 (global-set-key [f7] 'markdown-mode)
 (global-set-key [f8] 'markdown-gtd-today)
 (global-set-key [f9] 'compile)
+(global-set-key "\ej" 'fill-sentence)
 
 
 ;;
