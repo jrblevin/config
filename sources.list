@@ -1,0 +1,29 @@
+# Lenny (5.0)
+#deb http://debian.uchicago.edu/debian/ lenny main contrib non-free
+#deb http://security.debian.org/ lenny/updates main contrib non-free
+#deb http://volatile.debian.org/debian-volatile lenny/volatile main contrib non-free
+
+# Lenny backports
+#deb http://backports.debian.org/debian-backports lenny-backports main contrib non-free
+
+# Squeeze (6.0)
+deb http://ftp.us.debian.org/debian/ squeeze main contrib non-free
+deb http://security.debian.org/ squeeze/updates main contrib non-free
+deb http://ftp.us.debian.org/debian/ squeeze-updates main contrib non-free
+
+# Squeeze backports
+deb http://backports.debian.org/debian-backports squeeze-backports main contrib non-free
+
+# Testing
+#deb http://ftp.us.debian.org/debian testing main non-free contrib
+
+# Unstable
+#deb http://ftp.us.debian.org/debian unstable main non-free contrib
+
+# emacs-snapshot
+deb http://emacs.naquadah.org/ stable/
+#deb http://emacs.naquadah.org/ unstable/
+
+# debian-multimedia
+#deb http://www.debian-multimedia.org lenny main non-free
+deb http://www.debian-multimedia.org squeeze main non-free
