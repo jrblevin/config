@@ -1,6 +1,7 @@
 # data.prf: Unison preferences for current projects and configuration
 
 log = true
+auto = true
 logfile = /home/jblevins/.unison/unison.log
 rshargs = -C
 
