@@ -109,3 +109,8 @@ export PATH=${HOME}/bin:${PATH}
 if [[ $TERM == "xterm" ]]; then
     print -Pn "\e]2;$USER@$HOST\a"
 fi
+
+# Automatically start X
+if [ -z "$DISPLAY" ] && [[ $(tty) == "/dev/tty1" ]]; then
+   startx
+fi
