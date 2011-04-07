@@ -23,6 +23,7 @@ set generate_email_from 1
 % Directory / file names
 set save_posts "News/My_Posts"
 set save_replies "News/My_Replies"
+set scorefile "News/score"
 
 % Character mapping / MIME support
 charset display "utf8"
