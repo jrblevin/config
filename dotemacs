@@ -271,15 +271,6 @@
 (setq auto-mode-alist (cons '("\\.mdwn$" . markdown-mode) auto-mode-alist))
 
 ;; Unreleased local customizations
-(load-library "markdown-wiki")
-(setq markdown-wiki-directories
-      (list
-       "/home/jblevins/projects/ikiwiki/ikiwiki/doc/"
-       "/home/jblevins/projects/jblevins.org/"
-       "/home/jblevins/research/notes/"
-       "/home/jblevins/gtd/"
-       "/home/jblevins/projects/gtd/"))
-
 (load-library "markdown-gtd")
 (global-set-key [f11] 'markdown-make-next-action)
 (global-set-key [f12] 'markdown-mark-next-action-complete)
