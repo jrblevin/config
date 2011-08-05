@@ -57,7 +57,9 @@
         (setq color-theme-is-global nil)
         (require 'color-theme-subdued)
         (require 'color-theme-less)
-        (color-theme-subdued)))
+        (require 'color-theme-gruber-darker)
+        (require 'color-theme-twilight)
+        (color-theme-twilight)))
 
 ;; Selects the appropriate color theme for each frame based on whether
 ;; the client is running in console mode or windowed mode.
