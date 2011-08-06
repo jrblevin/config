@@ -277,6 +277,13 @@
 (global-set-key [f11] 'markdown-make-next-action)
 (global-set-key [f12] 'markdown-mark-next-action-complete)
 
+;;
+;; Deft
+;; ----
+
+(require 'deft)
+(setq deft-text-mode 'markdown-mode)
+(setq deft-directory "~/gtd/")
 
 ;;
 ;; Timestamps
@@ -333,7 +340,7 @@
 (global-set-key [f5] 'skeleton-weblog-header)
 (global-set-key [f6] 'calendar)
 (global-set-key [f7] 'markdown-mode)
-(global-set-key [f8] 'markdown-gtd-today)
+(global-set-key [f8] 'deft)
 (global-set-key [f9] 'compile)
 (global-set-key "\ej" 'fill-sentence)
 
