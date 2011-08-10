@@ -1,8 +1,16 @@
 ! .Xresources --- X server resource database
 !
 ! Created July 10, 2004
-! Last Modified June 26, 2010
+! Last Modified August 10, 2011
 ! Jason Blevins <jrblevin@sdf.org>
+
+!! Xft
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
 
 !! Emacs
 Emacs.menuBar:			off
