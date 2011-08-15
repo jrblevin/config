@@ -271,6 +271,7 @@
 
 (setq auto-mode-alist (cons '("\\.text$" . markdown-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.mdwn$" . markdown-mode) auto-mode-alist))
+(setq markdown-command "peg-markdown")
 
 ;; Unreleased local customizations
 (load-library "markdown-gtd")
