@@ -26,7 +26,7 @@
 (setq user-mail-address "jrblevin@sdf.org")
 
 ;; Set the load path
-(setq load-path (cons "~/.emacs.d/lisp" load-path))
+(setq load-path (cons "~/.emacs.d/site-lisp" load-path))
 
 ;; Disable the menu bar and toolbar
 (menu-bar-mode 0)
