@@ -80,6 +80,13 @@
 (server-start)
 (setq server-kill-new-buffers t)
 
+;;; Edit with Emacs:
+
+(if (and (daemonp) (locate-library "edit-server"))
+    (progn
+      (require 'edit-server)
+      (edit-server-start)))
+
 ;;; Color Themes:
 
 (require 'color-theme)
