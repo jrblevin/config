@@ -162,14 +162,10 @@
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
 
-;;
-;; GNU Octave 
-;; ----------
+;;; GNU Octave:
 
-(autoload 'octave-mode "octave-mod" nil t)
-(setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
-
+(autoload 'octave-mode "octave-mode" "Enter Octave mode" t)
+(setq auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
 ;;
 ;; Perl
