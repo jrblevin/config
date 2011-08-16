@@ -125,28 +125,22 @@
 
 (add-hook 'TeX-mode-hook 'my-TeX-mode-hook-fn)
 
+;;; BibTeX:
 
-;;
-;; BibTeX
-;; ------
+(defun my-bibtex-mode-hook-fn ()
+  "Function added to `bibtex-mode-hook'."
+  (setq fill-column 77)
+  (setq bibtex-user-optional-fields
+        '(("tags" "Entry tags")))
+  (setq bibtex-align-at-equal-sign t)
+  (setq bibtex-autokey-name-year-separator "-")
+  (setq bibtex-autokey-year-title-separator "-")
+  (setq bibtex-autokey-titleword-first-ignore '("the" "a" "if" "and" "an"))
+  (setq bibtex-autokey-titleword-length 30)
+  (setq bibtex-autokey-titlewords 1)
+  (setq bibtex-contline-indentation 17))
 
-(setq bibtex-user-optional-fields
-      '(("keywords" "Item tags and keywords")
-        ("url" "A URL where the item can be found"))
-      bibtex-align-at-equal-sign t
-      bibtex-autokey-name-year-separator ""
-      bibtex-autokey-year-title-separator ""
-      bibtex-autokey-titleword-first-ignore '("the" "a" "if" "and" "an")
-      bibtex-autokey-titleword-length 30
-      bibtex-autokey-titlewords 1
-      bibtex-contline-indentation 17)
-
-;; (defun my-bibtex-mode-hook-fn ()
-;;   "Function added to `bibtex-mode-hook'."
-;;   (setq fill-column 77))
-
-;; (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
-
+(add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
 
 ;;
 ;; GNU Octave 
