@@ -308,7 +308,7 @@
     (deft-new-file-named today)
     (beginning-of-buffer)
     (unless (looking-at (concat "^" today))
-      (insert today "\n\n"))))\
+      (insert today "\n\n"))))
 
 ;;
 ;; Timestamps
