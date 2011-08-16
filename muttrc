@@ -20,15 +20,22 @@ source $alias_file
 # Mailboxes
 # ---------
 
-set folder="~/mail/"
-set record = "=archive"
-set postponed = "=drafts"
-set mbox="="                      # don't remove read mail from inbox
+set folder = "imaps://jrblevin@imap.gmail.com:993"
+set spoolfile = "=INBOX"
+set record = "=[Gmail]/Sent Mail"
+set postponed = "=[Gmail]/Drafts"
+#set trash="=[Gmail]/Trash"
+
+set move = no
+set mail_check = 120
+set timeout = 300
+set imap_keepalive = 300
+set ssl_starttls = yes
+unset imap_check_subscribed
 
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
-
 
 # Mailboxes
 # ---------
@@ -50,8 +57,7 @@ mailboxes ! \
     + =instiki-users \
     + =latexml \
     + =markdown-discuss \
-    + =pandoc-discuss \
-    + =spam
+    + =pandoc-discuss
 
 # Mailing lists
 # -------------
@@ -96,9 +102,6 @@ set query_command="lbdbq '%s'"
 
 # Use aspell to check spelling
 set ispell="aspell -e -c"
-
-# Use fetchmail to check for new mail.
-macro index "\Cx\Cn" "<shell-escape>fetchmail<enter>"
 
 # Appearance
 # ----------
@@ -374,19 +377,19 @@ set pgp_getkeys_command="/usr/bin/gpg --recv-keys %r 2> /dev/null"
 # Pattern for good signatures.
 set pgp_good_sign="^gpg: Good signature from"
 
+# Keyboard Shortcuts
+# ------------------
 
-# Bayesian Mail Filter (bmf)
-# --------------------------
+bind editor <space> noop
 
-# Pipe mail to SDF and classify as spam or ham.
-macro index S "|bmf -S\n<save-message>=spam\n" "SPAM"
-macro index H "|bmf -N\n" "HAM"
-macro pager S "|bmf -S\n<save-message>=spam\n" "SPAM"
-macro pager H "|bmf -N\n" "HAM"
+macro index,pager S "<save-message>=[Gmail]/Spam<enter>" "Gmail spam"
+macro index,pager H "<save-message>=INBOX<enter>" "Gmail ham"
+macro index,pager Y "<save-message>=[Gmail]/All Mail<enter>" "Gmail archive"
 
+macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
+macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+macro index,pager gt "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to sent mail"
 
-# Keybindings
-# -----------
-
-macro index Y "<save-message>=archive\n" "Archive message"
-macro pager Y "<save-message>=archive\n" "Archive message"
+macro index,pager G "<group-reply>" "reply to all recipients"
