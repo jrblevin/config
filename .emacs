@@ -127,6 +127,75 @@
 (global-set-key [\M-down] 'move-line-down)
 (global-set-key [\M-up] 'move-line-up)
 
+;;; Markdown:
+
+(setq markdown-enable-math t)
+(setq markdown-command "peg-markdown")
+
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown formatted text files" t)
+(setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
+
+(defun my-markdown-mode-hook ()
+  (flyspell-mode 1)                     ; turn on flyspell-mode
+  (auto-fill-mode 1))			; turn on auto-fill-mode
+(add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
+
+;;; Deft:
+
+(require 'deft)
+(setq deft-text-mode 'markdown-mode)
+(setq deft-directory "~/gtd/")
+(setq deft-auto-save-interval 0.5)
+
+(defun deft-today ()
+  (interactive)
+  (let ((today (format-time-string "%Y-%m-%d")))
+    (deft-new-file-named today)
+    (beginning-of-buffer)
+    (unless (looking-at (concat "^" today))
+      (insert today "\n\n"))))
+
+;;; GTD:
+
+(defconst gtd-next-action-regex
+  "^- \\(.*?\\) \\((\\[\\[.+?\\]\\])\\)$"
+  "Regular expression matching incomplete next actions.")
+
+(defun gtd-mark-next-action-complete ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (when (re-search-forward gtd-next-action-regex nil t)
+      (let ((beg (match-beginning 0))
+            (date (format-time-string "(%Y-%m-%d)")))
+        (replace-match (concat "+ \\1 " date) nil nil)))))
+
+(defun gtd-make-next-action ()
+  (interactive)
+  (beginning-of-line)
+  (insert "-  ([[")
+  (insert (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
+  (insert "]])\n")
+  (forward-line -1)
+  (forward-char 2))
+
+;;; Fortran:
+
+(autoload 'f90-mode "f90"
+  "Major mode for editing Fortran code in free form." t)
+(setq auto-mode-alist (cons '("\\.f03$" . f90-mode) auto-mode-alist))
+(add-hook 'f90-mode-hook 'my-f90-mode-hook)
+
+(defun my-f90-mode-hook ()
+  (setq f90-beginning-ampersand nil
+	f90-font-lock-keywords f90-font-lock-keywords-3
+	comment-column 50)
+  (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
+  (abbrev-mode 1)			; turn on abbreviation mode
+  (turn-on-font-lock)			; for highlighting
+  (auto-fill-mode 0))			; turn off auto-filling
+
 ;;; AUCTeX:
 
 (load "auctex.el" nil t t)
@@ -212,113 +281,27 @@
           (run-at-time 0.5 nil 'delete-windows-on buf)
           (message "no compilation errors"))))
 
-;;; Calendar and Diary:
+;;; IDO mode:
 
-;; See the following:
-;;
-;; http://www.dotemacs.de/dotfiles/JasonRumney.emacs.html
-;; http://www.zvon.org/other/elisp/Output/index.html
-;; http://www.coling.uni-freiburg.de/~schauer/resources/emacs/config/calendar-stuff.el.html
-;; http://www.charlescurley.com/emacs.init.html
+(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(setq ido-file-extensions-order '(".txt" ".text" ".f90" ".el"))
+(ido-mode t)
 
-;; Add ISO format to date formats allowed in diary
-;; (require 'diary-lib)
-;; (require 'calendar)
+;;; CSS:
 
-;; (setq diary-file (expand-file-name "~/.diary")
-;;       calendar-week-start-day 1
-;;       mark-diary-entries-in-calendar t
-;;       mark-holidays-in-calendar t
-;;       view-diary-entries-initially nil
-;;       mark-diary-entries-in-calendar t
-;;       number-of-diary-entries 7)
+(setq cssm-indent-function #'cssm-c-style-indenter)
 
-;; (add-hook 'diary-display-hook 'fancy-diary-display)
-;; (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-;; (add-hook 'list-diary-entries-hook 'sort-diary-entries t)
+;;; ado-mode:
 
-;; (setq diary-date-forms
-;;       '((year "-" month "-" day "[^/0-9]")
-;;         (month "/" day "[^/0-9]")
-;;         (month "/" day "/" year "[^0-9]")
-;;         (monthname " *" day "[^,0-9]")
-;;         (monthname " *" day ", *" year "[^0-9]")
-;;         (dayname "\\W")))
-;; (setq calendar-date-display-form
-;;       (quote ((format "%04s-%02d-%02d" year (string-to-int month)
-;;                       (string-to-int day)))))
-;; (setq calendar-time-display-form
-;;       (quote (24-hours ":" minutes (if time-zone " (")
-;;                        time-zone (if time-zone ")"))))
-
-;;; Fortran:
-
-(autoload 'f90-mode "f90"
-  "Major mode for editing Fortran code in free form." t)
-(setq auto-mode-alist (cons '("\\.f03$" . f90-mode) auto-mode-alist))
-(add-hook 'f90-mode-hook 'my-f90-mode-hook)
-
-(defun my-f90-mode-hook ()
-  (setq f90-beginning-ampersand nil
-	f90-font-lock-keywords f90-font-lock-keywords-3
-	comment-column 50)
-  (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
-  (abbrev-mode 1)			; turn on abbreviation mode
-  (turn-on-font-lock)			; for highlighting
-  (auto-fill-mode 0))			; turn off auto-filling
-
-;;; Markdown:
-
-(setq markdown-enable-math t)
-(setq markdown-command "peg-markdown")
-
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown formatted text files" t)
-(setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
-
-(defun my-markdown-mode-hook ()
-  (flyspell-mode 1)                     ; turn on flyspell-mode
-  (auto-fill-mode 1))			; turn on auto-fill-mode
-(add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
-
-;;; GTD:
-
-(defconst gtd-next-action-regex
-  "^- \\(.*?\\) \\((\\[\\[.+?\\]\\])\\)$"
-  "Regular expression matching incomplete next actions.")
-
-(defun gtd-mark-next-action-complete ()
-  (interactive)
-  (save-excursion
-    (beginning-of-line)
-    (when (re-search-forward gtd-next-action-regex nil t)
-      (let ((beg (match-beginning 0))
-            (date (format-time-string "(%Y-%m-%d)")))
-        (replace-match (concat "+ \\1 " date) nil nil)))))
-
-(defun gtd-make-next-action ()
-  (interactive)
-  (beginning-of-line)
-  (insert "-  ([[")
-  (insert (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
-  (insert "]])\n")
-  (forward-line -1)
-  (forward-char 2))
-
-;;; Deft:
-
-(require 'deft)
-(setq deft-text-mode 'markdown-mode)
-(setq deft-directory "~/gtd/")
-(setq deft-auto-save-interval 0.5)
-
-(defun deft-today ()
-  (interactive)
-  (let ((today (format-time-string "%Y-%m-%d")))
-    (deft-new-file-named today)
-    (beginning-of-buffer)
-    (unless (looking-at (concat "^" today))
-      (insert today "\n\n"))))
+(defun ado-custom()
+  "ado-mode-hook"
+  (setq ado-claim-name "Jason Blevins")
+  (setq ado-signature-file "~/.emacs.d/.ado-signature")
+  (setq ado-site-template-dir "/usr/local/share/emacs/ado-mode/templates/")
+  (setq ado-date-format "%Y-%m-%d"))
+(add-hook 'ado-mode-hook 'ado-custom)
 
 ;;; Timestamps:
 
@@ -384,6 +367,45 @@
       (transpose-lines -1))
     (move-to-column col)))
 
+;;; Calendar and Diary:
+
+;; See the following:
+;;
+;; http://www.dotemacs.de/dotfiles/JasonRumney.emacs.html
+;; http://www.zvon.org/other/elisp/Output/index.html
+;; http://www.coling.uni-freiburg.de/~schauer/resources/emacs/config/calendar-stuff.el.html
+;; http://www.charlescurley.com/emacs.init.html
+
+;; Add ISO format to date formats allowed in diary
+;; (require 'diary-lib)
+;; (require 'calendar)
+
+;; (setq diary-file (expand-file-name "~/.diary")
+;;       calendar-week-start-day 1
+;;       mark-diary-entries-in-calendar t
+;;       mark-holidays-in-calendar t
+;;       view-diary-entries-initially nil
+;;       mark-diary-entries-in-calendar t
+;;       number-of-diary-entries 7)
+
+;; (add-hook 'diary-display-hook 'fancy-diary-display)
+;; (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
+;; (add-hook 'list-diary-entries-hook 'sort-diary-entries t)
+
+;; (setq diary-date-forms
+;;       '((year "-" month "-" day "[^/0-9]")
+;;         (month "/" day "[^/0-9]")
+;;         (month "/" day "/" year "[^0-9]")
+;;         (monthname " *" day "[^,0-9]")
+;;         (monthname " *" day ", *" year "[^0-9]")
+;;         (dayname "\\W")))
+;; (setq calendar-date-display-form
+;;       (quote ((format "%04s-%02d-%02d" year (string-to-int month)
+;;                       (string-to-int day)))))
+;; (setq calendar-time-display-form
+;;       (quote (24-hours ":" minutes (if time-zone " (")
+;;                        time-zone (if time-zone ")"))))
+
 ;;; AMPL:
 
 ;; (setq auto-mode-alist
@@ -398,15 +420,10 @@
 
 ;; (autoload 'ampl-mode "ampl-mode" "AMPL editing mode." t)
 
-
 ;;; SES:
 
 ; (autoload 'ses-mode "ses.el" "Spreadsheet mode" t)
 ; (add-to-list 'auto-mode-alist '("\\.ses$" . ses-mode))
-
-;;; CSS:
-
-(setq cssm-indent-function #'cssm-c-style-indenter)
 
 ;;; Org mode:
 
@@ -432,24 +449,6 @@
 ;;; Mutt:
 
 ;; (setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
-
-;;; ado-mode:
-
-(defun ado-custom()
-  "ado-mode-hook"
-  (setq ado-claim-name "Jason Blevins")
-  (setq ado-signature-file "~/.emacs.d/.ado-signature")
-  (setq ado-site-template-dir "/usr/local/share/emacs/ado-mode/templates/")
-  (setq ado-date-format "%Y-%m-%d"))
-(add-hook 'ado-mode-hook 'ado-custom)
-
-;;; IDO mode:
-
-(require 'ido)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(setq ido-file-extensions-order '(".txt" ".text" ".f90" ".el"))
-(ido-mode t)
 
 ;;; Skeleton Templates:
 
