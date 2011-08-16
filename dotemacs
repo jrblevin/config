@@ -273,10 +273,31 @@
 (setq auto-mode-alist (cons '("\\.mdwn$" . markdown-mode) auto-mode-alist))
 (setq markdown-command "peg-markdown")
 
-;; Unreleased local customizations
-(load-library "markdown-gtd")
-(global-set-key [f11] 'markdown-make-next-action)
-(global-set-key [f12] 'markdown-mark-next-action-complete)
+;;
+;; GTD
+;; ---
+
+(defconst gtd-next-action-regex
+  "^- \\(.*?\\) \\((\\[\\[.+?\\]\\])\\)$"
+  "Regular expression matching incomplete next actions.")
+
+(defun gtd-mark-next-action-complete ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (when (re-search-forward gtd-next-action-regex nil t)
+      (let ((beg (match-beginning 0))
+            (date (format-time-string "(%Y-%m-%d)")))
+        (replace-match (concat "+ \\1 " date) nil nil)))))
+
+(defun gtd-make-next-action ()
+  (interactive)
+  (beginning-of-line)
+  (insert "-  ([[")
+  (insert (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
+  (insert "]])\n")
+  (forward-line -1)
+  (forward-char 2))
 
 ;;
 ;; Deft
@@ -353,6 +374,8 @@
 (global-set-key [f8] 'deft)
 (global-set-key [f9] 'compile)
 (global-set-key [f10] 'deft-today)
+(global-set-key [f11] 'gtd-make-next-action)
+(global-set-key [f12] 'gtd-mark-next-action-complete)
 (global-set-key "\ej" 'fill-sentence)
 
 
