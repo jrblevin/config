@@ -285,6 +285,15 @@
 (require 'deft)
 (setq deft-text-mode 'markdown-mode)
 (setq deft-directory "~/gtd/")
+(setq deft-auto-save-interval 0.5)
+
+(defun deft-today ()
+  (interactive)
+  (let ((today (format-time-string "%Y-%m-%d")))
+    (deft-new-file-named today)
+    (beginning-of-buffer)
+    (unless (looking-at (concat "^" today))
+      (insert today "\n\n"))))\
 
 ;;
 ;; Timestamps
@@ -343,6 +352,7 @@
 (global-set-key [f7] 'markdown-mode)
 (global-set-key [f8] 'deft)
 (global-set-key [f9] 'compile)
+(global-set-key [f10] 'deft-today)
 (global-set-key "\ej" 'fill-sentence)
 
 
