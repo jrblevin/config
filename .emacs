@@ -2,20 +2,16 @@
 ;;
 ;; Jason Blevins <jrblevin@sdf.org>
 ;; Raleigh, May 29, 2004
+
+;; Emacs X Resources:
 ;;
-;; Set the following in ~/.Xresources:
-;;
-;; Emacs.menuBar:		off
-;; Emacs.verticalScrollBars:    off
-;; Emacs.toolBar:          	off
-;; Emacs.internalBorder:      	1
-;; Emacs.geometry:		80x35+5+5
-;; Emacs.Font:                  fontset-terminus
-;; Emacs.Fontset-0: \
-;; -xos4-terminus-medium-r-normal--20-200-72-72-c-100-fontset-terminus,\
-;; mule-unicode-0100-24ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
-;; mule-unicode-2500-33ff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1,\
-;; mule-unicode-e000-ffff:-misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1
+;; Emacs.menuBar:                off
+;; Emacs.verticalScrollBars:     off
+;; Emacs.toolBar:                off
+;; Emacs.internalBorder:         1
+;; Emacs.geometry:               80x35+5+5
+;; Emacs.FontBackend:            xft
+;; Emacs.font:                   Inconsolata-15
 
 ;; Personal information
 (setq user-mail-address "jrblevin@sdf.org")
