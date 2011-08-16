@@ -90,8 +90,7 @@
      (require 'color-theme-subdued)
      (require 'color-theme-less)
      (require 'color-theme-gruber-darker)
-     (require 'color-theme-twilight)
-     (color-theme-twilight)))
+     (require 'color-theme-twilight)))
 
 ;; Selects the appropriate color theme for each frame based on whether
 ;; the client is running in console mode or windowed mode.
