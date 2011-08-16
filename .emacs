@@ -13,6 +13,8 @@
 ;; Emacs.FontBackend:            xft
 ;; Emacs.font:                   Inconsolata-15
 
+;;; Basic Configuration:
+
 ;; Personal information
 (setq user-mail-address "jrblevin@sdf.org")
 
@@ -45,29 +47,6 @@
     (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
   (message "Directory does not exist: ~/.emacs.d/backup"))
 
-;; Color themes
-(require 'color-theme)
-(eval-after-load "color-theme"
-    '(progn
-        (color-theme-initialize)
-        (setq color-theme-is-global nil)
-        (require 'color-theme-subdued)
-        (require 'color-theme-less)
-        (require 'color-theme-gruber-darker)
-        (require 'color-theme-twilight)
-        (color-theme-twilight)))
-
-;; Selects the appropriate color theme for each frame based on whether
-;; the client is running in console mode or windowed mode.
-(defun my-select-color-theme(frame)
-  (select-frame frame)
-  (if (window-system frame)
-      (color-theme-twilight)
-    (color-theme-less)))
-
-;; Hook to run after making a new frame
-(add-hook 'after-make-frame-functions 'my-select-color-theme)
-
 ;; Show matching parentheses.
 (show-paren-mode 1)
 
@@ -81,10 +60,6 @@
 ;; Use debian-sensible-browser as generic browser
 (setq browse-url-generic-program "debian-sensible-browser")
 
-;; Start the Emacs server
-(server-start)
-(setq server-kill-new-buffers t)
-
 ;; Don't print a header
 (setq ps-print-header nil)
 
@@ -94,6 +69,33 @@
 ;; Disable startup screen
 (setq inhibit-startup-message t)
 
+;; Start the Emacs server
+(server-start)
+(setq server-kill-new-buffers t)
+
+;;; Color Themes:
+
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (setq color-theme-is-global nil)
+     (require 'color-theme-subdued)
+     (require 'color-theme-less)
+     (require 'color-theme-gruber-darker)
+     (require 'color-theme-twilight)
+     (color-theme-twilight)))
+
+;; Selects the appropriate color theme for each frame based on whether
+;; the client is running in console mode or windowed mode.
+(defun my-select-color-theme(frame)
+  (select-frame frame)
+  (if (window-system frame)
+      (color-theme-twilight)
+    (color-theme-less)))
+
+;; Hook to run after making a new frame
+(add-hook 'after-make-frame-functions 'my-select-color-theme)
 
 ;;
 ;; AUCTeX
