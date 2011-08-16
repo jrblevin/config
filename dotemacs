@@ -480,9 +480,10 @@
 ;; --------
 
 (require 'ido)
-(ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
+(setq ido-file-extensions-order '(".txt" ".text" ".f90" ".el"))
+(ido-mode t)
 
 
 ;; External files
