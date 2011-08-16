@@ -3,7 +3,14 @@
 ;; Jason Blevins <jrblevin@sdf.org>
 ;; Raleigh, May 29, 2004
 
-;; Emacs X Resources:
+;;; Directory Structure:
+;;
+;; ~/.emacs                      init file
+;; ~/.emacs.d/                   user directory
+;; ~/.emacs.d/backup             single location for backup files
+;; ~/.emacs.d/site-lisp          packages
+
+;;; Emacs X Resources:
 ;;
 ;; Emacs.menuBar:                off
 ;; Emacs.verticalScrollBars:     off
@@ -193,10 +200,8 @@
           (run-at-time 0.5 nil 'delete-windows-on buf)
           (message "no compilation errors"))))
 
-;;
-;; Calendar and Diary
-;; ------------------
-;;
+;;; Calendar and Diary:
+
 ;; See the following:
 ;;
 ;; http://www.dotemacs.de/dotfiles/JasonRumney.emacs.html
@@ -205,35 +210,34 @@
 ;; http://www.charlescurley.com/emacs.init.html
 
 ;; Add ISO format to date formats allowed in diary
-(require 'diary-lib)
-(require 'calendar)
+;; (require 'diary-lib)
+;; (require 'calendar)
 
-(setq diary-file (expand-file-name "~/.diary")
-      calendar-week-start-day 1
-      mark-diary-entries-in-calendar t
-      mark-holidays-in-calendar t
-      view-diary-entries-initially nil
-      mark-diary-entries-in-calendar t
-      number-of-diary-entries 7)
+;; (setq diary-file (expand-file-name "~/.diary")
+;;       calendar-week-start-day 1
+;;       mark-diary-entries-in-calendar t
+;;       mark-holidays-in-calendar t
+;;       view-diary-entries-initially nil
+;;       mark-diary-entries-in-calendar t
+;;       number-of-diary-entries 7)
 
-(add-hook 'diary-display-hook 'fancy-diary-display)
-(add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-(add-hook 'list-diary-entries-hook 'sort-diary-entries t)
+;; (add-hook 'diary-display-hook 'fancy-diary-display)
+;; (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
+;; (add-hook 'list-diary-entries-hook 'sort-diary-entries t)
 
-(setq diary-date-forms
-      '((year "-" month "-" day "[^/0-9]")
-        (month "/" day "[^/0-9]")
-        (month "/" day "/" year "[^0-9]")
-        (monthname " *" day "[^,0-9]")
-        (monthname " *" day ", *" year "[^0-9]")
-        (dayname "\\W")))
-(setq calendar-date-display-form
-      (quote ((format "%04s-%02d-%02d" year (string-to-int month)
-                      (string-to-int day)))))
-(setq calendar-time-display-form
-      (quote (24-hours ":" minutes (if time-zone " (")
-                       time-zone (if time-zone ")"))))
-
+;; (setq diary-date-forms
+;;       '((year "-" month "-" day "[^/0-9]")
+;;         (month "/" day "[^/0-9]")
+;;         (month "/" day "/" year "[^0-9]")
+;;         (monthname " *" day "[^,0-9]")
+;;         (monthname " *" day ", *" year "[^0-9]")
+;;         (dayname "\\W")))
+;; (setq calendar-date-display-form
+;;       (quote ((format "%04s-%02d-%02d" year (string-to-int month)
+;;                       (string-to-int day)))))
+;; (setq calendar-time-display-form
+;;       (quote (24-hours ":" minutes (if time-zone " (")
+;;                        time-zone (if time-zone ")"))))
 
 ;;
 ;; Fortran
@@ -401,40 +405,30 @@
 
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
+;;; Org mode:
 
-;;
-;; Org mode
-;; --------
+;; (require 'org-install)
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; (define-key global-map "\C-cl" 'org-store-link)
+;; (define-key global-map "\C-ca" 'org-agenda)
+;; (setq org-log-done t)
 
-(require 'org-install)
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
+;;; post-mode:
 
+;; (defun post-custom()
+;;   "post-hook"
+;;   (load "mutt-alias")
+;;   (setq mutt-alias-file-list '("~/.mutt-aliases"))
+;;   (local-set-key "\C-ci" 'mutt-alias-insert)
+;;   (setq post-underline-pattern nil)
+;;   (setq post-emoticon-pattern nil)
+;;   (setq post-bold-pattern nil)
+;;   (flyspell-mode 1))
+;; (add-hook 'post-mode-hook '(lambda() (post-custom)))
 
-;;
-;; post-mode
-;; ---------
+;;; Mutt:
 
-(defun post-custom()
-  "post-hook"
-  (load "mutt-alias")
-  (setq mutt-alias-file-list '("~/.mutt-aliases"))
-  (local-set-key "\C-ci" 'mutt-alias-insert)
-  (setq post-underline-pattern nil)
-  (setq post-emoticon-pattern nil)
-  (setq post-bold-pattern nil)
-  (flyspell-mode 1))
-(add-hook 'post-mode-hook '(lambda() (post-custom)))
-
-
-;;
-;; Mutt
-;; ----
-
-(setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
-
+;; (setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
 
 ;; Ado-mode
 ;; --------
