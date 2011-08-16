@@ -266,18 +266,14 @@
   (turn-on-font-lock)			; for highlighting
   (auto-fill-mode 0))			; turn off auto-filling
 
-
-;;
-;; Markdown
-;; --------
+;;; Markdown:
 
 (setq markdown-enable-math t)
 (setq markdown-command "peg-markdown")
 
-(autoload 'markdown-mode "markdown-mode.el"
-  "Major mode to edit Markdown files" t)
-
-(setq auto-mode-alist (cons '("\\.text$" . markdown-mode) auto-mode-alist))
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown formatted text files" t)
+(setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
 
 (defun my-markdown-mode-hook ()
   (flyspell-mode 1)                     ; turn on flyspell-mode
