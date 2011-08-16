@@ -104,6 +104,23 @@
 ;; Hook to run after making a new frame
 (add-hook 'after-make-frame-functions 'my-select-color-theme)
 
+;;; Global keybindings:
+
+(global-set-key [f3] 'my-insert-date-time)
+(global-set-key [f4] 'revert-buffer-no-confirm)
+(global-set-key [f5] 'skeleton-weblog-header)
+(global-set-key [f6] 'calendar)
+(global-set-key [f7] 'markdown-mode)
+(global-set-key [f8] 'deft)
+(global-set-key [f9] 'compile)
+(global-set-key [f10] 'deft-today)
+(global-set-key [f11] 'gtd-make-next-action)
+(global-set-key [f12] 'gtd-mark-next-action-complete)
+
+(global-set-key [?\M-j] 'fill-sentence)
+(global-set-key [\M-down] 'move-line-down)
+(global-set-key [\M-up] 'move-line-up)
+
 ;;
 ;; AUCTeX
 ;; ------
@@ -344,10 +361,7 @@
   (interactive "*")
   (insert (format-time-string "%Y-%02m-%02dT%02H:%02M:%02SZ" (current-time) t)))
 
-
-;;
-;; Global keybindings
-;; ------------------
+;;; Miscellaneous:
 
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation."
@@ -361,19 +375,6 @@
     (let ((beg (point)))
       (forward-sentence)
       (fill-region-as-paragraph beg (point)))))
-
-(global-set-key [f3] 'my-insert-date-time)
-(global-set-key [f4] 'revert-buffer-no-confirm)
-(global-set-key [f5] 'skeleton-weblog-header)
-(global-set-key [f6] 'calendar)
-(global-set-key [f7] 'markdown-mode)
-(global-set-key [f8] 'deft)
-(global-set-key [f9] 'compile)
-(global-set-key [f10] 'deft-today)
-(global-set-key [f11] 'gtd-make-next-action)
-(global-set-key [f12] 'gtd-mark-next-action-complete)
-(global-set-key "\ej" 'fill-sentence)
-
 
 ;;
 ;; AMPL
@@ -463,10 +464,6 @@
       (next-line)
       (transpose-lines -1))
     (move-to-column col)))
-
-(global-set-key [\M-down] 'move-line-down)
-(global-set-key [\M-up] 'move-line-up)
-
 
 ;; IDO mode
 ;; --------
