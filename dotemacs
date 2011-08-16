@@ -294,7 +294,7 @@
 (add-hook 'write-file-hooks 'time-stamp)
 (setq time-stamp-active t)
 (setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
-(setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|meta-modified:[ \t]+\\)")
+(setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|modified:[ \t]+\\)")
 (setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
 (setq time-stamp-line-limit 10)
 
