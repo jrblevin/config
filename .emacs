@@ -43,7 +43,7 @@
 ;; http://inamidst.com/config/emacs
 (if (file-directory-p "~/.emacs.d/backup")
     (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
-    (message "Directory does not exist: ~/.emacs.d/backup"))
+  (message "Directory does not exist: ~/.emacs.d/backup"))
 
 ;; Color themes
 (require 'color-theme)
