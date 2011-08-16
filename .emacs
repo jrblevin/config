@@ -121,15 +121,13 @@
 (global-set-key [\M-down] 'move-line-down)
 (global-set-key [\M-up] 'move-line-up)
 
-;;
-;; AUCTeX
-;; ------
+;;; AUCTeX:
 
 (load "auctex.el" nil t t)
-
 (setq TeX-parse-self t)
 (setq TeX-auto-save t)
 (setq TeX-source-specials-mode t)
+(setq TeX-PDF-mode t)
 
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
