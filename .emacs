@@ -276,13 +276,17 @@
 ;; --------
 
 (setq markdown-enable-math t)
+(setq markdown-command "peg-markdown")
 
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode to edit Markdown files" t)
 
 (setq auto-mode-alist (cons '("\\.text$" . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.mdwn$" . markdown-mode) auto-mode-alist))
-(setq markdown-command "peg-markdown")
+
+(defun my-markdown-mode-hook ()
+  (flyspell-mode 1)                     ; turn on flyspell-mode
+  (auto-fill-mode 1))			; turn on auto-fill-mode
+(add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
 ;;
 ;; GTD
