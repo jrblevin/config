@@ -255,11 +255,10 @@
   (setq f90-beginning-ampersand nil
 	f90-font-lock-keywords f90-font-lock-keywords-3
 	comment-column 50)
+  (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
   (abbrev-mode 1)			; turn on abbreviation mode
   (turn-on-font-lock)			; for highlighting
   (auto-fill-mode 0))			; turn off auto-filling
-
-(define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
 
 ;;; Markdown:
 
