@@ -250,11 +250,10 @@
 ;;       (quote (24-hours ":" minutes (if time-zone " (")
 ;;                        time-zone (if time-zone ")"))))
 
-;;
-;; Fortran
-;; -------
+;;; Fortran:
 
-(require 'f90)
+(autoload 'f90-mode "f90"
+  "Major mode for editing Fortran code in free form." t)
 (setq auto-mode-alist (cons '("\\.f03$" . f90-mode) auto-mode-alist))
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
 
