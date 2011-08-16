@@ -240,7 +240,12 @@
 ;;; GNU Octave:
 
 (autoload 'octave-mode "octave-mode" "Enter Octave mode" t)
-(setq auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist))
+;(setq auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+;;; Mathematica:
+
+(autoload 'mma-mode "mma" "Mathematica package file mode" t)
+;(setq auto-mode-alist (cons '("\\.m\\'" . mma-mode) auto-mode-alist))
 
 ;;; Perl:
 
