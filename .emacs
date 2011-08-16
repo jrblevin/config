@@ -425,8 +425,7 @@
 
 ;; (setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
 
-;; Ado-mode
-;; --------
+;;; ado-mode:
 
 (defun ado-custom()
   "ado-mode-hook"
@@ -434,7 +433,7 @@
   (setq ado-signature-file "~/.emacs.d/.ado-signature")
   (setq ado-site-template-dir "/usr/local/share/emacs/ado-mode/templates/")
   (setq ado-date-format "%Y-%m-%d"))
-(add-hook 'ado-mode-hook '(lambda() (ado-custom)))
+(add-hook 'ado-mode-hook 'ado-custom)
 
 
 ;; Line Movement
