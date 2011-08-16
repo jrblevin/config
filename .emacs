@@ -167,9 +167,7 @@
 (autoload 'octave-mode "octave-mode" "Enter Octave mode" t)
 (setq auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
-;;
-;; Perl
-;; ----
+;;; Perl:
 
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
@@ -182,10 +180,7 @@
   (setq cperl-continued-statement-offset 2)
   (setq cperl-extra-newline-before-brace t))
 
-
-;;
-;; C and C++
-;; ---------
+;;; C and C++:
 
 (defun my-c-mode-common-hook ()
   (c-set-style "k&r")
@@ -279,9 +274,7 @@
   (auto-fill-mode 1))			; turn on auto-fill-mode
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
-;;
-;; GTD
-;; ---
+;;; GTD:
 
 (defconst gtd-next-action-regex
   "^- \\(.*?\\) \\((\\[\\[.+?\\]\\])\\)$"
@@ -305,9 +298,7 @@
   (forward-line -1)
   (forward-char 2))
 
-;;
-;; Deft
-;; ----
+;;; Deft:
 
 (require 'deft)
 (setq deft-text-mode 'markdown-mode)
@@ -322,9 +313,7 @@
     (unless (looking-at (concat "^" today))
       (insert today "\n\n"))))
 
-;;
-;; Timestamps
-;; ----------
+;;; Timestamps:
 
 (require 'time-stamp)
 (add-hook 'write-file-hooks 'time-stamp)
@@ -369,9 +358,26 @@
       (forward-sentence)
       (fill-region-as-paragraph beg (point)))))
 
-;;
-;; AMPL
-;; ----
+;; Line movement functions by Michael Schuerig.
+
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines 1))
+    (next-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+;;; AMPL:
 
 ;; (setq auto-mode-alist
 ;;       (cons '("\\.mod$" . ampl-mode) auto-mode-alist))
@@ -386,16 +392,12 @@
 ;; (autoload 'ampl-mode "ampl-mode" "AMPL editing mode." t)
 
 
-;;
-;; SES
-;; ---
+;;; SES:
 
 ; (autoload 'ses-mode "ses.el" "Spreadsheet mode" t)
 ; (add-to-list 'auto-mode-alist '("\\.ses$" . ses-mode))
 
-;;
-;; css-mode
-;; --------
+;;; CSS:
 
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
@@ -434,31 +436,7 @@
   (setq ado-date-format "%Y-%m-%d"))
 (add-hook 'ado-mode-hook 'ado-custom)
 
-
-;; Line Movement
-;; -------------
-;;
-;; Courtesy of Michael Schuerig
-
-(defun move-line-down ()
-  (interactive)
-  (let ((col (current-column)))
-    (save-excursion
-      (next-line)
-      (transpose-lines 1))
-    (next-line)
-    (move-to-column col)))
-
-(defun move-line-up ()
-  (interactive)
-  (let ((col (current-column)))
-    (save-excursion
-      (next-line)
-      (transpose-lines -1))
-    (move-to-column col)))
-
-;; IDO mode
-;; --------
+;;; IDO mode:
 
 (require 'ido)
 (setq ido-enable-flex-matching t)
@@ -466,8 +444,6 @@
 (setq ido-file-extensions-order '(".txt" ".text" ".f90" ".el"))
 (ido-mode t)
 
-
-;; External files
-;; --------------
+;;; External files:
 
 (load-file "~/.emacs.d/skel.el")
