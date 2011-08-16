@@ -108,7 +108,7 @@
 
 (global-set-key [f3] 'my-insert-date-time)
 (global-set-key [f4] 'revert-buffer-no-confirm)
-(global-set-key [f5] 'skeleton-weblog-header)
+(global-set-key [f5] 'skeleton-webpage-header)
 (global-set-key [f6] 'calendar)
 (global-set-key [f7] 'markdown-mode)
 (global-set-key [f8] 'deft)
@@ -259,6 +259,8 @@
   (abbrev-mode 1)			; turn on abbreviation mode
   (turn-on-font-lock)			; for highlighting
   (auto-fill-mode 0))			; turn off auto-filling
+
+(define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
 
 ;;; Markdown:
 
@@ -444,6 +446,50 @@
 (setq ido-file-extensions-order '(".txt" ".text" ".f90" ".el"))
 (ido-mode t)
 
-;;; External files:
+;;; Skeleton Templates:
 
-(load-file "~/.emacs.d/skel.el")
+(define-skeleton skeleton-webpage-header
+  "Insert a metadata header for pages on jblevins.org."
+  nil
+  "title:       " (skeleton-read "Title: ") "\n"
+  "description: " (skeleton-read "Description: ") "\n"
+  "created:     " (my-insert-date-time) "\n"
+  "city:        Columbus\n"
+  "markup:      markdown\n"
+  "guid:        tag:jblevins.org," (my-insert-year) ":"
+  (replace-regexp-in-string
+   "/home/jblevins/projects/jblevins.org/htdocs\\(.*?\\)\\(main\\)*\\.text" "\\1"
+   (buffer-file-name))
+  "\n\n")
+
+(define-skeleton skeleton-f90-header
+  "Insert a file header for Fortran source code."
+  "Description: "
+  "! " (buffer-name) " --- " str "\n"
+  "!\n"
+  "! Copyright (C) " (my-insert-year) " Jason R. Blevins <jrblevin@sdf.org>\n"
+  "! All rights reserved.\n"
+  "!\n"
+  "! Redistribution and use in source and binary forms, with or without\n"
+  "! modification, are permitted provided that the following conditions are met:\n"
+  "! 1. Redistributions of source code must retain the above copyright\n"
+  "!    notice, this list of conditions and the following disclaimer.\n"
+  "! 2. Redistributions in binary form must reproduce the above copyright\n"
+  "!    notice, this list of conditions and the following disclaimer in the\n"
+  "!    documentation  and/or other materials provided with the distribution.\n"
+  "! 3. Neither the names of the copyright holders nor the names of any\n"
+  "!    contributors may be used to endorse or promote products derived from\n"
+  "!    this software without specific prior written permission.\n"
+  "!\n"
+  "! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\n"
+  "! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n"
+  "! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n"
+  "! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE\n"
+  "! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\n"
+  "! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\n"
+  "! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\n"
+  "! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\n"
+  "! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\n"
+  "! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n"
+  "! POSSIBILITY OF SUCH DAMAGE.\n"
+  "\n")
