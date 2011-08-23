@@ -1,28 +1,37 @@
 ;;; deft.el --- quickly browse, filter, and edit plain text notes
 
 ;; Copyright (C) 2011 Jason R. Blevins <jrblevin@sdf.org>
+;; All rights reserved.
 
-;; Version: 0.1
+;; Redistribution and use in source and binary forms, with or without
+;; modification, are permitted provided that the following conditions are met:
+;; 1. Redistributions of source code must retain the above copyright
+;;    notice, this list of conditions and the following disclaimer.
+;; 2. Redistributions in binary form must reproduce the above copyright
+;;    notice, this list of conditions and the following disclaimer in the
+;;    documentation  and/or other materials provided with the distribution.
+;; 3. Neither the names of the copyright holders nor the names of any
+;;    contributors may be used to endorse or promote products derived from
+;;    this software without specific prior written permission.
+
+;; THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+;; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+;; IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+;; ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+;; LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+;; CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+;; SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+;; INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+;; CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+;; ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+;; POSSIBILITY OF SUCH DAMAGE.
+
+;; Version: 0.2
 ;; Author: Jason R. Blevins <jrblevin@sdf.org>
 ;; Keywords: plain text, notes, Simplenote, Notational Velocity
 ;; URL: http://jblevins.org/projects/deft/
 
 ;; This file is not part of GNU Emacs.
-
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License
-;; as published by the Free Software Foundation; either version 2
-;; of the License, or (at your option) any later version.
-
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-
-;; You should have received a copy of the GNU General Public License
-;; along with this program; if not, write to the Free Software
-;; Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-;; 02110-1301, USA.
 
 ;;; Commentary:
 
@@ -33,12 +42,15 @@
 ;; right time and by automating many of the usual tasks such as
 ;; creating new files and saving files.
 
-;; Deft is free software, released under the GNU GPL.  You may
-;; download it directly here:
+;; Deft is open source software and may be freely distributed and
+;; modified under the BSD license.  Version 0.2 is the latest stable
+;; version.  You may download it directly here:
 
 ;;   * [deft.el](http://jblevins.org/projects/deft/deft.el)
 
-;; or clone the Git repository:
+;; To follow or contribute to Deft development, you can either
+;; [browse](http://jblevins.org/git/deft.git) or clone the Git
+;; repository:
 
 ;;     git clone git://jblevins.org/git/deft.git
 
@@ -171,9 +183,14 @@
 ;; History
 ;; -------
 
-;; The initial version of Deft was written by Jason Blevins and
-;; released on August 6, 2011.
+;; Version 0.2 (2011-08-22):
 
+;; * Match filenames when filtering.
+;; * Automatically save opened files (optional).
+;; * Address some byte-compilation warnings.
+
+;; Deft was originally written by Jason Blevins.
+;; The initial version, 0.1, was released on August 6, 2011.
 
 ;;; Code:
 
