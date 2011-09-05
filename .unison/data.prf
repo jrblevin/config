@@ -10,6 +10,7 @@ root = ssh://blevins//home/jblevins
 
 ignore = Name *~
 ignore = Name *.o
+ignore = Name .DS_Store
 
 path = projects
 path = inbox
