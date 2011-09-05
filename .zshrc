@@ -114,6 +114,8 @@ if [[ $OS == "Darwin" ]]; then
     export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     export MANPATH=/opt/local/share/man:$MANPATH
     export DISPLAY=:0.0
+    # Color ls
+    export CLICOLOR=1
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
