@@ -44,9 +44,6 @@ alias -s com=elinks
 alias -s net=elinks
 alias -s org=elinks
 
-# less input preprocessor
-eval `lessfile`
-
 # tab completion
 autoload -U compinit
 compinit
@@ -108,6 +105,18 @@ export PATH=${HOME}/bin:${PATH}
 # Set the xterm title
 if [[ $TERM == "xterm" ]]; then
     print -Pn "\e]2;$USER@$HOST\a"
+fi
+
+# Operating-system-specific settings
+OS=`uname -s`
+if [[ $OS == "Darwin" ]]; then
+    # MacPorts
+    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    export MANPATH=/opt/local/share/man:$MANPATH
+    export DISPLAY=:0.0
+elif [[ $OS == "Linux" ]]; then
+    # less input preprocessor
+    eval `lessfile`
 fi
 
 # Automatically start X
