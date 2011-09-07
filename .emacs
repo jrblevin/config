@@ -30,7 +30,10 @@
 
 ;; Disable the menu bar and toolbar
 (menu-bar-mode 0)
-(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
+;; Font Selection
+(set-default-font "Inconsolata-16")
 
 ;; Disable transient-mark-mode
 (setq transient-mark-mode nil)
