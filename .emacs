@@ -28,9 +28,8 @@
 ;; Set the load path
 (setq load-path (cons "~/.emacs.d/site-lisp" load-path))
 
-;; Disable the menu bar and toolbar
+;; Disable the menu bar
 (menu-bar-mode 0)
-(scroll-bar-mode 0)
 
 ;; Font Selection
 (set-default-font "Inconsolata-16")
