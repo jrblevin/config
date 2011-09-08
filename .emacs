@@ -30,6 +30,7 @@
 
 ;; Disable the menu bar
 (menu-bar-mode 0)
+(scroll-bar-mode 0)
 
 ;; Font Selection
 (set-default-font "Inconsolata-16")
