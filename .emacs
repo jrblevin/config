@@ -138,6 +138,7 @@
 
 (setq markdown-enable-math t)
 (setq markdown-command "peg-markdown")
+(setq markdown-link-space-sub-char "-")
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown formatted text files" t)
