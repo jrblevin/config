@@ -28,6 +28,10 @@
 ;; Set the load path
 (setq load-path (cons "~/.emacs.d/site-lisp" load-path))
 
+;; Include MacPorts binaries in the path
+(push "/opt/local/bin" exec-path)
+(setenv "PATH" (concat  "/opt/local/bin:" (getenv "PATH")))
+
 ;; Disable the menu bar
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
