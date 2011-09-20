@@ -4,6 +4,7 @@ log = true
 auto = true
 logfile = /home/jblevins/.unison/unison.log
 rshargs = -C
+times = true
 
 root = /home/jblevins
 root = ssh://blevins//home/jblevins
