@@ -48,6 +48,9 @@ alias -s org=elinks
 autoload -U compinit
 compinit
 
+# zmv
+autoload zmv
+
 # colorful completion listings
 zmodload -i zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
