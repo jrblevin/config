@@ -37,7 +37,7 @@
 (scroll-bar-mode 0)
 
 ;; Font Selection
-(set-default-font "Inconsolata-16")
+(set-default-font "Inconsolata-18")
 
 ;; Disable transient-mark-mode
 (setq transient-mark-mode nil)
@@ -299,7 +299,7 @@
 (require 'ido)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
-(setq ido-file-extensions-order '(".txt" ".text" ".f90" ".el"))
+(setq ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el"))
 (ido-mode t)
 
 ;;; CSS:
