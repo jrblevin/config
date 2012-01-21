@@ -64,8 +64,9 @@
 ;; Show matching parentheses.
 (show-paren-mode 1)
 
-;; Show the time in 24-hour format.
+;; Show the date and time in 24-hour format.
 (display-time-mode 1)
+(setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 
 ;; Show the column number in the mode line.
