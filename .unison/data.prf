@@ -14,5 +14,5 @@ ignore = Name *.o
 ignore = Name .DS_Store
 
 path = projects
-path = inbox
-path = config
+# path = inbox
+# path = config
