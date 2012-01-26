@@ -12,19 +12,28 @@ accounts = jrblevin
 
 [Account jrblevin]
 localrepository = local
-remoterepository = sdf
-autorefresh = 15
+remoterepository = gmail
+autorefresh = 1
 
 [Repository local]
 type = Maildir
-localfolders = ~/Mail/
+localfolders = /home/jblevins/Mail/
+
+[Repository gmail]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = jrblevin@gmail.com
+remotepassfile = /home/jblevins/config/private/.imappass
+ssl = yes
+maxconnections = 1
+realdelete = no
 
 [Repository sdf]
 type = IMAP
 remotehost = mail.freeshell.org
 ssl = yes
 remoteuser = jrblevin
-remotepassfile = /home/jrblevin/config/private/.imappass
+remotepassfile = /home/jblevins/config/private/.imappass
 folderfilter = lambda foldername: re.search('(^INBOX$|^mail)', foldername)
 nametrans = lambda foldername: re.sub('^mail/', '', foldername)
 
