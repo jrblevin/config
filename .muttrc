@@ -20,51 +20,18 @@ source $alias_file
 # Mailboxes
 # ---------
 
-set folder = "imaps://jrblevin@imap.gmail.com:993"
+set folder = "~/Mail"
 set spoolfile = "=INBOX"
-set record = "=[Gmail]/Sent Mail"
-set postponed = "=[Gmail]/Drafts"
-#set trash="=[Gmail]/Trash"
+set record = "=[Gmail].Sent Mail"
+set postponed = "=[Gmail].Drafts"
+set trash="=[Gmail].Trash"
 
 set move = no
-set mail_check = 120
-set timeout = 300
-set imap_keepalive = 300
-set ssl_starttls = yes
-unset imap_check_subscribed
 
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
 
-# Mailboxes
-# ---------
-
-# Where new mail may be received
-mailboxes ! \
-    + =blosxom-devel \
-    + =blosxom-users \
-    + =comp-fortran-90 \
-    + =debian-devel-announce \
-    + =debian-news \
-    + =econ-snde \
-    + =emacs-goodies-el \
-    + =gfortran \
-    + =gsl-discuss \
-    + =help-gsl \
-    + =info-gsl \
-    + =instiki-devel \
-    + =instiki-users \
-    + =latexml \
-    + =markdown-discuss \
-    + =pandoc-discuss
-
-# Mailing lists
-# -------------
-
-subscribe markdown-discuss@six.pairlist.net
-subscribe gsl-discuss@sourceware.org
-subscribe pandoc-discuss@googlegroups.com
 
 # Outgoing Headers
 # ----------------
@@ -102,6 +69,7 @@ set query_command="lbdbq '%s'"
 
 # Use aspell to check spelling
 set ispell="aspell -e -c"
+
 
 # Appearance
 # ----------
@@ -191,9 +159,6 @@ set fcc_attach
 # When replying to a message sent by me, reply to the recipients instead.
 unset reply_self
 
-# Automatically display as text for mailcap entries with copiousoutput,.
-set implicit_autoview
-
 
 # MIME
 # ----
@@ -202,8 +167,8 @@ set implicit_autoview
 alternative_order text/enriched text/plain text/html
 auto_view text/html
 
-# Always use the mime-types defined in .mailcap.
-set implicit_autoview=yes
+# Whether or not to display text for mailcap entries with copiousoutput.
+set implicit_autoview=no
 
 # Ask whether to use message/rfc822 type to forward messages.
 set mime_forward=ask-no
