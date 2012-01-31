@@ -20,13 +20,18 @@ source $alias_file
 # Mailboxes
 # ---------
 
-set folder = "~/Mail"
-set spoolfile = "=INBOX"
-set record = "=[Gmail].Sent Mail"
-set postponed = "=[Gmail].Drafts"
-set trash="=[Gmail].Trash"
+set folder = "imaps://jblevins@gauss.xbeta.org:993"
+set spoolfile = "="
+set record = "=sent"
+set postponed = "=drafts"
+set trash = "=trash"
 
 set move = no
+set mail_check = 30
+set timeout = 300
+set imap_keepalive = 300
+set ssl_starttls = yes
+unset imap_check_subscribed
 
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
@@ -347,14 +352,7 @@ set pgp_good_sign="^gpg: Good signature from"
 
 bind editor <space> noop
 
-macro index,pager S "<save-message>=[Gmail]/Spam<enter>" "Gmail spam"
-macro index,pager H "<save-message>=INBOX<enter>" "Gmail ham"
-macro index,pager Y "<save-message>=[Gmail]/All Mail<enter>" "Gmail archive"
-
-macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
-macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
-macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
-macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
-macro index,pager gt "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to sent mail"
-
+macro index,pager S "<save-message>=spam<enter>" "Spam: move to spam"
+macro index,pager H "<save-message>=<enter>" "Ham: move to inbox ham"
+macro index,pager Y "<save-message>=2012<enter>" "Archive"
 macro index,pager G "<group-reply>" "reply to all recipients"
