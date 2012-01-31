@@ -1,8 +1,8 @@
-MAILDIR=$HOME/mail
-LOGFILE=$HOME/.procmail.log
+MAILDIR=$HOME/Maildir
+LOGFILE=$HOME/Maildir/procmail.log
 
 :0fw
-| /usr/local/bin/bmf -p
+| /usr/bin/bmf -p
 
 :0:
 * ^X-Spam-Status: Yes
@@ -11,67 +11,3 @@ spam
 :0:
 * ^TO_jrb11@acpub.duke.edu
 spam
-
-:0:
-* ^TO_blosxom-devel
-blosxom-devel
-
-:0:
-* ^TO_blosxom-users
-blosxom-users
-
-:0:
-* ^TO_comp-fortran-90
-comp-fortran-90
-
-:0:
-* ^TO_debian-devel-announce
-debian-devel-announce
-
-:0:
-* ^TO_debian-news
-debian-news
-
-:0:
-* ^TO_econ-snde
-econ-snde
-
-:0:
-* ^X-Debian-Package: emacs-goodies-el
-emacs-goodies-el
-
-:0:
-* ^TO_fortran
-gfortran
-
-:0:
-* ^TO_gsl-discuss
-gsl-discuss
-
-:0:
-* ^TO_help-gsl
-help-gsl
-
-:0:
-* ^TO_info-gsl
-info-gsl
-
-:0:
-* ^TO_instiki-devel
-instiki-devel
-
-:0:
-* ^TO_instiki-users
-instiki-users
-
-:0:
-* ^TO_project-latexml
-latexml
-
-:0:
-* ^TO_markdown-discuss
-markdown-discuss
-
-:0:
-* ^TO_pandoc-discuss
-pandoc-discuss
