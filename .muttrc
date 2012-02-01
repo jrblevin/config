@@ -28,11 +28,12 @@ set trash = "=trash"
 mailboxes "=INBOX"
 
 set move = no
-set mail_check = 30
-set timeout = 300
+set mail_check = 5
+set timeout = 15
 set imap_keepalive = 300
 set ssl_starttls = yes
 unset imap_check_subscribed
+unset imap_passive
 
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
