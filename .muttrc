@@ -20,11 +20,12 @@ source $alias_file
 # Mailboxes
 # ---------
 
-set folder = "imaps://jblevins@gauss.xbeta.org:993"
-set spoolfile = "="
+set folder = "imaps://jblevins@gauss.xbeta.org"
+set spoolfile = "=INBOX"
 set record = "=sent"
 set postponed = "=drafts"
 set trash = "=trash"
+mailboxes "=INBOX"
 
 set move = no
 set mail_check = 30
