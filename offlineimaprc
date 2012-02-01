@@ -26,7 +26,7 @@ remoteuser = jrblevin@gmail.com
 remotepassfile = /home/jblevins/config/private/.imappass
 ssl = yes
 maxconnections = 1
-realdelete = no
+realdelete = yes
 
 [Repository sdf]
 type = IMAP
