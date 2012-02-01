@@ -7,7 +7,7 @@ rshargs = -C
 times = true
 
 root = /home/jblevins
-root = ssh://blevins//home/jblevins
+root = ssh://ap-jb01//home/jblevins
 
 ignore = Name *~
 ignore = Name *.o
