@@ -30,3 +30,8 @@ spam
     :0:
     spam
 }
+
+# Mail with iso-2022-jp in the header is moved to spam
+:0:
+* iso-2022-jp
+spam
