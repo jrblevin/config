@@ -11,3 +11,19 @@ spam
 :0:
 * ^TO_jrb11@acpub.duke.edu
 spam
+
+:0
+* GB2312
+{
+    LOG="Found GB2312 in the header of the message. Trashing..."
+    :0:
+    spam
+}
+
+:0 B
+* ^content-type.*(^.*)?charset=.*GB2312
+{
+    LOG="Found GB2312 in the body of the message. Trashing..."
+    :0:
+    spam
+}
