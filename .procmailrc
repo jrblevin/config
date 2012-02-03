@@ -1,29 +1,32 @@
 MAILDIR=$HOME/Maildir
 LOGFILE=$HOME/Maildir/procmail.log
 
+# Filter mail through bmf
 :0fw
 | /usr/bin/bmf -p
 
+# Mail marked as spam by bmf is moved to spam folder
 :0:
 * ^X-Spam-Status: Yes
 spam
 
+# Mail addressed to jrb11@acpub.duke.edu is moved to spam
 :0:
 * ^TO_jrb11@acpub.duke.edu
 spam
 
+# Mail with GB2312 in the header is moved to spam folder
 :0
 * GB2312
 {
-    LOG="Found GB2312 in the header of the message. Trashing..."
     :0:
     spam
 }
 
+# Attempt to detect GB2312 in multi-type messages
 :0 B
 * ^content-type.*(^.*)?charset=.*GB2312
 {
-    LOG="Found GB2312 in the body of the message. Trashing..."
     :0:
     spam
 }
