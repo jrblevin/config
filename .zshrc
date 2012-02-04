@@ -75,10 +75,6 @@ PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%~%{$fg[yellow]%}$(git_branch) %{$reset_co
 export PATH=/var/lib/gems/1.8/bin:$PATH
 export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
 
-# mpd
-export MPD_HOST=127.0.0.1
-export MPD_PORT=6600
-
 # GFortran
 export PATH=/opt/gcc-trunk/bin:${PATH}
 
@@ -122,6 +118,18 @@ if [[ $OS == "Darwin" ]]; then
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
+fi
+
+# Location-specific settings
+HOST=`hostname -f`
+if [[ $HOST =~ "econ.ohio-state.edu" ]]; then
+    # mpd
+    export MPD_HOST=foobarbaz@ap-jb01
+    export MPD_PORT=6600
+else
+    # mpd
+    export MPD_HOST=192.168.1.2
+    export MPD_PORT=6600
 fi
 
 # Automatically start X
