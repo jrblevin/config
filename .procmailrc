@@ -1,5 +1,6 @@
 MAILDIR=$HOME/Maildir
 LOGFILE=$HOME/Maildir/procmail.log
+SPAM=$MAILDIR/.spam
 
 :0fw
 | /usr/bin/bmf -p
@@ -9,7 +10,7 @@ LOGFILE=$HOME/Maildir/procmail.log
 {
     LOG="Flagged as spam by bmf. Moving to spam."
     :0:
-    spam
+    $SPAM
 }
 
 :0
@@ -17,7 +18,7 @@ LOGFILE=$HOME/Maildir/procmail.log
 {
     LOG="Mail addressed to jrb11@acpub.duke.edu. Moving to spam."
     :0:
-    spam
+    $SPAM
 }
 
 :0
@@ -25,7 +26,7 @@ LOGFILE=$HOME/Maildir/procmail.log
 {
     LOG="Found GB2312 in the header. Moving to spam."
     :0:
-    spam
+    $SPAM
 }
 
 :0 B
@@ -33,7 +34,7 @@ LOGFILE=$HOME/Maildir/procmail.log
 {
     LOG="Found GB2312 content-type in the body. Moving to spam."
     :0:
-    spam
+    $SPAM
 }
 
 :0
@@ -41,5 +42,5 @@ LOGFILE=$HOME/Maildir/procmail.log
 {
     LOG="Found iso-2022-jp in the header. Moving to spam."
     :0:
-    spam
+    $SPAM
 }
