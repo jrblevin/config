@@ -8,7 +8,7 @@ SPAM=$MAILDIR/.spam
 :0
 * ^X-Spam-Status: Yes
 {
-    LOG="Flagged as spam by bmf. Moving to spam."
+    LOG="SPAM (bmf) "
     :0:
     $SPAM
 }
@@ -16,7 +16,7 @@ SPAM=$MAILDIR/.spam
 :0
 * ^TO_jrb11@acpub.duke.edu
 {
-    LOG="Mail addressed to jrb11@acpub.duke.edu. Moving to spam."
+    LOG="SPAM (acpub) "
     :0:
     $SPAM
 }
@@ -24,7 +24,7 @@ SPAM=$MAILDIR/.spam
 :0
 * GB2312
 {
-    LOG="Found GB2312 in the header. Moving to spam."
+    LOG="SPAM (GB2312) "
     :0:
     $SPAM
 }
@@ -32,7 +32,7 @@ SPAM=$MAILDIR/.spam
 :0 B
 * ^content-type.*(^.*)?charset=.*GB2312
 {
-    LOG="Found GB2312 content-type in the body. Moving to spam."
+    LOG="SPAM (GB2312, body) "
     :0:
     $SPAM
 }
@@ -40,7 +40,7 @@ SPAM=$MAILDIR/.spam
 :0
 * iso-2022-jp
 {
-    LOG="Found iso-2022-jp in the header. Moving to spam."
+    LOG="SPAM (iso-2022-jp)"
     :0:
     $SPAM
 }
