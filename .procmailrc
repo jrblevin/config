@@ -1,6 +1,6 @@
-MAILDIR=$HOME/Maildir
+MAILDIR=$HOME/Maildir/
 LOGFILE=$HOME/Maildir/procmail.log
-SPAM=$MAILDIR/.spam
+SPAM=$MAILDIR/.spam/
 
 :0fw
 | /usr/bin/bmf -p
