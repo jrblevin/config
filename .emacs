@@ -26,7 +26,7 @@
 (setq user-mail-address "jrblevin@sdf.org")
 
 ;; Set the load path
-(setq load-path (cons "~/.emacs.d/site-lisp" load-path))
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 ;; Include MacPorts binaries in the path
 (push "/opt/local/bin" exec-path)
