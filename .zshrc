@@ -115,6 +115,8 @@ if [[ $OS == "Darwin" ]]; then
     export DISPLAY=:0.0
     # Color ls
     export CLICOLOR=1
+    # Use Spotlight database for locate
+    function locate { mdfind "kMDItemDisplayName == '$@'wc"; }
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
