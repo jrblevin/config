@@ -32,9 +32,13 @@
 (push "/opt/local/bin" exec-path)
 (setenv "PATH" (concat  "/opt/local/bin:" (getenv "PATH")))
 
-;; Disable the menu bar
-(menu-bar-mode 0)
-(scroll-bar-mode 0)
+;; Disable the menu bar, scroll bar, and toolbar.
+(if (boundp 'menu-bar-mode)
+    (menu-bar-mode 0))
+(if (boundp 'scroll-bar-mode)
+    (scroll-bar-mode 0))
+(if (boundp 'tool-bar-mode)
+    (tool-bar-mode 0))
 
 ;; Font Selection
 (set-default-font "Inconsolata-18")
