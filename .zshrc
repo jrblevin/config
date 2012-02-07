@@ -134,6 +134,29 @@ else
     export MPD_PORT=6600
 fi
 
+# SSH Agent (http://www.cygwin.com/ml/cygwin/2001-06/msg00537.html)
+SSH_ENV="$HOME/.ssh-agent"
+
+function start_agent {
+     echo -n "Initializing SSH agent..."
+     ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+     echo " OK"
+     chmod 600 "${SSH_ENV}"
+     . "${SSH_ENV}" > /dev/null
+     /usr/bin/ssh-add;
+}
+
+# Source SSH settings
+if [ -f "${SSH_ENV}" ]; then
+     . "${SSH_ENV}" > /dev/null
+     #ps ${SSH_AGENT_PID} doesn't work under cywgin
+     ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+         start_agent;
+     }
+else
+     start_agent;
+fi
+
 # Automatically start X
 if [ -z "$DISPLAY" ] && [[ $(tty) == "/dev/tty1" ]]; then
    startx
