@@ -27,6 +27,7 @@ else
   alias ls="ls -F"
 fi
 alias grep='grep --color=auto'
+alias make='make -j'
 alias ll='ls -l'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
