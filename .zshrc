@@ -3,6 +3,37 @@
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
 
+# Operating-system-specific settings
+OS=`uname -s`
+if [[ $OS == "Darwin" ]]; then
+    # MacPorts
+    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    export MANPATH=/opt/local/share/man:$MANPATH
+    export DISPLAY=:0.0
+    # Color ls
+    export CLICOLOR=1
+    # Use Spotlight database for locate
+    function locate { mdfind "kMDItemDisplayName == '$@'wc"; }
+    # Completion dump file
+    ZCOMPDUMP=$HOME/.zcompdump.osx
+elif [[ $OS == "Linux" ]]; then
+    # less input preprocessor
+    eval `lessfile`
+    ZCOMPDUMP=$HOME/.zcompdump.linux
+fi
+
+# Location-specific settings
+HOST=`hostname -f`
+if [[ $HOST =~ "econ.ohio-state.edu" ]]; then
+    # mpd
+    export MPD_HOST=foobarbaz@ap-jb01
+    export MPD_PORT=6600
+else
+    # mpd
+    export MPD_HOST=192.168.1.2
+    export MPD_PORT=6600
+fi
+
 # history
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
@@ -46,7 +77,7 @@ alias -s org=elinks
 
 # tab completion
 autoload -U compinit
-compinit
+compinit -d $ZCOMPDUMP
 
 # zmv
 autoload zmv
@@ -107,34 +138,6 @@ export PATH=${HOME}/bin:${PATH}
 # Set the xterm title
 if [[ $TERM == "xterm" ]]; then
     print -Pn "\e]2;$USER@$HOST\a"
-fi
-
-# Operating-system-specific settings
-OS=`uname -s`
-if [[ $OS == "Darwin" ]]; then
-    # MacPorts
-    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-    export MANPATH=/opt/local/share/man:$MANPATH
-    export DISPLAY=:0.0
-    # Color ls
-    export CLICOLOR=1
-    # Use Spotlight database for locate
-    function locate { mdfind "kMDItemDisplayName == '$@'wc"; }
-elif [[ $OS == "Linux" ]]; then
-    # less input preprocessor
-    eval `lessfile`
-fi
-
-# Location-specific settings
-HOST=`hostname -f`
-if [[ $HOST =~ "econ.ohio-state.edu" ]]; then
-    # mpd
-    export MPD_HOST=foobarbaz@ap-jb01
-    export MPD_PORT=6600
-else
-    # mpd
-    export MPD_HOST=192.168.1.2
-    export MPD_PORT=6600
 fi
 
 # SSH Agent (http://www.cygwin.com/ml/cygwin/2001-06/msg00537.html)
