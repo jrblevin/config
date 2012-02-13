@@ -22,9 +22,10 @@ elif [[ $OS == "Linux" ]]; then
     ZCOMPDUMP=$HOME/.zcompdump.linux
 fi
 
-# Location-specific settings
-HOST=`hostname -f`
-if [[ $HOST =~ "econ.ohio-state.edu" ]]; then
+# Host-specific settings
+FQDN=`hostname -f`
+HOST=`hostname -s`
+if [[ $FQDN =~ "econ.ohio-state.edu" ]]; then
     # mpd
     export MPD_HOST=foobarbaz@ap-jb01
     export MPD_PORT=6600
@@ -141,7 +142,7 @@ if [[ $TERM == "xterm" ]]; then
 fi
 
 # SSH Agent (http://www.cygwin.com/ml/cygwin/2001-06/msg00537.html)
-SSH_ENV="$HOME/.ssh-agent"
+SSH_ENV="$HOME/.ssh-agent.$HOST"
 
 function start_agent {
      echo -n "Initializing SSH agent..."
