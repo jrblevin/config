@@ -139,6 +139,11 @@
 (global-set-key [\M-down] 'move-line-down)
 (global-set-key [\M-up] 'move-line-up)
 
+;;; Ispell:
+
+(setq ispell-program-name "aspell")
+(setq ispell-extra-args '("--sug-mode=ultra"))
+
 ;;; Speck:
 
 (require 'speck)
