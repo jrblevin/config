@@ -139,6 +139,10 @@
 (global-set-key [\M-down] 'move-line-down)
 (global-set-key [\M-up] 'move-line-up)
 
+;;; Speck:
+
+(require 'speck)
+
 ;;; Markdown:
 
 (setq markdown-enable-math t)
@@ -150,7 +154,7 @@
 (setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
 
 (defun my-markdown-mode-hook ()
-  (flyspell-mode 1)                     ; turn on flyspell-mode
+  (speck-mode 1)                        ; turn on speck-mode
   (auto-fill-mode 1))			; turn on auto-fill-mode
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
@@ -220,7 +224,7 @@
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
   (LaTeX-math-mode 1)
-  (flyspell-mode)
+  (speck-mode)
 
   (setq font-latex-match-slide-title-keywords '("foilhead"))
 
@@ -461,7 +465,7 @@
 ;;   (setq post-underline-pattern nil)
 ;;   (setq post-emoticon-pattern nil)
 ;;   (setq post-bold-pattern nil)
-;;   (flyspell-mode 1))
+;;   (speck-mode 1))
 ;; (add-hook 'post-mode-hook '(lambda() (post-custom)))
 
 ;;; Mutt:
