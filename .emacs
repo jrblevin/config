@@ -144,10 +144,6 @@
 (setq ispell-program-name "aspell")
 (setq ispell-extra-args '("--sug-mode=ultra"))
 
-;;; Speck:
-
-(require 'speck)
-
 ;;; Markdown:
 
 (setq markdown-enable-math t)
@@ -159,7 +155,7 @@
 (setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
 
 (defun my-markdown-mode-hook ()
-  (speck-mode 1)                        ; turn on speck-mode
+  (flyspell-mode 1)                     ; turn on flyspell-mode
   (auto-fill-mode 1))			; turn on auto-fill-mode
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
@@ -229,7 +225,7 @@
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
   (LaTeX-math-mode 1)
-  (speck-mode)
+  (flyspell-mode)
 
   (setq font-latex-match-slide-title-keywords '("foilhead"))
 
@@ -470,7 +466,7 @@
 ;;   (setq post-underline-pattern nil)
 ;;   (setq post-emoticon-pattern nil)
 ;;   (setq post-bold-pattern nil)
-;;   (speck-mode 1))
+;;   (flyspell-mode 1))
 ;; (add-hook 'post-mode-hook '(lambda() (post-custom)))
 
 ;;; Mutt:
