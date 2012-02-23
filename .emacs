@@ -485,7 +485,7 @@
   "markup:      markdown\n"
   "guid:        tag:jblevins.org," (my-insert-year) ":"
   (replace-regexp-in-string
-   "/home/jblevins/projects/jblevins.org/htdocs\\(.*?\\)\\(main\\)*\\.text" "\\1"
+   "/\\(home\\|Users\\)/jblevins/projects/jblevins.org/htdocs\\(.*?\\)\\(main\\)*\\.text" "\\2"
    (buffer-file-name))
   "\n\n")
 
