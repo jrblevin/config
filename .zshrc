@@ -120,16 +120,16 @@ else
 fi
 
 # Intel Compilers
-export PATH=/opt/intel/bin:${PATH}
+source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
 
 # Open MPI
 export PATH=/opt/openmpi/bin:${PATH}
 
 # Library path
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH="/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/intel/lib/${ICS_ARCH}:/opt/intel/mkl/lib/${ICS_ARCH}:/opt/openmpi/lib"
+  LD_LIBRARY_PATH="/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/openmpi/lib:"
 else
-  LD_LIBRARY_PATH="/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/intel/lib/${ICS_ARCH}:/opt/intel/mkl/lib/${ICS_ARCH}:/opt/openmpi/lib:$LD_LIBRARY_PATH"
+  LD_LIBRARY_PATH="/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/openmpi/lib:$LD_LIBRARY_PATH"
 fi
 export LD_LIBRARY_PATH
 
