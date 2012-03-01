@@ -155,7 +155,7 @@
 (setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
 
 (defun my-markdown-mode-hook ()
-  (flyspell-mode 1)                     ; turn on flyspell-mode
+  (flyspell-mode 0)                     ; turn off flyspell-mode
   (auto-fill-mode 1))			; turn on auto-fill-mode
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
