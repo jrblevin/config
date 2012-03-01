@@ -209,6 +209,10 @@
   (setq f90-beginning-ampersand nil
 	f90-font-lock-keywords f90-font-lock-keywords-3
 	comment-column 50)
+  ;; Make Backslash non-special (not an escape character).
+  ;; With newer versions of f90.el, use `f90-backslash-not-special`.
+  (when (equal (char-syntax ?\\ ) ?\\ )
+    (modify-syntax-entry ?\\ "."))
   (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
   (abbrev-mode 1)			; turn on abbreviation mode
   (turn-on-font-lock)			; for highlighting
