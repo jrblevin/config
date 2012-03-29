@@ -3,6 +3,15 @@
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
 
+# Architecture-specific settings
+ARCH=`uname -m`
+if [[ ${ARCH} == "x86_64" ]]; then
+    LIB64="64"
+    ICS_ARCH="intel64"
+else
+    ICS_ARCH="ia32"
+fi
+
 # Operating-system-specific settings
 OS=`uname -s`
 if [[ $OS == "Darwin" ]]; then
@@ -22,6 +31,8 @@ elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
     ZCOMPDUMP=$HOME/.zcompdump.linux
+    # Intel Compilers
+    source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
     # Unison alias
     alias un='unison data'
 fi
@@ -113,18 +124,6 @@ export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
 
 # GFortran
 export PATH=/opt/gcc-trunk/bin:${PATH}
-
-# Architecture-specific settings
-ARCH=`uname -m`
-if [[ ${ARCH} == "x86_64" ]]; then
-    LIB64="64"
-    ICS_ARCH="intel64"
-else
-    ICS_ARCH="ia32"
-fi
-
-# Intel Compilers
-source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
 
 # Open MPI
 export PATH=/opt/openmpi/bin:${PATH}
