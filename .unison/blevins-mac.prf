@@ -1,0 +1,18 @@
+# blevins-mac.prf: Unison preferences for synchronizing OS X workstation
+
+log = true
+auto = true
+logfile = /Users/jblevins/.unison/unison.log
+rshargs = -C
+times = true
+
+root = /Users/jblevins
+root = ssh://ap-jb01//home/jblevins
+
+ignore = Name *~
+ignore = Name *.o
+ignore = Name .DS_Store
+
+path = projects
+path = archive
+path = data
