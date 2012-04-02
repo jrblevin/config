@@ -353,7 +353,7 @@ set pgp_good_sign="^gpg: Good signature from"
 
 bind editor <space> noop
 
-macro index,pager S "<save-message>=spam<enter>" "Spam: move to spam"
-macro index,pager H "<save-message>=<enter>" "Ham: move to inbox ham"
-macro index,pager Y "<save-message>=2012<enter>" "Archive"
+macro index,pager S "<save-message>=file-spam<enter>" "Recharacterize as spam"
+macro index,pager H "<save-message>=file-good<enter>" "Recharacterize as not spam"
+macro index,pager Y "<save-message>=Archive<enter>" "Archive message"
 macro index,pager G "<group-reply>" "reply to all recipients"
