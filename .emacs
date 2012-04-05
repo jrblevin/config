@@ -221,24 +221,30 @@
 ;;; AUCTeX:
 
 (load "auctex.el" nil t t)
-(setq TeX-parse-self t)
-(setq TeX-auto-save t)
-(setq TeX-source-specials-mode t)
-(setq TeX-PDF-mode t)
-
-(defun my-TeX-mode-hook-fn ()
-  "Function added to `TeX-mode-hook'."
-  (LaTeX-math-mode 1)
-  (flyspell-mode)
-
-  (setq font-latex-match-slide-title-keywords '("foilhead"))
-
-  (setq TeX-output-view-style
+(setq TeX-PDF-mode t
+      TeX-parse-self t
+      TeX-auto-save nil
+      TeX-source-specials-mode t
+      font-latex-match-slide-title-keywords '("foilhead")
+      TeX-output-view-style
+      (cond
+       ((eq system-type 'darwin)
+        (quote
+         (("^dvi$" "." "open %o")
+          ("^pdf$" "." "open %o")
+          ("^html?$" "." "open %o"))))
+       ((eq system-type 'gnu/linux)
         (quote
          (("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 7 %d")
           ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d -keep -sidemargin 1in -topmargin 1in")
           ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
-          ("^pdf$" "." "evince %o %(outpage)")))))
+          ("^pdf$" "." "evince %o %(outpage)")
+          ("^html?$" "." "debian-sensible-browser %o"))))))
+
+(defun my-TeX-mode-hook-fn ()
+  "Function added to `TeX-mode-hook'."
+  (LaTeX-math-mode 1)
+  (flyspell-mode))
 
 (add-hook 'TeX-mode-hook 'my-TeX-mode-hook-fn)
 
