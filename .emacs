@@ -226,20 +226,249 @@
       TeX-auto-save nil
       TeX-source-specials-mode t
       font-latex-match-slide-title-keywords '("foilhead")
-      TeX-output-view-style
+;;; ~/.emacs: Emacs configuration file.                     -*-emacs-lisp-*-
+;;
+;; Jason Blevins <jrblevin@sdf.org>
+;; Raleigh, May 29, 2004
+
+;;; Directory Structure:
+;;
+;; ~/.emacs                      init file
+;; ~/.emacs.d/                   user directory
+;; ~/.emacs.d/backup             single location for backup files
+;; ~/.emacs.d/site-lisp          packages
+
+;;; Emacs X Resources:
+;;
+;; Emacs.menuBar:                off
+;; Emacs.verticalScrollBars:     off
+;; Emacs.toolBar:                off
+;; Emacs.internalBorder:         1
+;; Emacs.geometry:               80x35+5+5
+;; Emacs.FontBackend:            xft
+;; Emacs.font:                   Inconsolata-15
+
+;;; Basic Configuration:
+
+;; Personal information
+(setq user-mail-address "jrblevin@sdf.org")
+
+;; Set the load path
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+
+;; Include MacPorts binaries in the path
+(push "/opt/local/bin" exec-path)
+(setenv "PATH" (concat  "/opt/local/bin:" (getenv "PATH")))
+
+;; Disable the menu bar, scroll bar, and toolbar.
+(if (boundp 'menu-bar-mode)
+    (menu-bar-mode 0))
+(if (boundp 'scroll-bar-mode)
+    (scroll-bar-mode 0))
+(if (boundp 'tool-bar-mode)
+    (tool-bar-mode 0))
+
+;; Font Selection
+(set-default-font "Inconsolata-18")
+
+;; Disable transient-mark-mode
+(setq transient-mark-mode nil)
+
+;; Highlight current line
+(global-hl-line-mode 1)
+
+;; Blinking cursor
+(blink-cursor-mode 1)
+
+;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
+(setq-default indent-tabs-mode nil)
+(setq tab-width 8)
+
+;; Synchronize Emacs kill buffer with X clipboard.
+(setq x-select-enable-clipboard t)
+
+;; Store backup files in one place.
+;; http://inamidst.com/config/emacs
+(if (file-directory-p "~/.emacs.d/backup")
+    (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
+  (message "Directory does not exist: ~/.emacs.d/backup"))
+
+;; Show matching parentheses.
+(show-paren-mode 1)
+
+;; Show the date and time in 24-hour format.
+(display-time-mode 1)
+(setq display-time-day-and-date t)
+(setq display-time-24hr-format t)
+
+;; Show the column number in the mode line.
+(column-number-mode 1)
+
+;; Use debian-sensible-browser as generic browser
+(setq browse-url-generic-program "debian-sensible-browser")
+
+;; Don't print a header
+(setq ps-print-header nil)
+
+;; Suppress beeps
+(setq visible-bell t)
+
+;; Disable startup screen
+(setq inhibit-startup-message t)
+
+;; Start the Emacs server
+(server-start)
+(setq server-kill-new-buffers t)
+
+;;; Edit with Emacs:
+
+(if (and (daemonp) (locate-library "edit-server"))
+    (progn
+      (require 'edit-server)
+      (edit-server-start)))
+
+;;; Color Themes:
+
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (setq color-theme-is-global nil)
+     (require 'color-theme-subdued)
+     (require 'color-theme-less)
+     (require 'color-theme-gruber-darker)
+     (require 'color-theme-twilight)))
+
+;; Selects the appropriate color theme for each frame based on whether
+;; the client is running in console mode or windowed mode.
+(defun my-select-color-theme(frame)
+  (select-frame frame)
+  (if (window-system frame)
+      (color-theme-twilight)
+    (color-theme-less)))
+
+;; Hook to run after making a new frame
+(add-hook 'after-make-frame-functions 'my-select-color-theme)
+
+;;; Global keybindings:
+
+(global-set-key [f3] 'my-insert-date-time)
+(global-set-key [f4] 'revert-buffer-no-confirm)
+(global-set-key [f5] 'skeleton-webpage-header)
+(global-set-key [f6] 'calendar)
+(global-set-key [f7] 'markdown-mode)
+(global-set-key [f8] 'deft)
+(global-set-key [f9] 'compile)
+(global-set-key [f10] 'deft-today)
+(global-set-key [f11] 'gtd-make-next-action)
+(global-set-key [f12] 'gtd-mark-next-action-complete)
+
+(global-set-key [?\M-j] 'fill-sentence)
+(global-set-key [\M-down] 'move-line-down)
+(global-set-key [\M-up] 'move-line-up)
+
+;;; Ispell:
+
+(setq ispell-program-name "aspell")
+(setq ispell-extra-args '("--sug-mode=ultra"))
+
+;;; Markdown:
+
+(setq markdown-enable-math t)
+(setq markdown-command "peg-markdown")
+(setq markdown-link-space-sub-char "-")
+
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown formatted text files" t)
+(setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
+
+(defun my-markdown-mode-hook ()
+  (flyspell-mode 0)                     ; turn off flyspell-mode
+  (auto-fill-mode 1))			; turn on auto-fill-mode
+(add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
+
+;;; Deft:
+
+(require 'deft)
+(setq deft-text-mode 'markdown-mode)
+(setq deft-directory "~/gtd/")
+(setq deft-auto-save-interval 0.5)
+
+(defun deft-today ()
+  (interactive)
+  (let ((today (format-time-string "%Y-%m-%d")))
+    (deft-new-file-named today)
+    (beginning-of-buffer)
+    (unless (looking-at (concat "^" today))
+      (insert today "\n\n"))))
+
+;;; GTD:
+
+(defconst gtd-next-action-regex
+  "^- \\(.*?\\) \\((\\[\\[.+?\\]\\])\\)$"
+  "Regular expression matching incomplete next actions.")
+
+(defun gtd-mark-next-action-complete ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (when (re-search-forward gtd-next-action-regex nil t)
+      (let ((beg (match-beginning 0))
+            (date (format-time-string "(%Y-%m-%d)")))
+        (replace-match (concat "+ \\1 " date) nil nil)))))
+
+(defun gtd-make-next-action ()
+  (interactive)
+  (beginning-of-line)
+  (insert "-  ([[")
+  (insert (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
+  (insert "]])\n")
+  (forward-line -1)
+  (forward-char 2))
+
+;;; Fortran:
+
+(autoload 'f90-mode "f90"
+  "Major mode for editing Fortran code in free form." t)
+(setq auto-mode-alist (cons '("\\.f03$" . f90-mode) auto-mode-alist))
+(add-hook 'f90-mode-hook 'my-f90-mode-hook)
+
+(defun my-f90-mode-hook ()
+  (setq f90-beginning-ampersand nil
+	f90-font-lock-keywords f90-font-lock-keywords-3
+	comment-column 50)
+  ;; Make Backslash non-special (not an escape character).
+  ;; With newer versions of f90.el, use `f90-backslash-not-special`.
+  (when (equal (char-syntax ?\\ ) ?\\ )
+    (modify-syntax-entry ?\\ "."))
+  (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
+  (abbrev-mode 1)			; turn on abbreviation mode
+  (turn-on-font-lock)			; for highlighting
+  (auto-fill-mode 0))			; turn off auto-filling
+
+;;; AUCTeX:
+
+(load "auctex.el" nil t t)
+(setq TeX-PDF-mode t
+      TeX-parse-self t
+      TeX-auto-save nil
+      TeX-source-specials-mode t
+      font-latex-match-slide-title-keywords '("foilhead")
+      TeX-view-program-list
+      (quote
+       (("open" "open %o")))
+      TeX-view-program-selection
       (cond
-       ((eq system-type 'darwin)
+       ((eq system-type (quote darwin))
         (quote
-         (("^dvi$" "." "open %o")
-          ("^pdf$" "." "open %o")
-          ("^html?$" "." "open %o"))))
-       ((eq system-type 'gnu/linux)
+         ((output-dvi "open")
+          (output-pdf "open")
+          (output-html "open"))))
+       (t
         (quote
-         (("^dvi$" "^landscape$" "%(o?)xdvi %dS -paper usr -s 7 %d")
-          ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us -s 5 %d -keep -sidemargin 1in -topmargin 1in")
-          ("^dvi$" "." "%(o?)xdvi %dS -s 5 %d")
-          ("^pdf$" "." "evince %o %(outpage)")
-          ("^html?$" "." "debian-sensible-browser %o"))))))
+         ((output-dvi "xdvi")
+          (output-pdf "Evince")
+          (output-html "xdg-open"))))))
 
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
