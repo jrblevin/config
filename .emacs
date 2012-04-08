@@ -88,6 +88,11 @@
 ;; Disable startup screen
 (setq inhibit-startup-message t)
 
+;; Make it hard to accidentally kill Emacs
+(global-unset-key (kbd "s-w"))
+(global-unset-key (kbd "s-q"))
+(global-unset-key (kbd "<ns-power-off>"))
+
 ;; Start the Emacs server
 (server-start)
 (setq server-kill-new-buffers t)
