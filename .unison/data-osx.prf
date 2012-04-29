@@ -1,4 +1,4 @@
-# blevins-mac.prf: Unison preferences for synchronizing OS X workstation
+# data-osx.prf: Unison preferences for synchronizing OS X machines
 
 log = true
 auto = true
@@ -6,7 +6,7 @@ logfile = /Users/jblevins/.unison/unison.log
 rshargs = -C
 times = true
 
-root = /Volumes/Data
+root = /Users/jblevins
 root = ssh://ap-jb01//home/jblevins
 
 ignore = Name *~

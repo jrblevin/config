@@ -25,8 +25,6 @@ if [[ $OS == "Darwin" ]]; then
     function locate { mdfind "kMDItemDisplayName == '$@'wc"; }
     # Completion dump file
     ZCOMPDUMP=$HOME/.zcompdump.osx
-    # Unison alias
-    alias un='unison blevins-mac'
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
@@ -76,6 +74,7 @@ fi
 alias grep='grep --color=auto'
 alias make='make -j'
 alias ll='ls -l'
+alias un='unison data'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
