@@ -10,4 +10,7 @@ times = true
 root = /home/media
 root = ssh://ap-jb01//home/media
 
+ignore = Name .DS_Store
+ignore = Name .AppleDouble
+
 path = [root]
