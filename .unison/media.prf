@@ -1,0 +1,13 @@
+# media.prf: Unison preferences for synchronizing media
+
+log = true
+auto = true
+batch = true
+logfile = /root/.unison/unison.log
+rshargs = -C
+times = true
+
+root = /home/media
+root = ssh://ap-jb01//home/media
+
+path = [root]
