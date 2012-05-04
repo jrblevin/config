@@ -197,7 +197,7 @@
         (replace-match (concat "+ \\1 " date) nil nil)
         (beginning-of-line)
         (kill-line)
-        (delete-char -1)
+        (kill-forward-chars 1)
         (deft-open-file (concat deft-directory project "." deft-extension))))))
 
 (defun gtd-make-next-action ()
