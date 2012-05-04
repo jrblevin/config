@@ -182,7 +182,7 @@
 ;;; GTD:
 
 (defconst gtd-next-action-regex
-  "^- \\(.*?\\) \\((\\[\\[.+?\\]\\])\\)$"
+  "^- \\(.*?\\) \\((\\[\\[\\(.+?\\)\\]\\])\\)$"
   "Regular expression matching incomplete next actions.")
 
 (defun gtd-mark-next-action-complete ()
@@ -191,8 +191,14 @@
     (beginning-of-line)
     (when (re-search-forward gtd-next-action-regex nil t)
       (let ((beg (match-beginning 0))
+            (project (match-string 3))
             (date (format-time-string "(%Y-%m-%d)")))
-        (replace-match (concat "+ \\1 " date) nil nil)))))
+        (message (concat "project: " project))
+        (replace-match (concat "+ \\1 " date) nil nil)
+        (beginning-of-line)
+        (kill-line)
+        (delete-char -1)
+        (deft-open-file (concat deft-directory project "." deft-extension))))))
 
 (defun gtd-make-next-action ()
   (interactive)
