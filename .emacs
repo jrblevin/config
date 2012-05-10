@@ -196,8 +196,7 @@
         (message (concat "project: " project))
         (replace-match (concat "+ \\1 " date) nil nil)
         (beginning-of-line)
-        (kill-line)
-        (kill-forward-chars 1)
+        (kill-whole-line)
         (deft-open-file (concat deft-directory project "." deft-extension))))))
 
 (defun gtd-make-next-action ()
