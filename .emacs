@@ -59,11 +59,13 @@
 ;; Synchronize Emacs kill buffer with X clipboard.
 (setq x-select-enable-clipboard t)
 
-;; Store backup files in one place.
+;; Store backup files in one place.  Do the same for auto save files.
 ;; http://inamidst.com/config/emacs
 (if (file-directory-p "~/.emacs.d/backup")
     (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
   (message "Directory does not exist: ~/.emacs.d/backup"))
+(setq auto-save-file-name-transforms
+      '((".*" "~/.emacs.d/auto-save-files/\\1" t)))
 
 ;; Show matching parentheses.
 (show-paren-mode 1)
