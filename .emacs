@@ -337,6 +337,10 @@
 
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
+;;; Emacs Speaks Statistics:
+
+(require 'ess-site)
+
 ;;; ado-mode:
 
 (defun ado-custom()
