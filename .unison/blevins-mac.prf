@@ -5,12 +5,13 @@ auto = true
 logfile = /Users/jblevins/.unison/unison.log
 rshargs = -C
 times = true
+owner = true
+group = true
 
 root = /Volumes/Data
 root = ssh://ap-jb01//home/jblevins
 
 ignore = Name *~
 ignore = Name *.o
-ignore = Name .DS_Store
 
 path = projects
