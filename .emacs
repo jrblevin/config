@@ -112,7 +112,6 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (setq color-theme-is-global nil)
      (require 'color-theme-subdued)
      (require 'color-theme-less)
      (require 'color-theme-gruber-darker)
