@@ -149,6 +149,25 @@
 
 (setq ispell-program-name "aspell")
 (setq ispell-extra-args '("--sug-mode=ultra"))
+(setq ispell-tex-skip-alists
+      '((("\\\\addcontentsline" ispell-tex-arg-end 2)
+         ("\\\\add\\(tocontents\\|vspace\\)" ispell-tex-arg-end)
+         ("\\\\\\([aA]lph\\|arabic\\)" ispell-tex-arg-end)
+         ("\\\\author" ispell-tex-arg-end)
+         ("\\\\cite\\(t\\|p\\|year\\|yearpar\\)" ispell-tex-arg-end)
+         ("\\\\autoref" ispell-tex-arg-end)
+         ("\\\\eqref" ispell-tex-arg-end)
+         ("\\\\label" ispell-tex-arg-end)
+         ("\\\\bibliographystyle" ispell-tex-arg-end)
+         ("\\\\makebox" ispell-tex-arg-end 0)
+         ("\\\\e?psfig" ispell-tex-arg-end)
+         ("\\\\document\\(class\\|style\\)" .
+          "\\\\begin[ \t\n]*{[ \t\n]*document[ \t\n]*}"))
+        (;; delimited with \begin.
+         ("\\(figure\\|table\\)\\*?" ispell-tex-arg-end 0)
+         ("list" ispell-tex-arg-end 2)
+         ("program" . "\\\\end[ \t\n]*{[ \t\n]*program[ \t\n]*}")
+         ("verbatim\\*?" . "\\\\end[ \t\n]*{[ \t\n]*verbatim\\*?[ \t\n]*}"))))
 
 ;;; Markdown:
 
