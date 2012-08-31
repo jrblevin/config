@@ -298,8 +298,8 @@
 
 ;;; GNU Octave:
 
-(autoload 'octave-mode "octave-mode" "Enter Octave mode" t)
-;(setq auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist))
+(autoload 'octave-mode "octave-mod" "Enter Octave mode" t)
+(setq auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
 ;;; Mathematica:
 
