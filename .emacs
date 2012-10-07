@@ -132,7 +132,7 @@
 
 (global-set-key [f3] 'my-insert-date-time)
 (global-set-key [f4] 'revert-buffer-no-confirm)
-(global-set-key [f5] 'skeleton-webpage-header)
+(global-set-key [f5] 'my-quick-log)
 (global-set-key [f6] 'calendar)
 (global-set-key [f7] 'markdown-mode)
 (global-set-key [f8] 'deft)
@@ -227,6 +227,13 @@
   (insert "]])\n")
   (forward-line -1)
   (forward-char 2))
+
+;;; Website:
+
+(defun my-quick-log (slug)
+  (interactive "sSlug: ")
+  (find-file (concat "~/projects/jblevins.org/htdocs/log/" slug ".text"))
+  (skeleton-webpage-header))
 
 ;;; Fortran:
 
