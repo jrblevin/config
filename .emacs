@@ -202,7 +202,7 @@
 ;;; GTD:
 
 (defconst gtd-next-action-regex
-  "^- \\(.*?\\) \\((\\[\\[\\(.+?\\)\\]\\])\\)$"
+  "^\\(([A-Z]+) \\)?\\([^@]*\\) \\(@.* \\)?\\+\\(.+\\)$"
   "Regular expression matching incomplete next actions.")
 
 (defun gtd-mark-next-action-complete ()
@@ -211,22 +211,40 @@
     (beginning-of-line)
     (when (re-search-forward gtd-next-action-regex nil t)
       (let ((beg (match-beginning 0))
-            (project (match-string 3))
+            (project (match-string 4))
             (date (format-time-string "(%Y-%m-%d)")))
         (message (concat "project: " project))
-        (replace-match (concat "+ \\1 " date) nil nil)
+        (replace-match (concat "+ \\2 " date) nil nil)
         (beginning-of-line)
         (kill-whole-line)
         (deft-open-file (concat deft-directory project "." deft-extension))))))
 
-(defun gtd-make-next-action ()
-  (interactive)
-  (beginning-of-line)
-  (insert "-  ([[")
-  (insert (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
-  (insert "]])\n")
-  (forward-line -1)
-  (forward-char 2))
+;; (defconst gtd-next-action-regex
+;;   "^- \\(.*?\\) \\((\\[\\[\\(.+?\\)\\]\\])\\)$"
+;;   "Regular expression matching incomplete next actions.")
+
+;; (defun gtd-mark-next-action-complete ()
+;;   (interactive)
+;;   (save-excursion
+;;     (beginning-of-line)
+;;     (when (re-search-forward gtd-next-action-regex nil t)
+;;       (let ((beg (match-beginning 0))
+;;             (project (match-string 3))
+;;             (date (format-time-string "(%Y-%m-%d)")))
+;;         (message (concat "project: " project))
+;;         (replace-match (concat "+ \\1 " date) nil nil)
+;;         (beginning-of-line)
+;;         (kill-whole-line)
+;;         (deft-open-file (concat deft-directory project "." deft-extension))))))
+
+;; (defun gtd-make-next-action ()
+;;   (interactive)
+;;   (beginning-of-line)
+;;   (insert "-  ([[")
+;;   (insert (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
+;;   (insert "]])\n")
+;;   (forward-line -1)
+;;   (forward-char 2))
 
 ;;; Website:
 
