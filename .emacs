@@ -244,8 +244,36 @@ the file, saving afterwards."
   (setq inhibit-read-only nil)
   (todotxt-jump-to-item item))
 
+(defun todotxt-move (n)
+  "Move the current item up or down by N lines."
+  (interactive "p")
+  (setq inhibit-read-only 't)
+  (setq col (current-column))
+  (beginning-of-line) (setq start (point))
+  (end-of-line) (forward-char) (setq end (point))
+  (let ((line-text (delete-and-extract-region start end)))
+    (forward-line n)
+    (insert line-text)
+    ;; restore point to original column in moved line
+    (forward-line -1)
+    (forward-char col))
+  (save-buffer)
+  (setq inhibit-read-only nil))
+
+(defun todotxt-move-up (n)
+  "Move the current item up by N lines."
+  (interactive "p")
+  (todotxt-move (if (null n) -1 (- n))))
+
+(defun todotxt-move-down (n)
+  "Move the current item down by N lines."
+  (interactive "p")
+  (todotxt-move (if (null n) 1 n)))
+
 (define-key todotxt-mode-map (kbd "C") 'todotxt-gtd-complete) ; (C)omplete item
 (define-key todotxt-mode-map (kbd "I") 'todotxt-insert-item) ; (I)nsert item
+(define-key todotxt-mode-map (kbd "N") 'todotxt-move-down) ; Move (N)ext
+(define-key todotxt-mode-map (kbd "P") 'todotxt-move-up) ; Move (P)revious
 
 ;; (defconst gtd-next-action-regex
 ;;   "^- \\(.*?\\) \\((\\[\\[\\(.+?\\)\\]\\])\\)$"
