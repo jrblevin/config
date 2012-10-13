@@ -139,7 +139,7 @@
 (global-set-key [f9] 'compile)
 (global-set-key [f10] 'deft-today)
 (global-set-key [f11] 'todotxt)
-(global-set-key [f12] 'gtd-mark-next-action-complete)
+(global-set-key [f12] 'todotxt-gtd-complete)
 
 (global-set-key [?\M-j] 'fill-sentence)
 (global-set-key [\M-down] 'move-line-down)
