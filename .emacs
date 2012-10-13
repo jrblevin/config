@@ -138,7 +138,7 @@
 (global-set-key [f8] 'deft)
 (global-set-key [f9] 'compile)
 (global-set-key [f10] 'deft-today)
-(global-set-key [f11] 'gtd-make-next-action)
+(global-set-key [f11] 'todotxt)
 (global-set-key [f12] 'gtd-mark-next-action-complete)
 
 (global-set-key [?\M-j] 'fill-sentence)
@@ -218,6 +218,34 @@
         (beginning-of-line)
         (kill-whole-line)
         (deft-open-file (concat deft-directory project "." deft-extension))))))
+
+;;; todotxt-mode:
+
+(require 'todotxt)
+(setq todotxt-file "~/gtd/todo.txt")
+
+(defun todotxt-gtd-complete ()
+  (interactive)
+  (setq inhibit-read-only 't)
+  (gtd-mark-next-action-complete)
+  (todotxt-prioritize-items)
+  (setq inhibit-read-only nil)
+  (save-buffer))
+
+(defun todotxt-insert-item (item)
+  "Prompt for an item to add to the todo list and append it to
+the file, saving afterwards."
+  (interactive "sItem to add: ")
+  (setq inhibit-read-only 't)
+  (beginning-of-line)
+  (insert (concat item "\n"))
+  (todotxt-prioritize-items)
+  (save-buffer)
+  (setq inhibit-read-only nil)
+  (todotxt-jump-to-item item))
+
+(define-key todotxt-mode-map (kbd "C") 'todotxt-gtd-complete) ; (C)omplete item
+(define-key todotxt-mode-map (kbd "I") 'todotxt-insert-item) ; (I)nsert item
 
 ;; (defconst gtd-next-action-regex
 ;;   "^- \\(.*?\\) \\((\\[\\[\\(.+?\\)\\]\\])\\)$"
