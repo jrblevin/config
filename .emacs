@@ -366,7 +366,7 @@ the file, saving afterwards."
   "Function added to `bibtex-mode-hook'."
   (setq fill-column 77)
   (setq bibtex-user-optional-fields
-        '(("tags" "Entry tags")))
+        '(("keywords" "Entry keywords")))
   (setq bibtex-align-at-equal-sign t)
   (setq bibtex-autokey-name-year-separator "-")
   (setq bibtex-autokey-year-title-separator "-")
