@@ -40,7 +40,7 @@ FQDN=`hostname -f`
 HOST=`hostname -s`
 if [[ $FQDN =~ "econ.ohio-state.edu" ]]; then
     # mpd
-    export MPD_HOST=foobarbaz@ap-jb01
+    export MPD_HOST=localhost
     export MPD_PORT=6600
 else
     # mpd
