@@ -1,0 +1,23 @@
+## /opt/local/etc/mpd.conf: MPD configuration for MacPorts
+#
+# Jason Blevins <jrblevin@sdf.org>
+#
+# Created: Columbus, November 16, 2012 09:58 EST
+# Last Modified: November 16, 2012 10:00 EST
+
+music_directory         "/opt/local/var/lib/mpd/music"
+playlist_directory      "/opt/local/var/lib/mpd/playlists"
+db_file                 "/opt/local/var/lib/mpd/database"
+log_file                "/opt/local/var/log/mpd/log"
+state_file              "/opt/local/var/lib/mpd/state"
+mixer_type              "software"
+
+# Security settings
+user                    "_mpd"
+bind_to_address         "localhost"
+default_permissions     "read,add,control,admin"
+port                    "6600"
+
+# Encoding settings.
+filesystem_charset "UTF-8"
+id3v1_encoding "UTF-8"
