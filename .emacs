@@ -377,10 +377,11 @@ the file, saving afterwards."
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
 
-;;; GNU Octave:
+;;; Matlab
 
-(autoload 'octave-mode "octave-mod" "Enter Octave mode" t)
-(setq auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist))
+(autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
+(setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
+(autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
 
 ;;; Mathematica:
 
