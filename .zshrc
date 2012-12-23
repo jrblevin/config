@@ -30,7 +30,9 @@ elif [[ $OS == "Linux" ]]; then
     eval `lessfile`
     ZCOMPDUMP=$HOME/.zcompdump.linux
     # Intel Compilers
-    source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
+    if [ -f /opt/intel/bin/compilervars.sh ]; then
+        source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
+    fi
     # Unison alias
     alias un='unison data'
 fi
