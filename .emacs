@@ -244,6 +244,18 @@ the file, saving afterwards."
   (setq inhibit-read-only nil)
   (todotxt-jump-to-item item))
 
+(defun todotxt-delete-item ()
+  "Delete the item on the current line."
+  (interactive)
+  (setq inhibit-read-only 't)
+  (beginning-of-line)
+  (let ((beg (point)))
+    (forward-line 1)
+    (delete-region beg (point)))
+  (todotxt-prioritize-items)
+  (save-buffer)
+  (setq inhibit-read-only nil))
+
 (defun todotxt-move (n)
   "Move the current item up or down by N lines."
   (interactive "p")
@@ -272,6 +284,7 @@ the file, saving afterwards."
 
 (define-key todotxt-mode-map (kbd "C") 'todotxt-gtd-complete) ; (C)omplete item
 (define-key todotxt-mode-map (kbd "I") 'todotxt-insert-item) ; (I)nsert item
+(define-key todotxt-mode-map (kbd "D") 'todotxt-delete-item) ; (D)elete item
 (define-key todotxt-mode-map (kbd "N") 'todotxt-move-down) ; Move (N)ext
 (define-key todotxt-mode-map (kbd "P") 'todotxt-move-up) ; Move (P)revious
 
