@@ -282,6 +282,14 @@ the file, saving afterwards."
   (interactive "p")
   (todotxt-move (if (null n) 1 n)))
 
+(defun todotxt-sort-by-context ()
+  "Sort items by context."
+  (interactive)
+  (setq inhibit-read-only 't)
+  (sort-regexp-fields nil "^.*?\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \\|@[^ ]+ \\+[^ ]+\\).*$" "\\1" (point-min) (point-max))
+  (save-buffer)
+  (setq inhibit-read-only nil))
+
 (define-key todotxt-mode-map (kbd "C") 'todotxt-gtd-complete) ; (C)omplete item
 (define-key todotxt-mode-map (kbd "I") 'todotxt-insert-item) ; (I)nsert item
 (define-key todotxt-mode-map (kbd "D") 'todotxt-delete-item) ; (D)elete item
