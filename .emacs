@@ -295,6 +295,7 @@ the file, saving afterwards."
 (define-key todotxt-mode-map (kbd "D") 'todotxt-delete-item) ; (D)elete item
 (define-key todotxt-mode-map (kbd "N") 'todotxt-move-down) ; Move (N)ext
 (define-key todotxt-mode-map (kbd "P") 'todotxt-move-up) ; Move (P)revious
+(define-key todotxt-mode-map (kbd "S") 'todotxt-sort-by-context) ; (S)ort by context
 
 ;; (defconst gtd-next-action-regex
 ;;   "^- \\(.*?\\) \\((\\[\\[\\(.+?\\)\\]\\])\\)$"
