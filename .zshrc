@@ -2,6 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
+# Last Modified: January 8, 2013 11:39 EST
 
 # Architecture-specific settings
 ARCH=`uname -m`
@@ -167,6 +168,13 @@ if [ -f "${SSH_ENV}" ]; then
 else
      start_agent;
 fi
+
+# SSHFS
+function sshmount {
+    cd "$HOME"
+    mkdir "$1"
+    sshfs "blevins:/home/jblevins/$1" "$1" -oreconnect,allow_other,volname="$1"
+}
 
 # Automatically start X
 if [ -z "$DISPLAY" ] && [[ $(tty) == "/dev/tty1" ]]; then
