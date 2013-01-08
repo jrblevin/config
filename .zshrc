@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: January 8, 2013 11:39 EST
+# Last Modified: January 8, 2013 16:48 EST
 
 # Architecture-specific settings
 ARCH=`uname -m`
@@ -81,6 +81,10 @@ alias un='unison data'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
+
+# duf: human readable, sorted disk usage
+# http://www.earthinfo.org/linux-disk-usage-sorted-by-size-and-human-readable/
+alias duf='du -sk * | sort -nr | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'
 
 # Suffix Aliases
 alias -s c=vim
