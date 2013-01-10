@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: January 10, 2013 15:22 EST
+# Last Modified: January 10, 2013 15:24 EST
 
 ### System-Specific Configuration
 
@@ -127,19 +127,111 @@ function sshmount {
 }
 
 
-### Prompt
+### Prompt: agnoster's Theme (https://gist.github.com/3712874)
 
-# current Git branch
-git_branch() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo " :${ref#refs/heads/}"
-}
-
-# prompt
 autoload -U colors
 colors
 setopt prompt_subst
-PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%~%{$fg[yellow]%}$(git_branch) %{$reset_color%}%% '
+
+# Configuration
+CURRENT_BG='NONE'
+SEGMENT_SEPARATOR='⮀'
+DEFAULT_USER='jblevins'
+
+# Begin a segment
+# Takes two arguments, background and foreground. Both can be omitted,
+# rendering default background/foreground.
+prompt_segment() {
+  local bg fg
+  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
+  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
+    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+  else
+    echo -n "%{$bg%}%{$fg%} "
+  fi
+  CURRENT_BG=$1
+  [[ -n $3 ]] && echo -n $3
+}
+
+# End the prompt, closing any open segments
+prompt_end() {
+  if [[ -n $CURRENT_BG ]]; then
+    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+  else
+    echo -n "%{%k%}"
+  fi
+  echo -n "%{%f%}"
+  CURRENT_BG=''
+}
+
+# Context: user@hostname (who am I and where am I)
+prompt_context() {
+  local user=`whoami`
+
+  if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$user@%m"
+  fi
+}
+
+# Checks if working tree is dirty
+parse_git_dirty() {
+  local SUBMODULE_SYNTAX=''
+  if [[ $POST_1_7_2_GIT -gt 0 ]]; then
+        SUBMODULE_SYNTAX="--ignore-submodules=dirty"
+  fi
+  if [[ -n $(git status -s ${SUBMODULE_SYNTAX}  2> /dev/null) ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+  else
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+  fi
+}
+
+# Git: branch/detached head, dirty status
+prompt_git() {
+  local ref dirty
+  if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
+    ZSH_THEME_GIT_PROMPT_DIRTY='±'
+    dirty=$(parse_git_dirty)
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
+    if [[ -n $dirty ]]; then
+      prompt_segment yellow black
+    else
+      prompt_segment green black
+    fi
+    echo -n "${ref/refs\/heads\//⭠ }$dirty"
+  fi
+}
+
+# Dir: current working directory
+prompt_dir() {
+  prompt_segment blue black '%~'
+}
+
+# Status:
+# - was there an error
+# - am I root
+# - are there background jobs?
+prompt_status() {
+  local symbols
+  symbols=()
+  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
+  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+  [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
+}
+
+# Main prompt
+build_prompt() {
+  RETVAL=$?
+  prompt_status
+  prompt_context
+  prompt_dir
+  prompt_git
+  prompt_end
+}
+
+PROMPT='%{%f%b%k%}$(build_prompt) '
 
 
 ### Specific Programs
@@ -153,6 +245,7 @@ export PATH=/opt/gcc-trunk/bin:${PATH}
 
 # Open MPI
 export PATH=/opt/openmpi/bin:${PATH}
+
 
 ### Paths
 
@@ -171,6 +264,7 @@ export PATH=${HOME}/bin:${PATH}
 if [[ $TERM == "xterm" ]]; then
     print -Pn "\e]2;$USER@$HOST\a"
 fi
+
 
 ### SSH
 
