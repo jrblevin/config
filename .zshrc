@@ -2,7 +2,9 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: January 8, 2013 16:48 EST
+# Last Modified: January 10, 2013 15:22 EST
+
+### System-Specific Configuration
 
 # Architecture-specific settings
 ARCH=`uname -m`
@@ -51,6 +53,9 @@ else
     export MPD_PORT=6600
 fi
 
+
+### Basic ZSH Configuration
+
 # history
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
@@ -67,7 +72,24 @@ setopt nobeep                   # stop yelling at me
 # set common environment variables
 export EDITOR="vi"              # default editor
 
-# aliases
+# tab completion
+autoload -U compinit
+compinit -d $ZCOMPDUMP
+
+# zmv
+autoload zmv
+
+# colorful completion listings
+zmodload -i zsh/complist
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Special characters that are to be considered part of words.
+# Default: WORDCHARS="*?_-.[]~=&;!#$%^(){}<>/"
+WORDCHARS="*?[]~&;!%^(){}<>"
+
+
+### Useful Commands and Aliases
+
 if ls -F --color=auto >&/dev/null; then
   eval `dircolors -b`
   alias ls="ls --color=auto -F"
@@ -97,20 +119,15 @@ alias -s com=elinks
 alias -s net=elinks
 alias -s org=elinks
 
-# tab completion
-autoload -U compinit
-compinit -d $ZCOMPDUMP
+# SSHFS
+function sshmount {
+    cd "$HOME"
+    mkdir "$1"
+    sshfs "blevins:/home/jblevins/$1" "$1" -oreconnect,allow_other,volname="$1"
+}
 
-# zmv
-autoload zmv
 
-# colorful completion listings
-zmodload -i zsh/complist
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# Special characters that are to be considered part of words.
-# Default: WORDCHARS="*?_-.[]~=&;!#$%^(){}<>/"
-WORDCHARS="*?[]~&;!%^(){}<>"
+### Prompt
 
 # current Git branch
 git_branch() {
@@ -124,6 +141,9 @@ colors
 setopt prompt_subst
 PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%~%{$fg[yellow]%}$(git_branch) %{$reset_color%}%% '
 
+
+### Specific Programs
+
 # Ruby
 export PATH=/var/lib/gems/1.8/bin:$PATH
 export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
@@ -133,6 +153,8 @@ export PATH=/opt/gcc-trunk/bin:${PATH}
 
 # Open MPI
 export PATH=/opt/openmpi/bin:${PATH}
+
+### Paths
 
 # Library path
 if [ -z "$LD_LIBRARY_PATH" ]; then
@@ -149,6 +171,8 @@ export PATH=${HOME}/bin:${PATH}
 if [[ $TERM == "xterm" ]]; then
     print -Pn "\e]2;$USER@$HOST\a"
 fi
+
+### SSH
 
 # SSH Agent (http://www.cygwin.com/ml/cygwin/2001-06/msg00537.html)
 SSH_ENV="$HOME/.ssh-agent.$HOST"
@@ -173,12 +197,8 @@ else
      start_agent;
 fi
 
-# SSHFS
-function sshmount {
-    cd "$HOME"
-    mkdir "$1"
-    sshfs "blevins:/home/jblevins/$1" "$1" -oreconnect,allow_other,volname="$1"
-}
+
+### Windowing System
 
 # Automatically start X
 if [ -z "$DISPLAY" ] && [[ $(tty) == "/dev/tty1" ]]; then
