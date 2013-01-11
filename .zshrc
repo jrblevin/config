@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: January 10, 2013 15:24 EST
+# Last Modified: January 10, 2013 22:44 EST
 
 ### System-Specific Configuration
 
@@ -169,9 +169,12 @@ prompt_end() {
 prompt_context() {
   local user=`whoami`
 
-  if [[ "$user" != "$DEFAULT_USER" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)$user@%m"
+  context="%m"
+  if [[ $UID -ne 0 && "$user" != "$DEFAULT_USER" ]]; then
+    context="$user$context"
   fi
+
+  prompt_segment black default "%(!.%{%F{yellow}%}.)$context"
 }
 
 # Checks if working tree is dirty
