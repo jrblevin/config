@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: January 10, 2013 22:44 EST
+# Last Modified: January 11, 2013 00:57 EST
 
 ### System-Specific Configuration
 
@@ -127,112 +127,46 @@ function sshmount {
 }
 
 
-### Prompt: agnoster's Theme (https://gist.github.com/3712874)
+### Prompt
 
 autoload -U colors
 colors
 setopt prompt_subst
 
 # Configuration
-CURRENT_BG='NONE'
-SEGMENT_SEPARATOR='⮀'
 DEFAULT_USER='jblevins'
 
-# Begin a segment
-# Takes two arguments, background and foreground. Both can be omitted,
-# rendering default background/foreground.
-prompt_segment() {
-  local bg fg
-  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
-  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
-  if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
-  else
-    echo -n "%{$bg%}%{$fg%} "
-  fi
-  CURRENT_BG=$1
-  [[ -n $3 ]] && echo -n $3
-}
-
-# End the prompt, closing any open segments
-prompt_end() {
-  if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
-  else
-    echo -n "%{%k%}"
-  fi
-  echo -n "%{%f%}"
-  CURRENT_BG=''
-}
-
-# Context: user@hostname (who am I and where am I)
+# Context: user@hostname
 prompt_context() {
   local user=`whoami`
-
-  context="%m"
+  local context="%m"
   if [[ $UID -ne 0 && "$user" != "$DEFAULT_USER" ]]; then
     context="$user$context"
   fi
-
-  prompt_segment black default "%(!.%{%F{yellow}%}.)$context"
-}
-
-# Checks if working tree is dirty
-parse_git_dirty() {
-  local SUBMODULE_SYNTAX=''
-  SUBMODULE_SYNTAX="--ignore-submodules=dirty"
-  if [[ -n $(git status -s ${SUBMODULE_SYNTAX}  2> /dev/null) ]]; then
-    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
-  else
-    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
-  fi
+  echo -n "$context"
 }
 
 # Git: branch/detached head, dirty status
 prompt_git() {
-  local ref dirty
-  if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-    ZSH_THEME_GIT_PROMPT_DIRTY='±'
-    dirty=$(parse_git_dirty)
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
-    if [[ -n $dirty ]]; then
-      prompt_segment yellow black
-    else
-      prompt_segment green black
-    fi
-    echo -n "${ref/refs\/heads\//⭠ }$dirty"
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  branch="${ref/refs\/heads\//}$dirty"
+  if [[ -n $(git status -s  2> /dev/null) ]]; then
+    echo -n "%{$fg[yellow]%} :$branch±"
+  else
+    echo -n "%{$fg[green]%} :$branch"
   fi
 }
 
-# Dir: current working directory
-prompt_dir() {
-  prompt_segment blue black '%~'
+# Prompt symbol
+prompt_symbol() {
+  if [[ $UID -ne 0 ]]; then
+      echo -n "%"
+  else
+      echo -n "#"
+  fi
 }
 
-# Status:
-# - was there an error
-# - am I root
-# - are there background jobs?
-prompt_status() {
-  local symbols
-  symbols=()
-  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
-  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}✪"
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
-  [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
-}
-
-# Main prompt
-build_prompt() {
-  RETVAL=$?
-  prompt_status
-  prompt_context
-  prompt_dir
-  prompt_git
-  prompt_end
-}
-
-PROMPT='%{%f%b%k%}$(build_prompt) '
+PROMPT='%{$fg[magenta]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_color%}%$(prompt_symbol) '
 
 
 ### Specific Programs
