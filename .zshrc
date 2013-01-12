@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: January 11, 2013 00:57 EST
+# Last Modified: January 11, 2013 23:17 EST
 
 ### System-Specific Configuration
 
@@ -151,9 +151,9 @@ prompt_git() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
   branch="${ref/refs\/heads\//}$dirty"
   if [[ -n $(git status -s  2> /dev/null) ]]; then
-    echo -n "%{$fg[yellow]%} :$branch±"
+    echo -n "%{$fg[red]%} :$branch"
   else
-    echo -n "%{$fg[green]%} :$branch"
+    echo -n "%{$fg[yellow]%} :$branch"
   fi
 }
 
@@ -166,7 +166,7 @@ prompt_symbol() {
   fi
 }
 
-PROMPT='%{$fg[magenta]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_color%}%$(prompt_symbol) '
+PROMPT='%{$fg[green]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_color%}%$(prompt_symbol) '
 
 
 ### Specific Programs
