@@ -41,7 +41,7 @@
     (tool-bar-mode 0))
 
 ;; Font Selection
-(set-default-font "Source Code Pro-18")
+(set-default-font "Source Code Pro-16")
 
 ;; Disable transient-mark-mode
 (setq transient-mark-mode nil)
