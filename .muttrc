@@ -65,7 +65,7 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 set editor="emacsclient %s"
 
 # How to print things
-set print_command="muttprint"
+set print_command="muttprint --printer TO_FILE:$HOME/muttprint.eps %s"
 
 # Send each message separately
 set print_split
