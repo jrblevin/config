@@ -62,7 +62,7 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 # -----------------
 
 # Compose mail using vim
-set editor='vi'
+set editor="emacsclient %s"
 
 # How to print things
 set print_command="muttprint"
