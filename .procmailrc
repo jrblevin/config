@@ -23,22 +23,16 @@ SPAM=$MAILDIR/.spam/
 
 :0
 * GB2312
+* !^From:.*\.osu\.edu
 {
     LOG="SPAM (GB2312) "
     :0:
     $SPAM
 }
 
-:0 B
-* ^content-type.*(^.*)?charset=.*GB2312
-{
-    LOG="SPAM (GB2312, body) "
-    :0:
-    $SPAM
-}
-
 :0
 * iso-2022-jp
+* !^From:.*\.osu\.edu
 {
     LOG="SPAM (iso-2022-jp)"
     :0:
