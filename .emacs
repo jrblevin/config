@@ -189,7 +189,7 @@
 (require 'deft)
 (setq deft-text-mode 'markdown-mode)
 (setq deft-directory "~/gtd/")
-(setq deft-auto-save-interval 0.5)
+(setq deft-auto-save-interval 2)
 
 (defun deft-today ()
   (interactive)
