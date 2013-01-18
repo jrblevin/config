@@ -1,5 +1,5 @@
-MAILDIR=$HOME/Maildir/
-LOGFILE=$HOME/Maildir/procmail.log
+MAILDIR=$HOME/Maildir
+LOGFILE=$MAILDIR/procmail.log
 SPAM=$MAILDIR/.spam/
 
 :0fw
