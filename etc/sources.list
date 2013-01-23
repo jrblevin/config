@@ -10,9 +10,13 @@
 deb http://ftp.us.debian.org/debian/ squeeze main contrib non-free
 deb http://security.debian.org/ squeeze/updates main contrib non-free
 deb http://ftp.us.debian.org/debian/ squeeze-updates main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ squeeze main contrib non-free
+deb-src http://security.debian.org/ squeeze/updates main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ squeeze-updates main contrib non-free
 
 # Squeeze backports
 deb http://backports.debian.org/debian-backports squeeze-backports main contrib non-free
+deb-src http://backports.debian.org/debian-backports squeeze-backports main contrib non-free
 
 # Testing
 #deb http://ftp.us.debian.org/debian testing main non-free contrib
@@ -25,5 +29,11 @@ deb http://emacs.naquadah.org/ stable/
 #deb http://emacs.naquadah.org/ unstable/
 
 # debian-multimedia
-#deb http://www.debian-multimedia.org lenny main non-free
-deb http://www.debian-multimedia.org squeeze main non-free
+deb http://www.deb-multimedia.org squeeze main non-free
+
+# HDPPA
+#deb http://hadret.rootnode.net/debian/ unstable main
+#deb-src http://hadret.rootnode.net/debian/ unstable main
+
+# Opera Browser (beta releases)
+#deb http://deb.opera.com/opera-beta/ stable non-free
