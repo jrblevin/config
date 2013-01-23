@@ -501,6 +501,13 @@ the file, saving afterwards."
   (interactive "*")
   (insert (format-time-string "%B %e, %Y")))
 
+(defun my-insert-date-iso ()
+  "Insert current date yyyy-mm-dd."
+  (interactive)
+  (when (region-active-p)
+    (delete-region (region-beginning) (region-end)))
+  (insert (format-time-string "%Y-%m-%d")))
+
 (defun my-insert-date-time ()
   "Insert the current date and time."
   (interactive "*")
