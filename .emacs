@@ -183,7 +183,7 @@
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown formatted text files" t)
-(setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 
 (defun my-markdown-mode-hook ()
   (flyspell-mode 0)                     ; turn off flyspell-mode
@@ -341,7 +341,7 @@ the file, saving afterwards."
 
 (autoload 'f90-mode "f90"
   "Major mode for editing Fortran code in free form." t)
-(setq auto-mode-alist (cons '("\\.f03$" . f90-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.f03\\'" . f90-mode))
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
 
 (defun my-f90-mode-hook ()
@@ -408,7 +408,7 @@ the file, saving afterwards."
 ;;; Matlab
 
 (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
-(setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.m\\'" . matlab-mode))
 (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
 
 ;;; Mathematica:
@@ -438,8 +438,7 @@ the file, saving afterwards."
   (c-toggle-auto-hungry-state -1))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
-(setq auto-mode-alist
-      (cons '("\\.leg$" . c-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.leg\\'" . c-mode))
 
 ;; Close the compilation window after clean compile.
 ;; From http://www.bloomington.in.us/~brutt/emacs-c-dev.html.
