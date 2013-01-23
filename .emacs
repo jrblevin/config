@@ -620,20 +620,23 @@ the file, saving afterwards."
 
 ;;; post-mode:
 
-;; (defun post-custom()
-;;   "post-hook"
-;;   (load "mutt-alias")
-;;   (setq mutt-alias-file-list '("~/.mutt-aliases"))
-;;   (local-set-key "\C-ci" 'mutt-alias-insert)
-;;   (setq post-underline-pattern nil)
-;;   (setq post-emoticon-pattern nil)
-;;   (setq post-bold-pattern nil)
-;;   (flyspell-mode 1))
-;; (add-hook 'post-mode-hook '(lambda() (post-custom)))
+(require 'post)
+(defun post-custom()
+  "post-hook"
+  (load "mutt-alias")
+  (setq mutt-alias-file-list '("~/.mutt-aliases"))
+  (local-set-key "\C-ci" 'mutt-alias-insert)
+  (setq post-underline-pattern nil)
+  (setq post-emoticon-pattern nil)
+  (setq post-bold-pattern nil)
+  (setq post-signature-pattern "\\(--\\|\\|Sent from my\\)")
+  (setq post-email-address user-mail-address)
+  (flyspell-mode 1))
+(add-hook 'post-mode-hook '(lambda() (post-custom)))
 
 ;;; Mutt:
 
-;; (setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
 
 ;;; Skeleton Templates:
 
