@@ -61,6 +61,9 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 # External Programs
 # -----------------
 
+# Sending mail
+set sendmail="esmtp"
+
 # Compose mail using vim
 set editor="emacsclient %s"
 
