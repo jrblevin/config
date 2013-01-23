@@ -32,13 +32,19 @@
 (push "/opt/local/bin" exec-path)
 (setenv "PATH" (concat  "/opt/local/bin:" (getenv "PATH")))
 
-;; Disable the menu bar, scroll bar, and toolbar.
-(if (boundp 'menu-bar-mode)
-    (menu-bar-mode 0))
+;; Disable the scroll bar and toolbar.
 (if (boundp 'scroll-bar-mode)
     (scroll-bar-mode 0))
 (if (boundp 'tool-bar-mode)
     (tool-bar-mode 0))
+
+;; System-specific configuration
+(cond
+ ((eq system-type 'darwin)
+  ;; Menu bar takes up no additional space in OS X.
+  (menu-bar-mode 1))
+ (t
+  (menu-bar-mode 0)))
 
 ;; Font Selection
 (set-default-font "Source Code Pro-16")
