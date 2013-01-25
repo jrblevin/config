@@ -203,7 +203,7 @@
     (deft-new-file-named today)
     (beginning-of-buffer)
     (unless (looking-at (concat "^" today))
-      (insert today "\n\n"))))
+      (insert today "\n\n<!-- #pending -->\n\n"))))
 
 ;;; GTD:
 
@@ -296,12 +296,19 @@ the file, saving afterwards."
   (save-buffer)
   (setq inhibit-read-only nil))
 
+(defun todotxt-deft-open-project ()
+  (interactive)
+  (when (re-search-forward " \\+\\([^ ]+\\)$" nil t)
+      (deft-open-file (concat deft-directory (match-string 1)
+                              "." deft-extension) 1)))
+
 (define-key todotxt-mode-map (kbd "C") 'todotxt-gtd-complete) ; (C)omplete item
 (define-key todotxt-mode-map (kbd "I") 'todotxt-insert-item) ; (I)nsert item
 (define-key todotxt-mode-map (kbd "D") 'todotxt-delete-item) ; (D)elete item
 (define-key todotxt-mode-map (kbd "N") 'todotxt-move-down) ; Move (N)ext
 (define-key todotxt-mode-map (kbd "P") 'todotxt-move-up) ; Move (P)revious
 (define-key todotxt-mode-map (kbd "S") 'todotxt-sort-by-context) ; (S)ort by context
+(define-key todotxt-mode-map (kbd "o") 'todotxt-deft-open-project) ; (O)pen
 
 ;; (defconst gtd-next-action-regex
 ;;   "^- \\(.*?\\) \\((\\[\\[\\(.+?\\)\\]\\])\\)$"
