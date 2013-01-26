@@ -2,5 +2,7 @@ text/html; open -a 'Google Chrome Canary' '%s'; needsterminal; description=HTML;
 image/gif; open -a Preview %s
 image/jpg; open -a Preview %s; needsterminal; description=JPEG Image; nametemplate=%s.jpg
 image/jpeg; open -a Preview %s; needsterminal; description=JPEG Image; nametemplate=%s.jpg
+image/png; open -a Preview %s; needsterminal; description=PNG Image; nametemplate=%s.png
 text/text; emacsclient '%s'; needsterminal; description=Text Text; nametemplate=%s.txt
 application/*; open '%s'; needsterminal
+video/*; open '%s'; needsterminal
