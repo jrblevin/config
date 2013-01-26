@@ -560,6 +560,15 @@ the file, saving afterwards."
       (transpose-lines -1))
     (move-to-column col)))
 
+;; Prevent killing the *scratch* buffer
+;; http://stackoverflow.com/questions/234963/re-open-scratch-buffer-in-emacs
+(defadvice kill-buffer (around kill-buffer-around-advice activate)
+  (let ((buffer-to-kill (ad-get-arg 0)))
+    (if (equal buffer-to-kill "*scratch*")
+        (bury-buffer)
+      ad-do-it)))
+
+
 ;;; Calendar and Diary:
 
 ;; See the following:
