@@ -655,6 +655,79 @@ the file, saving afterwards."
 
 (add-to-list 'auto-mode-alist '("mutt-" . post-mode))
 
+;;; Abbreviations
+
+(defun my-abbrev-expand (expand)
+  "Expands macros in the text EXPAND.  Replaces %clipboard with
+most recent kill ring contents and leaves the cursor at %|."
+  (let (text index len)
+    (setq text (replace-in-string expand "%clipboard" (car kill-ring)))
+    (setq len (length text))
+    (setq index (string-match "%|" text))
+    (cond
+     (index
+      (setq text (replace-in-string text "%|" ""))
+      (setq len (- len 2)))
+     (t
+      (setq index len)))
+    (insert text)
+    (forward-char (- index len))))
+
+(define-abbrev-table 'global-abbrev-table '(
+  ;; date expansions
+  ("ddate" "" my-insert-date 0)
+  ("iiso" "" my-insert-date-iso 0)
+
+  ;; email addresses
+  ("eem1" "jrblevin@sdf.org" nil 0)
+  ("eem2" "blevins.141@osu.edu" nil 0)
+
+  ;; signatures
+  ("ssig1" "Best,\n\nJason" nil 0)
+  ("ssig2" "Best,\n\nJason\n\n-- \nJason R. Blevins\nAssistant Professor of Economics\nThe Ohio State University\nhttp://jblevins.org/\n" nil 0)
+  ("ssig3" "Best,\n\Prof. Blevins" nil 0)
+
+  ;; common phrases
+  ("afaict" "as far as I can tell" nil 0)
+  ("afaik" "as far as I know" nil 0)
+  ("btw" "by the way" nil 0)
+  ("ito" "it turns out" nil 0)
+  ("tyvm" "Thank you very much!" nil 0)
+
+  ;; email shortcuts
+  ("ssorry" "I'm very sorry for the delay in getting back to you." nil 0)
+
+  ;; autocorrect
+  ("adn" "and" nil 0)
+  ("alot" "a lot" nil 0)
+  ("ehre" "here" nil 0)
+  ("esle" "else" nil 0)
+  ("haev" "have" nil 0)
+  ("htp:" "http:" nil 0)
+  ("knwo" "know" nil 0)
+  ("konw" "know" nil 0)
+  ("libary" "library" nil 0)
+  ("liek" "like" nil 0)
+  ("mkae" "make" nil 0)
+  ("recieve" "receive" nil 0)
+  ("smoe" "some" nil 0)
+  ("soem" "some" nil 0)
+  ("taht" "that" nil 0)
+  ("teh" "the" nil 0)
+  ("wnat" "want" nil 0)
+  ("wether" "whether" nil 0)
+  ("wtih" "with" nil 0)
+  ("yoru" "your" nil 0)
+  ("yuor" "your" nil 0)
+  ))
+
+;; Don't ask whether to save new abbrevs
+(setq save-abbrevs nil)
+
+;; Turn on abbrev mode globally
+(setq-default abbrev-mode t)
+
+
 ;;; Skeleton Templates:
 
 (define-skeleton skeleton-webpage-header
