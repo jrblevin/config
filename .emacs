@@ -653,7 +653,7 @@ the file, saving afterwards."
 
 ;;; Mutt:
 
-(setq auto-mode-alist (cons '("mutt-" . post-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("mutt-" . post-mode))
 
 ;;; Skeleton Templates:
 
