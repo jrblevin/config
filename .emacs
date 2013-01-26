@@ -48,6 +48,8 @@
 
 ;; Font Selection
 (set-default-font "Source Code Pro-16")
+;(set-default-font "Inconsolata 18")
+;(set-default-font "Anonymous Pro 16")
 
 ;; Disable transient-mark-mode
 (setq transient-mark-mode nil)
