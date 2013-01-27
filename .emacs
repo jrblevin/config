@@ -150,8 +150,8 @@
 (global-set-key [f12] 'todotxt-gtd-complete)
 
 (global-set-key [?\M-j] 'fill-sentence)
-(global-set-key [\M-down] 'move-line-down)
-(global-set-key [\M-up] 'move-line-up)
+(global-set-key [\C-\M-down] 'move-line-down)
+(global-set-key [\C-\M-up] 'move-line-up)
 
 ;;; Ispell:
 
