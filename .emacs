@@ -194,6 +194,14 @@
   (auto-fill-mode 1))			; turn on auto-fill-mode
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
+(defun markdown-reload ()
+  (interactive)
+  (when (eq major-mode 'markdown-mode)
+    (fundamental-mode))
+  (unload-feature 'markdown-mode)
+  (load-library (expand-file-name "~/projects/markdown-mode/markdown-mode.el"))
+  (markdown-mode))
+
 ;;; Deft:
 
 (require 'deft)
