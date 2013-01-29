@@ -211,11 +211,14 @@
 
 (defun deft-today ()
   (interactive)
-  (let ((today (format-time-string "%Y-%m-%d")))
-    (deft-new-file-named today)
-    (beginning-of-buffer)
-    (unless (looking-at (concat "^" today))
-      (insert today "\n\n<!-- #pending -->\n\n"))))
+  (let* ((today (format-time-string "%Y-%m-%d"))
+         (filename (concat deft-directory today "." deft-extension)))
+    (if (file-exists-p filename)
+        (deft-open-file filename t t)
+      (deft-new-file-named today)
+      (beginning-of-buffer)
+      (unless (looking-at (concat "^" today))
+        (insert today "\n\n<!-- #pending -->\n\n")))))
 
 ;;; GTD:
 
