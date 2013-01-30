@@ -26,7 +26,7 @@
 ;; ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 ;; POSSIBILITY OF SUCH DAMAGE.
 
-;;; Version: 0.5
+;;; Version: 0.5.1
 ;;; Author: Jason R. Blevins <jrblevin@sdf.org>
 ;;; Keywords: plain text, notes, Simplenote, Notational Velocity
 ;;; URL: http://jblevins.org/projects/deft/
@@ -43,8 +43,8 @@
 ;; creating new files and saving files.
 
 ;; Deft is open source software and may be freely distributed and
-;; modified under the BSD license.  Version 0.5 is the latest stable
-;; version, released on January 25, 2013.  You may download it
+;; modified under the BSD license.  Version 0.5.1 is the latest stable
+;; version, released on January 28, 2013.  You may download it
 ;; directly here:
 
 ;;   * [deft.el](http://jblevins.org/projects/deft/deft.el)
@@ -237,6 +237,12 @@
 ;; History
 ;; -------
 
+;; Version 0.5.1 (2013-01-28):
+
+;; * Bug fix: creating files with `C-c C-n` when both the filter string and
+;;   `deft-use-filename-as-title' are non-nil resulted in an invalid path.
+;; * Bug fix: killed buffers would persist in `deft-auto-save-buffers'.
+
 ;; Version 0.5 (2013-01-25):
 
 ;; * Implement incremental string search (default) and regex search.
@@ -385,7 +391,7 @@ entire filter string is interpreted as a single regular expression."
 
 ;; Constants
 
-(defconst deft-version "0.5")
+(defconst deft-version "0.5.1")
 
 (defconst deft-buffer "*Deft*"
   "Deft buffer name.")
@@ -738,7 +744,8 @@ Call this function after any actions which update the filter and file list."
 (defun deft-open-file (file &optional other switch)
   "Open FILE in a new buffer and setting its mode.
 When OTHER is non-nil, open the file in another window.  When
-OTHER and SWITCH are both non-nil, switch to the other window."
+OTHER and SWITCH are both non-nil, switch to the other window.
+FILE must be the complete path to the file, with extension."
   (let ((buffer (find-file-noselect file)))
     (with-current-buffer buffer
       (when (not (eq major-mode deft-text-mode))
@@ -764,6 +771,7 @@ OTHER and SWITCH are both non-nil, switch to the other window."
 
 (defun deft-new-file-named (file)
   "Create a new file named FILE (or interactively prompt for a filename).
+FILE must be a short name, without a path or a file extension.
 If the filter string is non-nil and title is not from file name,
 use it as the title."
   (interactive "sNew filename (without extension): ")
@@ -792,8 +800,7 @@ as the title."
     (if (and deft-filter-regexp deft-use-filename-as-title)
         ;; If the filter string is non-emtpy and titles are taken from
         ;; filenames is set, construct filename from filter string.
-	(setq file (concat (file-name-as-directory deft-directory)
-                           (deft-whole-filter-regexp) "." deft-extension))
+	(setq file (deft-whole-filter-regexp))
       ;; If the filter string is empty, or titles are taken from file
       ;; contents, then use an automatically generated unique filename.
       (setq file (deft-unused-filename)))
@@ -1029,7 +1036,7 @@ Otherwise, quick create a new file."
 (defun deft-auto-save ()
   (save-excursion
     (dolist (buf deft-auto-save-buffers)
-      (if (get-buffer buf)
+      (if (buffer-name buf)
           ;; Save open buffers that have been modified.
           (progn
             (set-buffer buf)
