@@ -125,9 +125,9 @@
 ;; http://stackoverflow.com/questions/92971/how-do-i-set-the-size-of-emacs-window
 
 (when (display-graphic-p)
-  ;; Width: 120 columns for large displays, 80 columns for small ones.
+  ;; Width: 93 columns for large displays, 80 columns for small ones.
   (if (> (x-display-pixel-width) 1280)
-         (add-to-list 'default-frame-alist (cons 'width 120))
+         (add-to-list 'default-frame-alist (cons 'width 93))
          (add-to-list 'default-frame-alist (cons 'width 80)))
   ;; Height: subtract from screen height (for panels, menubars, etc.)
   ;; and divide by the height of a character to get the number of lines.
