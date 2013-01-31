@@ -35,7 +35,7 @@
 ;; Disable the scroll bar and toolbar.
 (if (boundp 'scroll-bar-mode)
     (scroll-bar-mode 0))
-(if (boundp 'tool-bar-mode)
+(if (fboundp 'tool-bar-mode)
     (tool-bar-mode 0))
 
 ;; System-specific configuration
