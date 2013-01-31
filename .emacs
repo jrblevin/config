@@ -129,7 +129,7 @@
 ;; the client is running in console mode or windowed mode.
 (defun my-select-color-theme(frame)
   (select-frame frame)
-  (if (window-system frame)
+  (if (display-graphic-p frame)
       (color-theme-twilight)
     (color-theme-less)))
 
