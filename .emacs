@@ -42,12 +42,16 @@
 (cond
  ((eq system-type 'darwin)
   ;; Menu bar takes up no additional space in OS X.
-  (menu-bar-mode 1))
+  (menu-bar-mode 1)
+  ;; Default Latin font
+  (set-face-attribute 'default nil :family "Source Code Pro")
+  ;; Default font size (point * 10)
+  (set-face-attribute 'default nil :height 165))
  (t
   (menu-bar-mode 0)))
 
 ;; Font Selection
-(set-default-font "Source Code Pro-16")
+;(set-default-font "Source Code Pro-16")
 ;(set-default-font "Inconsolata 18")
 ;(set-default-font "Anonymous Pro 16")
 
