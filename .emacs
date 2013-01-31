@@ -118,6 +118,24 @@
       (require 'edit-server)
       (edit-server-start)))
 
+;;; Frame geometry:
+
+;; Set frame geometry according to display resolution.
+;;
+;; Based on a function by Bryan Oakley on StackOverflow:
+;; http://stackoverflow.com/questions/92971/how-do-i-set-the-size-of-emacs-window
+
+(when (display-graphic-p)
+  ;; Width: 120 columns for large displays, 80 columns for small ones.
+  (if (> (x-display-pixel-width) 1280)
+         (add-to-list 'default-frame-alist (cons 'width 120))
+         (add-to-list 'default-frame-alist (cons 'width 80)))
+  ;; Height: subtract from screen height (for panels, menubars, etc.)
+  ;; and divide by the height of a character to get the number of lines.
+  (add-to-list 'default-frame-alist
+               (cons 'height (/ (- (x-display-pixel-height) 50)
+                                (frame-char-height)))))
+
 ;;; Color Themes:
 
 (require 'color-theme)
