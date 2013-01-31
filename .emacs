@@ -111,12 +111,11 @@
 (server-start)
 (setq server-kill-new-buffers t)
 
-;;; Edit with Emacs:
+;;; Edit with Emacs Chrome extension:
 
-(if (and (daemonp) (locate-library "edit-server"))
-    (progn
-      (require 'edit-server)
-      (edit-server-start)))
+(require 'edit-server)
+(setq edit-server-new-frame nil)
+(edit-server-start)
 
 ;;; Frame geometry:
 
