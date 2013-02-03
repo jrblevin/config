@@ -174,6 +174,8 @@
 (global-set-key [\C-\M-down] 'move-line-down)
 (global-set-key [\C-\M-up] 'move-line-up)
 
+(global-set-key (kbd "C-h C-r") 'describe-char)
+
 ;;; Ispell:
 
 (setq ispell-program-name "aspell")
