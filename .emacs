@@ -221,8 +221,10 @@
   (interactive)
   (when (eq major-mode 'markdown-mode)
     (fundamental-mode))
+  (unload-feature 'markdown-test)
   (unload-feature 'markdown-mode)
   (load-library (expand-file-name "~/projects/markdown-mode/markdown-mode.el"))
+  (load-library (expand-file-name "~/projects/markdown-mode/tests/markdown-test.el"))
   (markdown-mode))
 
 ;;; Deft:
