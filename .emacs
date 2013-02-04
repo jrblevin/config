@@ -245,6 +245,10 @@
       (unless (looking-at (concat "^" today))
         (insert today "\n\n<!-- #pending -->\n\n")))))
 
+;;; titlecase:
+
+(require 'titlecase)
+
 ;;; GTD:
 
 (defconst gtd-next-action-regex
