@@ -741,6 +741,7 @@ most recent kill ring contents and leaves the cursor at %|."
   ("ehre" "here" nil 0)
   ("esle" "else" nil 0)
   ("haev" "have" nil 0)
+  ("hvae" "have" nil 0)
   ("htp:" "http:" nil 0)
   ("knwo" "know" nil 0)
   ("konw" "know" nil 0)
