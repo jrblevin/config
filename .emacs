@@ -32,7 +32,7 @@
 (push "/opt/local/bin" exec-path)
 (setenv "PATH" (concat  "/opt/local/bin:" (getenv "PATH")))
 
-;; Disable the scroll bar and toolbar.
+;; Disable the scroll bar, toolbar, tooltips, etc.
 (if (boundp 'scroll-bar-mode)
     (scroll-bar-mode 0))
 (if (fboundp 'tool-bar-mode)
@@ -213,7 +213,6 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 
 (defun my-markdown-mode-hook ()
-  (flyspell-mode 0)                     ; turn off flyspell-mode
   (auto-fill-mode 1))			; turn on auto-fill-mode
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
@@ -434,8 +433,7 @@ the file, saving afterwards."
 
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
-  (LaTeX-math-mode 1)
-  (flyspell-mode))
+  (LaTeX-math-mode 1))
 
 (add-hook 'TeX-mode-hook 'my-TeX-mode-hook-fn)
 
@@ -689,8 +687,7 @@ the file, saving afterwards."
   (setq post-emoticon-pattern nil)
   (setq post-bold-pattern nil)
   (setq post-signature-pattern "\\(--\\|\\|Sent from my\\)")
-  (setq post-email-address user-mail-address)
-  (flyspell-mode 1))
+  (setq post-email-address user-mail-address))
 (add-hook 'post-mode-hook '(lambda() (post-custom)))
 
 ;;; Mutt:
