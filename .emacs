@@ -776,12 +776,12 @@ most recent kill ring contents and leaves the cursor at %|."
 (define-skeleton skeleton-webpage-header
   "Insert a metadata header for pages on jblevins.org."
   nil
-  "title:       " (skeleton-read "Title: ") "\n"
+  "title: " (skeleton-read "Title: ") "\n"
   "description: " (skeleton-read "Description: ") "\n"
-  "created:     " (my-insert-date-time) "\n"
-  "city:        Columbus\n"
-  "markup:      markdown\n"
-  "guid:        tag:jblevins.org," (my-insert-year) ":"
+  "created: " (my-insert-date-time) "\n"
+  "city: Columbus\n"
+  "markup: markdown\n"
+  "guid: tag:jblevins.org," (my-insert-year) ":"
   (replace-regexp-in-string
    "/\\(home\\|Users\\)/jblevins/projects/jblevins.org/htdocs\\(.*?\\)\\(main\\)*\\.text" "\\2"
    (buffer-file-name))
