@@ -28,9 +28,10 @@
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
-;; Include MacPorts binaries in the path
+;; Add directories to the path
 (push "/opt/local/bin" exec-path)
-(setenv "PATH" (concat  "/opt/local/bin:" (getenv "PATH")))
+(push "/usr/local/bin" exec-path)
+(setenv "PATH" (concat "/opt/local/bin:/usr/local/bin" (getenv "PATH")))
 
 ;; Disable the scroll bar, toolbar, tooltips, etc.
 (if (boundp 'scroll-bar-mode)
