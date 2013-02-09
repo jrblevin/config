@@ -38,3 +38,11 @@ SPAM=$MAILDIR/.spam/
     :0:
     $SPAM
 }
+
+:0
+* BODY_ALL ?? ()\/(stock pick|stock alert|chicks|whores|penis|please her|amaze her|looking for man|boner|erection)
+{
+    LOG="SPAM (word blacklist)"
+    :0:
+    $SPAM
+}
