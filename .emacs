@@ -48,7 +48,7 @@
   (set-face-attribute 'default nil :family "Source Code Pro")
   ;; Default font size (point * 10)
   (set-face-attribute 'default nil :height 165))
- (t
+ ((fboundp 'menu-bar-mode)
   (menu-bar-mode 0)))
 
 ;; Font Selection
@@ -60,10 +60,12 @@
 (setq transient-mark-mode nil)
 
 ;; Highlight current line
-(global-hl-line-mode 1)
+(when (fboundp 'global-hl-line-mode)
+  (global-hl-line-mode 1))
 
 ;; Blinking cursor
-(blink-cursor-mode 1)
+(when (fboundp 'blink-cursor-mode)
+  (blink-cursor-mode 1))
 
 ;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
 (setq-default indent-tabs-mode nil)
