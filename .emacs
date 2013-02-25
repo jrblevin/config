@@ -178,6 +178,8 @@
 (global-set-key [\C-\M-up] 'move-line-up)
 
 (global-set-key (kbd "C-h C-r") 'describe-char)
+(global-set-key (kbd "M-g c") 'goto-char)
+(global-set-key (kbd "C-x C-g") 'deft-find-file)
 
 ;;; Ispell:
 
