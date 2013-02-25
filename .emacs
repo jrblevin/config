@@ -340,9 +340,13 @@ the file, saving afterwards."
   "Sort items by context."
   (interactive)
   (setq inhibit-read-only 't)
-  (sort-regexp-fields nil "^.*?\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} .*\\|@[^ ]+ \\+[^ ]+\\)$" "\\1" (point-min) (point-max))
-  (save-buffer)
-  (setq inhibit-read-only nil))
+  (let ((max (save-excursion
+               (goto-char (point-max))
+               (skip-syntax-backward "-")
+               (point))))
+    (sort-regexp-fields nil "^.*?\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} .*\\|@[^ ]+ \\+[^ ]+\\)$" "\\1" (point-min) max)
+    (save-buffer)
+    (setq inhibit-read-only nil)))
 
 (defun todotxt-deft-open-project ()
   (interactive)
