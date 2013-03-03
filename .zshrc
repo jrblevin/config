@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: January 11, 2013 23:17 EST
+# Last Modified: March 3, 2013 10:58 EST
 
 ### System-Specific Configuration
 
@@ -103,6 +103,11 @@ alias un='unison data'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias grl='git rlog'
+alias gst='git status'
+alias gci='git commit'
 
 # duf: human readable, sorted disk usage
 # http://www.earthinfo.org/linux-disk-usage-sorted-by-size-and-human-readable/

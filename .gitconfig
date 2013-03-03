@@ -10,6 +10,7 @@
         rlog = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\"
         lg = log -p
         df = diff
+        dc = diff --cached
 
 [color]
         ui = auto
