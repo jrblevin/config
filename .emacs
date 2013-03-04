@@ -173,7 +173,7 @@
 (global-set-key [f11] 'todotxt)
 (global-set-key [f12] 'todotxt-gtd-complete)
 
-(global-set-key [?\M-j] 'fill-sentence)
+(global-set-key [?\M-j] 'fill-sentences)
 (global-set-key [\C-\M-down] 'move-line-down)
 (global-set-key [\C-\M-up] 'move-line-up)
 
@@ -581,14 +581,24 @@ the file, saving afterwards."
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
 
-(defun fill-sentence ()
+(defun fill-sentences ()
+  "Fill paragraph at point, breaking lines at sentence boundaries."
   (interactive)
   (save-excursion
-    (unless (bolp)
-      (forward-sentence -1))
-    (let ((beg (point)))
-      (forward-sentence)
-      (fill-region-as-paragraph beg (point)))))
+    (let ((end-marker (make-marker)))
+      (set-marker end-marker (progn
+                               (forward-paragraph)
+                               (skip-syntax-backward "-")
+                               (point)))
+      (forward-paragraph -1)
+      (while (and (< (point) end-marker)
+                  (not (eobp)))
+        (save-excursion
+          (fill-region-as-paragraph (point) end-marker))
+        (forward-sentence)
+        (unless (>= (point) end-marker)
+          (delete-horizontal-space)
+          (unless (looking-at "\n") (insert "\n")))))))
 
 ;; Line movement functions by Michael Schuerig.
 
