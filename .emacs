@@ -219,9 +219,8 @@
 
 (defun my-markdown-mode-hook ()
   (save-excursion
-    (when (re-search-forward "^math:\\s-*itex$")
-      (markdown-math 1)))
-  (auto-fill-mode 1))			; turn on auto-fill-mode
+    (when (re-search-forward "^math:\\s-*itex$" nil t)
+      (markdown-itex-mode 1))))
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
 (defun markdown-reload ()
