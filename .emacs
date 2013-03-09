@@ -207,7 +207,6 @@
 
 ;;; Markdown:
 
-(setq markdown-enable-math t)
 (setq markdown-command "peg-markdown")
 (setq markdown-open-command "/usr/local/bin/mark")
 (setq markdown-link-space-sub-char "-")
@@ -216,8 +215,12 @@
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown formatted text files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("gtd/.*\\.txt\\'" . markdown-mode))
 
 (defun my-markdown-mode-hook ()
+  (save-excursion
+    (when (re-search-forward "^math:\\s-*itex$")
+      (markdown-math 1)))
   (auto-fill-mode 1))			; turn on auto-fill-mode
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
