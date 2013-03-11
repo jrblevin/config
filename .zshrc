@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: March 3, 2013 10:58 EST
+# Last Modified: March 11, 2013 12:16 EDT
 
 ### System-Specific Configuration
 
@@ -70,7 +70,7 @@ setopt hist_ignore_dups         # ignore repeated commands
 setopt nobeep                   # stop yelling at me
 
 # set common environment variables
-export EDITOR="vi"              # default editor
+export EDITOR="emacsclient -a vi" # default editor
 
 # tab completion
 autoload -U compinit

@@ -64,8 +64,8 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 # Sending mail
 set sendmail="esmtp"
 
-# Compose mail using vim
-set editor="emacsclient %s"
+# Compose mail using Emacs, if server running, or vim
+set editor="emacsclient %s -a vi"
 
 # How to print things
 set print_command="muttprint --printer TO_FILE:$HOME/muttprint.eps %s"
