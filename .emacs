@@ -250,6 +250,12 @@
       (unless (looking-at (concat "^" today))
         (insert today "\n\n<!-- #pending -->\n\n")))))
 
+;;; git-commit-mode:
+
+(autoload 'git-commit-mode "git-commit-mode"
+  "Major mode for editing Git commit messages" t)
+(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+
 ;;; titlecase:
 
 (require 'titlecase)
