@@ -255,6 +255,10 @@
 (autoload 'git-commit-mode "git-commit-mode"
   "Major mode for editing Git commit messages" t)
 (add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+(add-to-list 'auto-mode-alist '("/COMMIT_EDITMSG\\'" . git-commit-mode))
+(add-to-list 'auto-mode-alist '("/NOTES_EDITMSG\\'" . git-commit-mode))
+(add-to-list 'auto-mode-alist '("/MERGE_MSG\\'" . git-commit-mode))
+(add-to-list 'auto-mode-alist '("/TAG_EDITMSG\\'" . git-commit-mode))
 
 ;;; titlecase:
 
