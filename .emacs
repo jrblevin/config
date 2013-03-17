@@ -250,6 +250,10 @@
       (unless (looking-at (concat "^" today))
         (insert today "\n\n<!-- #pending -->\n\n")))))
 
+;;; magit
+
+(require 'magit)
+
 ;;; git-commit-mode:
 
 (autoload 'git-commit-mode "git-commit-mode"
