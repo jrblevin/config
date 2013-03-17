@@ -209,7 +209,8 @@
 (setq markdown-command "peg-markdown")
 (setq markdown-open-command "/usr/local/bin/mark")
 (setq markdown-link-space-sub-char "-")
-(setq markdown-footnote-location 'header)
+(setq markdown-footnote-location 'end)
+(setq markdown-reference-location 'header)
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown formatted text files" t)
