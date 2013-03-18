@@ -287,7 +287,13 @@
         (replace-match (concat "+ \\2 " date) nil nil)
         (beginning-of-line)
         (kill-whole-line)
-        (deft-open-file (concat deft-directory project "." deft-extension))))))
+        (let ((deft-filter-regexp nil))
+          (deft-open-file (concat deft-directory project "." deft-extension)))
+        (goto-char (point-min))
+        (when (re-search-forward "^## Completed" nil t)
+          (forward-line 2)
+          (yank)
+          (exchange-point-and-mark))))))
 
 ;;; todotxt-mode:
 
