@@ -35,3 +35,4 @@ check.double.delete 	= on
 
 # Include my main bibtex database by default
 input {/home/jblevins/gtd/research.bib}
+input {/Users/jblevins/gtd/research.bib}
