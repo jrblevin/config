@@ -21,7 +21,7 @@ source $alias_file
 # ---------
 
 set imap_user = jblevins
-set imap_pass = `security find-generic-password -w -s mutt -a imaps://gauss.xbeta.org`
+set imap_pass = `security find-internet-password -w -a jblevins -s gauss.xbeta.org -r imap`
 
 set folder = "imaps://gauss.xbeta.org"
 set spoolfile = "=INBOX"
