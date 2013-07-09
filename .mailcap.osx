@@ -1,8 +1,22 @@
-text/html; open '%s'; needsterminal; description=HTML; nametemplate=%s.html
-image/gif; open -a Preview %s
-image/jpg; open -a Preview %s; needsterminal; description=JPEG Image; nametemplate=%s.jpg
-image/jpeg; open -a Preview %s; needsterminal; description=JPEG Image; nametemplate=%s.jpg
-image/png; open -a Preview %s; needsterminal; description=PNG Image; nametemplate=%s.png
-text/text; emacsclient '%s'; needsterminal; description=Text Text; nametemplate=%s.txt
-application/*; open '%s'; needsterminal
-video/*; open '%s'; needsterminal
+# Images
+image/jpg; ~/bin/mutt-view %s jpg
+image/jpeg; ~/bin/mutt-view %s jpg
+image/pjpeg; ~/bin/mutt-view %s jpg
+image/png; ~/bin/mutt-view %s png
+image/gif; ~/bin/mutt-view %s gif
+
+# Microsoft Word documents
+application/msword; ~/bin/mutt-view %s "-" '/Applications/Microsoft Word.app'
+
+# PDF files
+application/pdf; ~/bin/mutt-view %s pdf
+
+# HTML
+
+# HTML
+text/html; ~/bin/mutt-view %s html; needsterminal;
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+#text/html; elinks -force-html %s; needsterminal;
+
+# Unidentified files
+application/octet-stream; ~/bin/mutt-view %s "-"

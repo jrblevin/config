@@ -20,7 +20,10 @@ source $alias_file
 # Mailboxes
 # ---------
 
-set folder = "imaps://jblevins@gauss.xbeta.org"
+set imap_user = jblevins
+set imap_pass = `security find-generic-password -w -s mutt -a imaps://gauss.xbeta.org`
+
+set folder = "imaps://gauss.xbeta.org"
 set spoolfile = "=INBOX"
 set record = "=sent"
 set postponed = "=drafts"
@@ -62,7 +65,7 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 # -----------------
 
 # Sending mail
-set sendmail="esmtp"
+set sendmail="esmtp -v -X /tmp/esmtp.log"
 
 # Compose mail using Emacs, if server running, or vim
 set editor="emacsclient %s -a vi"
@@ -129,6 +132,9 @@ set copy=yes
 # Purge deleted messages without asking.
 set delete=yes
 
+# Don't prompt to recall postponed messages when composing a new message.
+set recall=no
+
 # Skip initial prompts when replying.
 set fast_reply=yes
 
@@ -143,6 +149,9 @@ set reverse_alias
 
 # Use my address as it appears in the message I am replying to.
 set reverse_name
+
+# Use my real name as configured, not as in the From header.
+unset reverse_realname
 
 # Keep files even when no messages are left.
 set save_empty
@@ -173,7 +182,7 @@ unset reply_self
 # ----
 
 # Ignore HTML email if possible.  Convert it if we must.
-alternative_order text/enriched text/plain text/html
+alternative_order text/plain text/enriched text/html
 auto_view text/html
 
 # Whether or not to display text for mailcap entries with copiousoutput.
