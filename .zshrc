@@ -36,8 +36,6 @@ elif [[ $OS == "Linux" ]]; then
     if [ -f /opt/intel/bin/compilervars.sh ]; then
         source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
     fi
-    # Unison alias
-    alias un='unison data'
 fi
 
 # Host-specific settings
@@ -99,7 +97,6 @@ fi
 alias grep='grep --color=auto'
 alias make='make -j'
 alias ll='ls -l'
-alias un='unison data'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
@@ -123,14 +120,6 @@ alias -s html=elinks
 alias -s com=elinks
 alias -s net=elinks
 alias -s org=elinks
-
-# SSHFS
-function sshmount {
-    cd "$HOME"
-    mkdir "$1"
-    sshfs "blevins:/home/jblevins/$1" "$1" -oreconnect,allow_other,volname="$1"
-}
-
 
 ### Prompt
 
