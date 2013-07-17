@@ -140,15 +140,15 @@ prompt_context() {
   echo -n "$context"
 }
 
-# Git: branch/detached head, dirty status
-autoload -Uz vcs_info
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' unstagedstr "%{$fg[red]%}"
-zstyle ':vcs_info:git:*' stagedstr "%{$fg[red]%}"
-zstyle ':vcs_info:git:*' formats "%{$fg[yellow]%}%u%c :%b%{$reset_color%}"
-zstyle ':vcs_info:*' enable git svn
-precmd() {
-    vcs_info
+# Git branch and status
+prompt_git() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  branch="${ref/refs\/heads\//}$dirty"
+  if [[ -n $(git status -s 2> /dev/null) ]]; then
+    echo -n "%{$fg[red]%} :$branch"
+  else
+    echo -n "%{$fg[yellow]%} :$branch"
+  fi
 }
 
 # Prompt symbol
@@ -160,7 +160,7 @@ prompt_symbol() {
   fi
 }
 
-PROMPT='%{$fg[green]%}$(prompt_context) %{$fg[blue]%}%~${vcs_info_msg_0_} %{$reset_color%}%$(prompt_symbol) '
+PROMPT='%{$fg[green]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_color%}%$(prompt_symbol) '
 
 
 ### Specific Programs
