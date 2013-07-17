@@ -144,11 +144,12 @@ prompt_context() {
 prompt_git() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
   branch="${ref/refs\/heads\//}$dirty"
-  if [[ -n $(git status -s 2> /dev/null) ]]; then
-    echo -n "%{$fg[red]%} :$branch"
-  else
-    echo -n "%{$fg[yellow]%} :$branch"
-  fi
+  echo -n "%{$fg[yellow]%} :$branch"
+  # if [[ -n $(git status -s 2> /dev/null) ]]; then
+  #   echo -n "%{$fg[red]%} :$branch"
+  # else
+  #   echo -n "%{$fg[yellow]%} :$branch"
+  # fi
 }
 
 # Prompt symbol
