@@ -105,6 +105,7 @@ alias gdc='git diff --cached'
 alias grl='git rlog'
 alias gst='git status'
 alias gci='git commit'
+alias mutt="cd ~/inbox; mutt"
 
 # duf: human readable, sorted disk usage
 # http://www.earthinfo.org/linux-disk-usage-sorted-by-size-and-human-readable/
