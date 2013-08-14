@@ -485,6 +485,12 @@ the file, saving afterwards."
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
 
+;;; Graphviz
+
+(autoload 'graphviz-dot-mode "graphviz-dot-mode" "Enter Graphviz dot mode." t)
+(add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
+(add-to-list 'auto-mode-alist '("\\.gv\\'" . graphviz-dot-mode))
+
 ;;; Matlab
 
 (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
