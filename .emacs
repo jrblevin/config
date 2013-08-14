@@ -487,6 +487,7 @@ the file, saving afterwards."
 
 ;;; Graphviz
 
+(setq graphviz-dot-indent-width 4)
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "Enter Graphviz dot mode." t)
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 (add-to-list 'auto-mode-alist '("\\.gv\\'" . graphviz-dot-mode))
