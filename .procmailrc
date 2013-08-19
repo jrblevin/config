@@ -2,9 +2,11 @@ MAILDIR=$HOME/Maildir
 LOGFILE=$MAILDIR/procmail.log
 SPAM=$MAILDIR/.spam/
 
+# Process all messages with BMF.
 :0fw
 | /usr/bin/bmf -p
 
+# Spam: messages flagged by BMF.
 :0
 * ^X-Spam-Status: Yes
 {
@@ -13,6 +15,7 @@ SPAM=$MAILDIR/.spam/
     $SPAM
 }
 
+# Spam: messages sent to acpub.duke.edu domain.
 :0
 * ^TO_jrb11@acpub.duke.edu
 {
@@ -21,6 +24,7 @@ SPAM=$MAILDIR/.spam/
     $SPAM
 }
 
+# Spam: messages with GB2312 charset not from osu.edu.
 :0
 * GB2312
 * !^From:.*\.osu\.edu
@@ -30,6 +34,7 @@ SPAM=$MAILDIR/.spam/
     $SPAM
 }
 
+# Spam: messages with iso-2022-jp charset not from osu.edu.
 :0
 * iso-2022-jp
 * !^From:.*\.osu\.edu
@@ -39,6 +44,7 @@ SPAM=$MAILDIR/.spam/
     $SPAM
 }
 
+# Generic spam keywords
 :0
 * BODY_ALL ?? ()\/(stock pick|stock alert|chicks|virgins|whores|penis|please her|amaze her|looking for man|boner|erection)
 {
