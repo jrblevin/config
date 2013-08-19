@@ -1,6 +1,9 @@
 MAILDIR=$HOME/Maildir
 LOGFILE=$MAILDIR/procmail.log
+ARCHIVE=$MAILDIR/.Archive/
 SPAM=$MAILDIR/.spam/
+TRASH=$MAILDIR/.trash/
+XBETA=$MAILDIR/.xbeta/
 
 # Process all messages with BMF.
 :0fw
@@ -51,4 +54,34 @@ SPAM=$MAILDIR/.spam/
     LOG="SPAM (word blacklist)"
     :0:
     $SPAM
+}
+
+# File iTunes receipts
+:0
+* ^From:*do_not_reply@itunes.com
+* ^Subject:*Your receipt
+{
+    LOG="Archive (iTunes Receipt)"
+    :0:
+    $ARCHIVE
+}
+
+# File Linode invoices and receipts
+:0
+* ^From:*billing@linode.com
+* ^Subject:*Linode.com( - Invoice|: Payment Receipt)
+{
+    LOG="Archive (Linode invoices and receipts)"
+    :0:
+    $XBETA
+}
+
+# Trash SkyMiles Dining notifications
+:0
+* ^From.*skymiles@email.rewardsnetwork.com
+* ^Subject.*confirm your benefits
+{
+    LOG="Trash (SkyMiles Dining)"
+    :0:
+    $TRASH
 }
