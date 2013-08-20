@@ -58,8 +58,8 @@ XBETA=$MAILDIR/.xbeta/
 
 # File iTunes receipts
 :0
-* ^From:*do_not_reply@itunes.com
-* ^Subject:*Your receipt
+* ^From:.*do_not_reply@itunes\.com
+* ^Subject:.*Your receipt No\. [0-9]+
 {
     LOG="Archive (iTunes Receipt)"
     :0:
@@ -68,8 +68,8 @@ XBETA=$MAILDIR/.xbeta/
 
 # File Linode invoices and receipts
 :0
-* ^From:*billing@linode.com
-* ^Subject:*Linode.com( - Invoice|: Payment Receipt)
+* ^From:.*billing@linode\.com
+* ^Subject:.*Linode\.com( - Invoice|: Payment Receipt)
 {
     LOG="Archive (Linode invoices and receipts)"
     :0:
