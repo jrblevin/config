@@ -79,7 +79,7 @@ XBETA=$MAILDIR/.xbeta/
 # Trash SkyMiles Dining notifications
 :0
 * ^From.*skymiles@email.rewardsnetwork.com
-* ^Subject.*(confirm your benefits|Time is running out)
+* ^You've earned miles
 {
     LOG="Trash (SkyMiles Dining)"
     :0:
