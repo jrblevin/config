@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: March 11, 2013 12:16 EDT
+# Last Modified: September 15, 2013 20:57 EDT
 
 ### System-Specific Configuration
 
@@ -106,6 +106,13 @@ alias grl='git rlog'
 alias gst='git status'
 alias gci='git commit'
 alias mutt="cd ~/inbox; mutt"
+alias sdr="screen -d -R"
+
+# SSH shortcuts
+alias ss1="ssh ap-jb01"
+alias ssm="ssh blevins-mac"
+alias ssn="ssh newton"
+alias ssg="ssh gauss"
 
 # duf: human readable, sorted disk usage
 # http://www.earthinfo.org/linux-disk-usage-sorted-by-size-and-human-readable/
