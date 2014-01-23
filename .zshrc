@@ -105,6 +105,7 @@ alias gdc='git diff --cached'
 alias grl='git rlog'
 alias gst='git status'
 alias gci='git commit'
+alias gca='git commit --amend'
 alias mutt="cd ~/inbox; mutt"
 alias sdr="screen -d -R"
 
