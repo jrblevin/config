@@ -11,6 +11,7 @@
         lg = log -p
         df = diff
         dc = diff --cached
+        ldiff = difftool -t latex
 
 [color]
         ui = auto
@@ -20,3 +21,9 @@
 
 [core]
 	excludesfile = ~/.gitignore
+
+[difftool.latex]
+        cmd = git-latexdiff "$LOCAL" "$REMOTE"
+
+[difftool]
+        prompt = false
