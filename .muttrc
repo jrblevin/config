@@ -20,22 +20,24 @@ source $alias_file
 # Mailboxes
 # ---------
 
-set imap_user = jblevins
-set imap_pass = `security find-internet-password -w -a jblevins -s gauss.xbeta.org -r imap`
+set imap_user = jrblevin@fastmail.fm
+set imap_pass = `security find-internet-password -w -a jrblevin@fastmail.fm -s mail.messagingengine.com`
 
-set folder = "imaps://gauss.xbeta.org"
-set spoolfile = "=INBOX"
-set record = "=sent"
-set postponed = "=drafts"
-mailboxes "=INBOX"
+set folder = "imaps://mail.messagingengine.com/INBOX"
+set spoolfile = "="
+set record = "=Sent Items"
+set postponed = "=Drafts"
+mailboxes "="
 
 set move = no
 set mail_check = 5
 set timeout = 15
 set imap_keepalive = 300
-set ssl_starttls = yes
+set ssl_starttls = no
 unset imap_check_subscribed
 unset imap_passive
+set ssl_verify_host = no
+set ssl_verify_dates = no
 
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
@@ -71,7 +73,8 @@ set sendmail="msmtp -v -X /tmp/msmtp.log"
 set editor="emacsclient %s -a vi"
 
 # How to print things
-set print_command="muttprint --printer TO_FILE:$HOME/muttprint.eps %s"
+#set print_command="muttprint --printer TO_FILE:$HOME/muttprint.ps %s"
+set print_command="muttprint -p - | ps2pdf - $HOME/inbox/$(date +%Y-%m-%d-%H-%M-%S)-muttprint.pdf"
 
 # Send each message separately
 set print_split
@@ -304,6 +307,15 @@ color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+
 # Automatically verify signed messages.
 set crypt_verify_sig=yes
 
+# Sign replies to signed messages
+set crypt_replysign
+
+# Encrypt replies to encrypted messages
+set crypt_replyencrypt
+
+# Encrypt and sign replies to encrypted messages
+set crypt_replysignencrypted=yes
+
 # Some definitions:
 # %p - The empty string when no passphrase is needed, the string
 #      "PGPPASSFD=0" if one is needed.
@@ -365,7 +377,7 @@ set pgp_good_sign="^gpg: Good signature from"
 
 bind editor <space> noop
 
-macro index,pager S "<save-message>=file-spam<enter>" "Recharacterize as spam"
-macro index,pager H "<save-message>=file-good<enter>" "Recharacterize as not spam"
+macro index,pager S "<save-message>=Junk Mail<enter>" "Recharacterize as spam"
+macro index,pager H "<save-message>=INBOX<enter>" "Recharacterize as not spam"
 macro index,pager Y "<save-message>=Archive<enter>" "Archive message"
 macro index,pager G "<group-reply>" "reply to all recipients"
