@@ -462,10 +462,19 @@ the file, saving afterwards."
           (output-pdf "Evince")
           (output-html "xdg-open"))))))
 
+; RefTeX
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+
+(defun my-remove-Biber ()
+  "Remove Biber command"
+  (delete-if (lambda (item) (string-equal "Biber" (car item))) TeX-command-list))
+
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
+  (turn-on-flyspell)
+  (my-remove-Biber)
   (LaTeX-math-mode 1))
-
 (add-hook 'TeX-mode-hook 'my-TeX-mode-hook-fn)
 
 ;;; BibTeX:
