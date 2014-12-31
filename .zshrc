@@ -109,15 +109,28 @@ alias gca='git commit --amend'
 alias mutt="cd ~/inbox; mutt"
 alias sdr="screen -d -R"
 
+# Protect OS X tags
+# http://brettterpstra.com/2014/07/03/mavericks-tags-and-coreutils-a-warning/
+alias mv=/bin/mv
+alias cp=/bin/cp
+
 # SSH shortcuts
 alias ss1="ssh ap-jb01"
 alias ssm="ssh blevins-mac"
 alias ssn="ssh newton"
+alias ssl="ssh newton.local"
 alias ssg="ssh gauss"
+alias ssr="ssh roark"
 
 # duf: human readable, sorted disk usage
 # http://www.earthinfo.org/linux-disk-usage-sorted-by-size-and-human-readable/
 alias duf='du -sk * | sort -nr | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'
+
+# dnf: human readable, sorted file counts
+alias dnf='find . -maxdepth 1 -type d | sed -e "s/^.\///" | while read -r dir; do num=$(find "$dir" -type f | wc -l); printf "%d\t%s\n" "$num" "$dir"; done | sort -nr'
+
+# Clean up after latex
+alias latexclean='for ext in aux log bbl blg toc dvi fls fdb_latexmk synctex.gz out nav snm; do rm -f *.$ext; done'
 
 # Suffix Aliases
 alias -s c=vim
