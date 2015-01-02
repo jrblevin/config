@@ -130,7 +130,7 @@ alias duf='du -sk * | sort -nr | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G
 alias dnf='find . -maxdepth 1 -type d | sed -e "s/^.\///" | while read -r dir; do num=$(find "$dir" -type f | wc -l); printf "%d\t%s\n" "$num" "$dir"; done | sort -nr'
 
 # Clean up after latex
-alias latexclean='for ext in aux log bbl blg toc dvi fls fdb_latexmk synctex.gz out nav snm; do rm -f *.$ext; done'
+alias latexclean='for ext in aux log bbl brf blg toc dvi fls fdb_latexmk synctex.gz out nav snm; do rm -f *.$ext; done'
 
 # Suffix Aliases
 alias -s c=vim
