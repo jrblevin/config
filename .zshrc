@@ -97,6 +97,7 @@ fi
 alias grep='grep --color=auto'
 alias make='make -j'
 alias ll='ls -l'
+alias bc='bc -l'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
