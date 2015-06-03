@@ -47,7 +47,7 @@
   ;; Default Latin font
   (set-face-attribute 'default nil :family "Source Code Pro")
   ;; Default font size (point * 10)
-  (set-face-attribute 'default nil :height 165))
+  (set-face-attribute 'default nil :height 180))
  ((fboundp 'menu-bar-mode)
   (menu-bar-mode 0)))
 
@@ -75,12 +75,12 @@
 (setq x-select-enable-clipboard t)
 
 ;; Store backup files in one place.  Do the same for auto save files.
-;; http://inamidst.com/config/emacs
-(if (file-directory-p "~/.emacs.d/backup")
-    (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
-  (message "Directory does not exist: ~/.emacs.d/backup"))
-(setq auto-save-file-name-transforms
-      '((".*" "~/.emacs.d/auto-save-files/\\1" t)))
+;; http://www.emacswiki.org/emacs/AutoSave
+(defconst emacs-tmp-dir
+  (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+(setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix emacs-tmp-dir)
 
 ;; Show matching parentheses.
 (show-paren-mode 1)
@@ -138,15 +138,28 @@
                (cons 'height (/ (- (x-display-pixel-height) 50)
                                 (frame-char-height)))))
 
+;;; Margins:
+
+;; Set margins to center content in window.
+;; http://stackoverflow.com/questions/24955253/centre-emacs-buffer-within-window
+
+;; (defun my-resize-margins ()
+;;  (let ((margin-size (/ (- (frame-width) 100) 2)))
+;;    (set-window-margins nil margin-size margin-size)))
+
+;; (add-hook 'window-configuration-change-hook #'my-resize-margins)
+;; (my-resize-margins)
+
+
 ;;; Color Themes:
 
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (require 'color-theme-subdued)
+     ;; (require 'color-theme-subdued)
+     ;; (require 'color-theme-gruber-darker)
      (require 'color-theme-less)
-     (require 'color-theme-gruber-darker)
      (require 'color-theme-twilight)))
 
 ;; Selects the appropriate color theme for each frame based on whether
@@ -170,8 +183,6 @@
 (global-set-key [f8] 'deft)
 (global-set-key [f9] 'compile)
 (global-set-key [f10] 'deft-today)
-(global-set-key [f11] 'todotxt)
-(global-set-key [f12] 'todotxt-gtd-complete)
 
 (global-set-key [?\M-j] 'fill-sentences)
 (global-set-key [\C-\M-down] 'move-line-down)
@@ -179,6 +190,16 @@
 
 (global-set-key (kbd "C-h C-r") 'describe-char)
 (global-set-key (kbd "C-x C-g") 'deft-find-file)
+
+(global-set-key (kbd "C-c d") 'deft)
+(global-set-key (kbd "C-c D") 'deft-today)
+(global-set-key (kbd "C-c s") 'magit-status)
+(global-set-key (kbd "C-c g") 'deft-find-file)
+(global-set-key (kbd "C-c i") 'imenu)
+(global-set-key (kbd "C-c l") 'my-quick-log)
+(global-set-key (kbd "C-c t") 'titlecase-dwim)
+;; (global-set-key (kbd "C-c c") 'gtd-mark-next-action-complete)
+;; (global-set-key (kbd "C-c x") 'gtd-open-todo)
 
 ;;; Ispell:
 
@@ -215,7 +236,6 @@
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown formatted text files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("gtd/.*\\.txt\\'" . markdown-mode))
 
 (defun my-markdown-mode-hook ()
   (save-excursion
@@ -271,118 +291,124 @@
 
 ;;; GTD:
 
-(defconst gtd-next-action-regex
-  "^\\(([A-Z]+) \\)?\\([^@]*\\) \\(@.* \\)?\\+\\(.+\\)$"
-  "Regular expression matching incomplete next actions.")
+;; (require 'taskpaper-mode)
 
-(defun gtd-mark-next-action-complete ()
-  (interactive)
-  (save-excursion
-    (beginning-of-line)
-    (when (re-search-forward gtd-next-action-regex nil t)
-      (let ((beg (match-beginning 0))
-            (project (match-string 4))
-            (date (format-time-string "(%Y-%m-%d)")))
-        (message (concat "project: " project))
-        (replace-match (concat "+ \\2 " date) nil nil)
-        (beginning-of-line)
-        (kill-whole-line)
-        (let ((deft-filter-regexp nil))
-          (deft-open-file (concat deft-directory project "." deft-extension)))
-        (goto-char (point-min))
-        (when (re-search-forward "^## Completed" nil t)
-          (forward-line 2)
-          (yank)
-          (exchange-point-and-mark))))))
+;; (defconst gtd-next-action-regex
+;;   "^[x-] \\([^@]*\\) @\\([a-z0-9-]+\\)[ \t]*\\( @\\(due\\|remind\\|reminded\\)([0-9-]+ [0-9:]+)\\)?$"
+;;   "Regular expression matching incomplete next actions.")
+
+;; (defun gtd-mark-next-action-complete ()
+;;   (interactive)
+;;   (save-excursion
+;;     (beginning-of-line)
+;;     (when (re-search-forward gtd-next-action-regex nil t)
+;;       (let ((beg (match-beginning 0))
+;;             (project (match-string 2))
+;;             (date (format-time-string "@done(%Y-%m-%d)")))
+;;         (replace-match (concat "+ \\1\\3 " date) nil nil)
+;;         (beginning-of-line)
+;;         (kill-whole-line)
+;;         (let ((deft-filter-regexp nil))
+;;           (deft-open-file (concat deft-directory project ".txt")))
+;;         (goto-char (point-min))
+;;         (when (re-search-forward "^## Completed" nil t)
+;;           (forward-line 2)
+;;           (yank)
+;;           (exchange-point-and-mark))))))
+
+;; (defun gtd-open-todo ()
+;;   (interactive)
+;;   (find-file-other-window "~/gtd/todo.taskpaper")
+;;   (taskpaper-mode))
 
 ;;; todotxt-mode:
 
-(require 'todotxt)
-(setq todotxt-file "~/gtd/todo.txt")
+;; (require 'todotxt)
+;; (setq todotxt-file "~/gtd/todo.txt")
+;; (todotxt)
 
-(defun todotxt-gtd-complete ()
-  (interactive)
-  (setq inhibit-read-only 't)
-  (gtd-mark-next-action-complete)
-  (todotxt-prioritize-items)
-  (setq inhibit-read-only nil)
-  (save-buffer))
+;; (defun todotxt-gtd-complete ()
+;;   (interactive)
+;;   (setq inhibit-read-only 't)
+;;   (gtd-mark-next-action-complete)
+;;   (todotxt-prioritize-items)
+;;   (setq inhibit-read-only nil)
+;;   (save-buffer))
 
-(defun todotxt-insert-item (item)
-  "Prompt for an item to add to the todo list and append it to
-the file, saving afterwards."
-  (interactive "sItem to add: ")
-  (setq inhibit-read-only 't)
-  (beginning-of-line)
-  (insert (concat item "\n"))
-  (todotxt-prioritize-items)
-  (save-buffer)
-  (setq inhibit-read-only nil)
-  (todotxt-jump-to-item item))
+;; (defun todotxt-insert-item (item)
+;;   "Prompt for an item to add to the todo list and append it to
+;; the file, saving afterwards."
+;;   (interactive "sItem to add: ")
+;;   (setq inhibit-read-only 't)
+;;   (beginning-of-line)
+;;   (insert (concat item "\n"))
+;;   (todotxt-prioritize-items)
+;;   (save-buffer)
+;;   (setq inhibit-read-only nil)
+;;   (todotxt-jump-to-item item))
 
-(defun todotxt-delete-item ()
-  "Delete the item on the current line."
-  (interactive)
-  (setq inhibit-read-only 't)
-  (beginning-of-line)
-  (let ((beg (point)))
-    (forward-line 1)
-    (delete-region beg (point)))
-  (todotxt-prioritize-items)
-  (save-buffer)
-  (setq inhibit-read-only nil))
+;; (defun todotxt-delete-item ()
+;;   "Delete the item on the current line."
+;;   (interactive)
+;;   (setq inhibit-read-only 't)
+;;   (beginning-of-line)
+;;   (let ((beg (point)))
+;;     (forward-line 1)
+;;     (delete-region beg (point)))
+;;   (todotxt-prioritize-items)
+;;   (save-buffer)
+;;   (setq inhibit-read-only nil))
 
-(defun todotxt-move (n)
-  "Move the current item up or down by N lines."
-  (interactive "p")
-  (setq inhibit-read-only 't)
-  (setq col (current-column))
-  (beginning-of-line) (setq start (point))
-  (end-of-line) (forward-char) (setq end (point))
-  (let ((line-text (delete-and-extract-region start end)))
-    (forward-line n)
-    (insert line-text)
-    ;; restore point to original column in moved line
-    (forward-line -1)
-    (forward-char col))
-  (save-buffer)
-  (setq inhibit-read-only nil))
+;; (defun todotxt-move (n)
+;;   "Move the current item up or down by N lines."
+;;   (interactive "p")
+;;   (setq inhibit-read-only 't)
+;;   (setq col (current-column))
+;;   (beginning-of-line) (setq start (point))
+;;   (end-of-line) (forward-char) (setq end (point))
+;;   (let ((line-text (delete-and-extract-region start end)))
+;;     (forward-line n)
+;;     (insert line-text)
+;;     ;; restore point to original column in moved line
+;;     (forward-line -1)
+;;     (forward-char col))
+;;   (save-buffer)
+;;   (setq inhibit-read-only nil))
 
-(defun todotxt-move-up (n)
-  "Move the current item up by N lines."
-  (interactive "p")
-  (todotxt-move (if (null n) -1 (- n))))
+;; (defun todotxt-move-up (n)
+;;   "Move the current item up by N lines."
+;;   (interactive "p")
+;;   (todotxt-move (if (null n) -1 (- n))))
 
-(defun todotxt-move-down (n)
-  "Move the current item down by N lines."
-  (interactive "p")
-  (todotxt-move (if (null n) 1 n)))
+;; (defun todotxt-move-down (n)
+;;   "Move the current item down by N lines."
+;;   (interactive "p")
+;;   (todotxt-move (if (null n) 1 n)))
 
-(defun todotxt-sort-by-context ()
-  "Sort items by context."
-  (interactive)
-  (setq inhibit-read-only 't)
-  (let ((max (save-excursion
-               (goto-char (point-max))
-               (skip-syntax-backward "-")
-               (point))))
-    (sort-regexp-fields nil "^.*?\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} .*\\|@[^ ]+ \\+[^ ]+\\)$" "\\1" (point-min) max)
-    (save-buffer)
-    (setq inhibit-read-only nil)))
+;; (defun todotxt-sort-by-context ()
+;;   "Sort items by context."
+;;   (interactive)
+;;   (setq inhibit-read-only 't)
+;;   (let ((max (save-excursion
+;;                (goto-char (point-max))
+;;                (skip-syntax-backward "-")
+;;                (point))))
+;;     (sort-regexp-fields nil "^.*?\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} .*\\|@[^ ]+ \\+[^ ]+\\)$" "\\1" (point-min) max)
+;;     (save-buffer)
+;;     (setq inhibit-read-only nil)))
 
-(defun todotxt-deft-open-project ()
-  (interactive)
-  (when (re-search-forward " \\+\\([^ ]+\\)$" nil t)
-      (deft-open-file (concat deft-directory (match-string 1)
-                              "." deft-extension) 1)))
+;; (defun todotxt-deft-open-project ()
+;;   (interactive)
+;;   (when (re-search-forward " \\+\\([^ ]+\\)$" nil t)
+;;       (deft-open-file (concat deft-directory (match-string 1) ".txt") 1)))
 
-(define-key todotxt-mode-map (kbd "C") 'todotxt-gtd-complete) ; (C)omplete item
-(define-key todotxt-mode-map (kbd "I") 'todotxt-insert-item) ; (I)nsert item
-(define-key todotxt-mode-map (kbd "D") 'todotxt-delete-item) ; (D)elete item
-(define-key todotxt-mode-map (kbd "N") 'todotxt-move-down) ; Move (N)ext
-(define-key todotxt-mode-map (kbd "P") 'todotxt-move-up) ; Move (P)revious
-(define-key todotxt-mode-map (kbd "S") 'todotxt-sort-by-context) ; (S)ort by context
-(define-key todotxt-mode-map (kbd "o") 'todotxt-deft-open-project) ; (O)pen
+;; (define-key todotxt-mode-map (kbd "C") 'todotxt-gtd-complete) ; (C)omplete item
+;; (define-key todotxt-mode-map (kbd "I") 'todotxt-insert-item) ; (I)nsert item
+;; (define-key todotxt-mode-map (kbd "D") 'todotxt-delete-item) ; (D)elete item
+;; (define-key todotxt-mode-map (kbd "N") 'todotxt-move-down) ; Move (N)ext
+;; (define-key todotxt-mode-map (kbd "P") 'todotxt-move-up) ; Move (P)revious
+;; (define-key todotxt-mode-map (kbd "S") 'todotxt-sort-by-context) ; (S)ort by context
+;; (define-key todotxt-mode-map (kbd "o") 'todotxt-deft-open-project) ; (O)pen
 
 ;; (defconst gtd-next-action-regex
 ;;   "^- \\(.*?\\) \\((\\[\\[\\(.+?\\)\\]\\])\\)$"
@@ -424,6 +450,7 @@ the file, saving afterwards."
   "Major mode for editing Fortran code in free form." t)
 (add-to-list 'auto-mode-alist '("\\.f03\\'" . f90-mode))
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
+(add-to-list 'completion-ignored-extensions ".mod")
 
 (defun my-f90-mode-hook ()
   (setq f90-beginning-ampersand nil
@@ -441,6 +468,10 @@ the file, saving afterwards."
 ;;; AUCTeX:
 
 (load "auctex.el" nil t t)
+(setq completion-ignored-extensions
+      (append completion-ignored-extensions
+              '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
+                ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz")))
 (setq TeX-PDF-mode t
       TeX-parse-self t
       TeX-auto-save nil
@@ -448,21 +479,26 @@ the file, saving afterwards."
       font-latex-match-slide-title-keywords '("foilhead")
       TeX-view-program-list
       (quote
-       (("open" "open %o")))
+       (("Preview" "/usr/bin/open -a Preview.app %o")
+        ;; Skim's displayline is used for forward search (from .tex to .pdf)
+        ;; option -b highlights the current line;
+        ;; option -g opens Skim in the background;
+        ;; option -r asks Skim to revert the file
+        ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -r -b %n %o %b")))
       TeX-view-program-selection
       (cond
        ((eq system-type (quote darwin))
         (quote
-         ((output-dvi "open")
-          (output-pdf "open")
-          (output-html "open"))))
+         ((output-dvi "Skim")
+          (output-pdf "Skim")
+          (output-html "Skim"))))
        (t
         (quote
          ((output-dvi "xdvi")
           (output-pdf "Evince")
           (output-html "xdg-open"))))))
 
-; RefTeX
+;;; RefTeX
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
@@ -476,6 +512,20 @@ the file, saving afterwards."
   (my-remove-Biber)
   (LaTeX-math-mode 1))
 (add-hook 'TeX-mode-hook 'my-TeX-mode-hook-fn)
+
+;; make latexmk available via C-c C-c
+;; Use Command-Shift-click to reverse search in Skim.
+;; See http://www.stefanom.org/setting-up-a-nice-auctex-environment-on-mac-os-x/
+(add-hook 'LaTeX-mode-hook (lambda ()
+  (push
+    '("latexmk" "latexmk -g -synctex=1 -pdf %s" TeX-run-TeX nil t
+      :help "Run latexmk on file")
+    TeX-command-list)
+  (push
+    '("bibtool" "bibtool -x %s.aux > %s.bib" TeX-run-TeX nil t
+      :help "Run bibtool on aux file to produce bib file")
+    TeX-command-list)))
+(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
 
 ;;; BibTeX:
 
@@ -503,6 +553,7 @@ the file, saving afterwards."
 
 ;;; Matlab
 
+(setq matlab-auto-fill nil)
 (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
 (add-to-list 'auto-mode-alist '("\\.m\\'" . matlab-mode))
 (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
@@ -556,6 +607,7 @@ the file, saving afterwards."
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (setq ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el"))
+(setq ido-ignore-extensions t)
 (ido-mode t)
 
 ;;; CSS:
@@ -578,13 +630,13 @@ the file, saving afterwards."
 
 ;;; Timestamps:
 
-(require 'time-stamp)
-(add-hook 'write-file-hooks 'time-stamp)
-(setq time-stamp-active t)
-(setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
-(setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|^modified:[ \t]+\\)")
-(setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
-(setq time-stamp-line-limit 10)
+;; (require 'time-stamp)
+;; (add-hook 'write-file-hooks 'time-stamp)
+;; (setq time-stamp-active t)
+;; (setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
+;; (setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|^modified:[ \t]+\\)")
+;; (setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
+;; (setq time-stamp-line-limit 10)
 
 (defun my-insert-year ()
   "Insert the current year."
@@ -615,6 +667,23 @@ the file, saving afterwards."
 
 ;;; Miscellaneous:
 
+;; unix-file, dos-file, and mac-file from
+;; http://www.emacswiki.org/emacs/EndOfLineTips
+(defun unix-file ()
+  "Change the current buffer to Latin 1 with Unix line-ends."
+  (interactive)
+  (set-buffer-file-coding-system 'iso-latin-1-unix t))
+
+(defun dos-file ()
+  "Change the current buffer to Latin 1 with DOS line-ends."
+  (interactive)
+  (set-buffer-file-coding-system 'iso-latin-1-dos t))
+
+(defun mac-file ()
+  "Change the current buffer to Latin 1 with Mac line-ends."
+  (interactive)
+  (set-buffer-file-coding-system 'iso-latin-1-mac t))
+
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
@@ -637,6 +706,28 @@ the file, saving afterwards."
         (unless (>= (point) end-marker)
           (delete-horizontal-space)
           (unless (looking-at "\n") (insert "\n")))))))
+
+(defun make-row-vector (begin end)
+  (interactive "*r")
+  (save-excursion
+    (let ((a (make-marker))
+          (b (make-marker)))
+      (set-marker a begin)
+      (set-marker b end)
+      (goto-char a)
+      (while (re-search-forward "\n" b t)
+        (replace-match ", " nil nil))
+      (goto-char a)
+      (while (re-search-forward "[ ]+" b t)
+        (replace-match " " nil nil)))))
+
+;; Open files in dired mode using 'open'
+(eval-after-load "dired"
+  '(progn
+     (define-key dired-mode-map (kbd "z")
+       (lambda () (interactive)
+         (let ((fn (dired-get-file-for-visit)))
+           (start-process "default-app" nil "open" fn))))))
 
 ;; Line movement functions by Michael Schuerig.
 
@@ -732,24 +823,54 @@ the file, saving afterwards."
 ;; (define-key global-map "\C-ca" 'org-agenda)
 ;; (setq org-log-done t)
 
+;;; Lua mode:
+
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+
 ;;; post-mode:
 
-(require 'post)
-(defun post-custom()
-  "post-hook"
-  (load "mutt-alias")
-  (setq mutt-alias-file-list '("~/.mutt-aliases"))
-  (local-set-key "\C-ci" 'mutt-alias-insert)
-  (setq post-underline-pattern nil)
-  (setq post-emoticon-pattern nil)
-  (setq post-bold-pattern nil)
-  (setq post-signature-pattern "\\(--\\|\\|Sent from my\\)")
-  (setq post-email-address user-mail-address))
-(add-hook 'post-mode-hook '(lambda() (post-custom)))
+;; (require 'post)
+;; (defun post-custom()
+;;   "post-hook"
+;;   (load "mutt-alias")
+;;   (setq mutt-alias-file-list '("~/.mutt-aliases"))
+;;   (local-set-key "\C-ci" 'mutt-alias-insert)
+;;   (setq post-uses-fill-mode nil)
+;;   (setq post-underline-pattern nil)
+;;   (setq post-emoticon-pattern nil)
+;;   (setq post-bold-pattern nil)
+;;   (setq post-signature-pattern "\\(--\\|Cheers,\\|Thanks,\\|Best,\\|\\|Sent from my\\)")
+;;   (setq post-kill-quoted-sig nil)
+;;   (setq post-signature-source-is-file t)
+;;   (setq post-fixed-signature-source "~/.signature")
+;;   (setq post-email-address user-mail-address)
+;;   ;; Remove trailing whitespace (but protect '-- ' in signature)
+;;   (save-excursion
+;;     (beginning-of-buffer)
+;;     (while (re-search-forward "\\([>:]\\)\s+$" nil t)
+;;       (replace-match (match-string 1) nil nil)))
+;;   ;; Rewrite "Last, First" addresses
+;;   (save-excursion
+;;     (re-search-forward "\n\n")
+;;     (let ((end (point)))
+;;       ;;(message body)
+;;       (beginning-of-buffer)
+;;       (while (re-search-forward "\"\\([[:alpha:]]+\\), \\([[:alpha:]]+\\)\"" end t)
+;;         (replace-match (concat (match-string 2) " " (match-string 1)) nil nil))))
+;;   (post-goto-body))
+;; (add-hook 'post-mode-hook '(lambda() (post-custom)))
 
 ;;; Mutt:
 
-(add-to-list 'auto-mode-alist '("mutt-" . post-mode))
+;; (add-to-list 'auto-mode-alist '("mutt-" . post-mode))
+
+;;; muttrc-mode
+
+(autoload 'muttrc-mode "muttrc-mode.el" "Major mode to edit muttrc files" t)
+(add-to-list 'auto-mode-alist '(".muttrc\\'" . muttrc-mode))
+(add-to-list 'auto-mode-alist '(".mutt-aliases\\'" . muttrc-mode))
 
 ;;; Abbreviations
 
@@ -780,8 +901,9 @@ most recent kill ring contents and leaves the cursor at %|."
 
   ;; signatures
   ("ssig1" "Best,\n\nJason" nil 0)
-  ("ssig2" "Best,\n\nJason\n\n-- \nJason R. Blevins\nAssistant Professor of Economics\nThe Ohio State University\nhttp://jblevins.org/\n" nil 0)
-  ("ssig3" "Best,\n\Prof. Blevins" nil 0)
+  ("ssig2" "Best,\n\nProf. Blevins" nil 0)
+  ("ssig3" "Best,\n\nJason\n\n-- \nJason R. Blevins\nAssistant Professor of Economics\nThe Ohio State University\nhttp://jblevins.org/\n" nil 0)
+
 
   ;; common phrases
   ("afaict" "as far as I can tell" nil 0)
@@ -811,6 +933,7 @@ most recent kill ring contents and leaves the cursor at %|."
   ("soem" "some" nil 0)
   ("taht" "that" nil 0)
   ("teh" "the" nil 0)
+  ("tractible" "tractable" nil 0)
   ("wnat" "want" nil 0)
   ("wether" "whether" nil 0)
   ("wtih" "with" nil 0)
