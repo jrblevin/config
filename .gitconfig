@@ -8,6 +8,7 @@
         co = checkout
         ci = commit
         rlog = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\"
+        plog = log --graph --decorate --pretty=oneline --abbrev-commit --color
         lg = log -p
         df = diff
         dc = diff --cached
