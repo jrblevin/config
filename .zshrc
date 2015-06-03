@@ -97,6 +97,8 @@ fi
 alias grep='grep --color=auto'
 alias make='make -j'
 alias ll='ls -l'
+alias lh='ls -alh'
+alias lr='ls -talr'
 alias bc='bc -l'
 alias ee="emacs -nw"
 alias acs='apt-cache search'
@@ -107,8 +109,10 @@ alias grl='git rlog'
 alias gst='git status'
 alias gci='git commit'
 alias gca='git commit --amend'
+alias gcm='git commit -m'
 alias mutt="cd ~/inbox; mutt"
 alias sdr="screen -d -R"
+alias latexmk="latexmk -g -synctex=1 -pdf -pvc"
 
 # Protect OS X tags
 # http://brettterpstra.com/2014/07/03/mavericks-tags-and-coreutils-a-warning/
