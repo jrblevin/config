@@ -52,9 +52,9 @@
   (menu-bar-mode 0)))
 
 ;; Font Selection
-;(set-default-font "Source Code Pro-16")
-;(set-default-font "Inconsolata 18")
-;(set-default-font "Anonymous Pro 16")
+(set-frame-font "Source Code Pro-18")
+;; (set-frame-font "Inconsolata 18")
+;; (set-frame-font "Anonymous Pro 16")
 
 ;; Disable transient-mark-mode
 (setq transient-mark-mode nil)
@@ -247,7 +247,7 @@
     (if (file-exists-p filename)
         (deft-open-file filename t t)
       (deft-new-file-named today)
-      (beginning-of-buffer)
+      (goto-char (point-min))
       (unless (looking-at (concat "^" today))
         (insert today "\n\n<!-- #pending -->\n\n")))))
 
@@ -644,16 +644,16 @@ the file, saving afterwards."
   (interactive)
   (let ((col (current-column)))
     (save-excursion
-      (next-line)
+      (forward-line)
       (transpose-lines 1))
-    (next-line)
+    (forward-line)
     (move-to-column col)))
 
 (defun move-line-up ()
   (interactive)
   (let ((col (current-column)))
     (save-excursion
-      (next-line)
+      (forward-line)
       (transpose-lines -1))
     (move-to-column col)))
 
