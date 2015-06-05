@@ -232,10 +232,13 @@
 (setq markdown-link-space-sub-char "-")
 (setq markdown-footnote-location 'end)
 (setq markdown-reference-location 'header)
+(setq markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown formatted text files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("/gtd/.*\\.txt\\'" . markdown-mode))
 
 (defun my-markdown-mode-hook ()
   (save-excursion
@@ -256,20 +259,33 @@
 ;;; Deft:
 
 (require 'deft)
-(setq deft-text-mode 'markdown-mode)
 (setq deft-directory "~/gtd/")
 (setq deft-auto-save-interval 2)
+(setq deft-recursive t)
+(setq deft-extensions '("txt" "text" "tex" "org"))
+(setq deft-use-filter-string-for-filename t)
+;;(setq deft-use-filename-as-title t)
+(setq deft-file-naming-rules '((nospace . "-")
+                               (case-fn . downcase)))
+(deft)
 
 (defun deft-today ()
   (interactive)
   (let* ((today (format-time-string "%Y-%m-%d"))
-         (filename (concat deft-directory today "." deft-extension)))
+         (filename (concat deft-directory today ".txt"))
+         (deft-filter-regexp nil))
     (if (file-exists-p filename)
         (deft-open-file filename t t)
       (deft-new-file-named today)
       (goto-char (point-min))
       (unless (looking-at (concat "^" today))
         (insert today "\n\n<!-- #pending -->\n\n")))))
+
+(defun deft-reload ()
+  (interactive)
+  (quit-window)
+  (load-library "/Users/jblevins/projects/deft/deft.el")
+  (deft))
 
 ;;; magit
 
@@ -958,6 +974,7 @@ most recent kill ring contents and leaves the cursor at %|."
   "created: " (my-insert-date-time) "\n"
   "city: Columbus\n"
   "markup: markdown\n"
+  "feed: true\n"
   "guid: tag:jblevins.org," (my-insert-year) ":"
   (replace-regexp-in-string
    "/\\(home\\|Users\\)/jblevins/projects/jblevins.org/htdocs\\(.*?\\)\\(main\\)*\\.text" "\\2"
