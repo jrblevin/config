@@ -33,6 +33,12 @@
 (push "/usr/local/bin" exec-path)
 (setenv "PATH" (concat "/opt/local/bin:/usr/local/bin" (getenv "PATH")))
 
+;; Package management
+(require 'package)
+(package-initialize)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+
 ;; Disable the scroll bar, toolbar, tooltips, etc.
 (if (boundp 'scroll-bar-mode)
     (scroll-bar-mode 0))
