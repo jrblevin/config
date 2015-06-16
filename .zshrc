@@ -36,6 +36,17 @@ elif [[ $OS == "Linux" ]]; then
     if [ -f /opt/intel/bin/compilervars.sh ]; then
         source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
     fi
+    # GFortran
+    export PATH=/opt/gcc-trunk/bin:${PATH}
+    # Open MPI
+    export PATH=/opt/openmpi/bin:${PATH}
+    # Library path
+    if [ -z "$LD_LIBRARY_PATH" ]; then
+        LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/opt/openmpi/lib:"
+    else
+        LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/opt/openmpi/lib:$LD_LIBRARY_PATH"
+    fi
+    export LD_LIBRARY_PATH
 fi
 
 # Host-specific settings
@@ -196,23 +207,20 @@ PROMPT='%{$fg[green]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_co
 ### Specific Programs
 
 # Ruby
-export PATH=/var/lib/gems/1.8/bin:$PATH
-export RUBYLIB=$HOME/lib/ruby:/usr/local/lib/site_ruby/1.8:/usr/lib/ruby/1.8
-
-# GFortran
-export PATH=/opt/gcc-trunk/bin:${PATH}
-
-# Open MPI
-export PATH=/opt/openmpi/bin:${PATH}
-
+if [[ $OS == "Darwin" ]]; then
+    if [[ ! -z $(which ruby1.9) ]]; then
+      export PATH=/opt/local/lib/ruby1.9/gems/1.9.1/bin:${PATH}
+      export RUBYLIB=/opt/local/lib/ruby1.9/gems/1.9.1/gems:/opt/local/lib/ruby1.9/site_ruby/1.9.1
+    fi
+fi
 
 ### Paths
 
 # Library path
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH="/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/openmpi/lib:"
+  LD_LIBRARY_PATH="/usr/local/lib"
 else
-  LD_LIBRARY_PATH="/usr/local/lib:/opt/gcc-trunk/lib${LIB64}:/opt/openmpi/lib:$LD_LIBRARY_PATH"
+  LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 fi
 export LD_LIBRARY_PATH
 
@@ -248,12 +256,4 @@ if [ -f "${SSH_ENV}" ]; then
      }
 else
      start_agent;
-fi
-
-
-### Windowing System
-
-# Automatically start X
-if [ -z "$DISPLAY" ] && [[ $(tty) == "/dev/tty1" ]]; then
-   startx
 fi
