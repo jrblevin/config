@@ -101,6 +101,7 @@ alias lh='ls -alh'
 alias lr='ls -talr'
 alias bc='bc -l'
 alias ee="emacs -nw"
+alias ec="emacsclient"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
 alias gd='git diff'
@@ -110,6 +111,7 @@ alias gst='git status'
 alias gci='git commit'
 alias gca='git commit --amend'
 alias gcm='git commit -m'
+alias gitx='open -a GitX .'
 alias mutt="cd ~/inbox; mutt"
 alias sdr="screen -d -R"
 alias latexmk="latexmk -g -synctex=1 -pdf -pvc"
@@ -135,7 +137,7 @@ alias duf='du -sk * | sort -nr | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G
 alias dnf='find . -maxdepth 1 -type d | sed -e "s/^.\///" | while read -r dir; do num=$(find "$dir" -type f | wc -l); printf "%d\t%s\n" "$num" "$dir"; done | sort -nr'
 
 # Clean up after latex
-alias latexclean='for ext in aux log bbl brf blg toc dvi fls fdb_latexmk synctex.gz out nav snm; do rm -f *.$ext; done'
+alias latexclean='for ext in aux log bbl brf blg toc dvi fls fdb_latexmk synctex.gz out nav snm fff ttt; do rm -f *.$ext; done'
 
 # Suffix Aliases
 alias -s c=vim
