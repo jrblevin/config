@@ -2,7 +2,7 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: September 15, 2013 20:57 EDT
+# Last Modified: June 16, 2015 12:06 EDT
 
 ### System-Specific Configuration
 
@@ -257,3 +257,11 @@ if [ -f "${SSH_ENV}" ]; then
 else
      start_agent;
 fi
+
+### Per-Directory ZSH configuration
+
+function chpwd() {
+  if [ -r $PWD/.zsh_config ]; then
+    source $PWD/.zsh_config
+  fi
+}
