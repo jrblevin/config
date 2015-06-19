@@ -102,7 +102,7 @@
 	  (mumamo-background-chunk-submode ((t (:background "#222222")))) 
 
 	  (linum ((t (:background "#141314" :foreground "#2D2B2E"))))
-	  (hl-line ((t (:background "#212121"))))  
+	  (hl-line ((t (:background "#313131"))))
 	  (yas/field-highlight-face ((t (:background "#27292A"))))
 
 	  (magit-item-highlight ((((class color) (background dark))
