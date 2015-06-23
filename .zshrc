@@ -265,3 +265,6 @@ function chpwd() {
     source $PWD/.zsh_config
   fi
 }
+
+# k
+source ~/.zsh/k/k.sh
