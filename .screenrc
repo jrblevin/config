@@ -2,7 +2,7 @@
 #
 # Jason R. Blevins <jrblevin@sdf.org>
 # Created: Durham, January 19, 2007
-# Last Modified: January 15, 2015
+# Last Modified: July 10, 2015
 #
 # Parts taken from the following sources:
 # * http://texnatse.blogsome.com/2005/09/01/my-screenrc/
@@ -36,4 +36,4 @@ termcapinfo xterm hs:ts=\E]0;:fs=\007:ds=\E]0;\007
 backtick 1 0 30 sh -c "pwd | sed -e 's|/Users/jblevins|~|;s|/home/jblevins|~|;s|/home/blevins141|~|'"
 
 # use this for the hard status string
-hardstatus string "screen@%H - %1`"
+hardstatus string "%H"
