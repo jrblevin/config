@@ -83,7 +83,7 @@
 	  (font-lock-doc-string-face ((t (:foreground "DarkOrange"))))
 	  (font-lock-function-name-face ((t (:foreground "#9B703F"))))
 	  (font-lock-keyword-face ((t (:foreground "#CDA869"))))
-	  (font-lock-preprocessor-face ((t (:foreground "Aquamarine"))))
+	  (font-lock-preprocessor-face ((t (:foreground "#9B859D"))))
 	  (font-lock-reference-face ((t (:foreground "SlateBlue"))))
 
 	  ;; Enhanced-Ruby-Mode
@@ -126,6 +126,7 @@
 	  (font-lock-warning-face ((t (:background "#EE799F" :foreground "red"))))
 	  (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
 	  (region ((t (:background "#27292A"))))
+	  (shadow ((t (:foreground "#4b474c"))))
 	  (mode-line ((t (:background "grey75" :foreground "black"))))
 	  (highlight ((t (:background "#111111"))))
 	  (highline-face ((t (:background "SeaGreen"))))
@@ -136,7 +137,7 @@
 	  (zmacs-region ((t (:background "snow" :foreground "blue")))))))
 
 
-(color-theme-twilight)
+;(color-theme-twilight)
 
 (provide 'color-theme-twilight)
 
