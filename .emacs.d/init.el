@@ -30,6 +30,9 @@
 ;; Disable splash screen
 (setq inhibit-splash-screen t)
 
+;; Skip to scratch buffer, with no message
+(setq initial-scratch-message nil)
+
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
