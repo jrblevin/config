@@ -398,38 +398,6 @@
 
 (require 'rainbow-mode)
 
-;;; GTD:
-
-;; (require 'taskpaper-mode)
-
-;; (defconst gtd-next-action-regex
-;;   "^[x-] \\([^@]*\\) @\\([a-z0-9-]+\\)[ \t]*\\( @\\(due\\|remind\\|reminded\\)([0-9-]+ [0-9:]+)\\)?$"
-;;   "Regular expression matching incomplete next actions.")
-
-;; (defun gtd-mark-next-action-complete ()
-;;   (interactive)
-;;   (save-excursion
-;;     (beginning-of-line)
-;;     (when (re-search-forward gtd-next-action-regex nil t)
-;;       (let ((beg (match-beginning 0))
-;;             (project (match-string 2))
-;;             (date (format-time-string "@done(%Y-%m-%d)")))
-;;         (replace-match (concat "+ \\1\\3 " date) nil nil)
-;;         (beginning-of-line)
-;;         (kill-whole-line)
-;;         (let ((deft-filter-regexp nil))
-;;           (deft-open-file (concat deft-directory project ".txt")))
-;;         (goto-char (point-min))
-;;         (when (re-search-forward "^## Completed" nil t)
-;;           (forward-line 2)
-;;           (yank)
-;;           (exchange-point-and-mark))))))
-
-;; (defun gtd-open-todo ()
-;;   (interactive)
-;;   (find-file-other-window "~/gtd/todo.taskpaper")
-;;   (taskpaper-mode))
-
 ;;; todotxt-mode:
 
 ;; (require 'todotxt)
@@ -712,12 +680,13 @@
 
 ;;; IDO mode:
 
-(require 'ido)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(setq ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el"))
-(setq ido-ignore-extensions t)
-(ido-mode t)
+(when (require 'ido nil 'no-error)
+  (require 'ido)
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (setq ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el"))
+  (setq ido-ignore-extensions t)
+  (ido-mode t))
 
 ;;; CSS:
 
@@ -745,14 +714,13 @@
   (add-hook 'ado-mode-hook 'ado-custom))
 
 ;;; Timestamps:
-
-;; (require 'time-stamp)
+(require 'time-stamp)
 ;; (add-hook 'write-file-hooks 'time-stamp)
-;; (setq time-stamp-active t)
-;; (setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
-;; (setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|^modified:[ \t]+\\)")
-;; (setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
-;; (setq time-stamp-line-limit 10)
+(setq time-stamp-active t)
+(setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
+(setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|^modified:[ \t]+\\)")
+(setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
+(setq time-stamp-line-limit 10)
 
 (defun my-insert-year ()
   "Insert the current year."
