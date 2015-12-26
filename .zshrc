@@ -79,7 +79,7 @@ setopt hist_ignore_dups         # ignore repeated commands
 setopt nobeep                   # stop yelling at me
 
 # set common environment variables
-export EDITOR="emacsclient -a vi" # default editor
+export EDITOR="$HOME/bin/EDITOR" # default editor
 
 # tab completion
 autoload -U compinit
@@ -107,6 +107,7 @@ else
 fi
 alias grep='grep --color=auto'
 alias make='make -j'
+alias l='ls -l'
 alias ll='ls -l'
 alias lh='ls -alh'
 alias lr='ls -talr'
