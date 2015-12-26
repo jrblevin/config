@@ -200,9 +200,9 @@
 (global-set-key (kbd "C-c g") 'deft-find-file)
 (global-set-key (kbd "C-c i") 'imenu)
 (global-set-key (kbd "C-c l") 'my-quick-log)
-(global-set-key (kbd "C-c t") 'titlecase-dwim)
-;; (global-set-key (kbd "C-c c") 'gtd-mark-next-action-complete)
-;; (global-set-key (kbd "C-c x") 'gtd-open-todo)
+(global-set-key (kbd "C-c p") 'magit-push)
+(global-set-key (kbd "C-c t") 'time-stamp)
+(global-set-key (kbd "C-c T") 'titlecase-dwim)
 
 ;;; Ispell:
 
