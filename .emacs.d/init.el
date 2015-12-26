@@ -125,12 +125,6 @@
 (server-start)
 (setq server-kill-new-buffers t)
 
-;;; Edit with Emacs Chrome extension:
-
-(require 'edit-server)
-(setq edit-server-new-frame nil)
-(edit-server-start)
-
 ;;; Frame geometry:
 
 ;; Set frame geometry according to display resolution.
