@@ -155,6 +155,50 @@
 ;; (add-hook 'window-configuration-change-hook #'my-resize-margins)
 ;; (my-resize-margins)
 
+;; jrb-write-mode
+(defvar jrb-write-mode nil)
+(defvar jrb-write-mode-width 100)
+(define-minor-mode jrb-write-mode
+  "Minor mode for distraction-free writing."
+  :init-value nil
+  :global t
+  :variable jrb-write-mode
+  :group 'editing-basics
+  (cond ((not jrb-write-mode)
+         (set-fringe-style nil)
+         (visual-line-mode 0)
+         (toggle-frame-fullscreen))
+        (t
+         (toggle-frame-fullscreen)
+         (sleep-for 1)
+         (visual-line-mode 1)
+         (set-fringe-mode
+          (/ (- (frame-pixel-width)
+                (* jrb-write-mode-width (frame-char-width)))
+             2)))))
+
+;; jrb-dual-mode
+(defvar jrb-dual-mode nil)
+(defvar jrb-dual-mode-width 90)
+(define-minor-mode jrb-dual-mode
+  "Dual window mode for writing and previewing."
+  :init-value nil
+  :global t
+  :variable jrb-dual-mode
+  :group 'editing-basics
+  (cond ((not jrb-dual-mode)
+         (delete-other-windows)
+         (set-fringe-style nil)
+         (visual-line-mode 0)
+         (toggle-frame-fullscreen))
+        (t
+         (toggle-frame-fullscreen)
+         (delete-other-windows)
+         (sleep-for 1)
+         (visual-line-mode 1)
+         (let ((half-width (/ (frame-pixel-width) 2)))
+           (set-fringe-mode (/ (- half-width (* jrb-dual-mode-width (frame-char-width))) 2)))
+         (split-window-right))))
 
 ;;; Color Themes:
 
@@ -179,6 +223,7 @@
 (global-set-key [f8] 'deft)
 (global-set-key [f9] 'compile)
 (global-set-key [f10] 'deft-today)
+(global-set-key [f12] 'jrb-write-mode)
 
 (global-set-key [?\M-j] 'fill-sentences)
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
