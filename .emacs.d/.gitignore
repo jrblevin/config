@@ -7,3 +7,5 @@ auto-save-files
 session.*
 bookmarks
 ido.last
+elpa
+.cask
