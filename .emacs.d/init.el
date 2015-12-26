@@ -166,23 +166,14 @@
 
 (require 'color-theme)
 (eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     ;; (require 'color-theme-subdued)
-     ;; (require 'color-theme-gruber-darker)
-     (require 'color-theme-less)
-     (require 'color-theme-twilight)))
-
-;; Selects the appropriate color theme for each frame based on whether
-;; the client is running in console mode or windowed mode.
-(defun my-select-color-theme(frame)
-  (select-frame frame)
-  (if (display-graphic-p frame)
-      (color-theme-twilight)
-    (color-theme-less)))
-
-;; Hook to run after making a new frame
-(add-hook 'after-make-frame-functions 'my-select-color-theme)
+ '(progn
+    (color-theme-initialize)
+    ;(require 'color-theme-subdued)
+    ;(require 'color-theme-gruber-darker)
+    ;(require 'color-theme-less)
+    ;(require 'color-theme-twilight)
+    ;(color-theme-midnight)
+    (color-theme-twilight)))
 
 ;;; Global keybindings:
 
