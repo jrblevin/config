@@ -187,6 +187,7 @@
 (global-set-key [f10] 'deft-today)
 
 (global-set-key [?\M-j] 'fill-sentences)
+(global-set-key (kbd "M-Q") 'unfill-paragraph)
 (global-set-key [\C-\M-down] 'move-line-down)
 (global-set-key [\C-\M-up] 'move-line-up)
 
@@ -724,6 +725,14 @@
         (unless (>= (point) end-marker)
           (delete-horizontal-space)
           (unless (looking-at "\n") (insert "\n")))))))
+
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+;;; From http://www.emacswiki.org/emacs/UnfillParagraph
+(defun unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil region)))
 
 (defun make-row-vector (begin end)
   (interactive "*r")
