@@ -230,12 +230,14 @@
 
 ;;; Markdown:
 
-(setq markdown-command "peg-markdown")
-(setq markdown-open-command "/usr/local/bin/mark")
+(setq markdown-command "multimarkdown")
+(setq markdown-open-command "mark")
 (setq markdown-link-space-sub-char "-")
 (setq markdown-footnote-location 'end)
 (setq markdown-reference-location 'header)
+(setq markdown-live-preview-delete-export 'delete-on-destroy)
 (setq markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
+(setq org-table-automatic-realign nil); for MultiMarkdown tables
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown formatted text files" t)
@@ -246,8 +248,15 @@
 (defun my-markdown-mode-hook ()
   (save-excursion
     (when (re-search-forward "^math:\\s-*itex$" nil t)
-      (markdown-enable-math 1))))
+      (markdown-enable-math 1))
+    ;;(writegood-mode t)
+    ;;(turn-on-flyspell)
+    ))
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
+
+(defun my-gfm-mode-hook ()
+  (visual-line-mode 1))
+(add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
 
 (defun markdown-reload ()
   (interactive)
