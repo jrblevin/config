@@ -110,6 +110,9 @@
 ;; Suppress beeps
 (setq visible-bell t)
 
+;; Allow typing y or n instead of typing yes and no in full
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Make it hard to accidentally kill Emacs
 (global-unset-key (kbd "s-w"))
 (global-unset-key (kbd "s-q"))
