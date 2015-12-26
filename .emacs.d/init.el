@@ -956,6 +956,56 @@
 (add-to-list 'auto-mode-alist '(".muttrc\\'" . muttrc-mode))
 (add-to-list 'auto-mode-alist '(".mutt-aliases\\'" . muttrc-mode))
 
+;;; Visual bell
+
+;; nice little alternative visual bell; Miles Bader <miles /at/ gnu.org>
+
+(defcustom mode-line-bell-string "♪ ding ♪"
+  "Message displayed in mode-line by `mode-line-bell'
+function. Note: there's a magic 2 in the `mode-line-bell'
+function which deals with the size difference of the fullwidth
+characters."
+  :group 'user)
+(defcustom mode-line-bell-delay 0.1
+  "Number of seconds `mode-line-bell' displays its message."
+  :group 'user)
+
+;; internal variables
+(defvar mode-line-bell-cached-string nil)
+(defvar mode-line-bell-propertized-string nil)
+
+(defface mode-line-bell-face
+  '((t (:foreground "black" :background "red")))
+  "Face to use for additionally highlighting rule targets in Font-Lock mode."
+  :group 'user)
+
+(defun mode-line-bell ()
+  "Briefly display a highlighted message in the mode-line.
+
+The string displayed is the value of `mode-line-bell-string',
+with a red background; the background highlighting extends to the
+right margin.  The string is displayed for `mode-line-bell-delay'
+seconds.
+
+This function is intended to be used as a value of `ring-bell-function'."
+
+  (unless (equal mode-line-bell-string mode-line-bell-cached-string)
+    (setq mode-line-bell-propertized-string
+      (propertize
+       (concat
+        (propertize
+         "x"
+         'display
+         `(space :align-to (- right ,(string-width mode-line-bell-string) 2)))
+        mode-line-bell-string)
+       'face 'mode-line-bell-face))
+    (setq mode-line-bell-cached-string mode-line-bell-string))
+  (message mode-line-bell-propertized-string)
+  (sit-for mode-line-bell-delay)
+  (message ""))
+
+(setq ring-bell-function 'mode-line-bell)
+
 ;;; Abbreviations
 
 (defun my-abbrev-expand (expand)
