@@ -22,11 +22,19 @@
 
 ;;; Basic Configuration:
 
-;; Personal information
-(setq user-mail-address "jrblevin@sdf.org")
+;; Disable the scroll bar, toolbar, tooltips, etc.
+(if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode 0))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
+
+;; Disable splash screen
+(setq inhibit-splash-screen t)
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
+
+;; Personal information
+(setq user-mail-address "jrblevin@sdf.org")
 
 ;; Add directories to the path
 (push "/opt/local/bin" exec-path)
@@ -35,15 +43,9 @@
 
 ;; Package management
 (require 'package)
-(package-initialize)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-
-;; Disable the scroll bar, toolbar, tooltips, etc.
-(if (boundp 'scroll-bar-mode)
-    (scroll-bar-mode 0))
-(if (fboundp 'tool-bar-mode)
-    (tool-bar-mode 0))
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
 
 ;; System-specific configuration
 (cond
@@ -53,9 +55,9 @@
   ;; Default Latin font
   (set-face-attribute 'default nil :family "Source Code Pro")
   ;; Default font size (point * 10)
-  (set-face-attribute 'default nil :height 180))
- ((fboundp 'menu-bar-mode)
-  (menu-bar-mode 0)))
+  (set-face-attribute 'default nil :height 180)
+  ;; Default variable pitch font
+  (set-face-attribute 'variable-pitch nil :family "Avenir Next")))
 
 ;; Font Selection
 (set-frame-font "Source Code Pro-18")
@@ -107,9 +109,6 @@
 
 ;; Suppress beeps
 (setq visible-bell t)
-
-;; Disable startup screen
-(setq inhibit-startup-message t)
 
 ;; Make it hard to accidentally kill Emacs
 (global-unset-key (kbd "s-w"))
@@ -925,7 +924,6 @@ most recent kill ring contents and leaves the cursor at %|."
   ("ssig1" "Best,\n\nJason" nil 0)
   ("ssig2" "Best,\n\nProf. Blevins" nil 0)
   ("ssig3" "Best,\n\nJason\n\n-- \nJason R. Blevins\nAssistant Professor of Economics\nThe Ohio State University\nhttp://jblevins.org/\n" nil 0)
-
 
   ;; common phrases
   ("afaict" "as far as I can tell" nil 0)
