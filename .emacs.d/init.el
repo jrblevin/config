@@ -347,9 +347,17 @@
 (add-to-list 'auto-mode-alist '("/MERGE_MSG\\'" . git-commit-mode))
 (add-to-list 'auto-mode-alist '("/TAG_EDITMSG\\'" . git-commit-mode))
 
+;;; scss
+
+(require 'scss-mode)
+
 ;;; titlecase:
 
 (require 'titlecase)
+
+;;; rainbow-mode:
+
+(require 'rainbow-mode)
 
 ;;; GTD:
 
