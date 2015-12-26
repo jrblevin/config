@@ -10,3 +10,4 @@ ido.last
 elpa
 .cask
 ado-mode
+init-local.el

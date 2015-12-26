@@ -1,14 +1,15 @@
-;;; ~/.emacs: Emacs configuration file.                     -*-emacs-lisp-*-
+;;; ~/.emacs.d/init.el: Emacs configuration
 ;;
 ;; Jason Blevins <jrblevin@sdf.org>
 ;; Raleigh, May 29, 2004
 
 ;;; Directory Structure:
 ;;
-;; ~/.emacs                      init file
 ;; ~/.emacs.d/                   user directory
+;; ~/.emacs.d/init.el            init file
+;; ~/.emacs.d/init-local.el      additional private init file
 ;; ~/.emacs.d/backup             single location for backup files
-;; ~/.emacs.d/site-lisp          packages
+;; ~/.emacs.d/site-lisp          manually installed packages
 
 ;;; Emacs X Resources:
 ;;
@@ -35,6 +36,7 @@
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
+(add-to-list 'load-path "/opt/local/share/emacs/site-lisp/")
 
 ;; Personal information
 (setq user-mail-address "jrblevin@sdf.org")
