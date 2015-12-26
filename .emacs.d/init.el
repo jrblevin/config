@@ -266,7 +266,32 @@
   (when (featurep 'markdown-mode) (unload-feature 'markdown-mode))
   (load-library (expand-file-name "~/projects/markdown-mode/markdown-mode.el"))
   (load-library (expand-file-name "~/projects/markdown-mode/tests/markdown-test.el"))
+  ;;(setq debug-on-quit t)
   (markdown-mode))
+
+;;; MMM Mode:
+
+;; (require 'mmm-mode)
+;; (setq mmm-global-mode 'maybe)
+;; (setq mmm-parse-when-idle 't)
+
+;; (defun my-mmm-markdown-auto-class (lang &optional submode)
+;;   (let ((class (intern (concat "markdown-" lang)))
+;;         (submode (or submode (intern (concat lang "-mode"))))
+;;         (front (concat "^```" lang "[\n\r]+"))
+;;         (back "^```"))
+;;     (mmm-add-classes (list (list class :submode submode :front front :back back)))
+;;     (mmm-add-mode-ext-class 'markdown-mode nil class)))
+
+;; (mapc 'my-mmm-markdown-auto-class
+;;       '("awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
+;;         "markdown" "python" "r" "ruby" "sql" "stata" "xml" "octave"))
+
+;; ;; Mode names that differ from language names
+;; (my-mmm-markdown-auto-class "bib" 'bibtex-mode)
+;; (my-mmm-markdown-auto-class "fortran" 'f90-mode)
+;; (my-mmm-markdown-auto-class "perl" 'cperl-mode)
+;; (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
 
 ;;; Deft:
 
@@ -274,12 +299,21 @@
 (setq deft-directory "~/gtd/")
 (setq deft-auto-save-interval 2)
 (setq deft-recursive t)
-(setq deft-extensions '("txt" "text" "tex" "org"))
-(setq deft-use-filter-string-for-filename t)
-;;(setq deft-use-filename-as-title t)
-(setq deft-file-naming-rules '((nospace . "-")
+(setq deft-extensions '("txt" "text" "tex" "taskpaper" "org"))
+(setq deft-use-filter-string-for-filename nil)
+(setq deft-markdown-mode-title-level 1)
+(setq deft-use-filename-as-title nil)
+(setq deft-file-naming-rules '((noslash . "-")
+                               (nospace . "-")
                                (case-fn . downcase)))
-(deft)
+(setq deft-strip-summary-regexp
+      (concat "\\("
+              "[\n\t]" ;; blank
+              "\\|^<!-- #pending -->"
+              "\\|^<!-- #active -->"
+              "\\|^#\\+OPTIONS:.*$" ;; org-mode metadata
+              "\\|^#\\+AUTHOR:.*$" ;; org-mode-metadata
+              "\\)"))
 
 (defun deft-today ()
   (interactive)
@@ -291,7 +325,7 @@
       (deft-new-file-named today)
       (goto-char (point-min))
       (unless (looking-at (concat "^" today))
-        (insert today "\n\n<!-- #pending -->\n\n")))))
+        (insert "# " today "\n\n<!-- #pending -->\n\n")))))
 
 (defun deft-reload ()
   (interactive)
