@@ -683,7 +683,7 @@
 (defun n-cperl-mode-hook ()
   (setq cperl-indent-level 4)
   (setq cperl-continued-statement-offset 2)
-  (setq cperl-extra-newline-before-brace t))
+  (setq cperl-extra-newline-before-brace nil))
 
 ;;; C and C++:
 
