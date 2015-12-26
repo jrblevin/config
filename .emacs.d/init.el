@@ -726,16 +726,23 @@
 ;;; Emacs Speaks Statistics:
 
 (require 'ess-site)
+(defun my-ess-mode-hook()
+  (when (string-equal ess-language "STA")
+    (define-key ess-mode-map (kbd "_") nil)))
+
+(add-hook 'ess-mode-hook 'my-ess-mode-hook)
 
 ;;; ado-mode:
 
-(defun ado-custom()
-  "ado-mode-hook"
-  (setq ado-claim-name "Jason Blevins")
-  (setq ado-signature-file "~/.emacs.d/.ado-signature")
-  (setq ado-site-template-dir "/usr/local/share/emacs/ado-mode/templates/")
-  (setq ado-date-format "%Y-%m-%d"))
-(add-hook 'ado-mode-hook 'ado-custom)
+(setq load-path (cons "~/.emacs.d/site-lisp/ado-mode/lisp" load-path))
+(when (require 'ado-mode nil 'no-error)
+  (defun ado-custom()
+    "ado-mode-hook"
+    (setq ado-claim-name "Jason Blevins")
+    (setq ado-signature-file "~/.emacs.d/.ado-signature")
+    (setq ado-site-template-dir "~/.emacs.d/site-lisp/ado-mode/templates/")
+    (setq ado-date-format "%Y-%m-%d"))
+  (add-hook 'ado-mode-hook 'ado-custom))
 
 ;;; Timestamps:
 
