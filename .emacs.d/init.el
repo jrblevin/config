@@ -996,6 +996,12 @@ most recent kill ring contents and leaves the cursor at %|."
   ;; email shortcuts
   ("ssorry" "I'm very sorry for the delay in getting back to you." nil 0)
 
+  ;; keyboard symbols
+  ("cctl" "⌃" nil 0)
+  ("ccmd" "⌘" nil 0)
+  ("oopt" "⌥" nil 0)
+  ("sshift" "⇧" nil 0)
+
   ;; autocorrect
   ("adn" "and" nil 0)
   ("alot" "a lot" nil 0)
