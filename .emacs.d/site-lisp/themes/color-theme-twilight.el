@@ -134,8 +134,20 @@
 	  (text-cursor ((t (:background "yellow" :foreground "black"))))
 	  (toolbar ((t (nil))))
 	  (underline ((nil (:underline nil))))
-	  (zmacs-region ((t (:background "snow" :foreground "blue")))))))
+	  (zmacs-region ((t (:background "snow" :foreground "blue"))))
 
+          ;; term
+          (term-color-black ((t (:foreground "#313131" :background "#141414"))))
+          (term-color-red ((t (:foreground "#CF6A4C" :background "#a3472c"))))
+          (term-color-green ((t (:foreground "#8F9D6A" :background "#646d4a"))))
+          (term-color-yellow ((t (:foreground "#efa510" :background "#CDA869"))))
+          (term-color-blue ((t (:foreground "#7587A6" :background "#5d6c84"))))
+          (term-color-magenta ((t (:foreground "#EE799F" :background "#EF2929"))))
+          (term-color-cyan ((t (:foreground "#5d8084" :background "#41595c"))))
+          (term-color-white ((t (:foreground "#CACACA" :background "#5F5A60"))))
+          (term-default-fg-color ((t (:inherit term-color-white))))
+          (term-default-bg-color ((t (:inherit term-color-black))))
+          )))
 
 ;(color-theme-twilight)
 
