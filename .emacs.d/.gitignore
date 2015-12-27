@@ -11,3 +11,4 @@ elpa
 .cask
 ado-mode
 init-local.el
+init-junk.el
