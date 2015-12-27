@@ -2,9 +2,12 @@
 #
 # Jason Blevins <jrblevin@sdf.org>
 # Carrboro, November 16, 2008
-# Last Modified: June 16, 2015 12:06 EDT
+# Last Modified: December 26, 2015
 
 ### System-Specific Configuration
+
+# Basic $PATH
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 # Architecture-specific settings
 ARCH=`uname -m`
