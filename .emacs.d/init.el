@@ -42,9 +42,11 @@
 (setq user-mail-address "jrblevin@sdf.org")
 
 ;; Add directories to the path
+(push "/bin" exec-path)
+(push "/usr/bin" exec-path)
 (push "/opt/local/bin" exec-path)
 (push "/usr/local/bin" exec-path)
-(setenv "PATH" (concat "/opt/local/bin:/usr/local/bin" (getenv "PATH")))
+(setenv "PATH" (concat "/opt/local/bin:/usrb/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" (getenv "PATH")))
 
 ;; Package management
 (require 'package)
