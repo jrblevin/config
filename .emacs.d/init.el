@@ -47,10 +47,10 @@
 (push "/usr/bin" exec-path)
 (push "/opt/local/bin" exec-path)
 (push "/usr/local/bin" exec-path)
-(setenv "PATH" (concat "/opt/local/bin:/usrb/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" (getenv "PATH")))
+(setenv "PATH" (concat "/opt/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" (getenv "PATH")))
 (let ((home-bin (concat (getenv "HOME") "/bin")))
   (push home-bin exec-path)
-  (setenv "PATH" (concat home-bin (getenv "PATH"))))
+  (setenv "PATH" (concat home-bin ":" (getenv "PATH"))))
 
 ;; Package management
 (require 'package)
