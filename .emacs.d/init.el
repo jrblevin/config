@@ -35,6 +35,7 @@
 (setq initial-scratch-message nil)
 
 ;; Set the load path
+(add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 (add-to-list 'load-path "/opt/local/share/emacs/site-lisp/")
 
@@ -1208,3 +1209,7 @@ and subsequent lines as the event note."
               end tell"
              (applescript-quote-string event)
              (applescript-quote-string notes)))))
+
+;;; Local configuration
+
+(load-library "init-local.el")
