@@ -242,6 +242,7 @@
 
 (global-set-key (kbd "C-c d") 'deft)
 (global-set-key (kbd "C-c D") 'deft-today)
+(global-set-key (kbd "C-c M") 'deft-tomorrow)
 (global-set-key (kbd "C-c s") 'magit-status)
 (global-set-key (kbd "C-c g") 'deft-find-file)
 (global-set-key (kbd "C-c i") 'imenu)
@@ -361,19 +362,29 @@
               "\\|^#\\+AUTHOR:.*$" ;; org-mode-metadata
               "\\)"))
 
-(defun deft-today ()
+(defun deft-daily (iso)
   (interactive)
-  (let* ((today (format-time-string "%Y-%m-%d"))
-         (filename (concat deft-directory today ".txt"))
-         (deft-filter-regexp nil))
+  (let ((filename (concat deft-directory iso ".txt"))
+        (deft-filter-regexp nil))
     (if (file-exists-p filename)
         (deft-open-file filename t t)
-      (deft-new-file-named today)
+      (deft-new-file-named iso)
       (goto-char (point-min))
-      (unless (looking-at (concat "^" today))
-        (insert "# " today "\n\n<!-- #pending -->\n\n")))))
+      (unless (looking-at (concat "^" iso))
+        (insert "# " iso "\n\n<!-- #pending -->\n\n")))))
+
+(defun deft-today ()
+  "Create or open a Deft note for today."
+  (interactive)
+  (deft-daily (format-time-string "%Y-%m-%d")))
+
+(defun deft-tomorrow ()
+  "Create or open a Deft note for tomorrow."
+  (interactive)
+  (deft-daily (format-time-string "%Y-%m-%d" (tomorrow-time))))
 
 (defun deft-reload ()
+  "Reload Deft from source (for development)."
   (interactive)
   (quit-window)
   (load-library "/Users/jblevins/projects/deft/deft.el")
@@ -809,6 +820,20 @@
       (goto-char a)
       (while (re-search-forward "[ ]+" b t)
         (replace-match " " nil nil)))))
+
+(defun tomorrow-time ()
+ "Provide the time 24 hours from now in the same format as `current-time'.
+Modified slightly from <http://www.emacswiki.org/emacs/Journal>."
+ (let* ((now-time (current-time))          ; get the time now
+        (hi (car now-time))                ; save off the high word
+        (lo (car (cdr now-time)))          ; save off the low word
+        (msecs (nth 2 now-time)))          ; save off the milliseconds
+    (if (> lo 44671)                       ; If low word too big for adding to,
+        (setq hi (+ hi 2)                  ; carry 2 to the high word,
+              lo (- lo 44672))             ; subtract from the low
+      (setq hi (+ hi 1)                    ; else, add 86400 seconds
+            lo (+ lo 20864)))              ; (in two parts)
+    (list hi lo msecs)))
 
 ;; Open files in dired mode using 'open'
 (eval-after-load "dired"
