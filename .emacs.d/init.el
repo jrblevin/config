@@ -174,11 +174,15 @@
   (cond ((not jrb-write-mode)
          (set-fringe-style nil)
          (visual-line-mode 0)
+         (setq line-spacing nil)
+         (set-face-attribute 'default nil :height 180)
          (toggle-frame-fullscreen))
         (t
          (toggle-frame-fullscreen)
          (sleep-for 1)
          (visual-line-mode 1)
+         (setq line-spacing 0.5)
+         (set-face-attribute 'default nil :height 240)
          (set-fringe-mode
           (/ (- (frame-pixel-width)
                 (* jrb-write-mode-width (frame-char-width)))
