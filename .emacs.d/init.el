@@ -288,6 +288,7 @@
 (setq markdown-link-space-sub-char "-")
 (setq markdown-footnote-location 'end)
 (setq markdown-reference-location 'header)
+(setq markdown-asymmetric-header t)
 (setq markdown-live-preview-delete-export 'delete-on-destroy)
 (setq markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
 (setq org-table-automatic-realign nil); for MultiMarkdown tables
