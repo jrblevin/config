@@ -233,8 +233,8 @@
 (global-set-key (kbd "<f7>") 'markdown-mode)
 (global-set-key (kbd "<f8>") 'deft)
 (global-set-key (kbd "<f9>") 'compile)
-(global-set-key (kbd "<f10>") 'deft-today)
-(global-set-key (kbd "<f12>") 'jrb-write-mode)
+(global-set-key (kbd "<f10>") 'jrb-write-mode)
+(global-set-key (kbd "<f12>") 'jrb-dual-mode)
 
 (global-set-key [?\M-j] 'fill-sentences)
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
