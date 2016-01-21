@@ -226,15 +226,15 @@
 
 ;;; Global keybindings:
 
-(global-set-key [f3] 'my-insert-date-time)
-(global-set-key [f4] 'revert-buffer-no-confirm)
-(global-set-key [f5] 'my-quick-log)
-(global-set-key [f6] 'calendar)
-(global-set-key [f7] 'markdown-mode)
-(global-set-key [f8] 'deft)
-(global-set-key [f9] 'compile)
-(global-set-key [f10] 'deft-today)
-(global-set-key [f12] 'jrb-write-mode)
+(global-set-key (kbd "<f3>") 'my-insert-date-time)
+(global-set-key (kbd "<f4>") 'revert-buffer-no-confirm)
+(global-set-key (kbd "<f5>") 'my-quick-log)
+(global-set-key (kbd "<f6>") 'calendar)
+(global-set-key (kbd "<f7>") 'markdown-mode)
+(global-set-key (kbd "<f8>") 'deft)
+(global-set-key (kbd "<f9>") 'compile)
+(global-set-key (kbd "<f10>") 'deft-today)
+(global-set-key (kbd "<f12>") 'jrb-write-mode)
 
 (global-set-key [?\M-j] 'fill-sentences)
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
