@@ -708,6 +708,7 @@
 
 ;;; Emacs Speaks Statistics:
 
+(add-to-list 'load-path "/opt/local/share/emacs/site-lisp/ess/")
 (when (require 'ess-site nil 'no-error)
   (defun my-ess-mode-hook()
     (when (string-equal ess-language "STA")
