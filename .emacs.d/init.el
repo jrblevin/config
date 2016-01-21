@@ -234,6 +234,7 @@
 (global-set-key (kbd "<f8>") 'deft)
 (global-set-key (kbd "<f9>") 'compile)
 (global-set-key (kbd "<f10>") 'jrb-write-mode)
+(global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "<f12>") 'jrb-dual-mode)
 
 (global-set-key [?\M-j] 'fill-sentences)
