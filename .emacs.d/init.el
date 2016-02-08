@@ -226,6 +226,9 @@
 
 ;;; Global keybindings:
 
+(global-set-key (kbd "C-M-<backspace>") 'backward-kill-word)
+(global-set-key (kbd "M-<backspace>") 'backward-delete-word)
+
 (global-set-key (kbd "<f3>") 'my-insert-date-time)
 (global-set-key (kbd "<f4>") 'revert-buffer-no-confirm)
 (global-set-key (kbd "<f5>") 'my-quick-log)
@@ -891,6 +894,14 @@ Modified slightly from <http://www.emacswiki.org/emacs/Journal>."
   (interactive "r")
   (align-regexp start end
                 "\\(\\s-*\\)\\&" 1 1 t))
+
+;; Deleting rather than killing the previous word
+;; http://stackoverflow.com/questions/6133799/delete-a-word-without-adding-it-to-the-kill-ring-in-emacs
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
 
 ;;; Calendar and Diary:
 
