@@ -68,7 +68,9 @@
   (set-face-attribute 'default nil :family "Source Code Pro")
   ;; Default font size (point * 10)
   (set-face-attribute 'default nil :height 180)
-  ;; Default variable pitch font
+  ;; Default fixed-pitch font
+  (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
+  ;; Default variable-pitch font
   (set-face-attribute 'variable-pitch nil :family "Avenir Next")))
 
 ;; Font Selection
