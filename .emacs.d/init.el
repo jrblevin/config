@@ -351,9 +351,10 @@
 
 ;;; MMM Mode:
 
-;; (require 'mmm-mode)
-;; (setq mmm-global-mode 'maybe)
-;; (setq mmm-parse-when-idle 't)
+(require 'mmm-auto)
+(setq mmm-global-mode 'maybe)
+(setq mmm-parse-when-idle 't)
+(setq mmm-submode-decoration-level 0)
 
 ;; (defun my-mmm-markdown-auto-class (lang &optional submode)
 ;;   (let ((class (intern (concat "markdown-" lang)))
@@ -372,6 +373,17 @@
 ;; (my-mmm-markdown-auto-class "fortran" 'f90-mode)
 ;; (my-mmm-markdown-auto-class "perl" 'cperl-mode)
 ;; (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
+
+(defun jrb-mmm-latex-auto-class (lang &optional submode)
+  (let ((class (intern (concat "latex-" lang)))
+        (submode (or submode (intern (concat lang "-mode"))))
+        (front (concat "^\\\\begin{\\(pre\\|interface\\)}{" lang "}[\n\r]+"))
+        (back "^\\\\end{\\(pre\\|interface\\)}"))
+    (mmm-add-classes (list (list class :submode submode :front front :back back)))
+    (mmm-add-mode-ext-class 'latex-mode nil class)))
+
+(jrb-mmm-latex-auto-class "C" 'c-mode)
+(jrb-mmm-latex-auto-class "Fortran" 'f90-mode)
 
 ;;; Deft:
 
