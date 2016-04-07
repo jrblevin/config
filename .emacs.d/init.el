@@ -654,6 +654,22 @@
 ;; Use Command-Shift-click to reverse search in Skim.
 ;; See http://www.stefanom.org/setting-up-a-nice-auctex-environment-on-mac-os-x/
 (add-hook 'LaTeX-mode-hook (lambda ()
+  (setq LaTeX-font-list
+        (append
+         TeX-font-list
+         '(
+           (?\C-l "\\code{" "}")
+           (?c "\\code[C]{" "}")
+           (?f "\\code[Fortran]{" "}")
+           (?C "\\code[C]|" "|")
+           (?F "\\code[Fortran]|" "|")
+           ;; (?\C-l "\\lstinline|" "|")
+           ;; (?c "\\lstinline[language=C]|" "|")
+           ;; (?f "\\lstinline[language=Fortran]|" "|")
+           )))
+   (TeX-add-symbols
+    '("code" TeX-arg-verb))
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "code")
   (push
     '("latexmk" "latexmk -g -synctex=1 -pdf %s" TeX-run-TeX nil t
       :help "Run latexmk on file")
@@ -663,6 +679,40 @@
       :help "Run bibtool on aux file to produce bib file")
     TeX-command-list)))
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+
+;; Set up a custom "code" environment
+
+(defvar jrb-LaTeX-env-code-language-history nil
+  "History list of languages used in the current buffer in LaTeX code blocks.")
+
+(defun jrb-LaTeX-env-code (environment)
+  "Insert code environment with optional language"
+  (let ((lang (completing-read
+               "(Optional) Language: "
+               (list "Fortran" "C" "Perl" "Python" "Emacs-Lisp" "Shell" "Make")
+               nil 'confirm "Fortran"
+               'jrb-LaTeX-env-code-language-history)))
+    (LaTeX-insert-environment environment
+                              (unless (zerop (length lang))
+                                (concat LaTeX-optop lang LaTeX-optcl)))))
+
+(defun jrb-LaTeX-setup-code-env (env)
+  (add-to-list 'LaTeX-indent-environment-list
+               '(env current-indentation))
+  (LaTeX-add-environments '(env jrb-LaTeX-env-code))
+  (setq LaTeX-verbatim-regexp (concat LaTeX-verbatim-regexp "\\|" env))
+  (add-to-list 'LaTeX-verbatim-environments-local env))
+
+(defun jrb-LaTeX-mode-hook-setup-code ()
+  (jrb-LaTeX-setup-code-env "pre")
+  (jrb-LaTeX-setup-code-env "interface")
+  ;; For syntactic fontification, e.g. verbatim constructs.
+  (font-latex-set-syntactic-keywords)
+  ;; Tell font-lock about the update.
+  (setq font-lock-set-defaults nil)
+  (font-lock-set-defaults))
+
+(add-hook 'LaTeX-mode-hook 'jrb-LaTeX-mode-hook-setup-code)
 
 ;;; BibTeX:
 
@@ -1189,7 +1239,6 @@ most recent kill ring contents and leaves the cursor at %|."
 
 ;; Turn on abbrev mode globally
 (setq-default abbrev-mode t)
-
 
 ;;; Skeleton Templates:
 
