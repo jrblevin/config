@@ -641,7 +641,7 @@
 
 (defun my-remove-Biber ()
   "Remove Biber command"
-  (delete-if (lambda (item) (string-equal "Biber" (car item))) TeX-command-list))
+  (cl-delete-if (lambda (item) (string-equal "Biber" (car item))) TeX-command-list))
 
 (defun my-TeX-mode-hook-fn ()
   "Function added to `TeX-mode-hook'."
