@@ -322,8 +322,7 @@
 (defun my-markdown-mode-hook ()
   (save-excursion
     (when (re-search-forward "^math:\\s-*itex$" nil t)
-      (markdown-enable-math 1)))
-  (turn-on-flyspell))
+      (markdown-enable-math 1))))
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
 (defun my-gfm-mode-hook ()
