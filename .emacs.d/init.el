@@ -340,6 +340,15 @@
   ;;(setq debug-on-quit t)
   (markdown-mode))
 
+(defun jrb-fortran-code-block-region (beg end)
+  (interactive "r")
+  (save-excursion
+    (goto-char end)
+    (skip-chars-backward "\n")
+    (insert "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    (goto-char beg)
+    (insert "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {: lang=fortran }\n")))
+
 ;;; MMM Mode:
 
 ;; (require 'mmm-mode)
