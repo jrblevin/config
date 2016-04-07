@@ -607,6 +607,7 @@
 (setq completion-ignored-extensions
       (append completion-ignored-extensions
               '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
+                ".minted"
                 ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz")))
 (setq TeX-PDF-mode t
       TeX-parse-self t
