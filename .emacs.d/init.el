@@ -94,7 +94,7 @@
 (setq tab-width 8)
 
 ;; Synchronize Emacs kill buffer with X clipboard.
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 
 ;; Store backup files in one place.  Do the same for auto save files.
 ;; http://www.emacswiki.org/emacs/AutoSave
