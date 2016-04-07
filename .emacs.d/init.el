@@ -154,6 +154,10 @@
                (cons 'height (/ (- (x-display-pixel-height) 50)
                                 (frame-char-height)))))
 
+;; Window splitting thresholds
+(setq split-height-threshold nil)
+(setq split-width-threshold 140)
+
 ;;; Margins:
 
 ;; Set margins to center content in window.
