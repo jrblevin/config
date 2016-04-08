@@ -604,84 +604,63 @@
 ;;; AUCTeX:
 
 (load "auctex.el" nil t t)
+
+(setq TeX-parse-self t)
+(setq TeX-auto-save nil)
+(setq TeX-command-default "latexmk")
+(setq font-latex-match-slide-title-keywords '("foilhead"))
+
+;; Exclude temporary files from completion
 (setq completion-ignored-extensions
       (append completion-ignored-extensions
               '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
-                ".minted"
-                ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz")))
-(setq TeX-PDF-mode t
-      TeX-parse-self t
-      TeX-auto-save nil
-      TeX-source-specials-mode t
-      font-latex-match-slide-title-keywords '("foilhead")
-      TeX-view-program-list
-      (quote
-       (("Preview" "/usr/bin/open -a Preview.app %o")
-        ;; Skim's displayline is used for forward search (from .tex to .pdf)
-        ;; option -b highlights the current line;
-        ;; option -g opens Skim in the background;
-        ;; option -r asks Skim to revert the file
-        ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -r -b %n %o %b")))
-      TeX-view-program-selection
-      (cond
-       ((eq system-type (quote darwin))
-        (quote
-         ((output-dvi "Skim")
-          (output-pdf "Skim")
-          (output-html "Skim"))))
-       (t
-        (quote
-         ((output-dvi "xdvi")
-          (output-pdf "Evince")
-          (output-html "xdg-open"))))))
+                ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz"
+                ".minted")))
 
-;;; RefTeX
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-plug-into-AUCTeX t)
+;; One-time TeX setup
+(eval-after-load "tex"
+  '(progn
+     ;; make latexmk available via C-c C-c
+     ;; Use Command-Shift-click to reverse search in Skim.
+     ;; See http://www.stefanom.org/setting-up-a-nice-auctex-environment-on-mac-os-x/
+     (push
+      '("latexmk" "latexmk -g -synctex=1 -pdf %s" TeX-run-TeX nil t
+        :help "Run latexmk on file")
+      TeX-command-list)
 
-(defun my-remove-Biber ()
-  "Remove Biber command"
-  (cl-delete-if (lambda (item) (string-equal "Biber" (car item))) TeX-command-list))
+     ;; make bibtool available via C-c C-c
+     (push
+      '("bibtool" "bibtool -x %s.aux > %s.bib" TeX-run-TeX nil t
+        :help "Run bibtool on aux file to produce bib file")
+      TeX-command-list)
 
-(defun my-TeX-mode-hook-fn ()
-  "Function added to `TeX-mode-hook'."
-  (turn-on-flyspell)
-  (my-remove-Biber)
+     ;; Remove Biber command (so that bib completes to BibTeX)
+     (cl-delete-if (lambda (x) (string-equal "Biber" (car x))) TeX-command-list)
+
+     ;; Viewers
+     (setq TeX-view-program-list
+           '(("Preview" "/usr/bin/open -a Preview.app %o")
+             ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -r -b %n %o %b")))
+     (setq TeX-view-program-selection
+           '((output-dvi "Skim") (output-pdf "Skim") (output-html "open")))))
+
+
+(defun jrb-LaTeX-hook-fn ()
+  (setq LaTeX-font-list (append
+                         LaTeX-font-list
+                         '((?\C-l "\\code{" "}")
+                           (?c "\\code[C]{" "}")
+                           (?f "\\code[Fortran]{" "}")
+                           (?C "\\code[C]|" "|")
+                           (?F "\\code[Fortran]|" "|"))))
+  ;;(setq reftex-plug-into-AUCTeX t)
+  ;;(turn-on-reftex)
+  ;;(turn-on-flyspell)
   (LaTeX-math-mode 1))
-(add-hook 'TeX-mode-hook 'my-TeX-mode-hook-fn)
 
-;; make latexmk available via C-c C-c
-;; Use Command-Shift-click to reverse search in Skim.
-;; See http://www.stefanom.org/setting-up-a-nice-auctex-environment-on-mac-os-x/
-(add-hook 'LaTeX-mode-hook (lambda ()
-  (setq LaTeX-font-list
-        (append
-         TeX-font-list
-         '(
-           (?\C-l "\\code{" "}")
-           (?c "\\code[C]{" "}")
-           (?f "\\code[Fortran]{" "}")
-           (?C "\\code[C]|" "|")
-           (?F "\\code[Fortran]|" "|")
-           ;; (?\C-l "\\lstinline|" "|")
-           ;; (?c "\\lstinline[language=C]|" "|")
-           ;; (?f "\\lstinline[language=Fortran]|" "|")
-           )))
-   (TeX-add-symbols
-    '("code" TeX-arg-verb))
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "code")
-  (push
-    '("latexmk" "latexmk -g -synctex=1 -pdf %s" TeX-run-TeX nil t
-      :help "Run latexmk on file")
-    TeX-command-list)
-  (push
-    '("bibtool" "bibtool -x %s.aux > %s.bib" TeX-run-TeX nil t
-      :help "Run bibtool on aux file to produce bib file")
-    TeX-command-list)))
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+(add-hook 'LaTeX-mode-hook 'jrb-LaTeX-hook-fn)
 
-;; Set up a custom "code" environment
-
+;; Custom code macro, interface and pre environments
 (defvar jrb-LaTeX-env-code-language-history nil
   "History list of languages used in the current buffer in LaTeX code blocks.")
 
@@ -694,25 +673,47 @@
                'jrb-LaTeX-env-code-language-history)))
     (LaTeX-insert-environment environment
                               (unless (zerop (length lang))
-                                (concat LaTeX-optop lang LaTeX-optcl)))))
+                                (concat TeX-grop lang TeX-grcl)))))
 
-(defun jrb-LaTeX-setup-code-env (env)
-  (add-to-list 'LaTeX-indent-environment-list
-               '(env current-indentation))
-  (LaTeX-add-environments '(env jrb-LaTeX-env-code))
-  (setq LaTeX-verbatim-regexp (concat LaTeX-verbatim-regexp "\\|" env))
-  (add-to-list 'LaTeX-verbatim-environments-local env))
+(defun jrb-LaTeX-setup-code ()
+  (TeX-add-style-hook
+   "code"
+   (lambda ()
+     ;; New symbols
+     (TeX-add-symbols
+      '("code" TeX-arg-verb))
 
-(defun jrb-LaTeX-mode-hook-setup-code ()
-  (jrb-LaTeX-setup-code-env "pre")
-  (jrb-LaTeX-setup-code-env "interface")
-  ;; For syntactic fontification, e.g. verbatim constructs.
-  (font-latex-set-syntactic-keywords)
-  ;; Tell font-lock about the update.
-  (setq font-lock-set-defaults nil)
-  (font-lock-set-defaults))
+     ;; New environments
+     (LaTeX-add-environments
+      '("pre" jrb-LaTeX-env-code)
+      '("interface" jrb-LaTeX-env-code))
 
-(add-hook 'LaTeX-mode-hook 'jrb-LaTeX-mode-hook-setup-code)
+     ;; Filling
+     (make-local-variable 'LaTeX-indent-environment-list)
+     (add-to-list 'LaTeX-indent-environment-list
+                  '("pre" current-indentation))
+     (add-to-list 'LaTeX-indent-environment-list
+                  '("interface" current-indentation))
+     (make-local-variable 'LaTeX-verbatim-regexp)
+     (setq LaTeX-verbatim-regexp
+           (concat LaTeX-verbatim-regexp "\\|pre\\|interface"))
+     (add-to-list 'LaTeX-verbatim-environments-local "pre")
+     (add-to-list 'LaTeX-verbatim-environments-local "interface")
+     (add-to-list 'LaTeX-verbatim-macros-with-delims-local "code")
+     (add-to-list 'LaTeX-verbatim-macros-with-braces-local "code")
+
+     ;; Fontification
+     (when (and (fboundp 'font-latex-add-keywords)
+                (fboundp 'font-latex-set-syntactic-keywords)
+                (eq TeX-install-font-lock 'font-latex-setup))
+       (font-latex-add-keywords '(("code" "[{")) 'textual)
+       ;; For syntactic fontification, e.g. verbatim constructs.
+       (font-latex-set-syntactic-keywords)
+       ;; Tell font-lock about the update.
+       (setq font-lock-set-defaults nil)
+       (font-lock-set-defaults)))
+   LaTeX-dialect)
+  (TeX-run-style-hooks "code"))
 
 ;;; BibTeX:
 
