@@ -31,11 +31,16 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 0))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 
-;; Disable splash screen
-(setq inhibit-splash-screen t)
+;; Highlight current line, blink cursor
+(if (fboundp 'global-hl-line-mode) (global-hl-line-mode 1))
+(if (fboundp 'blink-cursor-mode) (blink-cursor-mode 1))
 
-;; Skip to scratch buffer, with no message
-(setq initial-scratch-message nil)
+(setq inhibit-splash-screen     t       ; Disable splash screen
+      initial-scratch-message   nil     ; No scratch buffer message
+      transient-mark-mode       nil     ; Disable transient-mark-mode
+      select-enable-clipboard   t       ; Sync kill ring and clipboard
+      visible-bell              t       ; Suppress beeps
+      )
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
@@ -80,23 +85,9 @@
 ;; Default variable-pitch font
 (set-face-attribute 'variable-pitch nil :family "Avenir Next")
 
-;; Disable transient-mark-mode
-(setq transient-mark-mode nil)
-
-;; Highlight current line
-(when (fboundp 'global-hl-line-mode)
-  (global-hl-line-mode 1))
-
-;; Blinking cursor
-(when (fboundp 'blink-cursor-mode)
-  (blink-cursor-mode 1))
-
 ;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
 (setq-default indent-tabs-mode nil)
 (setq tab-width 8)
-
-;; Synchronize Emacs kill buffer with X clipboard.
-(setq select-enable-clipboard t)
 
 ;; Store backup files in one place.  Do the same for auto save files.
 ;; http://www.emacswiki.org/emacs/AutoSave
@@ -116,12 +107,6 @@
 
 ;; Show the column number in the mode line.
 (column-number-mode 1)
-
-;; Don't print a header
-(setq ps-print-header nil)
-
-;; Suppress beeps
-(setq visible-bell t)
 
 ;; Allow typing y or n instead of typing yes and no in full
 (defalias 'yes-or-no-p 'y-or-n-p)
