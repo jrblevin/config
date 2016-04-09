@@ -57,6 +57,7 @@
       '(magit
         ido-completing-read+
         mmm-mode
+        smex
         rainbow-mode
         exec-path-from-shell
         flycheck
@@ -1089,6 +1090,10 @@ With argument ARG, do this that many times."
 (autoload 'muttrc-mode "muttrc-mode.el" "Major mode to edit muttrc files" t)
 (add-to-list 'auto-mode-alist '(".muttrc\\'" . muttrc-mode))
 (add-to-list 'auto-mode-alist '(".mutt-aliases\\'" . muttrc-mode))
+
+;;; Smex
+(autoload 'smex "smex")
+(global-set-key (kbd "M-x") 'smex)
 
 ;;; Visual bell
 
