@@ -55,6 +55,7 @@
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (setq package-selected-packages
       '(magit
+        ido-completing-read+
         mmm-mode
         rainbow-mode
         exec-path-from-shell
