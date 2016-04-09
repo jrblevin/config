@@ -240,6 +240,13 @@ if [[ $OS == "Darwin" ]]; then
     fi
 fi
 
+# Python
+if [[ $OS == "Darwin" ]]; then
+    if [[ ! -z $(which python2.7) ]]; then
+        export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}
+    fi
+fi
+
 ### Paths
 
 # Library path
