@@ -43,16 +43,6 @@
 ;; Personal information
 (setq user-mail-address "jrblevin@sdf.org")
 
-;; Add directories to the path
-(push "/bin" exec-path)
-(push "/usr/bin" exec-path)
-(push "/opt/local/bin" exec-path)
-(push "/usr/local/bin" exec-path)
-(setenv "PATH" (concat "/opt/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:" (getenv "PATH")))
-(let ((home-bin (concat (getenv "HOME") "/bin")))
-  (push home-bin exec-path)
-  (setenv "PATH" (concat home-bin ":" (getenv "PATH"))))
-
 ;; Package management
 (require 'package)
 (add-to-list 'package-archives
@@ -62,6 +52,8 @@
 ;; System-specific configuration
 (cond
  ((eq system-type 'darwin)
+  ;; Import PATH and exec-path from system
+  (exec-path-from-shell-initialize)
   ;; Menu bar takes up no additional space in OS X.
   (menu-bar-mode 1)
   ;; Default font size (point * 10)
