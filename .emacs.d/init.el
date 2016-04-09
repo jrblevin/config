@@ -306,6 +306,7 @@
 (add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
 
 (defun markdown-reload ()
+  "Reload markdown mode from source (for development)."
   (interactive)
   (when (eq major-mode 'markdown-mode)
     (fundamental-mode))
