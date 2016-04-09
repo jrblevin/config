@@ -10,6 +10,7 @@
 ;; ~/.emacs.d/init-local.el      additional private init file
 ;; ~/.emacs.d/backup             single location for backup files
 ;; ~/.emacs.d/site-lisp          manually installed packages
+;; ~/.emacs.d/themes             custom themes
 
 ;;; Emacs X Resources:
 ;;
@@ -227,16 +228,8 @@
 
 ;;; Color Themes:
 
-(require 'color-theme)
-(eval-after-load "color-theme"
- '(progn
-    (color-theme-initialize)
-    ;(require 'color-theme-subdued)
-    ;(require 'color-theme-gruber-darker)
-    ;(require 'color-theme-less)
-    ;(require 'color-theme-twilight)
-    ;(color-theme-midnight)
-    (color-theme-twilight)))
+(setq custom-theme-directory "~/.emacs.d/themes")
+(load-theme 'twilight t)
 
 ;;; Global keybindings:
 
