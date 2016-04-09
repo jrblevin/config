@@ -64,19 +64,23 @@
  ((eq system-type 'darwin)
   ;; Menu bar takes up no additional space in OS X.
   (menu-bar-mode 1)
-  ;; Default Latin font
-  (set-face-attribute 'default nil :family "Source Code Pro")
   ;; Default font size (point * 10)
-  (set-face-attribute 'default nil :height 180)
-  ;; Default fixed-pitch font
-  (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
-  ;; Default variable-pitch font
-  (set-face-attribute 'variable-pitch nil :family "Avenir Next")))
+  (set-face-attribute 'default nil :height 180))
+ (t
+  (menu-bar-mode 0)
+  (set-face-attribute 'default nil :height 150)))
 
 ;; Font Selection
-(set-frame-font "Source Code Pro-18")
+;;(set-frame-font "Source Code Pro-18")
 ;; (set-frame-font "Inconsolata 18")
 ;; (set-frame-font "Anonymous Pro 16")
+
+;; Default Latin font
+(set-face-attribute 'default nil :family "Source Code Pro")
+;; Default fixed-pitch font
+(set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
+;; Default variable-pitch font
+(set-face-attribute 'variable-pitch nil :family "Avenir Next")
 
 ;; Disable transient-mark-mode
 (setq transient-mark-mode nil)
