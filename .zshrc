@@ -31,6 +31,15 @@ if [[ $OS == "Darwin" ]]; then
     function locate { mdfind "kMDItemDisplayName == '$@'wc"; }
     # Completion dump file
     ZCOMPDUMP=$HOME/.zcompdump.osx
+    # PGI
+    export PGI="/Applications/Free PGI.app/Contents/Resources/pgi"
+    export PGI_VERSION=16.3
+    export PATH="$PGI/osx86-64/$PGI_VERSION/bin:$PATH"
+    export MANPATH="$MANPATH:$PGI/linux86-64/$PGI_VERSION/man"
+    export PGI_MINOSX=$(sw_vers -productVersion)
+    export PGI_MINOSXNUM="1011"
+    export PGI_ISCLANG31="703"
+    export PGI_GCCDIR64="/Applications/Xcode.app/Contents/Developer/usr/lib/llvm-gcc/4.2.1"
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
@@ -41,6 +50,13 @@ elif [[ $OS == "Linux" ]]; then
     fi
     # GFortran
     export PATH=/opt/gcc-trunk/bin:${PATH}
+    # PGI
+    export PGI=/opt/pgi
+    export PGI_VERSION=15.10
+    export PATH=$PGI/linux86-64/$PGI_VERSION/bin:$PATH
+    export MANPATH=$MANPATH:$PGI/linux86-64/$PGI_VERSION/man
+    export LM_PROJECT=PAS0501
+    export LM_LICENSE_FILE=$LM_LICENSE_FILE:7496@license2.osc.edu
     # Open MPI
     export PATH=/opt/openmpi/bin:${PATH}
     # Library path
