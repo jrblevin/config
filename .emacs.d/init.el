@@ -356,8 +356,8 @@
 ;;; MMM Mode:
 
 (require 'mmm-auto)
-(setq mmm-global-mode 'maybe)
-(setq mmm-parse-when-idle 't)
+(setq mmm-global-mode nil)
+(setq mmm-parse-when-idle nil)
 (setq mmm-submode-decoration-level 0)
 
 ;; (defun my-mmm-markdown-auto-class (lang &optional submode)
