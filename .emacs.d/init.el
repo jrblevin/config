@@ -56,6 +56,7 @@
 (setq package-selected-packages
       '(magit
         mmm-mode
+        rainbow-mode
         exec-path-from-shell
         flycheck
         ))
