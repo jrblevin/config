@@ -47,10 +47,18 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(setq package-selected-packages
+      '(magit
+        mmm-mode
+        exec-path-from-shell
+        flycheck
+        ))
 (package-initialize)
+(package-install-selected-packages)
 
 ;; System-specific configuration
 (cond
+ ;; OS X configuration
  ((eq system-type 'darwin)
   ;; Import PATH and exec-path from system
   (exec-path-from-shell-initialize)
@@ -58,14 +66,11 @@
   (menu-bar-mode 1)
   ;; Default font size (point * 10)
   (set-face-attribute 'default nil :height 180))
- (t
+ ;; GNU/Linux configuration
+ ((eq system-type 'gnu/linux)
   (menu-bar-mode 0)
-  (set-face-attribute 'default nil :height 150)))
-
-;; Font Selection
-;;(set-frame-font "Source Code Pro-18")
-;; (set-frame-font "Inconsolata 18")
-;; (set-frame-font "Anonymous Pro 16")
+  (set-face-attribute 'default nil :height 150)
+  (setq browse-url-generic-program "debian-sensible-browser")))
 
 ;; Default Latin font
 (set-face-attribute 'default nil :family "Source Code Pro")
@@ -110,9 +115,6 @@
 
 ;; Show the column number in the mode line.
 (column-number-mode 1)
-
-;; Use debian-sensible-browser as generic browser
-(setq browse-url-generic-program "debian-sensible-browser")
 
 ;; Don't print a header
 (setq ps-print-header nil)
