@@ -332,23 +332,13 @@
 (setq mmm-parse-when-idle nil)
 (setq mmm-submode-decoration-level 0)
 
-;; (defun my-mmm-markdown-auto-class (lang &optional submode)
-;;   (let ((class (intern (concat "markdown-" lang)))
-;;         (submode (or submode (intern (concat lang "-mode"))))
-;;         (front (concat "^```" lang "[\n\r]+"))
-;;         (back "^```"))
-;;     (mmm-add-classes (list (list class :submode submode :front front :back back)))
-;;     (mmm-add-mode-ext-class 'markdown-mode nil class)))
-
-;; (mapc 'my-mmm-markdown-auto-class
-;;       '("awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
-;;         "markdown" "python" "r" "ruby" "sql" "stata" "xml" "octave"))
-
-;; ;; Mode names that differ from language names
-;; (my-mmm-markdown-auto-class "bib" 'bibtex-mode)
-;; (my-mmm-markdown-auto-class "fortran" 'f90-mode)
-;; (my-mmm-markdown-auto-class "perl" 'cperl-mode)
-;; (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
+(defun jrb-mmm-markdown-auto-class (lang &optional submode)
+  (let ((class (intern (concat "markdown-" lang)))
+        (submode (or submode (intern (concat lang "-mode"))))
+        (front (concat "^```" lang "[\n\r]+"))
+        (back "^```"))
+    (mmm-add-classes (list (list class :submode submode :front front :back back)))
+    (mmm-add-mode-ext-class 'markdown-mode nil class)))
 
 (defun jrb-mmm-latex-auto-class (lang &optional submode)
   (let ((class (intern (concat "latex-" lang)))
@@ -358,6 +348,16 @@
     (mmm-add-classes (list (list class :submode submode :front front :back back)))
     (mmm-add-mode-ext-class 'latex-mode nil class)))
 
+;; Set up modes for cases where names match
+(mapc 'jrb-mmm-markdown-auto-class
+      '("awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
+        "markdown" "python" "r" "ruby" "sql" "stata" "xml" "octave"))
+
+;; Mode names that differ from language names
+(jrb-mmm-markdown-auto-class "bib" 'bibtex-mode)
+(jrb-mmm-markdown-auto-class "fortran" 'f90-mode)
+(jrb-mmm-markdown-auto-class "perl" 'cperl-mode)
+(jrb-mmm-markdown-auto-class "shell" 'shell-script-mode)
 (jrb-mmm-latex-auto-class "C" 'c-mode)
 (jrb-mmm-latex-auto-class "Fortran" 'f90-mode)
 
