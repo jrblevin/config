@@ -5,7 +5,6 @@
 
 ;; Author: Marcus Crafter
 ;;	Jason Blevins
-;; Maintainer: Jason Blevins
 ;; Adapted-By: Yesudeep Mangalapilly
 ;; Keywords: textmate twilight color theme
 ;; URL: https://github.com/jrblevin/twilight-emacs
@@ -61,7 +60,7 @@
 (custom-theme-set-faces
  'twilight
  '(default ((t (:background "#141414" :foreground "#F8F8F8"))))
- '(cursor ((t (:foreground "#CDA869"))))
+ '(cursor ((t (:background "#CDA869"))))
  '(blue ((t (:foreground "blue"))))
  '(border-glyph ((t (nil))))
  '(buffers-tab ((t (:background "#141414" :foreground "#CACACA"))))
@@ -73,10 +72,10 @@
  '(font-lock-doc-string-face ((t (:foreground "DarkOrange"))))
  '(font-lock-function-name-face ((t (:foreground "#9B703F"))))
  '(font-lock-keyword-face ((t (:foreground "#CDA869"))))
- '(font-lock-preprocessor-face ((t (:foreground "#9B859D"))))
+ '(font-lock-preprocessor-face ((t (:foreground "#CF6A4C"))))
  '(font-lock-reference-face ((t (:foreground "SlateBlue"))))
  '(font-lock-string-face ((t (:foreground "#8F9D6A"))))
- '(font-lock-type-face ((t (:foreground "#9B703F"))))
+ '(font-lock-type-face ((t (:foreground "#89788a"))))
  '(font-lock-variable-name-face ((t (:foreground "#7587A6"))))
  '(font-lock-warning-face ((t (:background "#EE799F" :foreground "red"))))
  '(font-lock-regexp-grouping-backslash ((t (:foreground "#E9C062"))))
