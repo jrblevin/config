@@ -116,6 +116,12 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 WORDCHARS="*?[]~&;!%^(){}<>"
 
 
+### Emacs
+if [[ $OS == "Darwin" ]]; then
+    EMACS25=/Applications/Emacs\ 25.app/Contents/MacOS/Emacs-x86_64-10_9
+    EMACS24=/Applications/Emacs\ 24.5.app/Contents/MacOS/Emacs
+fi
+
 ### Useful Commands and Aliases
 
 if ls -F --color=auto >&/dev/null; then
