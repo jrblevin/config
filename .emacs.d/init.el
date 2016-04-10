@@ -40,6 +40,7 @@
       transient-mark-mode       nil     ; Disable transient-mark-mode
       select-enable-clipboard   t       ; Sync kill ring and clipboard
       visible-bell              t       ; Suppress beeps
+      scroll-step               1       ; Smooth scrolling
       )
 
 ;; Set the load path
