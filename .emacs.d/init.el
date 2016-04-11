@@ -17,7 +17,9 @@
 ;;; Basic Configuration:
 
 ;; Platform-specific configuration
-(defun jrb-mac-or-not (m n) (if (eq system-type 'darwin) m n))
+(defsubst jrb-mac-or-not (mac not)
+  "Return MAC if system is a Mac and NOT otherwise."
+  (if (eq system-type 'darwin) mac not))
 
 ;; Configure GUI elements quickly (scroll bar, tool bar, and menu bar)
 (if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
@@ -166,6 +168,7 @@
 ;;; Simple package configuration
 
 (defsubst hook-into-modes (func &rest modes)
+  "Add FUNC to hook functions given by MODES."
   (dolist (mode-hook modes) (add-hook mode-hook func)))
 
 (use-package company
