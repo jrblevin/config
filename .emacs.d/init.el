@@ -176,6 +176,16 @@
 
 ;;; Simple package configuration
 
+(use-package company
+  :ensure t
+  :defer t
+  :diminish t
+  :config
+  (setq company-backends
+        '((company-dabbrev-code company-abbrev company-capf)
+          (company-files company-keywords)))
+  (global-company-mode))
+
 (use-package server
   :config
   (setq server-kill-new-buffers t)
@@ -186,16 +196,6 @@
   :ensure t
   :bind (("M-x" . smex))
   :config (smex-initialize))
-
-(use-package company
-  :ensure t
-  :defer t
-  :diminish t
-  :config
-  (setq company-backends
-        '((company-dabbrev-code company-abbrev company-capf)
-          (company-files company-keywords)))
-  (global-company-mode))
 
 
 ;;; Margins:
