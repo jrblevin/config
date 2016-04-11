@@ -107,16 +107,7 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(setq package-selected-packages
-      '(magit
-        use-package
-        ido-completing-read+
-        mmm-mode
-        exec-path-from-shell
-        page-break-lines
-        flycheck
-        color-theme-sanityinc-tomorrow
-        ))
+(setq package-selected-packages '(use-package)) ; bootstrap
 (package-initialize)
 (package-install-selected-packages)
 
