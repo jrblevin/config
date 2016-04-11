@@ -786,6 +786,7 @@
 ;;; Emacs Lisp
 
 (defun jrb-emacs-lisp-hook ()
+  (page-break-lines-mode)
   ;; Skip past ^L, headings marked by `;;;`, and subsequent comments
   ;; <http://endlessparentheses.com/improving-page-navigation.html>
   (make-local-variable 'page-delimiter)
