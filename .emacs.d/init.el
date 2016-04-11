@@ -167,6 +167,16 @@
   "Add FUNC to hook functions given by MODES."
   (dolist (mode-hook modes) (add-hook mode-hook func)))
 
+(use-package ado-mode
+  :disabled t
+  :defer t
+  :load-path "site-lisp/ado-mode/lisp"
+  :config
+  (setq ado-claim-name "Jason Blevins"
+        ado-signature-file "~/.emacs.d/.ado-signature"
+        ado-site-template-dir "~/.emacs.d/site-lisp/ado-mode/templates/"
+        ado-date-format "%Y-%m-%d"))
+
 (use-package company
   :ensure t
   :defer t
@@ -905,19 +915,6 @@
     (when (string-equal ess-language "STA")
       (define-key ess-mode-map (kbd "_") nil)))
   (add-hook 'ess-mode-hook 'my-ess-mode-hook))
-
-
-;;; ado-mode:
-
-(setq load-path (cons "~/.emacs.d/site-lisp/ado-mode/lisp" load-path))
-(when (require 'ado-mode nil 'no-error)
-  (defun ado-custom()
-    "ado-mode-hook"
-    (setq ado-claim-name "Jason Blevins")
-    (setq ado-signature-file "~/.emacs.d/.ado-signature")
-    (setq ado-site-template-dir "~/.emacs.d/site-lisp/ado-mode/templates/")
-    (setq ado-date-format "%Y-%m-%d"))
-  (add-hook 'ado-mode-hook 'ado-custom))
 
 
 ;;; Timestamps:
