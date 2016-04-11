@@ -148,6 +148,7 @@ alias gst='git status'
 alias gci='git commit'
 alias gca='git commit --amend'
 alias gcm='git commit -m'
+alias gplog='git plog'
 alias gitx='open -a GitX .'
 alias mutt="cd ~/inbox; mutt"
 alias sdr="screen -d -R"
