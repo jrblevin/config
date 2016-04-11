@@ -157,7 +157,6 @@
 (global-set-key (kbd "C-c i") 'imenu)
 (global-set-key (kbd "C-c l") 'my-quick-log)
 (global-set-key (kbd "C-c t") 'time-stamp)
-(global-set-key (kbd "C-c T") 'titlecase-dwim)
 (global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
 (global-set-key (kbd "C-c f") 'send-region-to-fantastical)
 
@@ -235,7 +234,6 @@
   (hook-into-modes #'flyspell-buffer
                    'text-mode-hook))
 
-
 (use-package magit
   :bind (("C-x g b" . magit-blame)
          ("C-x g c" . magit-commit)
@@ -266,6 +264,9 @@
   :diminish page-break-lines-mode
   :init (hook-into-modes #'page-break-lines-mode 'emacs-lisp-mode-hook))
 
+(use-package scss-mode
+  :mode (("\\.scss\\'" . scss-mode)))
+
 (use-package server
   :config
   (setq server-kill-new-buffers t)
@@ -276,6 +277,9 @@
   :ensure t
   :bind (("M-x" . smex))
   :config (smex-initialize))
+
+(use-package titlecase
+  :bind (("C-c T" . titlecase-dwim)))
 
 
 ;;; Margins:
@@ -515,16 +519,6 @@
   (quit-window)
   (load-library "/Users/jblevins/projects/deft/deft.el")
   (deft))
-
-
-;;; scss
-
-(require 'scss-mode)
-
-
-;;; titlecase:
-
-(require 'titlecase)
 
 
 ;;; todotxt-mode:
