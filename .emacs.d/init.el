@@ -3,7 +3,7 @@
 ;; Jason Blevins <jrblevin@sdf.org>
 ;; Raleigh, May 29, 2004
 
-;;; Directory Structure:
+;; Directory Structure:
 ;;
 ;; ~/.emacs.d/                   user directory
 ;; ~/.emacs.d/init.el            init file
@@ -13,18 +13,9 @@
 ;; ~/.emacs.d/site-lisp          manually installed packages
 ;; ~/.emacs.d/themes             custom themes
 
-;;; Emacs X Resources:
-;;
-;; Emacs.menuBar:                off
-;; Emacs.verticalScrollBars:     off
-;; Emacs.toolBar:                off
-;; Emacs.internalBorder:         1
-;; Emacs.geometry:               80x35+5+5
-;; Emacs.FontBackend:            xft
-;; Emacs.font:                   Inconsolata-15
-
 (require 'cl-lib)
 
+
 ;;; Basic Configuration:
 
 ;; Disable the scroll bar, toolbar, tooltips, etc.
@@ -125,6 +116,7 @@
 (server-start)
 (setq server-kill-new-buffers t)
 
+
 ;;; Frame geometry:
 
 ;; Set frame geometry according to display resolution.
@@ -147,6 +139,7 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 140)
 
+
 ;;; Margins:
 
 ;; Set margins to center content in window.
@@ -216,11 +209,13 @@
            (set-fringe-mode (/ (- half-width (* jrb-dual-mode-width (frame-char-width))) 2)))
          (split-window-right))))
 
+
 ;;; Color Themes:
 
 (setq custom-theme-directory "~/.emacs.d/themes")
 (load-theme 'twilight t)
 
+
 ;;; Global keybindings:
 
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-word)
@@ -258,6 +253,7 @@
 (global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
 (global-set-key (kbd "C-c f") 'send-region-to-fantastical)
 
+
 ;;; Hippie expand:
 
 (global-set-key "\M-/" 'hippie-expand)
@@ -273,6 +269,7 @@
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
 
+
 ;;; Ispell:
 
 (setq ispell-program-name "aspell")
@@ -297,6 +294,7 @@
          ("program" . "\\\\end[ \t\n]*{[ \t\n]*program[ \t\n]*}")
          ("verbatim\\*?" . "\\\\end[ \t\n]*{[ \t\n]*verbatim\\*?[ \t\n]*}"))))
 
+
 ;;; Markdown:
 
 (setq markdown-command "multimarkdown")
@@ -358,6 +356,7 @@
     (goto-char beg)
     (insert "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {: lang=fortran }\n")))
 
+
 ;;; MMM Mode:
 
 (require 'mmm-auto)
@@ -394,6 +393,7 @@
 (jrb-mmm-latex-auto-class "C" 'c-mode)
 (jrb-mmm-latex-auto-class "Fortran" 'f90-mode)
 
+
 ;;; Deft:
 
 (require 'deft)
@@ -444,23 +444,28 @@
   (load-library "/Users/jblevins/projects/deft/deft.el")
   (deft))
 
+
 ;;; Magit:
 
 (require 'magit nil 'no-error)
 (setq magit-completing-read-function 'magit-ido-completing-read)
 
+
 ;;; scss
 
 (require 'scss-mode)
 
+
 ;;; titlecase:
 
 (require 'titlecase)
 
+
 ;;; rainbow-mode:
 
 (require 'rainbow-mode)
 
+
 ;;; todotxt-mode:
 
 ;; (require 'todotxt)
@@ -577,6 +582,7 @@
 ;;   (forward-line -1)
 ;;   (forward-char 2))
 
+
 ;;; Website:
 
 (defun my-quick-log (slug)
@@ -584,6 +590,7 @@
   (find-file (concat "~/projects/jblevins.org/htdocs/log/" slug ".text"))
   (skeleton-webpage-header))
 
+
 ;;; Fortran:
 
 (autoload 'f90-mode "f90"
@@ -610,6 +617,7 @@
   (turn-on-font-lock)			; for highlighting
   (auto-fill-mode 0))			; turn off auto-filling
 
+
 ;;; AUCTeX:
 
 (load "auctex.el" nil t t)
@@ -724,6 +732,7 @@
    LaTeX-dialect)
   (TeX-run-style-hooks "code"))
 
+
 ;;; BibTeX:
 
 (defun my-bibtex-mode-hook-fn ()
@@ -741,6 +750,7 @@
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
 
+
 ;;; Graphviz
 
 (setq graphviz-dot-indent-width 4)
@@ -748,6 +758,7 @@
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 (add-to-list 'auto-mode-alist '("\\.gv\\'" . graphviz-dot-mode))
 
+
 ;;; Matlab
 
 (setq matlab-auto-fill nil)
@@ -755,11 +766,13 @@
 (add-to-list 'auto-mode-alist '("\\.m\\'" . matlab-mode))
 (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
 
+
 ;;; Mathematica:
 
 (autoload 'mma-mode "mma" "Mathematica package file mode" t)
 ;(setq auto-mode-alist (cons '("\\.m\\'" . mma-mode) auto-mode-alist))
 
+
 ;;; Perl:
 
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
@@ -773,6 +786,7 @@
   (setq cperl-continued-statement-offset 2)
   (setq cperl-extra-newline-before-brace nil))
 
+
 ;;; C and C++:
 
 (defun my-c-mode-common-hook ()
@@ -798,6 +812,7 @@
           (run-at-time 0.5 nil 'delete-windows-on buf)
           (message "no compilation errors"))))
 
+
 ;;; IDO mode:
 
 (when (require 'ido nil 'no-error)
@@ -808,10 +823,12 @@
   (setq ido-ignore-extensions t)
   (ido-mode t))
 
+
 ;;; CSS:
 
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
+
 ;;; Emacs Speaks Statistics:
 
 (add-to-list 'load-path "/opt/local/share/emacs/site-lisp/ess/")
@@ -821,6 +838,7 @@
       (define-key ess-mode-map (kbd "_") nil)))
   (add-hook 'ess-mode-hook 'my-ess-mode-hook))
 
+
 ;;; ado-mode:
 
 (setq load-path (cons "~/.emacs.d/site-lisp/ado-mode/lisp" load-path))
@@ -833,6 +851,7 @@
     (setq ado-date-format "%Y-%m-%d"))
   (add-hook 'ado-mode-hook 'ado-custom))
 
+
 ;;; Timestamps:
 (require 'time-stamp)
 ;; (add-hook 'write-file-hooks 'time-stamp)
@@ -869,6 +888,7 @@
   (interactive "*")
   (insert (format-time-string "%Y-%02m-%02dT%02H:%02M:%02SZ" (current-time) t)))
 
+
 ;;; Miscellaneous:
 
 ;; unix-file, dos-file, and mac-file from
@@ -911,8 +931,8 @@
           (delete-horizontal-space)
           (unless (looking-at "\n") (insert "\n")))))))
 
-;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
-;;; From http://www.emacswiki.org/emacs/UnfillParagraph
+;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+;; From http://www.emacswiki.org/emacs/UnfillParagraph
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
   (interactive (progn (barf-if-buffer-read-only) '(t)))
@@ -1005,6 +1025,7 @@ With argument ARG, do this that many times."
   (interactive "p")
   (delete-region (point) (progn (backward-word arg) (point))))
 
+
 ;;; Calendar and Diary:
 
 ;; See the following:
@@ -1044,6 +1065,7 @@ With argument ARG, do this that many times."
 ;;       (quote (24-hours ":" minutes (if time-zone " (")
 ;;                        time-zone (if time-zone ")"))))
 
+
 ;;; AMPL:
 
 ;; (setq auto-mode-alist
@@ -1058,11 +1080,13 @@ With argument ARG, do this that many times."
 
 ;; (autoload 'ampl-mode "ampl-mode" "AMPL editing mode." t)
 
+
 ;;; SES:
 
 ; (autoload 'ses-mode "ses.el" "Spreadsheet mode" t)
 ; (add-to-list 'auto-mode-alist '("\\.ses$" . ses-mode))
 
+
 ;;; Org mode:
 
 ;; (require 'org-install)
@@ -1071,12 +1095,14 @@ With argument ARG, do this that many times."
 ;; (define-key global-map "\C-ca" 'org-agenda)
 ;; (setq org-log-done t)
 
+
 ;;; Lua mode:
 
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
+
 ;;; post-mode:
 
 ;; (require 'post)
@@ -1110,20 +1136,21 @@ With argument ARG, do this that many times."
 ;;   (post-goto-body))
 ;; (add-hook 'post-mode-hook '(lambda() (post-custom)))
 
+
 ;;; Mutt:
 
 ;; (add-to-list 'auto-mode-alist '("mutt-" . post-mode))
-
-;;; muttrc-mode
 
 (autoload 'muttrc-mode "muttrc-mode.el" "Major mode to edit muttrc files" t)
 (add-to-list 'auto-mode-alist '(".muttrc\\'" . muttrc-mode))
 (add-to-list 'auto-mode-alist '(".mutt-aliases\\'" . muttrc-mode))
 
+
 ;;; Smex
 (autoload 'smex "smex")
 (global-set-key (kbd "M-x") 'smex)
 
+
 ;;; Visual bell
 
 ;; nice little alternative visual bell; Miles Bader <miles /at/ gnu.org>
@@ -1174,6 +1201,7 @@ This function is intended to be used as a value of `ring-bell-function'."
 
 (setq ring-bell-function 'mode-line-bell)
 
+
 ;;; Abbreviations
 
 (defun my-abbrev-expand (expand)
@@ -1254,6 +1282,7 @@ most recent kill ring contents and leaves the cursor at %|."
 ;; Turn on abbrev mode globally
 (setq-default abbrev-mode t)
 
+
 ;;; Skeleton Templates:
 
 (define-skeleton skeleton-webpage-header
@@ -1303,6 +1332,7 @@ most recent kill ring contents and leaves the cursor at %|."
   "! POSSIBILITY OF SUCH DAMAGE.\n"
   "\n")
 
+
 ;;; Inter-App Communication:
 
 ;; AppleScript support
@@ -1371,12 +1401,13 @@ and subsequent lines as the event note."
              (applescript-quote-string event)
              (applescript-quote-string notes)))))
 
+
 ;;; Local configuration
 
 (load-file "~/.emacs.d/init-local.el")
 
-;;; Custom configuration
-
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file))
+
+;;; init.el ends here
