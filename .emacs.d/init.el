@@ -131,8 +131,7 @@
 (setq custom-theme-directory "~/.emacs.d/themes")
 (let ((hour (string-to-number (substring (current-time-string) 11 13))))
   (if (member hour (number-sequence 6 17))
-      ;; (load-theme 'twilight t)
-      (load-theme 'sanityinc-tomorrow-bright t)
+      (load-theme 'twilight t)
     (load-theme 'sanityinc-tomorrow-night t)))
 
 
