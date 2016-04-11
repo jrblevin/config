@@ -42,10 +42,6 @@
               (cons 'height (/ (- (x-display-pixel-height) 50)
                                (frame-char-height))))))
 
-;; Start the Emacs server
-(server-start)
-(setq server-kill-new-buffers t)
-
 ;; Highlight current line, blink cursor
 (if (fboundp 'global-hl-line-mode) (global-hl-line-mode 1))
 (if (fboundp 'blink-cursor-mode) (blink-cursor-mode 1))
@@ -179,6 +175,12 @@
 
 
 ;;; Simple package configuration
+
+(use-package server
+  :config
+  (setq server-kill-new-buffers t)
+  (unless (server-running-p)
+    (server-start)))
 
 (use-package smex
   :ensure t
