@@ -12,3 +12,4 @@ elpa
 ado-mode
 init-local.el
 init-junk.el
+custom.el
