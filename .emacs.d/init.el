@@ -55,6 +55,7 @@
       transient-mark-mode       nil     ; Disable transient-mark-mode
       select-enable-clipboard   t       ; Sync kill ring and clipboard
       scroll-step               1       ; Smooth scrolling
+      scroll-margin             3       ; Some context when recentering
       column-number-mode        1       ; Show column number in mode line
       split-height-threshold    nil     ; Window splitting thresholds
       split-width-threshold     140     ; Minimum side-by-side split is 70 char
