@@ -55,6 +55,7 @@
         exec-path-from-shell
         page-break-lines
         flycheck
+        color-theme-sanityinc-tomorrow
         ))
 (package-initialize)
 (package-install-selected-packages)
@@ -214,7 +215,11 @@
 ;;; Color Themes:
 
 (setq custom-theme-directory "~/.emacs.d/themes")
-(load-theme 'twilight t)
+(let ((hour (string-to-number (substring (current-time-string) 11 13))))
+  (if (member hour (number-sequence 6 17))
+      ;; (load-theme 'twilight t)
+      (load-theme 'sanityinc-tomorrow-bright t)
+    (load-theme 'sanityinc-tomorrow-night t)))
 
 
 ;;; Global keybindings:
