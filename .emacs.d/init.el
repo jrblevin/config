@@ -54,6 +54,8 @@
         rainbow-mode
         exec-path-from-shell
         page-break-lines
+        company
+        company-math
         flycheck
         color-theme-sanityinc-tomorrow
         ))
@@ -274,6 +276,14 @@
         try-expand-line
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
+
+
+;;; Company:
+
+(setq company-backends
+      '((company-dabbrev-code company-abbrev company-capf)
+        (company-files company-keywords)))
+(add-hook 'after-init-hook 'global-company-mode)
 
 
 ;;; Ispell:
