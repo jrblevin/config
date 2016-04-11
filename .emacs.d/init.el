@@ -130,8 +130,11 @@
 (setq custom-theme-directory "~/.emacs.d/themes")
 (let ((hour (string-to-number (substring (current-time-string) 11 13))))
   (if (member hour (number-sequence 6 17))
-      (load-theme 'twilight t)
-    (load-theme 'sanityinc-tomorrow-night t)))
+      (use-package twilight-theme
+        :init (load-theme 'twilight 'no-confirm))
+    (use-package color-theme-sanityinc-tomorrow
+      :ensure t
+      :init (load-theme 'sanityinc-tomorrow-night 'no-confirm))))
 
 
 ;;; Global keybindings:
