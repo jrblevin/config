@@ -324,7 +324,6 @@
 (setq markdown-asymmetric-header t)
 (setq markdown-live-preview-delete-export 'delete-on-destroy)
 (setq markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
-(setq org-table-automatic-realign nil); for MultiMarkdown tables
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown formatted text files" t)
@@ -345,6 +344,10 @@
                          :inherit markdown-header-face :height 1.2)))
 
 (defun my-markdown-mode-hook ()
+  ;; For MultiMarkdown tables
+  (make-local-variable 'org-table-automatic-realign)
+  (setq org-table-automatic-realign nil)
+  ;; Enable math mode based on file metadata
   (save-excursion
     (when (re-search-forward "^math:\\s-*itex$" nil t)
       (markdown-enable-math 1))))
