@@ -301,6 +301,19 @@
          ("verbatim\\*?" . "\\\\end[ \t\n]*{[ \t\n]*verbatim\\*?[ \t\n]*}"))))
 
 
+;;; flyspell:
+
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
+;; Add spell-checking in comments for all programming language modes
+(if (fboundp 'prog-mode)
+    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (dolist (hook '(nxml-mode-hook
+                  shell-mode-hook))
+    (add-hook hook 'flyspell-prog-mode)))
+
+
 ;;; Markdown:
 
 (setq markdown-command "multimarkdown")
