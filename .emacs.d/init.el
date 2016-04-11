@@ -155,11 +155,8 @@
 (global-set-key (kbd "C-c d") 'deft)
 (global-set-key (kbd "C-c D") 'deft-today)
 (global-set-key (kbd "C-c M") 'deft-tomorrow)
-(global-set-key (kbd "C-c s") 'magit-status)
-(global-set-key (kbd "C-c g") 'deft-find-file)
 (global-set-key (kbd "C-c i") 'imenu)
 (global-set-key (kbd "C-c l") 'my-quick-log)
-(global-set-key (kbd "C-c p") 'magit-push)
 (global-set-key (kbd "C-c t") 'time-stamp)
 (global-set-key (kbd "C-c T") 'titlecase-dwim)
 (global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
@@ -180,6 +177,22 @@
         '((company-dabbrev-code company-abbrev company-capf)
           (company-files company-keywords)))
   (global-company-mode))
+
+(use-package magit
+  :bind (("C-x g b" . magit-blame)
+         ("C-x g c" . magit-commit)
+         ("C-x g d" . magit-diff)
+         ("C-x g l" . magit-log-buffer-file)
+         ("C-x g p" . magit-push)
+         ("C-x g s" . magit-status))
+  :init
+  (add-hook 'magit-mode-hook 'hl-line-mode)
+  :config
+  (setq magit-completing-read-function 'magit-ido-completing-read)
+  (add-hook 'magit-log-edit-mode-hook
+            #'(lambda ()
+                (set-fill-column 72)
+                (flyspell-mode))))
 
 (use-package rainbow-mode
   :commands rainbow-mode
@@ -482,12 +495,6 @@
   (quit-window)
   (load-library "/Users/jblevins/projects/deft/deft.el")
   (deft))
-
-
-;;; Magit:
-
-(require 'magit nil 'no-error)
-(setq magit-completing-read-function 'magit-ido-completing-read)
 
 
 ;;; scss
