@@ -187,6 +187,16 @@
   :bind (("M-x" . smex))
   :config (smex-initialize))
 
+(use-package company
+  :ensure t
+  :defer 10
+  :diminish t
+  :config
+  (setq company-backends
+        '((company-dabbrev-code company-abbrev company-capf)
+          (company-files company-keywords)))
+  (global-company-mode))
+
 
 ;;; Margins:
 
@@ -272,14 +282,6 @@
         try-expand-line
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
-
-
-;;; Company:
-
-(setq company-backends
-      '((company-dabbrev-code company-abbrev company-capf)
-        (company-files company-keywords)))
-(add-hook 'after-init-hook 'global-company-mode)
 
 
 ;;; Ispell:
