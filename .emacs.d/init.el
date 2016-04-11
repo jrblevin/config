@@ -119,8 +119,6 @@
         smex
         exec-path-from-shell
         page-break-lines
-        company
-        company-math
         flycheck
         color-theme-sanityinc-tomorrow
         rainbow-mode))
@@ -189,7 +187,7 @@
 
 (use-package company
   :ensure t
-  :defer 10
+  :defer t
   :diminish t
   :config
   (setq company-backends
@@ -667,6 +665,10 @@
 ;; One-time TeX setup
 (eval-after-load "tex"
   '(progn
+     (use-package company-auctex
+       :config
+       (company-auctex-init))
+
      ;; make latexmk available via C-c C-c
      ;; Use Command-Shift-click to reverse search in Skim.
      ;; See http://www.stefanom.org/setting-up-a-nice-auctex-environment-on-mac-os-x/
