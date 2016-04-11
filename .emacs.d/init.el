@@ -171,7 +171,7 @@
 (use-package company
   :ensure t
   :defer t
-  :diminish t
+  :diminish company-mode
   :config
   (setq company-backends
         '((company-dabbrev-code company-abbrev company-capf)
