@@ -104,8 +104,8 @@
 ;;; Package management
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (setq package-selected-packages '(use-package)) ; bootstrap
 (package-initialize)
 (package-install-selected-packages)
@@ -184,6 +184,7 @@
   :config (exec-path-from-shell-initialize))
 
 (use-package flycheck
+  :ensure t
   :defer 5
   :config
   (setq flycheck-gfortran-warnings (list "all" "extra" "surprising")
