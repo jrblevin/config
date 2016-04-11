@@ -13,15 +13,38 @@
 ;; ~/.emacs.d/site-lisp          manually installed packages
 ;; ~/.emacs.d/themes             custom themes
 
-(require 'cl-lib)
-
 
 ;;; Basic Configuration:
 
-;; Disable the scroll bar, toolbar, tooltips, etc.
+;; Platform-specific configuration
+(defun jrb-mac-or-not (m n) (if (eq system-type 'darwin) m n))
+
+;; Configure GUI elements quickly (scroll bar, tool bar, and menu bar)
 (if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode 0))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode (jrb-mac-or-not 1 0)))
+
+;; Default fonts (face height is 10 * point size)
+(set-face-attribute 'default nil :family "Source Code Pro"
+                    :height (jrb-mac-or-not 180 150))
+(set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
+(set-face-attribute 'variable-pitch nil :family "Avenir Next")
+
+;; Set frame geometry according to display resolution.
+;; Width: 93 columns for large displays, 80 columns for small ones.
+;; Height: subtract from screen height (for panels, menubars, etc.)
+;; and divide by the height of a character to get the number of lines.
+;; <http://stackoverflow.com/questions/92971/>
+(when (display-graphic-p)
+  (setq initial-frame-alist
+        (list (cons 'top 1) (cons 'left 1)
+              (cons 'width (if (> (x-display-pixel-width) 1280) 93 80))
+              (cons 'height (/ (- (x-display-pixel-height) 50)
+                               (frame-char-height))))))
+
+;; Start the Emacs server
+(server-start)
+(setq server-kill-new-buffers t)
 
 ;; Highlight current line, blink cursor
 (if (fboundp 'global-hl-line-mode) (global-hl-line-mode 1))
@@ -31,9 +54,14 @@
       initial-scratch-message   nil     ; No scratch buffer message
       transient-mark-mode       nil     ; Disable transient-mark-mode
       select-enable-clipboard   t       ; Sync kill ring and clipboard
-      visible-bell              t       ; Suppress beeps
       scroll-step               1       ; Smooth scrolling
-      )
+      column-number-mode        1       ; Show column number in mode line
+      split-height-threshold    nil     ; Window splitting thresholds
+      split-width-threshold     140     ; Minimum side-by-side split is 70 char
+      visible-bell              t)      ; Suppress beeps
+
+;; Import PATH and exec-path from system
+(if (featurep 'exec-path-from-shell) (exec-path-from-shell-initialize))
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
@@ -42,48 +70,8 @@
 ;; Personal information
 (setq user-mail-address "jrblevin@sdf.org")
 
-;; Package management
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(setq package-selected-packages
-      '(magit
-        ido-completing-read+
-        mmm-mode
-        smex
-        rainbow-mode
-        exec-path-from-shell
-        page-break-lines
-        company
-        company-math
-        flycheck
-        color-theme-sanityinc-tomorrow
-        ))
-(package-initialize)
-(package-install-selected-packages)
-
-;; System-specific configuration
-(cond
- ;; OS X configuration
- ((eq system-type 'darwin)
-  ;; Import PATH and exec-path from system
-  (exec-path-from-shell-initialize)
-  ;; Menu bar takes up no additional space in OS X.
-  (menu-bar-mode 1)
-  ;; Default font size (point * 10)
-  (set-face-attribute 'default nil :height 180))
- ;; GNU/Linux configuration
- ((eq system-type 'gnu/linux)
-  (menu-bar-mode 0)
-  (set-face-attribute 'default nil :height 150)
-  (setq browse-url-generic-program "debian-sensible-browser")))
-
-;; Default Latin font
-(set-face-attribute 'default nil :family "Source Code Pro")
-;; Default fixed-pitch font
-(set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
-;; Default variable-pitch font
-(set-face-attribute 'variable-pitch nil :family "Avenir Next")
+;; Browser
+(setq browse-url-generic-program (jrb-mac-or-not nil "debian-sensible-browser"))
 
 ;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
 (setq-default indent-tabs-mode nil)
@@ -105,9 +93,6 @@
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 
-;; Show the column number in the mode line.
-(column-number-mode 1)
-
 ;; Allow typing y or n instead of typing yes and no in full
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -116,32 +101,90 @@
 (global-unset-key (kbd "s-q"))
 (global-unset-key (kbd "<ns-power-off>"))
 
-;; Start the Emacs server
-(server-start)
-(setq server-kill-new-buffers t)
+;; Load libraries
+(require 'cl-lib)
 
 
-;;; Frame geometry:
+;;; Package management
 
-;; Set frame geometry according to display resolution.
-;;
-;; Based on a function by Bryan Oakley on StackOverflow:
-;; http://stackoverflow.com/questions/92971/how-do-i-set-the-size-of-emacs-window
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(setq package-selected-packages
+      '(magit
+        use-package
+        ido-completing-read+
+        mmm-mode
+        smex
+        exec-path-from-shell
+        page-break-lines
+        company
+        company-math
+        flycheck
+        color-theme-sanityinc-tomorrow
+        rainbow-mode))
+(package-initialize)
+(package-install-selected-packages)
 
-(when (display-graphic-p)
-  ;; Width: 93 columns for large displays, 80 columns for small ones.
-  (if (> (x-display-pixel-width) 1280)
-         (add-to-list 'default-frame-alist (cons 'width 93))
-         (add-to-list 'default-frame-alist (cons 'width 80)))
-  ;; Height: subtract from screen height (for panels, menubars, etc.)
-  ;; and divide by the height of a character to get the number of lines.
-  (add-to-list 'default-frame-alist
-               (cons 'height (/ (- (x-display-pixel-height) 50)
-                                (frame-char-height)))))
+;; use-package
+(require 'use-package)
+(setq use-package-verbose t)
 
-;; Window splitting thresholds
-(setq split-height-threshold nil)
-(setq split-width-threshold 140)
+
+;;; Color Themes:
+
+(setq custom-theme-directory "~/.emacs.d/themes")
+(let ((hour (string-to-number (substring (current-time-string) 11 13))))
+  (if (member hour (number-sequence 6 17))
+      ;; (load-theme 'twilight t)
+      (load-theme 'sanityinc-tomorrow-bright t)
+    (load-theme 'sanityinc-tomorrow-night t)))
+
+
+;;; Global keybindings:
+
+(global-set-key (kbd "C-M-<backspace>") 'backward-kill-word)
+(global-set-key (kbd "M-<backspace>") 'backward-delete-word)
+
+(global-set-key (kbd "<f3>") 'my-insert-date-time)
+(global-set-key (kbd "<f4>") 'revert-buffer-no-confirm)
+(global-set-key (kbd "<f5>") 'my-quick-log)
+(global-set-key (kbd "<f6>") 'calendar)
+(global-set-key (kbd "<f7>") 'markdown-mode)
+(global-set-key (kbd "<f8>") 'deft)
+(global-set-key (kbd "<f9>") 'compile)
+(global-set-key (kbd "<f10>") 'jrb-write-mode)
+(global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
+(global-set-key (kbd "<f12>") 'jrb-dual-mode)
+
+(global-set-key [?\M-j] 'fill-sentences)
+(global-set-key (kbd "M-Q") 'unfill-paragraph)
+(global-set-key [\C-\M-down] 'move-line-down)
+(global-set-key [\C-\M-up] 'move-line-up)
+
+(global-set-key (kbd "C-h C-r") 'describe-char)
+(global-set-key (kbd "C-x C-g") 'deft-find-file)
+
+(global-set-key (kbd "C-c d") 'deft)
+(global-set-key (kbd "C-c D") 'deft-today)
+(global-set-key (kbd "C-c M") 'deft-tomorrow)
+(global-set-key (kbd "C-c s") 'magit-status)
+(global-set-key (kbd "C-c g") 'deft-find-file)
+(global-set-key (kbd "C-c i") 'imenu)
+(global-set-key (kbd "C-c l") 'my-quick-log)
+(global-set-key (kbd "C-c p") 'magit-push)
+(global-set-key (kbd "C-c t") 'time-stamp)
+(global-set-key (kbd "C-c T") 'titlecase-dwim)
+(global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
+(global-set-key (kbd "C-c f") 'send-region-to-fantastical)
+
+
+;;; Simple package configuration
+
+(use-package smex
+  :ensure t
+  :bind (("M-x" . smex))
+  :config (smex-initialize))
 
 
 ;;; Margins:
@@ -212,54 +255,6 @@
          (let ((half-width (/ (frame-pixel-width) 2)))
            (set-fringe-mode (/ (- half-width (* jrb-dual-mode-width (frame-char-width))) 2)))
          (split-window-right))))
-
-
-;;; Color Themes:
-
-(setq custom-theme-directory "~/.emacs.d/themes")
-(let ((hour (string-to-number (substring (current-time-string) 11 13))))
-  (if (member hour (number-sequence 6 17))
-      ;; (load-theme 'twilight t)
-      (load-theme 'sanityinc-tomorrow-bright t)
-    (load-theme 'sanityinc-tomorrow-night t)))
-
-
-;;; Global keybindings:
-
-(global-set-key (kbd "C-M-<backspace>") 'backward-kill-word)
-(global-set-key (kbd "M-<backspace>") 'backward-delete-word)
-
-(global-set-key (kbd "<f3>") 'my-insert-date-time)
-(global-set-key (kbd "<f4>") 'revert-buffer-no-confirm)
-(global-set-key (kbd "<f5>") 'my-quick-log)
-(global-set-key (kbd "<f6>") 'calendar)
-(global-set-key (kbd "<f7>") 'markdown-mode)
-(global-set-key (kbd "<f8>") 'deft)
-(global-set-key (kbd "<f9>") 'compile)
-(global-set-key (kbd "<f10>") 'jrb-write-mode)
-(global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
-(global-set-key (kbd "<f12>") 'jrb-dual-mode)
-
-(global-set-key [?\M-j] 'fill-sentences)
-(global-set-key (kbd "M-Q") 'unfill-paragraph)
-(global-set-key [\C-\M-down] 'move-line-down)
-(global-set-key [\C-\M-up] 'move-line-up)
-
-(global-set-key (kbd "C-h C-r") 'describe-char)
-(global-set-key (kbd "C-x C-g") 'deft-find-file)
-
-(global-set-key (kbd "C-c d") 'deft)
-(global-set-key (kbd "C-c D") 'deft-today)
-(global-set-key (kbd "C-c M") 'deft-tomorrow)
-(global-set-key (kbd "C-c s") 'magit-status)
-(global-set-key (kbd "C-c g") 'deft-find-file)
-(global-set-key (kbd "C-c i") 'imenu)
-(global-set-key (kbd "C-c l") 'my-quick-log)
-(global-set-key (kbd "C-c p") 'magit-push)
-(global-set-key (kbd "C-c t") 'time-stamp)
-(global-set-key (kbd "C-c T") 'titlecase-dwim)
-(global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
-(global-set-key (kbd "C-c f") 'send-region-to-fantastical)
 
 
 ;;; Hippie expand:
@@ -1191,11 +1186,6 @@ With argument ARG, do this that many times."
 (autoload 'muttrc-mode "muttrc-mode.el" "Major mode to edit muttrc files" t)
 (add-to-list 'auto-mode-alist '(".muttrc\\'" . muttrc-mode))
 (add-to-list 'auto-mode-alist '(".mutt-aliases\\'" . muttrc-mode))
-
-
-;;; Smex
-(autoload 'smex "smex")
-(global-set-key (kbd "M-x") 'smex)
 
 
 ;;; Abbreviations
