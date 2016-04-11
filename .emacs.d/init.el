@@ -168,6 +168,9 @@
 
 ;;; Simple package configuration
 
+(defsubst hook-into-modes (func &rest modes)
+  (dolist (mode-hook modes) (add-hook mode-hook func)))
+
 (use-package company
   :ensure t
   :defer t
@@ -186,6 +189,11 @@
     (setq-local global-hl-line-mode nil)
     (hl-line-mode -1))
   (add-hook 'rainbow-mode-hook 'jrb-rainbow-mode-hook))
+
+(use-package page-break-lines
+  :ensure t
+  :diminish page-break-lines-mode
+  :init (hook-into-modes #'page-break-lines-mode 'emacs-lisp-mode-hook))
 
 (use-package server
   :config
@@ -784,7 +792,6 @@
 ;;; Emacs Lisp
 
 (defun jrb-emacs-lisp-hook ()
-  (page-break-lines-mode)
   ;; Skip past ^L, headings marked by `;;;`, and subsequent comments
   ;; <http://endlessparentheses.com/improving-page-navigation.html>
   (make-local-variable 'page-delimiter)
