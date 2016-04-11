@@ -112,12 +112,11 @@
         use-package
         ido-completing-read+
         mmm-mode
-        smex
         exec-path-from-shell
         page-break-lines
         flycheck
         color-theme-sanityinc-tomorrow
-        rainbow-mode))
+        ))
 (package-initialize)
 (package-install-selected-packages)
 
@@ -184,6 +183,15 @@
         '((company-dabbrev-code company-abbrev company-capf)
           (company-files company-keywords)))
   (global-company-mode))
+
+(use-package rainbow-mode
+  :commands rainbow-mode
+  :config
+  (defun jrb-rainbow-mode-hook ()
+    "Disable hl-line-mode when rainbow-mode is active."
+    (setq-local global-hl-line-mode nil)
+    (hl-line-mode -1))
+  (add-hook 'rainbow-mode-hook 'jrb-rainbow-mode-hook))
 
 (use-package server
   :config
@@ -488,11 +496,6 @@
 ;;; titlecase:
 
 (require 'titlecase)
-
-
-;;; rainbow-mode:
-
-(require 'rainbow-mode)
 
 
 ;;; todotxt-mode:
