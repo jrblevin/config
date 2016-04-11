@@ -8,6 +8,7 @@
 ;; ~/.emacs.d/                   user directory
 ;; ~/.emacs.d/init.el            init file
 ;; ~/.emacs.d/init-local.el      additional private init file
+;; ~/.emacs.d/custom.el          customized variables and faces
 ;; ~/.emacs.d/backup             single location for backup files
 ;; ~/.emacs.d/site-lisp          manually installed packages
 ;; ~/.emacs.d/themes             custom themes
@@ -313,6 +314,18 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("/gtd/.*\\.txt\\'" . markdown-mode))
+
+(eval-after-load "markdown"
+  '(progn
+     (set-face-attribute 'markdown-header-face nil
+                         :inherit font-lock-function-name-face :bold t
+                         :family "variable-pitch")
+     (set-face-attribute 'markdown-header-face-1 nil
+                         :inherit markdown-header-face :height 1.8)
+     (set-face-attribute 'markdown-header-face-2 nil
+                         :inherit markdown-header-face :height 1.4)
+     (set-face-attribute 'markdown-header-face-3 nil
+                         :inherit markdown-header-face :height 1.2)))
 
 (defun my-markdown-mode-hook ()
   (save-excursion
