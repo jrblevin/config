@@ -193,6 +193,49 @@
   :init
   (hook-into-modes #'flycheck-mode 'f90-mode-hook 'emacs-lisp-mode-hook))
 
+(use-package flyspell
+  :defer 5
+  :diminish flyspell-mode
+  :init
+  (use-package ispell
+    :config
+    ;; ignore LaTeX commands and environments
+    (setq ispell-tex-skip-alists
+          (list
+           (append (car ispell-tex-skip-alists)
+                   '(("\\\\cite" ispell-tex-arg-end)
+                     ("\\\\nocite" ispell-tex-arg-end)
+                     ("\\\\includegraphics" ispell-tex-arg-end)
+                     ("\\\\author" ispell-tex-arg-end)
+                     ("\\\\ref" ispell-tex-arg-end)
+                     ("\\\\eqref" ispell-tex-arg-end)
+                     ("\\\\pageref" ispell-tex-arg-end)
+                     ("\\\\label" ispell-tex-arg-end)
+                     ("\\\\mathit" ispell-tex-arg-end)
+                     ("\\\\mathrm" ispell-tex-arg-end)
+                     ("\\\\url" ispell-tex-arg-end)
+                     ("\\\\lstinputlisting" ispell-tex-arg-end 2)
+                     ("\\\\mint" ispell-tex-arg-end 2)
+                     ("\\\\inputminted" ispell-tex-arg-end 2)
+                     ("\\\\code" ispell-tex-arg-end 2)
+                     ("\\\\example" ispell-tex-arg-end 2)))
+           (append (cadr ispell-tex-skip-alists)
+                   '(("tabular" ispell-tex-arg-end))
+                   (mapcar
+                    (lambda (env)
+                      (cons env (format "\\\\end[ \t\n]*{[ \t\n]*%s[ \t\n]*}" env)))
+                    '("equation\\*" "minted" "listing" "lstlisting" "pre" "interface")))))
+    (setq ispell-extra-args '("--sug-mode=ultra")))
+  ;; spell-checking in text modes and in comments for programming modes
+  (hook-into-modes #'flyspell-prog-mode
+                   'prog-mode-hook
+                   'nxml-mode-hook)
+  (hook-into-modes #'turn-on-flyspell
+                   'text-mode-hook)
+  (hook-into-modes #'flyspell-buffer
+                   'text-mode-hook))
+
+
 (use-package magit
   :bind (("C-x g b" . magit-blame)
          ("C-x g c" . magit-commit)
@@ -319,44 +362,6 @@
         try-expand-line
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
-
-
-;;; Ispell:
-
-(setq ispell-program-name "aspell")
-(setq ispell-extra-args '("--sug-mode=ultra"))
-(setq ispell-tex-skip-alists
-      '((("\\\\addcontentsline" ispell-tex-arg-end 2)
-         ("\\\\add\\(tocontents\\|vspace\\)" ispell-tex-arg-end)
-         ("\\\\\\([aA]lph\\|arabic\\)" ispell-tex-arg-end)
-         ("\\\\author" ispell-tex-arg-end)
-         ("\\\\cite\\(t\\|p\\|year\\|yearpar\\)" ispell-tex-arg-end)
-         ("\\\\autoref" ispell-tex-arg-end)
-         ("\\\\eqref" ispell-tex-arg-end)
-         ("\\\\label" ispell-tex-arg-end)
-         ("\\\\bibliographystyle" ispell-tex-arg-end)
-         ("\\\\makebox" ispell-tex-arg-end 0)
-         ("\\\\e?psfig" ispell-tex-arg-end)
-         ("\\\\document\\(class\\|style\\)" .
-          "\\\\begin[ \t\n]*{[ \t\n]*document[ \t\n]*}"))
-        (;; delimited with \begin.
-         ("\\(figure\\|table\\)\\*?" ispell-tex-arg-end 0)
-         ("list" ispell-tex-arg-end 2)
-         ("program" . "\\\\end[ \t\n]*{[ \t\n]*program[ \t\n]*}")
-         ("verbatim\\*?" . "\\\\end[ \t\n]*{[ \t\n]*verbatim\\*?[ \t\n]*}"))))
-
-
-;;; flyspell:
-
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
-
-;; Add spell-checking in comments for all programming language modes
-(if (fboundp 'prog-mode)
-    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-  (dolist (hook '(nxml-mode-hook
-                  shell-mode-hook))
-    (add-hook hook 'flyspell-prog-mode)))
 
 
 ;;; Markdown:
@@ -728,7 +733,6 @@
                            (?F "\\code[Fortran]|" "|"))))
   ;;(setq reftex-plug-into-AUCTeX t)
   ;;(turn-on-reftex)
-  ;;(turn-on-flyspell)
   (LaTeX-math-mode 1))
 
 (add-hook 'LaTeX-mode-hook 'jrb-LaTeX-hook-fn)
