@@ -244,6 +244,15 @@
   (hook-into-modes #'flyspell-buffer
                    'text-mode-hook))
 
+(use-package ido
+  :config
+  (setq ido-enable-flex-matching t
+        ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el")
+        ido-ignore-extensions t
+        ido-everywhere t)
+  :init
+  (ido-mode t))
+
 (use-package magit
   :bind (("C-x g b" . magit-blame)
          ("C-x g c" . magit-commit)
@@ -772,17 +781,6 @@
           ;;no errors, make the compilation window go away in 0.5 seconds
           (run-at-time 0.5 nil 'delete-windows-on buf)
           (message "no compilation errors"))))
-
-
-;;; IDO mode:
-
-(when (require 'ido nil 'no-error)
-  (require 'ido)
-  (setq ido-enable-flex-matching t)
-  (setq ido-everywhere t)
-  (setq ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el"))
-  (setq ido-ignore-extensions t)
-  (ido-mode t))
 
 
 ;;; CSS:
