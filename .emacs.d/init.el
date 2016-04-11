@@ -53,6 +53,7 @@
         smex
         rainbow-mode
         exec-path-from-shell
+        page-break-lines
         flycheck
         ))
 (package-initialize)
@@ -749,6 +750,20 @@
   (setq bibtex-contline-indentation 17))
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
+
+
+;;; Emacs Lisp
+
+(defun jrb-emacs-lisp-hook ()
+  ;; Skip past ^L, headings marked by `;;;`, and subsequent comments
+  ;; <http://endlessparentheses.com/improving-page-navigation.html>
+  (make-local-variable 'page-delimiter)
+  (setq page-delimiter
+        (rx bol (or "\f" ";;;")
+            (not (any "#")) (* not-newline) "\n"
+            (* (* blank) (opt ";" (* not-newline)) "\n"))))
+
+(add-hook 'emacs-lisp-mode-hook 'jrb-emacs-lisp-hook)
 
 
 ;;; Graphviz
