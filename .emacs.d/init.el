@@ -59,9 +59,6 @@
       split-width-threshold     140     ; Minimum side-by-side split is 70 char
       visible-bell              t)      ; Suppress beeps
 
-;; Import PATH and exec-path from system
-(if (featurep 'exec-path-from-shell) (exec-path-from-shell-initialize))
-
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 (add-to-list 'load-path "/opt/local/share/emacs/site-lisp/")
@@ -180,6 +177,11 @@
         '((company-dabbrev-code company-abbrev company-capf)
           (company-files company-keywords)))
   (global-company-mode))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :if (jrb-mac-or-not t nil)
+  :config (exec-path-from-shell-initialize))
 
 (use-package magit
   :bind (("C-x g b" . magit-blame)
