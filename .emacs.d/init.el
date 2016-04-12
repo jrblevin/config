@@ -312,6 +312,27 @@ regexp.")
   (hook-into-modes #'flyspell-buffer
                    'text-mode-hook))
 
+(use-package f90
+  :mode (("\\.[Ff]\\(?:90\\|95\\|03\\|08\\|15\\)\\'" . f90-mode)
+         ("\\.inc\\'" . f90-mode))
+  :config
+  (defun jrb-f90-mode-hook ()
+    (setq f90-beginning-ampersand nil
+          f90-font-lock-keywords f90-font-lock-keywords-3
+          comment-column 50)
+    (make-local-variable 'completion-ignored-extensions)
+    (add-to-list 'completion-ignored-extensions ".mod")
+    ;; Make Backslash non-special (not an escape character).
+    ;; With newer versions of f90.el, use `f90-backslash-not-special`.
+    (when (equal (char-syntax ?\\ ) ?\\ )
+      (modify-syntax-entry ?\\ "."))
+    (define-abbrev f90-mode-abbrev-table "`rw" "real(wp)")
+    (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
+    (abbrev-mode 1)			; turn on abbreviation mode
+    (turn-on-font-lock)			; for highlighting
+    (auto-fill-mode 0))
+  (add-hook 'f90-mode-hook 'jrb-f90-mode-hook))
+
 (use-package git-messenger
   :commands git-messenger:popup-message
   :bind ("C-x g !" . git-messenger:popup-message)
@@ -648,29 +669,6 @@ regexp.")
   (interactive "sSlug: ")
   (find-file (concat "~/projects/jblevins.org/htdocs/log/" slug ".text"))
   (skeleton-webpage-header))
-
-
-;;; Fortran:
-
-(autoload 'f90-mode "f90"
-  "Major mode for editing Fortran code in free form." t)
-(add-to-list 'auto-mode-alist '("\\.f03\\'" . f90-mode))
-(add-hook 'f90-mode-hook 'my-f90-mode-hook)
-(add-to-list 'completion-ignored-extensions ".mod")
-
-(defun my-f90-mode-hook ()
-  (setq f90-beginning-ampersand nil
-	f90-font-lock-keywords f90-font-lock-keywords-3
-	comment-column 50)
-  ;; Make Backslash non-special (not an escape character).
-  ;; With newer versions of f90.el, use `f90-backslash-not-special`.
-  (when (equal (char-syntax ?\\ ) ?\\ )
-    (modify-syntax-entry ?\\ "."))
-  (define-abbrev f90-mode-abbrev-table "`rw" "real(wp)")
-  (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
-  (abbrev-mode 1)			; turn on abbreviation mode
-  (turn-on-font-lock)			; for highlighting
-  (auto-fill-mode 0))			; turn off auto-filling
 
 
 ;;; AUCTeX:
