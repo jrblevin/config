@@ -305,6 +305,13 @@
   :bind (("M-x" . smex))
   :config (smex-initialize))
 
+(use-package sublimity
+  :load-path "site-lisp/sublimity"
+  :config
+  (require 'sublimity-attractive)
+  (setq sublimity-attractive-centering-width 100)
+  (sublimity-mode 1))
+
 (use-package titlecase
   :bind (("C-c T" . titlecase-dwim)))
 
