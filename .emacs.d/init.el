@@ -244,6 +244,14 @@
   (hook-into-modes #'flyspell-buffer
                    'text-mode-hook))
 
+(use-package guide-key
+  :defer t
+  :diminish guide-key-mode
+  :config
+  (setq guide-key/guide-key-sequence '("C-x" "C-c"))
+  (setq guide-key/recursive-key-sequence-flag t)
+  (guide-key-mode 1))
+
 (use-package ido
   :config
   (setq ido-enable-flex-matching t
