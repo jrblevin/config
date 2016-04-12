@@ -166,6 +166,36 @@
 (global-set-key (kbd "C-c f") 'send-region-to-fantastical)
 
 
+;;; auto-minor-mode-alist
+
+;; From <https://github.com/vermiculus/dotfiles/blob/master/.emacs.d/my-packages/auto-minor-mode.el>
+
+(defvar auto-minor-mode-alist nil
+  "Alist of filename patterns and minor mode functions.
+See `auto-mode-alist'.  All elements of this alist are checked,
+meaning you can enable multiple minor modes for the same
+regexp.")
+
+(defun enable-minor-mode-based-on-extension ()
+  "Check file name against all pairs in `auto-minor-mode-alist'."
+  (when buffer-file-name
+    (let ((name buffer-file-name)
+          (remote-id (file-remote-p buffer-file-name))
+          (alist auto-minor-mode-alist))
+      ;; Remove backup-suffixes from file name.
+      (setq name (file-name-sans-versions name))
+      ;; Remove remote file name identification.
+      (when (and (stringp remote-id)
+                 (string-match-p (regexp-quote remote-id) name))
+        (setq name (substring name (match-end 0))))
+      (while (and alist (caar alist) (cdar alist))
+        (if (string-match (caar alist) name)
+            (funcall (cdar alist) 1))
+        (setq alist (cdr alist))))))
+
+(add-hook 'find-file-hook 'enable-minor-mode-based-on-extension)
+
+
 ;;; Simple package configuration
 
 (defsubst hook-into-modes (func &rest modes)
@@ -298,8 +328,11 @@
                 (flyspell-mode))))
 
 (use-package rainbow-mode
+  :defer 10
   :commands rainbow-mode
-  :config
+  :init
+  (add-to-list 'auto-minor-mode-alist '("-theme\\.el\\'" . rainbow-mode))
+  (add-to-list 'auto-minor-mode-alist '("\\.s?css\\'" . rainbow-mode))
   (defun jrb-rainbow-mode-hook ()
     "Disable hl-line-mode when rainbow-mode is active."
     (setq-local global-hl-line-mode nil)
