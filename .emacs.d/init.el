@@ -333,6 +333,7 @@ regexp.")
   :init
   (add-to-list 'auto-minor-mode-alist '("-theme\\.el\\'" . rainbow-mode))
   (add-to-list 'auto-minor-mode-alist '("\\.s?css\\'" . rainbow-mode))
+  (setq rainbow-x-colors nil)
   (defun jrb-rainbow-mode-hook ()
     "Disable hl-line-mode when rainbow-mode is active."
     (setq-local global-hl-line-mode nil)
