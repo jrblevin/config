@@ -369,6 +369,10 @@ regexp.")
                 (set-fill-column 72)
                 (flyspell-mode))))
 
+(use-package muttrc-mode
+  :mode ((".muttrc\\'" . muttrc-mode)
+         (".mutt-aliases\\'" . muttrc-mode)))
+
 (use-package org
   :mode (("\\.org\\'" . org-mode)))
 
@@ -1086,9 +1090,10 @@ With argument ARG, do this that many times."
 ; (autoload 'ses-mode "ses.el" "Spreadsheet mode" t)
 ; (add-to-list 'auto-mode-alist '("\\.ses$" . ses-mode))
 
-
 
 ;;; post-mode:
+
+;; (add-to-list 'auto-mode-alist '("mutt-" . post-mode))
 
 ;; (require 'post)
 ;; (defun post-custom()
@@ -1120,15 +1125,6 @@ With argument ARG, do this that many times."
 ;;         (replace-match (concat (match-string 2) " " (match-string 1)) nil nil))))
 ;;   (post-goto-body))
 ;; (add-hook 'post-mode-hook '(lambda() (post-custom)))
-
-
-;;; Mutt:
-
-;; (add-to-list 'auto-mode-alist '("mutt-" . post-mode))
-
-(autoload 'muttrc-mode "muttrc-mode.el" "Major mode to edit muttrc files" t)
-(add-to-list 'auto-mode-alist '(".muttrc\\'" . muttrc-mode))
-(add-to-list 'auto-mode-alist '(".mutt-aliases\\'" . muttrc-mode))
 
 
 ;;; Abbreviations
