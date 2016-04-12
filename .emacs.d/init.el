@@ -364,6 +364,9 @@ regexp.")
                 (set-fill-column 72)
                 (flyspell-mode))))
 
+(use-package org
+  :mode (("\\.org\\'" . org-mode)))
+
 (use-package rainbow-mode
   :defer 10
   :commands rainbow-mode
@@ -1078,14 +1081,6 @@ With argument ARG, do this that many times."
 ; (autoload 'ses-mode "ses.el" "Spreadsheet mode" t)
 ; (add-to-list 'auto-mode-alist '("\\.ses$" . ses-mode))
 
-
-;;; Org mode:
-
-;; (require 'org-install)
-;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;; (define-key global-map "\C-cl" 'org-store-link)
-;; (define-key global-map "\C-ca" 'org-agenda)
-;; (setq org-log-done t)
 
 
 ;;; post-mode:
