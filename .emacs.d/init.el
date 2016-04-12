@@ -855,11 +855,6 @@ regexp.")
           (message "no compilation errors"))))
 
 
-;;; CSS:
-
-(setq cssm-indent-function #'cssm-c-style-indenter)
-
-
 ;;; Timestamps:
 (require 'time-stamp)
 ;; (add-hook 'write-file-hooks 'time-stamp)
