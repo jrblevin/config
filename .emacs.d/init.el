@@ -344,6 +344,10 @@ regexp.")
   :init
   (ido-mode t))
 
+(use-package lua-mode
+  :mode (("\\.lua$" . lua-mode))
+  :interpreter ("lua" . lua-mode))
+
 (use-package magit
   :bind (("C-x g b" . magit-blame)
          ("C-x g c" . magit-commit)
@@ -1082,13 +1086,6 @@ With argument ARG, do this that many times."
 ;; (define-key global-map "\C-cl" 'org-store-link)
 ;; (define-key global-map "\C-ca" 'org-agenda)
 ;; (setq org-log-done t)
-
-
-;;; Lua mode:
-
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 
 ;;; post-mode:
