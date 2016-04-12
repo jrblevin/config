@@ -247,7 +247,7 @@ regexp.")
   :commands R
   :mode (("\\.a?do\\'" . stata-mode)
          ("\\.[Rr]\\'" . r-mode)
-         ("\\.[Rr]out" . r-transcript-mode)
+         ("\\.[Rr]out\\'" . r-transcript-mode)
          ("\\.[Ss][Aa][Ss]\\'" . sas-mode))
   :init
   (defun jrb-ess-mode-hook()
@@ -350,7 +350,7 @@ regexp.")
   (ido-mode t))
 
 (use-package lua-mode
-  :mode (("\\.lua$" . lua-mode))
+  :mode (("\\.lua\\'" . lua-mode))
   :interpreter ("lua" . lua-mode))
 
 (use-package magit
@@ -370,8 +370,8 @@ regexp.")
                 (flyspell-mode))))
 
 (use-package muttrc-mode
-  :mode ((".muttrc\\'" . muttrc-mode)
-         (".mutt-aliases\\'" . muttrc-mode)))
+  :mode (("\\.muttrc\\'" . muttrc-mode)
+         ("\\.mutt-aliases\\'" . muttrc-mode)))
 
 (use-package org
   :mode (("\\.org\\'" . org-mode)))
