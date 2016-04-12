@@ -249,6 +249,21 @@
   (hook-into-modes #'flyspell-buffer
                    'text-mode-hook))
 
+(use-package hippie-expand
+  :config
+  (setq hippie-expand-try-functions-list
+        '(try-complete-file-name-partially
+          try-complete-file-name
+          try-expand-dabbrev
+          try-expand-dabbrev-all-buffers
+          try-expand-dabbrev-from-kill
+          try-expand-all-abbrevs
+          try-expand-list
+          try-expand-line
+          try-complete-lisp-symbol-partially
+          try-complete-lisp-symbol))
+  :bind ("M-/" . hippie-expand))
+
 (use-package guide-key
   :defer t
   :diminish guide-key-mode
@@ -389,22 +404,6 @@
          (let ((half-width (/ (frame-pixel-width) 2)))
            (set-fringe-mode (/ (- half-width (* jrb-dual-mode-width (frame-char-width))) 2)))
          (split-window-right))))
-
-
-;;; Hippie expand:
-
-(global-set-key "\M-/" 'hippie-expand)
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill
-        try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-all-abbrevs
-        try-expand-list
-        try-expand-line
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol))
 
 
 ;;; Markdown:
