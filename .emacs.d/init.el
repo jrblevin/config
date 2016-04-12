@@ -97,6 +97,11 @@
 (global-unset-key (kbd "s-q"))
 (global-unset-key (kbd "<ns-power-off>"))
 
+;; UTF-8
+(prefer-coding-system 'utf-8)
+(when (display-graphic-p)
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+
 ;; Load libraries
 (require 'cl-lib)
 
