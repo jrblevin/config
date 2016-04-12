@@ -212,6 +212,13 @@ regexp.")
         ado-site-template-dir "~/.emacs.d/site-lisp/ado-mode/templates/"
         ado-date-format "%Y-%m-%d"))
 
+(use-package ampl-mode
+  :disabled t
+  :mode (("\\.ampl\\'" . ampl-mode)
+         ("\\.mod\\'" . ampl-mode)
+         ("\\.dat\\'" . ampl-mode))
+  :interpreter ("ampl" . ampl-mode))
+
 (use-package company
   :ensure t
   :defer t
@@ -1065,21 +1072,6 @@ With argument ARG, do this that many times."
 ;; (setq calendar-time-display-form
 ;;       (quote (24-hours ":" minutes (if time-zone " (")
 ;;                        time-zone (if time-zone ")"))))
-
-
-;;; AMPL:
-
-;; (setq auto-mode-alist
-;;       (cons '("\\.mod$" . ampl-mode) auto-mode-alist))
-;; (setq auto-mode-alist
-;;       (cons '("\\.dat$" . ampl-mode) auto-mode-alist))
-;; (setq auto-mode-alist
-;;       (cons '("\\.ampl$" . ampl-mode) auto-mode-alist))
-;; (setq interpreter-mode-alist
-;;       (cons '("ampl" . ampl-mode)
-;;             interpreter-mode-alist))
-
-;; (autoload 'ampl-mode "ampl-mode" "AMPL editing mode." t)
 
 
 ;;; SES:
