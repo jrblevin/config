@@ -222,6 +222,19 @@ regexp.")
           (company-files company-keywords)))
   (global-company-mode))
 
+(use-package ess-site
+  :load-path "/opt/local/share/emacs/site-lisp/ess/"
+  :commands R
+  :mode (("\\.a?do\\'" . stata-mode)
+         ("\\.[Rr]\\'" . r-mode)
+         ("\\.[Rr]out" . r-transcript-mode)
+         ("\\.[Ss][Aa][Ss]\\'" . sas-mode))
+  :init
+  (defun jrb-ess-mode-hook()
+    (when (string-equal ess-language "STA")
+      (define-key ess-mode-map (kbd "_") nil)))
+  (add-hook 'ess-mode-hook 'jrb-ess-mode-hook))
+
 (use-package exec-path-from-shell
   :ensure t
   :if (jrb-mac-or-not t nil)
@@ -839,16 +852,6 @@ regexp.")
 ;;; CSS:
 
 (setq cssm-indent-function #'cssm-c-style-indenter)
-
-
-;;; Emacs Speaks Statistics:
-
-(add-to-list 'load-path "/opt/local/share/emacs/site-lisp/ess/")
-(when (require 'ess-site nil 'no-error)
-  (defun my-ess-mode-hook()
-    (when (string-equal ess-language "STA")
-      (define-key ess-mode-map (kbd "_") nil)))
-  (add-hook 'ess-mode-hook 'my-ess-mode-hook))
 
 
 ;;; Timestamps:
