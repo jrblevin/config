@@ -312,6 +312,11 @@ regexp.")
   (hook-into-modes #'flyspell-buffer
                    'text-mode-hook))
 
+(use-package git-messenger
+  :commands git-messenger:popup-message
+  :bind ("C-x g !" . git-messenger:popup-message)
+  :init (setq git-messenger:show-detail t))
+
 (use-package hippie-expand
   :config
   (setq hippie-expand-try-functions-list
