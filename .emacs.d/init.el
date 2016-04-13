@@ -1175,6 +1175,7 @@ most recent kill ring contents and leaves the cursor at %|."
   ;; autocorrect
   ("adn" "and" nil 0)
   ("alot" "a lot" nil 0)
+  ("comprized" "comprised" nil 0)
   ("ehre" "here" nil 0)
   ("esle" "else" nil 0)
   ("haev" "have" nil 0)
