@@ -1,7 +1,7 @@
 ;;; Emacs Edit mode for this file is -*- Emacs-lisp -*-
 
 ;; mma.el --- programming mode for writing Mathematica package files
-;; $Id: mma.el,v 1.1 2003/01/23 08:10:55 halfmann Exp $
+;; $Id: mma.el,v 1.32 2000/06/27 16:05:19 wichmann Exp $
 
 ;; Copyright (C) 1999 Tim Wichmannn
 
@@ -106,7 +106,7 @@
 
 ;;;; Code:
 
-(defconst mma-version "$Revision: 1.1 $"
+(defconst mma-version "$Revision: 1.32 $"
   "The Revision number of mma.el.
 You should add this number when reporting bugs.")
 
