@@ -108,14 +108,20 @@
 
 ;;; Package management
 
-(require 'package)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(setq package-selected-packages '(use-package)) ; bootstrap
-(package-initialize)
-(package-install-selected-packages)
+;; Load `package.el'
+(eval-when-compile (require 'package))
+(setq package-enable-at-startup nil
+      package-archives
+      '(("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("gnu" . "http://elpa.gnu.org/packages/")))
+(eval-when-compile (package-initialize t))
 
-;; use-package
+;; Bootstrap `use-package'
+(setq package-selected-packages '(use-package))
+(package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents))
+(package-install-selected-packages)
 (require 'use-package)
 (setq use-package-verbose t)
 
