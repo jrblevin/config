@@ -314,9 +314,11 @@ regexp.")
                    'prog-mode-hook
                    'nxml-mode-hook)
   (hook-into-modes #'turn-on-flyspell
-                   'text-mode-hook)
+                   'LaTeX-mode-hook
+                   'markdown-mode-hook)
   (hook-into-modes #'flyspell-buffer
-                   'text-mode-hook))
+                   'LaTeX-mode-hook
+                   'markdown-mode-hook))
 
 (use-package f90
   :mode (("\\.[Ff]\\(?:90\\|95\\|03\\|08\\|15\\)\\'" . f90-mode)
