@@ -148,7 +148,6 @@
 (global-set-key (kbd "<f4>") 'revert-buffer-no-confirm)
 (global-set-key (kbd "<f5>") 'my-quick-log)
 (global-set-key (kbd "<f6>") 'calendar)
-(global-set-key (kbd "<f7>") 'markdown-mode)
 (global-set-key (kbd "<f10>") 'jrb-write-mode)
 (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "<f12>") 'jrb-dual-mode)
@@ -290,6 +289,7 @@ regexp.")
     (interactive)
     (deft-daily (format-time-string "%Y-%m-%d" (tomorrow-time))))
 
+  :config
   (defun deft-reload ()
     "Reload Deft from source (for development)."
     (interactive)
@@ -480,6 +480,62 @@ regexp.")
             #'(lambda ()
                 (set-fill-column 72)
                 (flyspell-mode))))
+
+(use-package markdown-mode
+  :bind (("<f7>" . markdown-mode))
+  :commands (markdown-mode gfm-mode)
+  :mode (("\\.text\\'" . markdown-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("/gtd/.*\\.txt\\'" . markdown-mode))
+  :config
+  (use-package org-table
+    :commands orgtbl-mode)
+
+  (setq markdown-command "multimarkdown"
+        markdown-open-command "mark"
+        markdown-link-space-sub-char "-"
+        markdown-footnote-location 'end
+        markdown-reference-location 'header
+        markdown-asymmetric-header t
+        markdown-live-preview-delete-export 'delete-on-destroy
+        markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
+
+  (set-face-attribute 'markdown-header-face nil
+                      :inherit font-lock-function-name-face
+                      :inherit 'variable-pitch
+                      :weight 'bold)
+  (set-face-attribute 'markdown-header-face-1 nil
+                      :inherit markdown-header-face :height 1.8)
+  (set-face-attribute 'markdown-header-face-2 nil
+                      :inherit markdown-header-face :height 1.4)
+  (set-face-attribute 'markdown-header-face-3 nil
+                      :inherit markdown-header-face :height 1.2)
+
+  (defun jrb-markdown-mode-hook ()
+    ;; For MultiMarkdown tables
+    (make-local-variable 'org-table-automatic-realign)
+    (setq org-table-automatic-realign nil)
+    ;; Enable math mode based on file metadata
+    (save-excursion
+      (when (re-search-forward "^math:\\s-*itex$" nil t)
+        (markdown-enable-math 1))))
+  (add-hook 'markdown-mode-hook 'jrb-markdown-mode-hook)
+
+  (defun jrb-gfm-mode-hook ()
+    (visual-line-mode 1))
+  (add-hook 'gfm-mode-hook 'jrb-gfm-mode-hook)
+
+  (defun markdown-reload ()
+    "Reload markdown mode from source (for development)."
+    (interactive)
+    (when (eq major-mode 'markdown-mode)
+      (fundamental-mode))
+    (when (featurep 'markdown-test) (unload-feature 'markdown-test))
+    (when (featurep 'markdown-mode) (unload-feature 'markdown-mode))
+    (load-library (expand-file-name "~/projects/markdown-mode/markdown-mode.el"))
+    (load-library (expand-file-name "~/projects/markdown-mode/tests/markdown-test.el"))
+    ;;(setq debug-on-quit t)
+    (markdown-mode)))
 
 (use-package mma
   :commands mma-mode)
@@ -677,72 +733,6 @@ regexp.")
          (let ((half-width (/ (frame-pixel-width) 2)))
            (set-fringe-mode (/ (- half-width (* jrb-dual-mode-width (frame-char-width))) 2)))
          (split-window-right))))
-
-
-;;; Markdown:
-;; org-table in org-table.el :commands orgtbl-mode
-
-(setq markdown-command "multimarkdown")
-(setq markdown-open-command "mark")
-(setq markdown-link-space-sub-char "-")
-(setq markdown-footnote-location 'end)
-(setq markdown-reference-location 'header)
-(setq markdown-asymmetric-header t)
-(setq markdown-live-preview-delete-export 'delete-on-destroy)
-(setq markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
-
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown formatted text files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("/gtd/.*\\.txt\\'" . markdown-mode))
-
-(eval-after-load "markdown"
-  '(progn
-     (set-face-attribute 'markdown-header-face nil
-                         :inherit font-lock-function-name-face :bold t
-                         :family "variable-pitch")
-     (set-face-attribute 'markdown-header-face-1 nil
-                         :inherit markdown-header-face :height 1.8)
-     (set-face-attribute 'markdown-header-face-2 nil
-                         :inherit markdown-header-face :height 1.4)
-     (set-face-attribute 'markdown-header-face-3 nil
-                         :inherit markdown-header-face :height 1.2)))
-
-(defun my-markdown-mode-hook ()
-  ;; For MultiMarkdown tables
-  (make-local-variable 'org-table-automatic-realign)
-  (setq org-table-automatic-realign nil)
-  ;; Enable math mode based on file metadata
-  (save-excursion
-    (when (re-search-forward "^math:\\s-*itex$" nil t)
-      (markdown-enable-math 1))))
-(add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
-
-(defun my-gfm-mode-hook ()
-  (visual-line-mode 1))
-(add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
-
-(defun markdown-reload ()
-  "Reload markdown mode from source (for development)."
-  (interactive)
-  (when (eq major-mode 'markdown-mode)
-    (fundamental-mode))
-  (when (featurep 'markdown-test) (unload-feature 'markdown-test))
-  (when (featurep 'markdown-mode) (unload-feature 'markdown-mode))
-  (load-library (expand-file-name "~/projects/markdown-mode/markdown-mode.el"))
-  (load-library (expand-file-name "~/projects/markdown-mode/tests/markdown-test.el"))
-  ;;(setq debug-on-quit t)
-  (markdown-mode))
-
-(defun jrb-fortran-code-block-region (beg end)
-  (interactive "r")
-  (save-excursion
-    (goto-char end)
-    (skip-chars-backward "\n")
-    (insert "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    (goto-char beg)
-    (insert "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {: lang=fortran }\n")))
 
 
 ;;; Website:
@@ -1028,6 +1018,17 @@ Modified slightly from <http://www.emacswiki.org/emacs/Journal>."
   (interactive "r")
   (align-regexp start end
                 "\\(\\s-*\\)\\&" 1 1 t))
+
+(defun jrb-fortran-code-block-region (beg end)
+  "Create a tilde-fenced Fortran code block using region from BEG to END.
+Formats code blcoks for use on the Fortran Wiki."
+  (interactive "r")
+  (save-excursion
+    (goto-char end)
+    (skip-chars-backward "\n")
+    (insert "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    (goto-char beg)
+    (insert "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {: lang=fortran }\n")))
 
 ;; Deleting rather than killing the previous word
 ;; http://stackoverflow.com/questions/6133799/delete-a-word-without-adding-it-to-the-kill-ring-in-emacs
