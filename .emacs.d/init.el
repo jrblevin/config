@@ -1053,88 +1053,6 @@ With argument ARG, do this that many times."
   (delete-region (point) (progn (backward-word arg) (point))))
 
 
-;;; Calendar and Diary:
-
-;; See the following:
-;;
-;; http://www.dotemacs.de/dotfiles/JasonRumney.emacs.html
-;; http://www.zvon.org/other/elisp/Output/index.html
-;; http://www.coling.uni-freiburg.de/~schauer/resources/emacs/config/calendar-stuff.el.html
-;; http://www.charlescurley.com/emacs.init.html
-
-;; Add ISO format to date formats allowed in diary
-;; (require 'diary-lib)
-;; (require 'calendar)
-
-;; (setq diary-file (expand-file-name "~/.diary")
-;;       calendar-week-start-day 1
-;;       mark-diary-entries-in-calendar t
-;;       mark-holidays-in-calendar t
-;;       view-diary-entries-initially nil
-;;       mark-diary-entries-in-calendar t
-;;       number-of-diary-entries 7)
-
-;; (add-hook 'diary-display-hook 'fancy-diary-display)
-;; (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-;; (add-hook 'list-diary-entries-hook 'sort-diary-entries t)
-
-;; (setq diary-date-forms
-;;       '((year "-" month "-" day "[^/0-9]")
-;;         (month "/" day "[^/0-9]")
-;;         (month "/" day "/" year "[^0-9]")
-;;         (monthname " *" day "[^,0-9]")
-;;         (monthname " *" day ", *" year "[^0-9]")
-;;         (dayname "\\W")))
-;; (setq calendar-date-display-form
-;;       (quote ((format "%04s-%02d-%02d" year (string-to-int month)
-;;                       (string-to-int day)))))
-;; (setq calendar-time-display-form
-;;       (quote (24-hours ":" minutes (if time-zone " (")
-;;                        time-zone (if time-zone ")"))))
-
-
-;;; SES:
-
-; (autoload 'ses-mode "ses.el" "Spreadsheet mode" t)
-; (add-to-list 'auto-mode-alist '("\\.ses$" . ses-mode))
-
-
-;;; post-mode:
-
-;; (add-to-list 'auto-mode-alist '("mutt-" . post-mode))
-
-;; (require 'post)
-;; (defun post-custom()
-;;   "post-hook"
-;;   (load "mutt-alias")
-;;   (setq mutt-alias-file-list '("~/.mutt-aliases"))
-;;   (local-set-key "\C-ci" 'mutt-alias-insert)
-;;   (setq post-uses-fill-mode nil)
-;;   (setq post-underline-pattern nil)
-;;   (setq post-emoticon-pattern nil)
-;;   (setq post-bold-pattern nil)
-;;   (setq post-signature-pattern "\\(--\\|Cheers,\\|Thanks,\\|Best,\\|\\|Sent from my\\)")
-;;   (setq post-kill-quoted-sig nil)
-;;   (setq post-signature-source-is-file t)
-;;   (setq post-fixed-signature-source "~/.signature")
-;;   (setq post-email-address user-mail-address)
-;;   ;; Remove trailing whitespace (but protect '-- ' in signature)
-;;   (save-excursion
-;;     (beginning-of-buffer)
-;;     (while (re-search-forward "\\([>:]\\)\s+$" nil t)
-;;       (replace-match (match-string 1) nil nil)))
-;;   ;; Rewrite "Last, First" addresses
-;;   (save-excursion
-;;     (re-search-forward "\n\n")
-;;     (let ((end (point)))
-;;       ;;(message body)
-;;       (beginning-of-buffer)
-;;       (while (re-search-forward "\"\\([[:alpha:]]+\\), \\([[:alpha:]]+\\)\"" end t)
-;;         (replace-match (concat (match-string 2) " " (match-string 1)) nil nil))))
-;;   (post-goto-body))
-;; (add-hook 'post-mode-hook '(lambda() (post-custom)))
-
-
 ;;; Abbreviations
 
 (defun my-abbrev-expand (expand)
