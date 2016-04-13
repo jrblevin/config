@@ -403,6 +403,11 @@ regexp.")
                 (set-fill-column 72)
                 (flyspell-mode))))
 
+(use-package matlab
+  :commands (matlab-mode matlab-shell)
+  :mode (("\\.m\\'" . matlab-mode))
+  :config (setq matlab-auto-fill nil))
+
 (use-package mmm-mode
   :defer t
   :bind (("C-c m" . mmm-parse-buffer))
@@ -820,14 +825,6 @@ regexp.")
   (setq bibtex-contline-indentation 17))
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
-
-
-;;; Matlab
-
-(setq matlab-auto-fill nil)
-(autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
-(add-to-list 'auto-mode-alist '("\\.m\\'" . matlab-mode))
-(autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
 
 
 ;;; Mathematica:
