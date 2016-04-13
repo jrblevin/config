@@ -9,7 +9,6 @@
 ;; ~/.emacs.d/init.el            init file
 ;; ~/.emacs.d/init-local.el      additional private init file
 ;; ~/.emacs.d/custom.el          customized variables and faces
-;; ~/.emacs.d/backup             single location for backup files
 ;; ~/.emacs.d/site-lisp          manually installed packages
 ;; ~/.emacs.d/themes             custom themes
 
