@@ -225,6 +225,21 @@ regexp.")
          ("\\.dat\\'" . ampl-mode))
   :interpreter ("ampl" . ampl-mode))
 
+(use-package bibtex
+  :defer t
+  :config
+  (setq bibtex-user-optional-fields '(("keywords" "Entry keywords"))
+        bibtex-autokey-names 5
+        bibtex-autokey-name-separator "-"
+        bibtex-autokey-name-year-separator "-"
+        bibtex-autokey-year-title-separator "-"
+        bibtex-autokey-year-length 4
+        bibtex-autokey-titleword-ignore '("The" "A" "If" "An")
+        bibtex-autokey-titleword-length 30
+        bibtex-autokey-titlewords 1
+        bibtex-contline-indentation 17
+        bibtex-align-at-equal-sign t))
+
 (use-package company
   :ensure t
   :defer t
@@ -613,6 +628,7 @@ regexp.")
 
 
 ;;; Markdown:
+;; org-table in org-table.el :commands orgtbl-mode
 
 (setq markdown-command "multimarkdown")
 (setq markdown-open-command "mark")
@@ -852,24 +868,6 @@ regexp.")
        (font-lock-set-defaults)))
    LaTeX-dialect)
   (TeX-run-style-hooks "code"))
-
-
-;;; BibTeX:
-
-(defun my-bibtex-mode-hook-fn ()
-  "Function added to `bibtex-mode-hook'."
-  (setq fill-column 77)
-  (setq bibtex-user-optional-fields
-        '(("keywords" "Entry keywords")))
-  (setq bibtex-align-at-equal-sign t)
-  (setq bibtex-autokey-name-year-separator "-")
-  (setq bibtex-autokey-year-title-separator "-")
-  (setq bibtex-autokey-titleword-first-ignore '("the" "a" "if" "and" "an"))
-  (setq bibtex-autokey-titleword-length 30)
-  (setq bibtex-autokey-titlewords 1)
-  (setq bibtex-contline-indentation 17))
-
-(add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
 
 
 ;;; Timestamps:
