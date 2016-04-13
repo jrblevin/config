@@ -13,6 +13,8 @@
 ;; ~/.emacs.d/site-lisp          manually installed packages
 ;; ~/.emacs.d/themes             custom themes
 
+(defconst emacs-start-time (current-time))
+
 
 ;;; Basic Configuration:
 
@@ -1403,5 +1405,20 @@ and subsequent lines as the event note."
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file))
+
+;;; Post initialization
+
+(when window-system
+  (let ((elapsed (float-time (time-subtract (current-time)
+                                            emacs-start-time))))
+    (message "Loading %s...done (%.3fs)" load-file-name elapsed))
+
+  (add-hook 'after-init-hook
+            `(lambda ()
+               (let ((elapsed (float-time (time-subtract (current-time)
+                                                         emacs-start-time))))
+                 (message "Loading %s...done (%.3fs) [after-init]"
+                          ,load-file-name elapsed)))
+            t))
 
 ;;; init.el ends here
