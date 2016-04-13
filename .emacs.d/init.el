@@ -414,6 +414,9 @@ regexp.")
                 (set-fill-column 72)
                 (flyspell-mode))))
 
+(use-package mma
+  :commands mma-mode)
+
 (use-package matlab
   :commands (matlab-mode matlab-shell)
   :mode (("\\.m\\'" . matlab-mode))
@@ -867,12 +870,6 @@ regexp.")
   (setq bibtex-contline-indentation 17))
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
-
-
-;;; Mathematica:
-
-(autoload 'mma-mode "mma" "Mathematica package file mode" t)
-;(setq auto-mode-alist (cons '("\\.m\\'" . mma-mode) auto-mode-alist))
 
 
 ;;; Timestamps:
