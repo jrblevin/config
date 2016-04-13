@@ -235,6 +235,18 @@ regexp.")
           (company-files company-keywords)))
   (global-company-mode))
 
+(use-package compile
+  :config
+  (defun jrb-autoclose-compile-window (buffer string)
+    (cond
+     ((string-match "finished" string)
+      (message "Build seemed successful: closing window.")
+      (run-with-timer 2 nil 'delete-window (get-buffer-window buffer t)))
+     (t
+      (message "Compilation exited abnormally: %s" string))))
+  (setq compilation-finish-functions 'jrb-autoclose-compile-window)
+  (setq compilation-window-height 15))
+
 (use-package elisp-mode
   :defer t
   :init
@@ -864,20 +876,6 @@ regexp.")
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 (add-to-list 'auto-mode-alist '("\\.leg\\'" . c-mode))
-
-;; Close the compilation window after clean compile.
-;; From http://www.bloomington.in.us/~brutt/emacs-c-dev.html.
-(setq compilation-finish-function
-      (lambda (buf str)
-
-        (if (string-match "exited abnormally" str)
-
-            ;;there were errors
-            (message "compilation errors, press C-x ` to visit")
-
-          ;;no errors, make the compilation window go away in 0.5 seconds
-          (run-at-time 0.5 nil 'delete-windows-on buf)
-          (message "no compilation errors"))))
 
 
 ;;; Timestamps:
