@@ -472,6 +472,16 @@ regexp.")
   :diminish page-break-lines-mode
   :init (hook-into-modes #'page-break-lines-mode 'emacs-lisp-mode-hook))
 
+(use-package cperl-mode
+  :mode (("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
+  :interpreter (("perl" . cperl-mode)
+                ("perl5" . cperl-mode)
+                ("miniperl" . cperl-mode))
+  :config
+  (setq cperl-indent-level 4)
+  (setq cperl-continued-statement-offset 2)
+  (setq cperl-extra-newline-before-brace nil))
+
 (use-package scss-mode
   :mode (("\\.scss\\'" . scss-mode)))
 
@@ -831,20 +841,6 @@ regexp.")
 
 (autoload 'mma-mode "mma" "Mathematica package file mode" t)
 ;(setq auto-mode-alist (cons '("\\.m\\'" . mma-mode) auto-mode-alist))
-
-
-;;; Perl:
-
-(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
-
-(add-hook 'cperl-mode-hook 'n-cperl-mode-hook t)
-(defun n-cperl-mode-hook ()
-  (setq cperl-indent-level 4)
-  (setq cperl-continued-statement-offset 2)
-  (setq cperl-extra-newline-before-brace nil))
 
 
 ;;; C and C++:
