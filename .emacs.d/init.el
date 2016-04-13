@@ -149,7 +149,6 @@
 (global-set-key (kbd "<f5>") 'my-quick-log)
 (global-set-key (kbd "<f6>") 'calendar)
 (global-set-key (kbd "<f7>") 'markdown-mode)
-(global-set-key (kbd "<f8>") 'deft)
 (global-set-key (kbd "<f10>") 'jrb-write-mode)
 (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "<f12>") 'jrb-dual-mode)
@@ -162,9 +161,6 @@
 (global-set-key (kbd "C-h C-r") 'describe-char)
 (global-set-key (kbd "C-x C-g") 'deft-find-file)
 
-(global-set-key (kbd "C-c d") 'deft)
-(global-set-key (kbd "C-c D") 'deft-today)
-(global-set-key (kbd "C-c M") 'deft-tomorrow)
 (global-set-key (kbd "C-c i") 'imenu)
 (global-set-key (kbd "C-c l") 'my-quick-log)
 (global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
@@ -261,6 +257,62 @@ regexp.")
       (message "Compilation exited abnormally: %s" string))))
   (setq compilation-finish-functions 'jrb-autoclose-compile-window)
   (setq compilation-window-height 15))
+
+(use-package deft
+  :bind
+  (("<f8>" . deft)
+   ("C-c d" . deft)
+   ("C-c D" . deft-today)
+   ("C-c M" . deft-tomorrow))
+
+  :commands
+  (deft deft-open-file deft-new-file-named)
+
+  :init
+  (defun deft-daily (iso)
+    (interactive)
+    (let ((filename (concat deft-directory iso ".txt"))
+          (deft-filter-regexp nil))
+      (if (file-exists-p filename)
+          (deft-open-file filename t t)
+        (deft-new-file-named iso)
+        (goto-char (point-min))
+        (unless (looking-at (concat "^" iso))
+          (insert "# " iso "\n\n<!-- #pending -->\n\n")))))
+
+  (defun deft-today ()
+    "Create or open a Deft note for today."
+    (interactive)
+    (deft-daily (format-time-string "%Y-%m-%d")))
+
+  (defun deft-tomorrow ()
+    "Create or open a Deft note for tomorrow."
+    (interactive)
+    (deft-daily (format-time-string "%Y-%m-%d" (tomorrow-time))))
+
+  (defun deft-reload ()
+    "Reload Deft from source (for development)."
+    (interactive)
+    (quit-window)
+    (load-library "/Users/jblevins/projects/deft/deft.el")
+    (deft))
+
+  (setq deft-directory "~/gtd/"
+        deft-auto-save-interval 2
+        deft-recursive t
+        deft-extensions '("txt" "text" "tex" "taskpaper" "org")
+        deft-use-filter-string-for-filename nil
+        deft-markdown-mode-title-level 1
+        deft-use-filename-as-title nil
+        deft-file-naming-rules '((noslash . "-")
+                                 (nospace . "-")
+                                 (case-fn . downcase))
+        deft-strip-summary-regexp
+        (concat "\\("
+                "[\n\t]" ; blank
+                "\\|^<!--[ ]*#[[:alnum:]][ ]*-->" ; hashtags
+                "\\|^#\\+[[:upper:]_]+:.*$" ; org-mode metadata
+                "\\)")))
 
 (use-package elisp-mode
   :defer t
@@ -691,57 +743,6 @@ regexp.")
     (insert "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     (goto-char beg)
     (insert "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {: lang=fortran }\n")))
-
-
-;;; Deft:
-
-(require 'deft)
-(setq deft-directory "~/gtd/")
-(setq deft-auto-save-interval 2)
-(setq deft-recursive t)
-(setq deft-extensions '("txt" "text" "tex" "taskpaper" "org"))
-(setq deft-use-filter-string-for-filename nil)
-(setq deft-markdown-mode-title-level 1)
-(setq deft-use-filename-as-title nil)
-(setq deft-file-naming-rules '((noslash . "-")
-                               (nospace . "-")
-                               (case-fn . downcase)))
-(setq deft-strip-summary-regexp
-      (concat "\\("
-              "[\n\t]" ;; blank
-              "\\|^<!-- #pending -->"
-              "\\|^<!-- #active -->"
-              "\\|^#\\+OPTIONS:.*$" ;; org-mode metadata
-              "\\|^#\\+AUTHOR:.*$" ;; org-mode-metadata
-              "\\)"))
-
-(defun deft-daily (iso)
-  (interactive)
-  (let ((filename (concat deft-directory iso ".txt"))
-        (deft-filter-regexp nil))
-    (if (file-exists-p filename)
-        (deft-open-file filename t t)
-      (deft-new-file-named iso)
-      (goto-char (point-min))
-      (unless (looking-at (concat "^" iso))
-        (insert "# " iso "\n\n<!-- #pending -->\n\n")))))
-
-(defun deft-today ()
-  "Create or open a Deft note for today."
-  (interactive)
-  (deft-daily (format-time-string "%Y-%m-%d")))
-
-(defun deft-tomorrow ()
-  "Create or open a Deft note for tomorrow."
-  (interactive)
-  (deft-daily (format-time-string "%Y-%m-%d" (tomorrow-time))))
-
-(defun deft-reload ()
-  "Reload Deft from source (for development)."
-  (interactive)
-  (quit-window)
-  (load-library "/Users/jblevins/projects/deft/deft.el")
-  (deft))
 
 
 ;;; Website:
