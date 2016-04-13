@@ -362,6 +362,10 @@ regexp.")
           try-complete-lisp-symbol))
   :bind ("M-/" . hippie-expand))
 
+(use-package graphviz-dot-mode
+  :ensure t :defer t
+  :config (setq graphviz-dot-indent-width 4))
+
 (use-package guide-key
   :defer t
   :diminish guide-key-mode
@@ -816,13 +820,6 @@ regexp.")
   (setq bibtex-contline-indentation 17))
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook-fn)
-
-
-;;; Graphviz
-
-(use-package graphviz-dot-mode
-  :ensure t :defer t
-  :config (setq graphviz-dot-indent-width 4))
 
 
 ;;; Matlab
