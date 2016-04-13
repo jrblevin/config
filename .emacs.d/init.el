@@ -483,6 +483,15 @@ regexp.")
   :diminish page-break-lines-mode
   :init (hook-into-modes #'page-break-lines-mode 'emacs-lisp-mode-hook))
 
+(use-package cc-mode
+  :mode (("\\.leg\\'" . c-mode))
+  :config
+  (defun jrb-c-mode-common-hook ()
+    (c-set-style "k&r")
+    (setq c-basic-offset 4)
+    (c-toggle-auto-hungry-state -1))
+  (add-hook 'c-mode-common-hook 'jrb-c-mode-common-hook))
+
 (use-package cperl-mode
   :mode (("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
   :interpreter (("perl" . cperl-mode)
@@ -864,18 +873,6 @@ regexp.")
 
 (autoload 'mma-mode "mma" "Mathematica package file mode" t)
 ;(setq auto-mode-alist (cons '("\\.m\\'" . mma-mode) auto-mode-alist))
-
-
-;;; C and C++:
-
-(defun my-c-mode-common-hook ()
-  (c-set-style "k&r")
-  (setq c-basic-offset 4)
-  (setq compilation-window-height 8)
-  (c-toggle-auto-hungry-state -1))
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-
-(add-to-list 'auto-mode-alist '("\\.leg\\'" . c-mode))
 
 
 ;;; Timestamps:
