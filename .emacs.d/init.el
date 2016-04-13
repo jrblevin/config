@@ -168,7 +168,6 @@
 (global-set-key (kbd "C-c M") 'deft-tomorrow)
 (global-set-key (kbd "C-c i") 'imenu)
 (global-set-key (kbd "C-c l") 'my-quick-log)
-(global-set-key (kbd "C-c t") 'time-stamp)
 (global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
 (global-set-key (kbd "C-c f") 'send-region-to-fantastical)
 
@@ -502,6 +501,18 @@ regexp.")
   (require 'sublimity-attractive)
   (setq sublimity-attractive-centering-width 100)
   (sublimity-mode 1))
+
+(use-package time-stamp
+  :defer t
+  :bind ("C-c t" . time-stamp)
+  :init
+  ;;(add-hook 'write-file-hooks 'time-stamp)
+  :config
+  (setq time-stamp-active t)
+  (setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
+  (setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|^modified:[ \t]+\\)")
+  (setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
+  (setq time-stamp-line-limit 15))
 
 (use-package titlecase
   :bind (("C-c T" . titlecase-dwim)))
@@ -870,13 +881,6 @@ regexp.")
 
 
 ;;; Timestamps:
-(require 'time-stamp)
-;; (add-hook 'write-file-hooks 'time-stamp)
-(setq time-stamp-active t)
-(setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
-(setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|^modified:[ \t]+\\)")
-(setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
-(setq time-stamp-line-limit 10)
 
 (defun my-insert-year ()
   "Insert the current year."
