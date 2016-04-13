@@ -150,7 +150,6 @@
 (global-set-key (kbd "<f6>") 'calendar)
 (global-set-key (kbd "<f7>") 'markdown-mode)
 (global-set-key (kbd "<f8>") 'deft)
-(global-set-key (kbd "<f9>") 'compile)
 (global-set-key (kbd "<f10>") 'jrb-write-mode)
 (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "<f12>") 'jrb-dual-mode)
@@ -251,6 +250,7 @@ regexp.")
   (global-company-mode))
 
 (use-package compile
+  :bind ("<f9>" . compile)
   :config
   (defun jrb-autoclose-compile-window (buffer string)
     (cond
