@@ -62,7 +62,6 @@
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-to-list 'load-path "/opt/local/share/emacs/site-lisp/")
 
 ;; Personal information
 (setq user-mail-address "jrblevin@sdf.org")
@@ -652,6 +651,67 @@ regexp.")
   (setq sublimity-attractive-centering-width 100)
   (sublimity-mode 1))
 
+(use-package tex
+  :ensure auctex
+  :commands (tex-mode)
+  :config
+  (setq TeX-parse-self t
+        TeX-auto-save nil)
+
+  ;; Update available TeX commands
+  (setq TeX-command-list
+        (append
+         '(("latexmk" "latexmk -g -synctex=1 -pdf %s"
+            TeX-run-TeX nil (latex-mode)
+            :help "Run latexmk on file")
+           ("bibtool" "bibtool -x %s.aux > %s.bib"
+            TeX-run-command nil t
+            :help "Run bibtool on aux file to produce bib file"))
+         TeX-command-list))
+
+  ;; Viewers
+  (setq TeX-view-program-list
+        '(("Preview" "/usr/bin/open -a Preview.app %o")
+          ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -r -b %n %o %b")))
+  (setq TeX-view-program-selection
+        '((output-dvi "Skim") (output-pdf "Skim") (output-html "open")))
+
+  (use-package company-auctex
+    :config (company-auctex-init)))
+
+(use-package latex
+  :ensure auctex
+  :mode (("\\.tex\\'" . latex-mode))
+  :commands (latex-mode LaTeX-mode)
+  :config
+  (setq font-latex-match-slide-title-keywords '("foilhead" "fhead"))
+
+  (defun jrb-LaTeX-hook-fn ()
+    (setq TeX-command-default "latexmk")
+    (setq LaTeX-font-list (append
+                           LaTeX-font-list
+                           '((?\C-l "\\code{" "}")
+                             (?c "\\code[C]{" "}")
+                             (?f "\\code[Fortran]{" "}")
+                             (?C "\\code[C]|" "|")
+                             (?F "\\code[Fortran]|" "|"))))
+    ;; (setq reftex-plug-into-AUCTeX t)
+    ;; (turn-on-reftex)
+    (LaTeX-math-mode 1)
+    (jrb-LaTeX-setup-code))
+  (add-hook 'LaTeX-mode-hook 'jrb-LaTeX-hook-fn))
+
+(use-package tex-site
+  :defer t
+  :ensure auctex
+  :config
+  ;; Exclude temporary files from completion
+  (setq completion-ignored-extensions
+        (append completion-ignored-extensions
+                '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
+                  ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz"
+                  ".ind" ".ilg" ".lol" ".minted"))))
+
 (use-package time-stamp
   :defer t
   :bind ("C-c t" . time-stamp)
@@ -746,67 +806,7 @@ regexp.")
   (skeleton-webpage-header))
 
 
-;;; AUCTeX:
-
-(load "auctex.el" nil t t)
-
-(setq TeX-parse-self t)
-(setq TeX-auto-save nil)
-(setq TeX-command-default "latexmk")
-(setq font-latex-match-slide-title-keywords '("foilhead"))
-
-;; Exclude temporary files from completion
-(setq completion-ignored-extensions
-      (append completion-ignored-extensions
-              '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
-                ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz"
-                ".minted")))
-
-;; One-time TeX setup
-(eval-after-load "tex"
-  '(progn
-     (use-package company-auctex
-       :config
-       (company-auctex-init))
-
-     ;; make latexmk available via C-c C-c
-     ;; Use Command-Shift-click to reverse search in Skim.
-     ;; See http://www.stefanom.org/setting-up-a-nice-auctex-environment-on-mac-os-x/
-     (push
-      '("latexmk" "latexmk -g -synctex=1 -pdf %s" TeX-run-TeX nil t
-        :help "Run latexmk on file")
-      TeX-command-list)
-
-     ;; make bibtool available via C-c C-c
-     (push
-      '("bibtool" "bibtool -x %s.aux > %s.bib" TeX-run-TeX nil t
-        :help "Run bibtool on aux file to produce bib file")
-      TeX-command-list)
-
-     ;; Remove Biber command (so that bib completes to BibTeX)
-     (cl-delete-if (lambda (x) (string-equal "Biber" (car x))) TeX-command-list)
-
-     ;; Viewers
-     (setq TeX-view-program-list
-           '(("Preview" "/usr/bin/open -a Preview.app %o")
-             ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -r -b %n %o %b")))
-     (setq TeX-view-program-selection
-           '((output-dvi "Skim") (output-pdf "Skim") (output-html "open")))))
-
-
-(defun jrb-LaTeX-hook-fn ()
-  (setq LaTeX-font-list (append
-                         LaTeX-font-list
-                         '((?\C-l "\\code{" "}")
-                           (?c "\\code[C]{" "}")
-                           (?f "\\code[Fortran]{" "}")
-                           (?C "\\code[C]|" "|")
-                           (?F "\\code[Fortran]|" "|"))))
-  ;;(setq reftex-plug-into-AUCTeX t)
-  ;;(turn-on-reftex)
-  (LaTeX-math-mode 1))
-
-(add-hook 'LaTeX-mode-hook 'jrb-LaTeX-hook-fn)
+;;; Custom Environments in AUCTeX:
 
 ;; Custom code macro, interface and pre environments
 (defvar jrb-LaTeX-env-code-language-history nil
