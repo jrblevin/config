@@ -543,7 +543,10 @@ regexp.")
 (use-package matlab
   :commands (matlab-mode matlab-shell)
   :mode (("\\.m\\'" . matlab-mode))
-  :config (setq matlab-auto-fill nil))
+  :config
+  (setq-local comment-insert-comment-function 'matlab-comment)
+  (add-hook 'matlab-mode-hook (lamba () (local-set-key "\M-;" nil)))
+  (setq matlab-auto-fill nil))
 
 (use-package mmm-mode
   :defer t
