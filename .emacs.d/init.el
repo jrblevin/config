@@ -158,7 +158,6 @@
 (global-set-key [\C-\M-up] 'move-line-up)
 
 (global-set-key (kbd "C-h C-r") 'describe-char)
-(global-set-key (kbd "C-x C-g") 'deft-find-file)
 
 (global-set-key (kbd "C-c i") 'imenu)
 (global-set-key (kbd "C-c l") 'my-quick-log)
@@ -262,7 +261,8 @@ regexp.")
   (("<f8>" . deft)
    ("C-c d" . deft)
    ("C-c D" . deft-today)
-   ("C-c M" . deft-tomorrow))
+   ("C-c M" . deft-tomorrow)
+   ("C-x C-g" . deft-find-file))
 
   :commands
   (deft deft-open-file deft-new-file-named)
