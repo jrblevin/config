@@ -32,7 +32,7 @@
 (require 'tex)
 (require 'latex)
 (require 'company)
-(require 'yasnippet)
+;(require 'yasnippet)
 
 (defvar company-auctex-arg-lookup-table
   '((TeX-arg-define-macro . ("\\MacroName"))
