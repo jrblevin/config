@@ -9,6 +9,7 @@ bookmarks
 ido.last
 elpa
 .cask
+.smex-items
 ado-mode
 init-local.el
 init-junk.el
