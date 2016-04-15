@@ -288,6 +288,9 @@ regexp.")
     (interactive)
     (deft-daily (format-time-string "%Y-%m-%d" (tomorrow-time))))
 
+  :init
+  (setq deft-directory "~/gtd/")
+
   :config
   (defun deft-reload ()
     "Reload Deft from source (for development)."
@@ -296,8 +299,7 @@ regexp.")
     (load-library "/Users/jblevins/projects/deft/deft.el")
     (deft))
 
-  (setq deft-directory "~/gtd/"
-        deft-auto-save-interval 2
+  (setq deft-auto-save-interval 2
         deft-recursive t
         deft-extensions '("txt" "text" "tex" "taskpaper" "org")
         deft-use-filter-string-for-filename nil
