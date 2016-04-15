@@ -74,12 +74,20 @@
 (setq tab-width 8)
 
 ;; Store backup files in one place.  Do the same for auto save files.
-;; http://www.emacswiki.org/emacs/AutoSave
-(defconst emacs-tmp-dir
-  (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
-(setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
-(setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
-(setq auto-save-list-file-prefix emacs-tmp-dir)
+(defvar jrb-backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p jrb-backup-directory))
+    (make-directory jrb-backup-directory t))
+(setq make-backup-files t
+      backup-directory-alist `((".*" . ,jrb-backup-directory))
+      backup-by-copying t
+      version-control t
+      delete-old-versions t
+      vc-make-backup-files t
+      kept-old-versions 6
+      kept-new-versions 9)
+(setq auto-save-default t
+      auto-save-file-name-transforms `((".*" ,jrb-backup-directory t))
+      auto-save-list-file-prefix jrb-backup-directory)
 
 ;; Show matching parentheses.
 (show-paren-mode 1)
