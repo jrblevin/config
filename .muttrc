@@ -79,8 +79,8 @@ set print_command="muttprint -p - | ps2pdf - $HOME/inbox/$(date +%Y-%m-%d-%H-%M-
 # Send each message separately
 set print_split
 
-# Use the Little Brother Database to look up addresses (see also ~/.lbdbrc).
-set query_command="lbdbq '%s'"
+# Use the OS X Address Book to look up contacts
+set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
 
 # Use aspell to check spelling
 set ispell="aspell -e -c"
