@@ -500,8 +500,7 @@ regexp.")
         markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
 
   (set-face-attribute 'markdown-header-face nil
-                      :inherit font-lock-function-name-face
-                      :inherit 'variable-pitch
+                      :inherit '(variable-pitch font-lock-function-name-face)
                       :weight 'bold)
   (set-face-attribute 'markdown-header-face-1 nil
                       :inherit markdown-header-face :height 1.8)
