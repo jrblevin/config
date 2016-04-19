@@ -27,6 +27,13 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode (jrb-mac-or-not 1 0)))
 
+;; Set the load path
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+
+;; Personal information
+(setq user-full-name "Jason Blevins")
+(setq user-mail-address "jrblevin@sdf.org")
+
 ;; Default fonts (face height is 10 * point size)
 (set-face-attribute 'default nil :family "Fira Code" :weight 'light
                     :height (jrb-mac-or-not 180 150))
@@ -59,12 +66,6 @@
       split-height-threshold    nil     ; Window splitting thresholds
       split-width-threshold     140     ; Minimum side-by-side split is 70 char
       visible-bell              t)      ; Suppress beeps
-
-;; Set the load path
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-
-;; Personal information
-(setq user-mail-address "jrblevin@sdf.org")
 
 ;; Browser
 (setq browse-url-generic-program (jrb-mac-or-not nil "debian-sensible-browser"))
