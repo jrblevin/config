@@ -364,7 +364,7 @@ regexp.")
 
 (use-package flycheck
   :ensure t
-  :defer 5
+  :defer t
   :config
   (setq flycheck-gfortran-warnings (list "all" "extra" "surprising")
         flycheck-gfortran-language-standard "f2008"
@@ -373,7 +373,7 @@ regexp.")
   (hook-into-modes #'flycheck-mode 'f90-mode-hook 'emacs-lisp-mode-hook))
 
 (use-package flyspell
-  :defer 5
+  :defer t
   :diminish flyspell-mode
   :init
   (use-package ispell
@@ -611,7 +611,6 @@ regexp.")
   :mode (("\\.org\\'" . org-mode)))
 
 (use-package rainbow-mode
-  :defer 10
   :commands rainbow-mode
   :init
   (add-to-list 'auto-minor-mode-alist '("-theme\\.el\\'" . rainbow-mode))
