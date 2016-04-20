@@ -39,7 +39,7 @@
 (set-face-attribute 'default nil :family "Fira Code" :weight 'light
                     :height (jrb-mac-or-not 180 150))
 (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
-(set-face-attribute 'variable-pitch nil :family "Avenir Next")
+(set-face-attribute 'variable-pitch nil :family "Fira Sans")
 
 ;; Set frame geometry according to display resolution.
 ;; Width: 93 columns for large displays, 80 columns for small ones.
