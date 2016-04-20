@@ -264,8 +264,8 @@ regexp.")
         bibtex-align-at-equal-sign t))
 
 (use-package company
+  :defer 5
   :ensure t
-  :defer t
   :diminish company-mode
   :config
   (setq company-backends
@@ -477,7 +477,7 @@ regexp.")
   :config (setq graphviz-dot-indent-width 4))
 
 (use-package guide-key
-  :defer t
+  :defer 5
   :diminish guide-key-mode
   :config
   (setq guide-key/guide-key-sequence '("C-x" "C-c"))
