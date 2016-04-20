@@ -124,14 +124,12 @@
       package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
         ("gnu" . "http://elpa.gnu.org/packages/")))
-(eval-when-compile (package-initialize t))
+(eval-when-compile (package-initialize))
 
 ;; Bootstrap `use-package'
-(setq package-selected-packages '(use-package))
-(package-initialize)
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents))
-(package-install-selected-packages)
+  (package-refresh-contents)
+  (package-install 'use-package))
 (require 'use-package)
 (setq use-package-verbose t)
 
