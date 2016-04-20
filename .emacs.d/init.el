@@ -470,6 +470,7 @@ regexp.")
   (guide-key-mode 1))
 
 (use-package ido
+  :commands (ido-read-file-name)
   :config
   (setq ido-enable-flex-matching t
         ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el")
