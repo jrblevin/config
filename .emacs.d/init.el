@@ -485,14 +485,18 @@ regexp.")
   (guide-key-mode 1))
 
 (use-package ido
-  :commands (ido-read-file-name)
+  :init
+  (ido-mode t)
+  (add-to-list 'ido-ignore-files "\\.DS_Store")
+  (use-package ido-ubiquitous
+    :ensure t
+    :init (ido-ubiquitous-mode 1))
   :config
   (setq ido-enable-flex-matching t
         ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el")
+        read-file-name-function 'ido-read-file-name
         ido-ignore-extensions t
-        ido-everywhere t)
-  :init
-  (ido-mode t))
+        ido-everywhere t))
 
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
