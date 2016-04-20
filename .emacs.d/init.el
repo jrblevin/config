@@ -78,9 +78,9 @@
 (setq tab-width 8)
 
 ;; Store backup files in one place.  Do the same for auto save files.
-(defvar jrb-backup-directory (concat user-emacs-directory "backups"))
-(if (not (file-exists-p jrb-backup-directory))
-    (make-directory jrb-backup-directory t))
+(defvar jrb-backup-directory (expand-file-name "backups/" user-emacs-directory))
+(unless (file-exists-p jrb-backup-directory)
+  (make-directory jrb-backup-directory t))
 (setq make-backup-files t
       backup-directory-alist `((".*" . ,jrb-backup-directory))
       backup-by-copying t
@@ -92,6 +92,21 @@
 (setq auto-save-default t
       auto-save-file-name-transforms `((".*" ,jrb-backup-directory t))
       auto-save-list-file-prefix jrb-backup-directory)
+
+;; Save history
+(defvar jrb-history-directory (expand-file-name "history/" user-emacs-directory))
+(unless (file-exists-p jrb-history-directory)
+  (make-directory jrb-history-directory t))
+(setq savehist-file (expand-file-name "history" jrb-history-directory))
+(setq history-length 100)
+(setq savehist-additional-variables '(search-ring regexp-search-ring))
+(put 'minibuffer-history 'history-length 50)
+(put 'kill-ring 'history-length 25)
+(savehist-mode 1)
+
+(defun jrb-clean-kill-ring ()
+  (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
+(add-hook 'kill-emacs-hook 'jrb-clean-kill-ring)
 
 ;; Show matching parentheses.
 (show-paren-mode 1)
@@ -661,7 +676,7 @@ regexp.")
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands)
          ("C-c C-c M-x" . execute-extended-command))
-  :init (setq smex-save-file (concat user-emacs-directory ".smex-items"))
+  :init (setq smex-save-file (concat jrb-history-directory "smex"))
   :config (smex-initialize))
 
 (use-package sublimity
