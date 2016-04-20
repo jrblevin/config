@@ -65,8 +65,10 @@
       scroll-margin             3       ; Some context when recentering
       column-number-mode        1       ; Show column number in mode line
       split-height-threshold    nil     ; Window splitting thresholds
-      split-width-threshold     140     ; Minimum side-by-side split is 70 char
-      visible-bell              t)      ; Suppress beeps
+      split-width-threshold     140)    ; Minimum side-by-side split is 70 char
+
+;; Suppress beeps
+(setq visible-bell nil ring-bell-function 'jrb-flash-mode-line)
 
 ;; Browser
 (setq browse-url-generic-program (jrb-mac-or-not nil "debian-sensible-browser"))
@@ -1052,6 +1054,12 @@ Formats code blcoks for use on the Fortran Wiki."
 With argument ARG, do this that many times."
   (interactive "p")
   (delete-region (point) (progn (backward-word arg) (point))))
+
+(defun jrb-flash-mode-line ()
+  "Alternative `ring-bell-function' that flashes the mode line.
+Avoids visual bell issues in Emacs 24.5 on OS X."
+  (invert-face 'mode-line)
+  (run-with-timer 0.1 nil 'invert-face 'mode-line))
 
 
 ;;; Abbreviations
