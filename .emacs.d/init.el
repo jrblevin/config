@@ -34,6 +34,9 @@
 (setq user-full-name "Jason Blevins")
 (setq user-mail-address "jrblevin@sdf.org")
 
+;; Load newer version of .el and .elc if both are available
+(setq load-prefer-newer t)
+
 ;; Default fonts (face height is 10 * point size)
 (require 'fira-code-ligatures)
 (set-face-attribute 'default nil :family "Fira Code" :weight 'light
