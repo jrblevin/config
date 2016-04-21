@@ -7,7 +7,7 @@ auto-save-files
 session.*
 bookmarks
 ido.last
-elpa
+elpa*
 .cask
 .smex-items
 ado-mode
