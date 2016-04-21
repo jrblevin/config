@@ -138,9 +138,6 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier nil)
 
-;; Load libraries
-(require 'cl-lib)
-
 
 ;;; Package management
 
@@ -380,6 +377,7 @@ regexp.")
 
 (use-package exec-path-from-shell
   :ensure t
+  :defer 1
   :if (jrb-mac-or-not t nil)
   :config (exec-path-from-shell-initialize))
 
@@ -494,10 +492,11 @@ regexp.")
   :init
   (ido-mode t)
   (add-to-list 'ido-ignore-files "\\.DS_Store")
+  :config
   (use-package ido-ubiquitous
     :ensure t
-    :init (ido-ubiquitous-mode 1))
-  :config
+    :defer 1
+    :config (ido-ubiquitous-mode 1))
   (setq ido-enable-flex-matching t
         ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el")
         read-file-name-function 'ido-read-file-name
@@ -509,6 +508,7 @@ regexp.")
   :interpreter ("lua" . lua-mode))
 
 (use-package magit
+  :ensure t
   :bind (("C-x g b" . magit-blame)
          ("C-x g c" . magit-commit)
          ("C-x g d" . magit-diff)
