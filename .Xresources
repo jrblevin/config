@@ -11,11 +11,10 @@ Emacs.toolBar:          	off
 Emacs.internalBorder:      	1
 Emacs.geometry:			80x35+5+5
 Emacs.FontBackend:              xft
-Emacs.font:                     Inconsolata-15
 
 !! XTerm
-XTerm*faceName:                 SourceCodePro
-XTerm*faceSize:                 16
+XTerm*faceName:         Fira Code Light
+XTerm*faceSize:         16
 XTerm*geometry:			80x30
 XTerm*saveLines:		5000
 XTerm*background:		black
