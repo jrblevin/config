@@ -15,18 +15,42 @@
 
 ;;; Basic Configuration:
 
+;; Configure GUI elements quickly
+(setq default-frame-alist '((font . "Fira Code-16")
+                            (vertical-scroll-bars . 0)
+                            (menu-bar-lines . 0)
+                            (tool-bar-lines . 0)
+                            (left-fringe . 1)
+                            (right-fringe . 1)
+                            (alpha 94 90)))
+
+;; Set frame geometry according to display resolution.
+;; Width: 93 columns for large displays, 80 columns for small ones.
+;; Height: subtract from screen height (for panels, menubars, etc.)
+;; and divide by the height of a character to get the number of lines.
+;; <http://stackoverflow.com/questions/92971/>
+(setq initial-frame-alist
+      (list (cons 'top 1) (cons 'left 1)
+            (cons 'width (if (> (x-display-pixel-width) 1280) 93 80))
+            (cons 'height (/ (- (x-display-pixel-height) 50)
+                             (frame-char-height)))))
+
+;; Disable scroll bar, tool bar, and menu bar
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+;; Increase garbage collection threshold
+(setq gc-cons-threshold (* 16 1024 1024))
+
+;; Don't show so many messages on startup
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
+
 ;; Platform-specific configuration
 (defsubst jrb-mac-or-not (mac not)
   "Return MAC if system is a Mac and NOT otherwise."
   (if (eq system-type 'darwin) mac not))
-
-;; Configure GUI elements quickly (scroll bar, tool bar, and menu bar)
-(if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode (jrb-mac-or-not 1 0)))
-
-;; Set the load path
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 ;; Personal information
 (setq user-full-name "Jason Blevins")
@@ -34,25 +58,6 @@
 
 ;; Load newer version of .el and .elc if both are available
 (setq load-prefer-newer t)
-
-;; Default fonts (face height is 10 * point size)
-(require 'fira-code-ligatures)
-(set-face-attribute 'default nil :family "Fira Code" :weight 'light
-                    :height (jrb-mac-or-not 180 150))
-(set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
-(set-face-attribute 'variable-pitch nil :family "Fira Sans")
-
-;; Set frame geometry according to display resolution.
-;; Width: 93 columns for large displays, 80 columns for small ones.
-;; Height: subtract from screen height (for panels, menubars, etc.)
-;; and divide by the height of a character to get the number of lines.
-;; <http://stackoverflow.com/questions/92971/>
-(when (display-graphic-p)
-  (setq initial-frame-alist
-        (list (cons 'top 1) (cons 'left 1)
-              (cons 'width (if (> (x-display-pixel-width) 1280) 93 80))
-              (cons 'height (/ (- (x-display-pixel-height) 50)
-                               (frame-char-height))))))
 
 ;; Highlight current line, blink cursor
 (if (fboundp 'global-hl-line-mode) (global-hl-line-mode 1))
@@ -152,6 +157,9 @@
         ("gnu" . "http://elpa.gnu.org/packages/")))
 (eval-when-compile (package-initialize))
 
+;; Set the load path
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -160,7 +168,16 @@
 (setq use-package-verbose t)
 
 
-;;; Color Themes:
+;;; Fonts and color themes:
+
+(use-package fira-code-ligatures
+  :if (display-graphic-p)
+  :config
+  (set-face-attribute 'default nil :family "Fira Code" :weight 'light
+                      ;; face height is 10 * point size
+                      :height (jrb-mac-or-not 180 150))
+  (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
+  (set-face-attribute 'variable-pitch nil :family "Fira Sans"))
 
 (setq custom-theme-directory "~/.emacs.d/themes")
 (let ((hour (string-to-number (substring (current-time-string) 11 13))))
