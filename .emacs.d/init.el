@@ -99,10 +99,10 @@
 (unless (file-exists-p jrb-history-directory)
   (make-directory jrb-history-directory t))
 (setq savehist-file (expand-file-name "history" jrb-history-directory))
-(setq history-length 100)
-(setq savehist-additional-variables '(search-ring regexp-search-ring))
-(put 'minibuffer-history 'history-length 50)
-(put 'kill-ring 'history-length 25)
+(setq history-length 100
+      history-delete-duplicates t
+      savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 (savehist-mode 1)
 
 (defun jrb-clean-kill-ring ()
