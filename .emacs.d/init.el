@@ -149,6 +149,9 @@
 ;; Load `package.el'
 (eval-when-compile (require 'package))
 (setq package-enable-at-startup nil
+      package-user-dir (format "%selpa-%d.%d" user-emacs-directory
+                               emacs-major-version emacs-minor-version)
+      package-menu-async t
       package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
         ("gnu" . "http://elpa.gnu.org/packages/")))
