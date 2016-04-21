@@ -123,6 +123,8 @@
 (global-unset-key (kbd "s-w"))
 (global-unset-key (kbd "s-q"))
 (global-unset-key (kbd "<ns-power-off>"))
+(global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
+(global-set-key (kbd "C-x C-c") 'kill-buffer-and-window)
 
 ;; UTF-8
 (prefer-coding-system 'utf-8)
