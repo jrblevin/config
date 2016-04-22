@@ -77,7 +77,7 @@
 (setq visible-bell nil ring-bell-function 'jrb-flash-mode-line)
 
 ;; Browser
-(setq browse-url-generic-program (jrb-mac-or-not nil "debian-sensible-browser"))
+(setq browse-url-generic-program (jrb-mac-or-not nil "google-chrome"))
 
 ;; Tabs versus Spaces: http://www.jwz.org/doc/tabs-vs-spaces.html
 (setq-default indent-tabs-mode nil)
