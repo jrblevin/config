@@ -42,27 +42,64 @@
 ;; right time and by automating many of the usual tasks such as
 ;; creating new files and saving files.
 
+;; ![Deft Screencast](http://jblevins.org/projects/deft/deft-v0.6.gif)
+
+;; Obtaining Deft
+;; --------------
+
 ;; Deft is open source software and may be freely distributed and
-;; modified under the BSD license.  Version 0.7 is the latest stable
-;; version, released on December 21, 2015.  You may download it
-;; directly here:
+;; modified under the BSD license.  The latest stable release is
+;; version 0.7, released on December 21, 2015.
+
+;; **Installation via MELPA Stable**
+
+;; The recommended way to install Deft is to obtain the stable version
+;; from [MELPA Stable](https://stable.melpa.org/#/deft) using
+;; `package.el'.  First, configure `package.el' and the MELPA Stable
+;; repository by adding the following to your `.emacs', `init.el', or
+;; equivalent startup file:
+
+;;     (require 'package)
+;;     (add-to-list 'package-archives
+;;                  '("melpa-stable" . "https://stable.melpa.org/packages/"))
+;;     (package-initialize)
+
+;; Then, after restarting Emacs or evaluating the above statements, issue
+;; the following command: `M-x package-install RET deft RET`.
+
+;; [MELPA Stable]: http://stable.melpa.org/
+
+;; **Direct Download**
+
+;; Alternatively you can manually download and install Deft.
+;; First, download the latest stable version of and save the file
+;; where Emacs can find it---a directory in your `load-path':
 
 ;;   * [deft.el](http://jblevins.org/projects/deft/deft.el)
 
-;; To follow or contribute to Deft development, you can browse or
-;; clone the Git repository at [jblevins.org][] or [GitHub][]:
+;; Then, add the following line to your startup file:
 
-;;     git clone git://jblevins.org/git/deft.git
+;;     (require 'deft)
+
+;; **Development Version**
+
+;; To follow or contribute to Deft development, you can browse or
+;; clone the Git repository [on GitHub](https://github.com/jrblevin/deft):
+
 ;;     git clone https://github.com/jrblevin/deft.git
 
-;; [![Build Status][status]][travis]
+;; If you prefer to install and use the development version, which may
+;; become unstable at some times, you can either clone the Git
+;; repository as above or install Deft from
+;; [MELPA](https://melpa.org/#/deft).
 
-;; [jblevins.org]: http://jblevins.org/git/deft.git
-;; [GitHub]: https://github.com/jrblevin/deft
-;; [travis]: https://travis-ci.org/jrblevin/deft
-;; [status]: https://travis-ci.org/jrblevin/deft.svg?branch=master
+;; If you clone the repository directly, then make sure that Emacs can
+;; find it by adding the following line to your startup file:
 
-;; ![Deft Screencast](http://jblevins.org/projects/deft/deft-v0.6.gif)
+;;     (add-to-list 'load-path "/path/to/deft/repository")
+
+;; Overview
+;; --------
 
 ;; The Deft buffer is simply a file browser which lists the titles of
 ;; all text files in the Deft directory followed by short summaries
@@ -149,13 +186,9 @@
 ;; Getting Started
 ;; ---------------
 
-;; To start using it, place it somewhere in your Emacs load-path and
-;; add the line
-
-;;     (require 'deft)
-
-;; in your `.emacs` file.  Then run `M-x deft` to start.  It is useful
-;; to create a global keybinding for the `deft` function (e.g., a
+;; Once you have installed Deft following one of the above methods,
+;; you can simply run `M-x deft` to start Deft.  It is useful
+;; to create a global keybinding for the `deft' function (e.g., a
 ;; function key) to start it quickly (see below for details).
 
 ;; When you first run Deft, it will complain that it cannot find the
@@ -210,6 +243,18 @@
 
 ;;     (global-set-key [f8] 'deft)
 
+;; If you manage loading packages with [use-package][], then you can
+;; configure by adding a declaration such as this one to your init
+;; file:
+
+;;     (use-package deft
+;;       :bind ("<f8>" . deft)
+;;       :commands (deft)
+;;       :config (setq deft-directory "~/Dropbox/notes"
+;;                     deft-extensions '("md" "org")))
+
+;; [use-package]: https://github.com/jwiegley/use-package
+
 ;; Reading Files
 ;; -------------
 
@@ -217,7 +262,7 @@
 ;; the file, with certain characters removed from the beginning.  Hash
 ;; characters, as used in Markdown headers, and asterisks, as in Org
 ;; Mode headers, are removed.  Additionally, Org mode `#+TITLE:` tags,
-;; MultiMarkdown `Title:` tags, LaTeX comment markers (`%`), and
+;; MultiMarkdown `Title:` tags, LaTeX comment markers, and
 ;; Emacs mode-line declarations (e.g., `-*-mode-*-`) are stripped from
 ;; displayed titles.  This can be customized by changing
 ;; `deft-strip-title-regexp'.
@@ -331,6 +376,10 @@
 ;; properties from the standard font-lock faces defined by your current
 ;; color theme.
 
+;; Deft also provides several hooks: `deft-mode-hook',
+;; `deft-filter-hook', and `deft-open-file-hook'.  See the
+;; documentation for these variables for further details.
+
 ;; Acknowledgments
 ;; ---------------
 
@@ -379,7 +428,7 @@
 ;; * Update default `deft-strip-title-regexp' to remove the following:
 ;;     - org-mode `#+TITLE:` tags
 ;;     - MultiMarkdown `Title:` tags
-;;     - LaTeX comment markers (i.e., `%`)
+;;     - LaTeX comment markers
 ;;     - Emacs mode-line declarations (e.g., `-*-mode-*-`)
 ;; * Remove leading and trailing whitespace from titles.
 ;; * Disable visual line mode to prevent lines from wrapping.
@@ -621,6 +670,7 @@ or kebab-case
     (setq deft-file-naming-rules '((noslash . \"-\")
                                    (nospace . \"-\")
                                    (case-fn . downcase)))"
+  :type '(alist :key-type symbol :value-type sexp)
   :group 'deft)
 
 ;; Faces
@@ -682,6 +732,12 @@ or kebab-case
 
 (defvar deft-mode-hook nil
   "Hook run when entering Deft mode.")
+
+(defvar deft-filter-hook nil
+  "Hook run when the Deft filter string changes.")
+
+(defvar deft-open-file-hook nil
+  "Hook run after Deft opens a file.")
 
 (defvar deft-filter-regexp nil
   "A list of string representing the current filter used by Deft.
@@ -1032,7 +1088,7 @@ Case is ignored."
   "Render the file browser in the *Deft* buffer.
 When REFRESH is true, attempt to restore the point afterwards."
   (let ((orig-point (point)))
-    (setq deft-window-width (window-width))
+    (setq deft-window-width (window-width (get-buffer-window deft-buffer t)))
     (let ((inhibit-read-only t))
       (erase-buffer))
     (remove-overlays)
@@ -1099,7 +1155,8 @@ handles nil values gracefully."
 (add-hook 'window-configuration-change-hook
           (lambda ()
             (when (and (eq (current-buffer) (get-buffer deft-buffer))
-                       (not (eq deft-window-width (window-width))))
+                       (not (eq deft-window-width
+				(window-width (get-buffer-window deft-buffer t)))))
               (deft-buffer-setup t))))
 
 (defun deft-refresh ()
@@ -1195,6 +1252,7 @@ FILE must be a relative or absolute path, with extension."
                              (deft-cache-update-file buffer-file-name)
                              (deft-refresh-filter)))
                 nil t))
+    (run-hooks 'deft-open-file-hook)
     (if other
         (if switch
             (switch-to-buffer-other-window buffer)
@@ -1401,7 +1459,8 @@ Deft buffer."
   (when deft-filter-regexp
     (setq deft-filter-regexp nil)
     (setq deft-current-files deft-all-files)
-    (deft-refresh))
+    (deft-refresh)
+    (run-hooks 'deft-filter-hook))
   (message "Filter cleared."))
 
 (defun deft-filter (str &optional reset)
@@ -1444,7 +1503,8 @@ replace the entire filter string."
         (setq deft-filter-regexp (list str))
       (setq deft-filter-regexp nil)))
   (deft-filter-update)
-  (deft-refresh-browser))
+  (deft-refresh-browser)
+  (run-hooks 'deft-filter-hook))
 
 (defun deft-filter-increment ()
   "Append character to the filter regexp and update `deft-current-files'."
@@ -1456,12 +1516,13 @@ replace the entire filter string."
     (if (and deft-incremental-search (string= char " "))
         (setq deft-filter-regexp (cons "" deft-filter-regexp))
       (progn
-        (if (car deft-filter-regexp)
-            (setcar deft-filter-regexp (concat (car deft-filter-regexp) char))
-          (setq deft-filter-regexp (list char)))
-        (setq deft-current-files (deft-filter-files deft-current-files))
-        (setq deft-current-files (delq nil deft-current-files))
-        (deft-refresh-browser)))))
+	(if (car deft-filter-regexp)
+	    (setcar deft-filter-regexp (concat (car deft-filter-regexp) char))
+	  (setq deft-filter-regexp (list char)))
+	(setq deft-current-files (deft-filter-files deft-current-files))
+	(setq deft-current-files (delq nil deft-current-files))
+	(deft-refresh-browser)
+	(run-hooks 'deft-filter-hook)))))
 
 (defun deft-filter-decrement ()
   "Remove last character from the filter, if possible, and update.
