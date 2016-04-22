@@ -268,6 +268,9 @@ regexp.")
          ("\\.dat\\'" . ampl-mode))
   :interpreter ("ampl" . ampl-mode))
 
+(use-package auto-compile :disabled t
+  :config (auto-compile-on-load-mode))
+
 (use-package bibtex
   :defer t
   :config
