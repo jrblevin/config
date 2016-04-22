@@ -15,14 +15,17 @@
 
 ;;; Basic Configuration:
 
+;; Platform-specific configuration
+(defsubst jrb-mac-or-not (mac not)
+  "Return MAC if system is a Mac and NOT otherwise."
+  (if (eq system-type 'darwin) mac not))
+
 ;; Configure GUI elements quickly
 (setq default-frame-alist
       `((font . ,(format "Fira Code-%d" (jrb-mac-or-not 18 15)))
         (vertical-scroll-bars . 0)
         (menu-bar-lines . 0)
         (tool-bar-lines . 0)
-        (left-fringe . 1)
-        (right-fringe . 1)
         (alpha 94 90)))
 
 ;; Set frame geometry according to display resolution.
@@ -47,11 +50,6 @@
 ;; Don't show so many messages on startup
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message t)
-
-;; Platform-specific configuration
-(defsubst jrb-mac-or-not (mac not)
-  "Return MAC if system is a Mac and NOT otherwise."
-  (if (eq system-type 'darwin) mac not))
 
 ;; Personal information
 (setq user-full-name "Jason Blevins")
