@@ -17,7 +17,7 @@
 
 ;; Configure GUI elements quickly
 (setq default-frame-alist
-      '((font . (format "Fira Code-%d" (jrb-mac-or-not 18 15)))
+      `((font . ,(format "Fira Code-%d" (jrb-mac-or-not 18 15)))
         (vertical-scroll-bars . 0)
         (menu-bar-lines . 0)
         (tool-bar-lines . 0)
