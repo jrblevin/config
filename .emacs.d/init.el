@@ -16,13 +16,14 @@
 ;;; Basic Configuration:
 
 ;; Configure GUI elements quickly
-(setq default-frame-alist '((font . "Fira Code-16")
-                            (vertical-scroll-bars . 0)
-                            (menu-bar-lines . 0)
-                            (tool-bar-lines . 0)
-                            (left-fringe . 1)
-                            (right-fringe . 1)
-                            (alpha 94 90)))
+(setq default-frame-alist
+      '((font . (format "Fira Code-%d" (jrb-mac-or-not 18 15)))
+        (vertical-scroll-bars . 0)
+        (menu-bar-lines . 0)
+        (tool-bar-lines . 0)
+        (left-fringe . 1)
+        (right-fringe . 1)
+        (alpha 94 90)))
 
 ;; Set frame geometry according to display resolution.
 ;; Width: 93 columns for large displays, 80 columns for small ones.
