@@ -16,32 +16,42 @@ set sort_alias= alias
 set reverse_alias=yes
 source $alias_file
 
+# Usernames and passwords
+set my_user = jrblevin@fastmail.fm
+set my_pass = `security find-internet-password -w -a jrblevin@fastmail.fm -s mail.messagingengine.com`
+set my_server = mail.messagingengine.com
+
 
 # Mailboxes
 # ---------
 
-set imap_user = jrblevin@fastmail.fm
-set imap_pass = `security find-internet-password -w -a jrblevin@fastmail.fm -s mail.messagingengine.com`
-
-set folder = "imaps://mail.messagingengine.com/INBOX"
+set folder = "imaps://$my_server/INBOX"
 set spoolfile = "="
 set record = "=Sent Items"
 set postponed = "=Drafts"
-mailboxes "="
+set trash = "=Trash"
+mailboxes "= =+SaneLater"
 
 set move = no
-set mail_check = 5
+set mail_check = 300
 set timeout = 15
-set imap_keepalive = 300
+set imap_keepalive = 600
 set ssl_starttls = no
-unset imap_check_subscribed
 unset imap_passive
-set ssl_verify_host = no
-set ssl_verify_dates = no
+
+set imap_user = $my_user
+set imap_pass = $my_pass
 
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
+
+
+# Sending Mail
+# ------------
+
+set smtp_url = "smtps://$my_user@$my_server:465"
+set smtp_pass = $my_pass
 
 
 # Outgoing Headers
@@ -65,9 +75,6 @@ my_hdr X-PGP-Key: http://jblevins.org/jrblevin.asc
 
 # External Programs
 # -----------------
-
-# Sending mail
-set sendmail="msmtp -v -X /tmp/msmtp.log"
 
 # Compose mail using Emacs, if server running, or vim
 set editor="emacsclient %s -a vi"
@@ -377,7 +384,28 @@ set pgp_good_sign="^gpg: Good signature from"
 
 bind editor <space> noop
 
-macro index,pager S "<save-message>=Junk Mail<enter>" "Recharacterize as spam"
-macro index,pager H "<save-message>=INBOX<enter>" "Recharacterize as not spam"
-macro index,pager Y "<save-message>=Archive<enter>" "Archive message"
-macro index,pager G "<group-reply>" "reply to all recipients"
+bind  index,pager G group-reply
+bind  index,pager V view-attachments
+
+macro index,pager gi "<change-folder>=<enter>"              "go to INBOX"
+macro index,pager gl "<change-folder>=+SaneLater<enter>"    "go to SaneLater"
+macro index,pager ga "<change-folder>=Archive<enter>"       "go to Archive"
+macro index,pager gd "<change-folder>=Drafts<enter>"        "go to Drafts"
+macro index,pager gs "<change-folder>=Sent Items<enter>"    "go to Sent Items"
+macro index,pager gj "<change-folder>=Junk Mail<enter>"     "go to Junk Mail"
+bind  index,pager g= change-folderUTay
+
+macro index,pager vi "<save-message>=<enter>"               "move to INBOX"
+macro index,pager H  "<save-message>=<enter>"               "mark as not spam"
+macro index,pager vl "<save-message>=+Sane Later<enter>"    "move to SaneLater"
+macro index,pager va "<save-message>=Archive<enter>"        "move to Archive"
+macro index,pager y  "<save-message>=Archive<enter>"        "archive message"
+macro index,pager vd "<save-message>=Drafts<enter>"         "move to Drafts"
+macro index,pager vs "<save-message>=Sent Items<enter>"     "move to Sent Items"
+macro index,pager vj "<save-message>=Junk Mail<enter>"      "move to Junk Mail"
+macro index,pager S "<save-message>=Junk Mail<enter>"       "mark as spam"
+macro index,pager vt "<save-message>=+SaneTomorrow<enter>"  "move to SaneTomorrow"
+macro index,pager vn "<save-message>=+SaneNextWeek<enter>"  "move to SaneNextWeek"
+macro index,pager vh "<save-message>=+SaneTomorrow<enter>"  "move to SaneBlackHole"
+
+macro index,pager xo "<pipe-message>of-import-mail<enter>"  "send to OmniFocus"
