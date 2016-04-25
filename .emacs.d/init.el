@@ -606,7 +606,7 @@ regexp.")
   :mode (("\\.m\\'" . matlab-mode))
   :config
   (setq-local comment-insert-comment-function 'matlab-comment)
-  (add-hook 'matlab-mode-hook (lamba () (local-set-key "\M-;" nil)))
+  (add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-;" nil)))
   (setq matlab-auto-fill nil))
 
 (use-package mmm-mode
