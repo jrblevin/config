@@ -379,6 +379,7 @@ set pgp_getkeys_command="gpg --recv-keys %r 2> /dev/null"
 # Pattern for good signatures.
 set pgp_good_sign="^gpg: Good signature from"
 
+
 # Keyboard Shortcuts
 # ------------------
 
