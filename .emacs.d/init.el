@@ -442,7 +442,9 @@ regexp.")
                     (lambda (env)
                       (cons env (format "\\\\end[ \t\n]*{[ \t\n]*%s[ \t\n]*}" env)))
                     '("equation\\*" "minted" "listing" "lstlisting" "pre" "interface")))))
-    (setq ispell-extra-args '("--sug-mode=ultra")))
+    (setq ispell-program-name "aspell"
+          ispell-really-aspell t
+          ispell-extra-args '("--sug-mode=ultra")))
   ;; spell-checking in text modes and in comments for programming modes
   (hook-into-modes #'flyspell-prog-mode
                    'prog-mode-hook
