@@ -394,11 +394,11 @@ macro index,pager ga "<change-folder>=Archive<enter>"       "go to Archive"
 macro index,pager gd "<change-folder>=Drafts<enter>"        "go to Drafts"
 macro index,pager gs "<change-folder>=Sent Items<enter>"    "go to Sent Items"
 macro index,pager gj "<change-folder>=Junk Mail<enter>"     "go to Junk Mail"
-bind  index,pager g= change-folderUTay
+bind  index,pager g= change-folder
 
 macro index,pager vi "<save-message>=<enter>"               "move to INBOX"
 macro index,pager H  "<save-message>=<enter>"               "mark as not spam"
-macro index,pager vl "<save-message>=+Sane Later<enter>"    "move to SaneLater"
+macro index,pager vl "<save-message>=+SaneLater<enter>"    "move to SaneLater"
 macro index,pager va "<save-message>=Archive<enter>"        "move to Archive"
 macro index,pager y  "<save-message>=Archive<enter>"        "archive message"
 macro index,pager vd "<save-message>=Drafts<enter>"         "move to Drafts"
