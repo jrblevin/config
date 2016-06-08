@@ -369,6 +369,13 @@ regexp.")
                 "\\|^#\\+[[:upper:]_]+:.*$" ; org-mode metadata
                 "\\)")))
 
+(use-package ebib
+  :commands ebib
+  :ensure t
+  :config
+  (setq ebib-file-search-dirs '("~/references/articles" "~/references/books")
+        ebib-file-associations '(("pdf" . "pdfexpert"))))
+
 (use-package elisp-mode
   :defer t
   :init
