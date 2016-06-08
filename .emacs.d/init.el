@@ -272,6 +272,9 @@ regexp.")
 
 (use-package bibtex
   :defer t
+  :bind (:map bibtex-mode-map
+         ("C-M-a" . beginning-of-defun)
+         ("C-M-e" . end-of-defun))
   :config
   (setq bibtex-user-optional-fields '(("keywords" "Entry keywords"))
         bibtex-autokey-names 5
