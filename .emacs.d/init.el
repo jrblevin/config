@@ -273,8 +273,25 @@ regexp.")
 (use-package bibtex
   :defer t
   :bind (:map bibtex-mode-map
+         ("C-c C-v" . bibtex-open-file)
          ("C-M-a" . beginning-of-defun)
          ("C-M-e" . end-of-defun))
+  :init
+  (defun bibtex-open-file ()
+    "Search for and open PDF file corresponding to BibTeX entry at point."
+    (interactive)
+    (save-excursion
+      (bibtex-beginning-of-entry)
+      (let ((key (cdr (assoc-string "=key=" (bibtex-parse-entry))))
+            (dirs '("/Users/jblevins/references/articles"
+                    "/Users/jblevins/references/books"))
+            (filename nil))
+        (while dirs
+          (setq filename (concat (car dirs) "/" key ".pdf"))
+          (if (not (file-exists-p filename))
+              (setq dirs (cdr dirs))
+            (shell-command (format "open \"%s\"" filename))
+            (setq dirs nil))))))
   :config
   (setq bibtex-user-optional-fields '(("keywords" "Entry keywords"))
         bibtex-autokey-names 5
