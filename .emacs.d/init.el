@@ -358,6 +358,7 @@ regexp.")
         deft-use-filter-string-for-filename nil
         deft-markdown-mode-title-level 1
         deft-use-filename-as-title nil
+        deft-generation-rules nil
         deft-file-naming-rules '((noslash . "-")
                                  (nospace . "-")
                                  (case-fn . downcase))
