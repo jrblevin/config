@@ -272,10 +272,6 @@ regexp.")
 
 (use-package bibtex
   :defer t
-  :bind (:map bibtex-mode-map
-         ("C-c C-v" . bibtex-open-file)
-         ("C-M-a" . beginning-of-defun)
-         ("C-M-e" . end-of-defun))
   :init
   (defun bibtex-open-file ()
     "Search for and open PDF file corresponding to BibTeX entry at point."
@@ -293,6 +289,9 @@ regexp.")
             (shell-command (format "open \"%s\"" filename))
             (setq dirs nil))))))
   :config
+  (bind-key "C-c C-v" 'bibtex-open-file bibtex-mode-map)
+  (bind-key "C-M-a" 'beginning-of-defun bibtex-mode-map)
+  (bind-key "C-M-e" 'end-of-defun bibtex-mode-map)
   (setq bibtex-user-optional-fields '(("keywords" "Entry keywords"))
         bibtex-autokey-names 5
         bibtex-autokey-name-separator "-"
@@ -302,7 +301,6 @@ regexp.")
         bibtex-autokey-titleword-ignore '("The" "A" "If" "An")
         bibtex-autokey-titleword-length 30
         bibtex-autokey-titlewords 1
-        bibtex-contline-indentation 17
         bibtex-align-at-equal-sign t))
 
 (use-package company
