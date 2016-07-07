@@ -1032,6 +1032,21 @@ regexp.")
   (let ((fill-column (point-max)))
     (fill-paragraph nil region)))
 
+;; Based on endless/fill-or-unfill by Artur Malabarba at
+;; <http://endlessparentheses.com/fill-and-unfill-paragraphs-with-a-single-key.html>.
+(defun fill-paragraph-dwim ()
+  "Like `fill-paragraph', but unfill if used twice."
+  (interactive)
+  (if (eq last-command 'fill-paragraph-dwim)
+      (progn
+        (message "Unfilling...")
+        (setq this-command nil)
+        (unfill-paragraph))
+    (message "Filling...")
+    (call-interactively #'fill-paragraph)))
+
+(global-set-key [remap fill-paragraph] #'fill-paragraph-dwim)
+
 (defun make-row-vector (begin end)
   (interactive "*r")
   (save-excursion
