@@ -577,6 +577,8 @@ regexp.")
   :mode (("\\.text\\'" . markdown-mode)
          ("\\.md\\'" . markdown-mode)
          ("/gtd/.*\\.txt\\'" . markdown-mode))
+  :init
+  (setq markdown-header-scaling t)
   :config
   (use-package org-table
     :commands orgtbl-mode)
@@ -588,17 +590,11 @@ regexp.")
         markdown-reference-location 'header
         markdown-asymmetric-header t
         markdown-live-preview-delete-export 'delete-on-destroy
+        markdown-hr-strings
+        '("------------------------------------------------------------------------------"
+          "*** *** ***"
+          "--- --- ---")
         markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
-
-  (set-face-attribute 'markdown-header-face nil
-                      :inherit '(variable-pitch font-lock-function-name-face)
-                      :weight 'bold)
-  (set-face-attribute 'markdown-header-face-1 nil
-                      :inherit markdown-header-face :height 1.8)
-  (set-face-attribute 'markdown-header-face-2 nil
-                      :inherit markdown-header-face :height 1.4)
-  (set-face-attribute 'markdown-header-face-3 nil
-                      :inherit markdown-header-face :height 1.2)
 
   (defun jrb-markdown-mode-hook ()
     ;; For MultiMarkdown tables
