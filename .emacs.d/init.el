@@ -20,6 +20,10 @@
   "Return MAC if system is a Mac and NOT otherwise."
   (if (eq system-type 'darwin) mac not))
 
+(defsubst jrb-large-screen-or-not (large not)
+  "Return LARGE if system has a large (wide) screen and NOT otherwise."
+  (if (> (x-display-pixel-width) 1280) large not))
+
 ;; Configure GUI elements quickly
 (setq default-frame-alist
       `((font . ,(format "Fira Code-%d" (jrb-mac-or-not 18 15)))
@@ -35,14 +39,14 @@
 ;; <http://stackoverflow.com/questions/92971/>
 (setq initial-frame-alist
       (list (cons 'top 1) (cons 'left 1)
-            (cons 'width (if (> (x-display-pixel-width) 1280) 93 80))
+            (cons 'width (jrb-large-screen-or-not 93 80))
             (cons 'height (/ (- (x-display-pixel-height) 50)
                              (frame-char-height)))))
 
 ;; Disable scroll bar, tool bar, and menu bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode (jrb-mac-or-not 1 0)))
 
 ;; Increase garbage collection threshold
 (setq gc-cons-threshold (* 16 1024 1024))
