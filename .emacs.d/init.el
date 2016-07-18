@@ -475,6 +475,11 @@ regexp.")
     (setq ispell-program-name "aspell"
           ispell-really-aspell t
           ispell-extra-args '("--sug-mode=ultra")))
+  ;; Fix slow calls to flyspell-small-region
+  ;; http://www.brool.com/post/speeding-up-flyspell-region/
+  (defadvice flyspell-region (around fast-flyspell-region)
+    (flet ((sit-for (x) t)) ad-do-it))
+  (ad-activate 'flyspell-region)
   ;; spell-checking in text modes and in comments for programming modes
   (hook-into-modes #'flyspell-prog-mode
                    'prog-mode-hook
