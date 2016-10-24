@@ -2,7 +2,7 @@
 #
 # Jason R. Blevins <jrblevin@sdf.org>
 # Created: Durham, January 19, 2007
-# Last Modified: July 10, 2015
+# Last Modified: October 23, 2016
 #
 # Parts taken from the following sources:
 # * http://texnatse.blogsome.com/2005/09/01/my-screenrc/
@@ -18,7 +18,7 @@ startup_message off
 defscrollback 100000
 
 # Change the escape character to `.
-escape ``
+#escape ``
 
 # Detach on hangup.
 autodetach on
