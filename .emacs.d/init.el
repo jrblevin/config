@@ -737,6 +737,41 @@ regexp.")
   :diminish page-break-lines-mode
   :init (hook-into-modes #'page-break-lines-mode 'emacs-lisp-mode-hook))
 
+(use-package post
+  :mode (("mutt-" . post-mode))
+  ;:bind (("C-c i" . mutt-alias-insert))
+  :config
+  (setq post-signature-pattern "\\(--\\|Cheers,\\|Thanks,\\|Best,\\|Best regards,\\|\\|Sent from my\\)"
+        post-uses-fill-mode nil
+        post-underline-pattern nil
+        post-emoticon-pattern nil
+        post-bold-pattern nil
+        post-kill-quoted-sig nil
+        post-signature-source-is-file t
+        post-fixed-signature-source "~/.signature"
+        post-email-address user-mail-address)
+
+  (use-package mutt-alias
+    :commands (mutt-alias-insert)
+    :init (setq mutt-alias-file-list '("~/.mutt-aliases")))
+
+  (defun jrb-post-mode-hook()
+    ;; Remove trailing whitespace (but protect '-- ' in signature)
+    (save-excursion
+      (beginning-of-buffer)
+      (while (re-search-forward "\\([>:]\\)\s+$" nil t)
+        (replace-match (match-string 1) nil nil)))
+    ;; Rewrite "Last, First" addresses
+    (save-excursion
+      (re-search-forward "\n\n")
+      (let ((end (point)))
+        ;;(message body)
+        (beginning-of-buffer)
+        (while (re-search-forward "\"\\([[:alpha:]]+\\), \\([[:alpha:]]+\\)\"" end t)
+          (replace-match (concat (match-string 2) " " (match-string 1)) nil nil))))
+    (post-goto-body))
+  (add-hook 'post-mode-hook 'jrb-post-mode-hook))
+
 (use-package cc-mode
   :mode (("\\.leg\\'" . c-mode))
   :config
