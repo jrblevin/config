@@ -410,10 +410,16 @@ regexp.")
 
 (use-package ebib
   :commands ebib
-  :ensure t
   :config
   (setq ebib-file-search-dirs '("~/references/articles" "~/references/books")
-        ebib-file-associations '(("pdf" . "pdfexpert"))))
+        ebib-search-dirs '("~/gtd")
+        ebib-preload-bib-files '("research.bib")
+        ebib-index-display-fields '("title")
+        ebib-file-associations '(("pdf" . "pdfexpert"))
+        ebib-keywords-file (expand-file-name "ebib-keywords.txt"
+                                             user-emacs-directory)
+        ebib-save-keywords-on-exit 'always
+        ebib-keywords-use-only-file t))
 
 (use-package elisp-mode
   :defer t
