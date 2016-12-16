@@ -629,6 +629,8 @@ regexp.")
         markdown-css-paths '("/Applications/Marked 2.app/Contents/Resources/Lopash.css"))
 
   (defun jrb-markdown-mode-hook ()
+    ;; Olivetti
+    (turn-on-olivetti-mode)
     ;; For MultiMarkdown tables
     (make-local-variable 'org-table-automatic-realign)
     (setq org-table-automatic-realign nil)
@@ -708,6 +710,13 @@ regexp.")
   :mode (("\\.muttrc\\'" . muttrc-mode)
          ("\\.mutt-aliases\\'" . muttrc-mode)))
 
+(use-package olivetti
+  :ensure t
+  :init
+  (setq olivetti-body-width (jrb-large-screen-or-not 90 80)
+        olivetti-hide-mode-line nil)
+  :bind (("C-c w" . olivetti-mode)))
+
 (use-package org
   :mode (("\\.org\\'" . org-mode)))
 
@@ -768,8 +777,7 @@ regexp.")
   :load-path "site-lisp/sublimity"
   :config
   (require 'sublimity-attractive)
-  (setq sublimity-attractive-centering-width 90)
-  (sublimity-mode 1))
+  (setq sublimity-attractive-centering-width 90))
 
 (use-package tex
   :ensure auctex
