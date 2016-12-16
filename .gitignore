@@ -1,2 +1,4 @@
 .DS_Store
 *.elc
+.emacs.d/network-security.data
+.emacs.d/tramp
