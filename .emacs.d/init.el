@@ -325,7 +325,7 @@ regexp.")
         bibtex-align-at-equal-sign t))
 
 (use-package company
-  :defer 5
+  :defer 1
   :ensure t
   :diminish company-mode
   :config
