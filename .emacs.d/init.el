@@ -12,10 +12,12 @@
 ;; ~/.emacs.d/site-lisp          manually installed packages
 ;; ~/.emacs.d/themes             custom themes
 
-
-;;; Basic Configuration:
+;; Set the load path
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
 
-;; Platform-specific configuration
+
+;;; Platform-specific configuration
+
 (defsubst jrb-mac-or-not (mac not)
   "Return MAC if system is a Mac and NOT otherwise."
   (if (eq system-type 'darwin) mac not))
@@ -24,24 +26,51 @@
   "Return LARGE if system has a large (wide) screen and NOT otherwise."
   (if (> (x-display-pixel-width) 1280) large not))
 
-;; Configure GUI elements quickly
+(defconst jrb-default-face-height (jrb-mac-or-not 18 15))
+
+
+;;; GUI Elements
+
+(when (display-graphic-p)
+  ;; Set fonts first so widths and heights below are correct
+  (require 'fira-code-ligatures)
+  (setq jrb-default-line-spacing 0.25)
+  (setq-default line-spacing jrb-default-line-spacing)
+  (set-face-attribute 'default nil :family "Fira Code" :weight 'light
+                      ;; face height is 10 * point size
+                      :height (* jrb-default-face-height 10))
+  (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
+  (set-face-attribute 'variable-pitch nil :family "Fira Sans"))
+
+(defun jrb-default-frame-width ()
+  "Default width for frames.
+Subtract from screen width and divide by the width of a character
+to get the number of columns. Only use half screen width for
+large displays."
+  (let ((denom (jrb-large-screen-or-not 2 1))
+        (fringes (window-fringes)))
+    (/ (- (/ (x-display-pixel-width) denom)
+          (+ (car fringes) (cadr fringes)))
+       (frame-char-width))))
+
+(defun jrb-default-frame-height ()
+  "Default height for frames.
+Subtract from screen height (for panels, menubars, etc.) and
+divide by the height of a character to get the number of lines.
+See <http://stackoverflow.com/questions/92971/>."
+  (/ (- (x-display-pixel-height) 50)
+     (frame-char-height)))
+
+;; Set frame geometry according to display resolution.
 (setq default-frame-alist
-      `((font . ,(format "Fira Code-%d" (jrb-mac-or-not 18 15)))
+      `((top . 1)
+        (left . 1)
+        (width . ,(jrb-default-frame-width))
+        (height . ,(jrb-default-frame-height))
         (vertical-scroll-bars . 0)
         (menu-bar-lines . 0)
         (tool-bar-lines . 0)
         (alpha 94 90)))
-
-;; Set frame geometry according to display resolution.
-;; Width: 93 columns for large displays, 80 columns for small ones.
-;; Height: subtract from screen height (for panels, menubars, etc.)
-;; and divide by the height of a character to get the number of lines.
-;; <http://stackoverflow.com/questions/92971/>
-(setq initial-frame-alist
-      (list (cons 'top 1) (cons 'left 1)
-            (cons 'width (jrb-large-screen-or-not 93 80))
-            (cons 'height (/ (- (x-display-pixel-height) 50)
-                             (frame-char-height)))))
 
 ;; Disable scroll bar, tool bar, and menu bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -160,9 +189,6 @@
         ("gnu" . "http://elpa.gnu.org/packages/")))
 (eval-when-compile (package-initialize))
 
-;; Set the load path
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -171,16 +197,7 @@
 (setq use-package-verbose t)
 
 
-;;; Fonts and color themes:
-
-(use-package fira-code-ligatures
-  :if (display-graphic-p)
-  :config
-  (set-face-attribute 'default nil :family "Fira Code" :weight 'light
-                      ;; face height is 10 * point size
-                      :height (jrb-mac-or-not 180 150))
-  (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
-  (set-face-attribute 'variable-pitch nil :family "Fira Sans"))
+;;; Color themes:
 
 (setq custom-theme-directory "~/.emacs.d/themes")
 (let ((hour (string-to-number (substring (current-time-string) 11 13))))
