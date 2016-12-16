@@ -870,7 +870,6 @@ regexp.")
 
 ;; jrb-write-mode
 (defvar jrb-write-mode nil)
-(defvar jrb-write-mode-width 100)
 (define-minor-mode jrb-write-mode
   "Minor mode for distraction-free writing."
   :init-value nil
@@ -878,23 +877,21 @@ regexp.")
   :variable jrb-write-mode
   :group 'editing-basics
   (cond ((not jrb-write-mode)
-         (set-fringe-style nil)
-         (visual-line-mode 0)
-         (setq-default line-spacing nil)
-         (setq line-spacing nil)
-         (set-face-attribute 'default nil :height 180)
-         (toggle-frame-fullscreen))
+         ;; Restore line spacing and text scaling
+         (setq-default line-spacing jrb-default-line-spacing)
+         (when (> text-scale-mode-amount 0)
+           (text-scale-set 0))
+         ;; Turn full screen off
+         (when (frame-parameter nil 'fullscreen)
+           (toggle-frame-fullscreen)))
         (t
-         (toggle-frame-fullscreen)
+         ;; Turn full screen on
+         (unless (frame-parameter nil 'fullscreen)
+           (toggle-frame-fullscreen))
          (sleep-for 1)
-         (visual-line-mode 1)
-         (setq-default line-spacing 0.5)
-         (setq line-spacing 0.5)
-         (set-face-attribute 'default nil :height 240)
-         (set-fringe-mode
-          (/ (- (frame-pixel-width)
-                (* jrb-write-mode-width (frame-char-width)))
-             2)))))
+         ;; Increase text scaling and line spacing
+         (text-scale-set 0.5)
+         (setq-default line-spacing 0.5))))
 
 ;; jrb-dual-mode
 (defvar jrb-dual-mode nil)
