@@ -768,7 +768,7 @@ regexp.")
   :load-path "site-lisp/sublimity"
   :config
   (require 'sublimity-attractive)
-  (setq sublimity-attractive-centering-width 100)
+  (setq sublimity-attractive-centering-width 90)
   (sublimity-mode 1))
 
 (use-package tex
