@@ -2,3 +2,5 @@
 *.elc
 .emacs.d/network-security.data
 .emacs.d/tramp
+.emacs.d/backups/*
+.emacs.d/history/*
