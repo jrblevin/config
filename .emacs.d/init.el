@@ -233,6 +233,7 @@ See <http://stackoverflow.com/questions/92971/>."
 (global-set-key (kbd "C-c l") 'my-quick-log)
 (global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
 (global-set-key (kbd "C-c f") 'send-region-to-fantastical)
+(global-set-key (kbd "C-c e") 'jrb-evaluate-template)
 
 
 ;;; auto-minor-mode-alist
@@ -1357,6 +1358,39 @@ most recent kill ring contents and leaves the cursor at %|."
   "! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n"
   "! POSSIBILITY OF SUCH DAMAGE.\n"
   "\n")
+
+
+;;; TaskPaper Templates:
+
+(defconst jrb-template-dir "~/gtd/templates/")
+(defconst jrb-template-buffer-name "*Template*")
+
+(defun jrb-find-template ()
+  "Find TEMPLATE interactively using the minibuffer."
+  (completing-read
+   "Template: "
+   (let* ((dir (expand-file-name jrb-template-dir))
+          (regexp (concat dir "\\([a-z0-9-]+\\)\.taskpaper"))
+          (files (directory-files dir t "." t))
+          (templates (mapcar (lambda (f) (replace-regexp-in-string regexp "\\1" f)) files)))
+     templates)))
+
+(defun jrb-evaluate-template (template buffer)
+  (interactive (list (jrb-find-template)
+                     (generate-new-buffer-name jrb-template-buffer-name)))
+  (switch-to-buffer buffer)
+  (taskpaper-mode)
+  (insert-file-contents (concat jrb-template-dir template ".taskpaper"))
+  (beginning-of-buffer)
+  (let ((vars (list)))
+    (while (re-search-forward "«[a-zA-Z0-9 ]+»" nil t)
+      (add-to-list 'vars (match-string 0)))
+    (dolist (var (reverse vars))
+      (let ((value (read-from-minibuffer (concat var ": "))))
+        (beginning-of-buffer)
+        (while (re-search-forward var nil t)
+          (replace-match value)))))
+  (kill-ring-save (point-min) (point-max)))
 
 
 ;;; Inter-App Communication:
