@@ -1000,6 +1000,11 @@ regexp.")
       '("pre" jrb-LaTeX-env-code)
       '("interface" jrb-LaTeX-env-code))
 
+     ;; Abbrevs
+     (define-abbrev latex-mode-abbrev-table "xfr" "" 'skeleton-beamer-frame)
+     (define-abbrev latex-mode-abbrev-table "xfl" "" 'skeleton-beamer-listing-frame)
+     (define-abbrev latex-mode-abbrev-table "xfo" "" 'skeleton-beamer-output-listing-frame)
+
      ;; Filling
      (make-local-variable 'LaTeX-indent-environment-list)
      (add-to-list 'LaTeX-indent-environment-list
@@ -1357,6 +1362,36 @@ most recent kill ring contents and leaves the cursor at %|."
   "! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\n"
   "! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n"
   "! POSSIBILITY OF SUCH DAMAGE.\n"
+  "\n")
+
+(define-skeleton skeleton-beamer-frame
+  "Insert an empty Beamer frame."
+  "Title: "
+  "\\begin{frame}{" str "}\n"
+  "  \\begin{itemize}\n"
+  "  \\item " _ "\n"
+  "  \\end{itemize}\n"
+  "\\end{frame}\n"
+  "\n")
+
+(define-skeleton skeleton-beamer-listing-frame
+  "Insert an empty code listing frame."
+  "Title: "
+  "\\begin{frame}[fragile]{" str "}\n"
+  "\\begin{lstlisting}\n"
+  _ "\n"
+  "\\end{lstlisting}\n"
+  "\\end{frame}\n"
+  "\n")
+
+(define-skeleton skeleton-beamer-output-listing-frame
+  "Insert an empty code listing frame."
+  "Title: "
+  "\\begin{frame}[fragile]{" str "}\n"
+  "\\begin{lstlisting}[style=output]\n"
+  _ "\n"
+  "\\end{lstlisting}\n"
+  "\\end{frame}\n"
   "\n")
 
 
