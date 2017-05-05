@@ -237,9 +237,8 @@ PROMPT='%{$fg[green]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_co
 
 # Ruby
 if [[ $OS == "Darwin" ]]; then
-    if [[ ! -z $(which ruby1.9) ]]; then
-      export PATH=/opt/local/lib/ruby1.9/gems/1.9.1/bin:${PATH}
-      export RUBYLIB=/opt/local/lib/ruby1.9/gems/1.9.1/gems:/opt/local/lib/ruby1.9/site_ruby/1.9.1
+    if [[ ! -z $(which rbenv) ]]; then
+        eval "$(rbenv init -)"
     fi
 fi
 
