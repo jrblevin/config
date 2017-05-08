@@ -1231,6 +1231,12 @@ Avoids visual bell issues in Emacs 24.5 on OS X."
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil 'invert-face 'mode-line))
 
+(defun jrb-clean-minibuffer ()
+  "Remove unnecessary items from minibuffer before taking screenshots."
+  (interactive)
+  (abbrev-mode 0)
+  (display-time-mode 0))
+
 
 ;;; Abbreviations
 
