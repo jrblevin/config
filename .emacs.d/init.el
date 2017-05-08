@@ -583,6 +583,13 @@ regexp.")
         ido-ignore-extensions t
         ido-everywhere t))
 
+(use-package imenu-list
+  :ensure t
+  :bind (("C-'" . imenu-list-smart-toggle))
+  :config
+  (setq imenu-list-focus-after-activation t
+        imenu-list-auto-resize nil))
+
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
   :interpreter ("lua" . lua-mode))
