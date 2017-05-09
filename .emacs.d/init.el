@@ -836,6 +836,9 @@ regexp.")
 (use-package taskpaper
   :mode (("\\.taskpaper\\'" . taskpaper-mode)))
 
+(use-package swift
+  :mode (("\\.swift\\'" . swift-mode)))
+
 (use-package tex
   :ensure auctex
   :commands (tex-mode)
