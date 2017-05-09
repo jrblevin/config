@@ -892,11 +892,12 @@ regexp.")
     (setq TeX-command-default "latexmk")
     (setq LaTeX-font-list (append
                            LaTeX-font-list
-                           '((?\C-l "\\code{" "}")
-                             (?c "\\code[C]{" "}")
-                             (?f "\\code[Fortran]{" "}")
-                             (?C "\\code[C]|" "|")
-                             (?F "\\code[Fortran]|" "|"))))
+                           '((?c "\\ccode{" "}")
+                             (?f "\\fcode{" "}")
+                             (?s "\\scode{" "}")
+                             (?C "\\ccode|" "|")
+                             (?F "\\fcode|" "|")
+                             (?S "\\scode|" "|"))))
     ;; (setq reftex-plug-into-AUCTeX t)
     ;; (turn-on-reftex)
     (LaTeX-math-mode 1)
@@ -1028,7 +1029,9 @@ regexp.")
    (lambda ()
      ;; New symbols
      (TeX-add-symbols
-      '("code" TeX-arg-verb))
+      '("ccode" TeX-arg-verb)
+      '("fcode" TeX-arg-verb)
+      '("scode" TeX-arg-verb))
 
      ;; New environments
      (LaTeX-add-environments
@@ -1053,12 +1056,21 @@ regexp.")
      (add-to-list 'LaTeX-verbatim-environments-local "interface")
      (add-to-list 'LaTeX-verbatim-macros-with-delims-local "code")
      (add-to-list 'LaTeX-verbatim-macros-with-braces-local "code")
+     (add-to-list 'LaTeX-verbatim-macros-with-delims-local "ccode")
+     (add-to-list 'LaTeX-verbatim-macros-with-braces-local "ccode")
+     (add-to-list 'LaTeX-verbatim-macros-with-delims-local "fcode")
+     (add-to-list 'LaTeX-verbatim-macros-with-braces-local "fcode")
+     (add-to-list 'LaTeX-verbatim-macros-with-delims-local "scode")
+     (add-to-list 'LaTeX-verbatim-macros-with-braces-local "scode")
 
      ;; Fontification
      (when (and (fboundp 'font-latex-add-keywords)
                 (fboundp 'font-latex-set-syntactic-keywords)
                 (eq TeX-install-font-lock 'font-latex-setup))
-       (font-latex-add-keywords '(("code" "[{")) 'textual)
+       (font-latex-add-keywords '(("code" "{{")) 'textual)
+       (font-latex-add-keywords '(("ccode" "{")) 'textual)
+       (font-latex-add-keywords '(("fcode" "{")) 'textual)
+       (font-latex-add-keywords '(("scode" "{")) 'textual)
        ;; For syntactic fontification, e.g. verbatim constructs.
        (font-latex-set-syntactic-keywords)
        ;; Tell font-lock about the update.
