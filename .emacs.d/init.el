@@ -272,6 +272,13 @@ regexp.")
   "Add FUNC to hook functions given by MODES."
   (dolist (mode-hook modes) (add-hook mode-hook func)))
 
+(use-package abbrev
+  :defer 1
+  :diminish abbrev-mode
+  :config
+  ;; Turn on abbrev mode globally
+  (setq-default abbrev-mode t))
+
 (use-package ado-mode
   :disabled t
   :defer t
@@ -1323,9 +1330,6 @@ most recent kill ring contents and leaves the cursor at %|."
 
 ;; Don't ask whether to save new abbrevs
 (setq save-abbrevs nil)
-
-;; Turn on abbrev mode globally
-(setq-default abbrev-mode t)
 
 
 ;;; Skeleton Templates:
