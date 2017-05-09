@@ -6,15 +6,15 @@
 ;;   Dominique Orban.     Chicago,  March 2003.  ;;
 ;;                        Montreal, March 2008.  ;;
 ;;                                               ;;
-;;   dominique.orban@polymtl.ca                  ;;
+;;   dominique.orban@gmail.com                   ;;
 ;;                                               ;;
 ;;===============================================;;
 ;;===============================================;;
 
-;; Author: Dominique Orban <dominique.orban@polymtl.ca>
+;; Author: Dominique Orban <dominique.orban@gmail.com>
 ;; Keywords: Ampl
 ;; Version: 0.1
-;; Time stamp: "Sun Mar 23 20:06:35 PST 2003"
+;; Time stamp: "Wed 25 Sep 2013 10:55:10 EDT"
 
 ;; Purpose: Provides syntax highlighting and basic indentation for
 ;;  models written in Ampl. Ampl is a modeling language for
@@ -24,7 +24,7 @@
 ;;  not-too-distant future is the ability to run an Ampl process in an
 ;;  Emacs window to facilitate model debugging and running.
 
-;; If you find this mode useful, please let me know <dominique.orban@polymtl.ca>
+;; If you find this mode useful, please let me know <dominique.orban@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -76,8 +76,8 @@
 ;; Files whose extension is .mod, .dat or .ampl will be edited in Ampl mode
 (setq auto-mode-alist
       (append
-       '(("\\(.mod\\|.dat\\|.ampl\\)'" . ampl-mode))
-     auto-mode-alist))
+       '(("\\(.mod\\|.dat\\|.ampl\\)\\'" . ampl-mode))
+       auto-mode-alist))
 
 (autoload 'ampl-mode "Ampl" "Entering Ampl mode..." t)
 
@@ -152,6 +152,7 @@
 
 ;; Comments
 ;; start with a hash, end with a newline
+(setq comment-start "#")
 (defconst ampl-font-lock-comments
   (append ampl-font-lock-constants2
 	  (list '( "\\(#\\).*$" . (0 font-lock-comment-face t t))))
@@ -180,12 +181,12 @@
           (prog1
               (setq position 0)
             (setq reason "top of buffer"))
-        
+
         (progn
           (forward-line -1) ; move point to beginning of previous line, if any
           (if (looking-at ".*[:=][ \t]*$") ; if previous line ends with : or =
               (prog1
-                  (setq position default-tab-width) ; indent
+                  (setq position tab-width) ; indent
                 (setq reason "previous line ends in : or ="))
             (prog1
                 (setq position 0)  ; otherwise, do not indent
@@ -217,7 +218,7 @@
 
 (defvar ampl-user-comment
   "#####
-##  %       
+##  %
 #####
 "
   "# User-defined comment template." )
@@ -331,7 +332,8 @@
   (setq major-mode 'ampl-mode)
   (setq mode-name "Ampl")
   (use-local-map ampl-mode-map)   ; Load Ampl keymap
-  (run-hooks 'ampl-mode-hook))
+  (run-mode-hooks 'ampl-mode-hook)
+)
 
 (provide 'ampl-mode)  ; So others can (require 'ampl-mode)
 
