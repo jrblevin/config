@@ -3,19 +3,14 @@
 # Based on John Wiegley's Makefile
 # <https://github.com/jwiegley/dot-emacs/>
 
-DIRS        = site-lisp themes
+DIRS        = site-lisp themes elpa-25.2
 SUBDIRS     = $(shell find $(DIRS) -maxdepth 1 ! -name .git -type d -print)
 LIB_SOURCE  = $(wildcard site-lisp/*.el) $(wildcard themes/*.el)
 TARGET      = $(patsubst %.el,%.elc, $(LIB_SOURCE)) \
               $(patsubst %.el,%.elc, init.el) #dot-gnus.el dot-org.el
 EMACS       = emacs
 EMACS_BATCH = $(EMACS) -Q -batch
-LOADPATH    = -L . \
-	      -L $(wildcard elpa/company-0*) \
-	      -L $(wildcard elpa/auctex-*) \
-              -L $(wildcard elpa/bind-key-*) \
-              -L $(wildcard elpa/use-package-*) \
-              $(patsubst %,-L %, $(SUBDIRS))
+LOADPATH    = -L . $(patsubst %,-L %, $(SUBDIRS))
 BATCH_LOAD  = $(EMACS_BATCH) $(LOADPATH)
 
 all: $(TARGET)
@@ -29,7 +24,7 @@ compile:
 %.elc: %.el
 	@rm -f $@
 	@echo Compiling file $<
-	@$(BATCH_LOAD) -f batch-byte-compile $<
+	$(BATCH_LOAD) -f batch-byte-compile $<
 
 init.elc: init.el init-local.elc custom.elc #dot-gnus.elc
 
