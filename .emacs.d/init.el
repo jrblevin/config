@@ -480,8 +480,8 @@ regexp.")
   (setq flycheck-gfortran-warnings (list "all" "extra" "surprising")
         flycheck-gfortran-language-standard "f2008"
         flycheck-gfortran-include-path (list "." ".." "/Users/jblevins/projects/osl/"))
-  :init
   (add-to-list 'flycheck-emacs-lisp-checkdoc-variables 'sentence-end-double-space)
+  :init
   (hook-into-modes #'flycheck-mode 'f90-mode-hook 'emacs-lisp-mode-hook))
 
 (use-package flyspell
