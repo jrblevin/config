@@ -475,7 +475,7 @@ regexp.")
 (use-package flycheck
   :ensure t
   :defer t
-  :diminish t
+  :diminish flycheck-mode
   :config
   (setq flycheck-gfortran-warnings (list "all" "extra" "surprising")
         flycheck-gfortran-language-standard "f2008"
