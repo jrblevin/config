@@ -205,13 +205,15 @@ See <http://stackoverflow.com/questions/92971/>."
 ;;; Color themes:
 
 (setq custom-theme-directory "~/.emacs.d/themes")
-(let ((hour (string-to-number (substring (current-time-string) 11 13))))
-  (if (member hour (number-sequence 6 22))
-      (use-package twilight-theme
-        :init (load-theme 'twilight 'no-confirm))
-    (use-package color-theme-sanityinc-tomorrow
-      :ensure t
-      :init (load-theme 'sanityinc-tomorrow-night 'no-confirm))))
+(if (display-graphic-p)
+    (let ((hour (string-to-number (substring (current-time-string) 11 13))))
+      (if (member hour (number-sequence 6 22))
+          (use-package twilight-theme
+            :init (load-theme 'twilight 'no-confirm))
+        (use-package color-theme-sanityinc-tomorrow
+          :ensure t
+          :init (load-theme 'sanityinc-tomorrow-night 'no-confirm))))
+  (load-theme 'less t))
 
 
 ;;; Global keybindings:
