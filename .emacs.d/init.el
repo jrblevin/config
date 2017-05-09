@@ -647,10 +647,12 @@ regexp.")
 
   (setq markdown-command "multimarkdown"
         markdown-open-command "mark"
+        markdown-enable-wiki-links t
         markdown-link-space-sub-char "-"
         markdown-footnote-location 'end
         markdown-reference-location 'header
         markdown-asymmetric-header t
+        markdown-nested-imenu-heading-index t
         markdown-live-preview-delete-export 'delete-on-destroy
         markdown-hr-strings
         '("------------------------------------------------------------------------------"
