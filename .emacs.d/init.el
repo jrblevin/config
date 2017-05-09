@@ -542,6 +542,10 @@ regexp.")
     (auto-fill-mode 0))
   (add-hook 'f90-mode-hook 'jrb-f90-mode-hook))
 
+(use-package google-this
+  :commands google-this
+  :bind ("C-c g" . google-this))
+
 (use-package git-messenger
   :commands git-messenger:popup-message
   :bind ("C-x g !" . git-messenger:popup-message)
