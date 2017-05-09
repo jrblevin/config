@@ -154,6 +154,7 @@ alias gplog='git plog'
 alias gitx='open -a GitX .'
 alias mutt="cd ~/inbox; mutt"
 alias sdr="screen -d -R"
+alias tma="tmux attach -t default || tmux new -s default"
 alias latexmk="latexmk -g -synctex=1 -pdf -pvc"
 
 # Protect OS X tags
