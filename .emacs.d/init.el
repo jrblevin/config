@@ -730,6 +730,7 @@ regexp.")
 
 (use-package olivetti
   :ensure t
+  :diminish (olivetti-mode visual-line-mode)
   :init
   (setq olivetti-body-width (jrb-large-screen-or-not 90 80)
         olivetti-hide-mode-line nil)
