@@ -24,7 +24,7 @@
 
 (defsubst jrb-large-screen-or-not (large not)
   "Return LARGE if system has a large (wide) screen and NOT otherwise."
-  (if (> (x-display-pixel-width) 1280) large not))
+  (if (and (display-graphic-p) (> (x-display-pixel-width) 1280)) large not))
 
 (defconst jrb-default-face-height (jrb-mac-or-not 18 15))
 
@@ -49,7 +49,7 @@ to get the number of columns. Only use half screen width for
 large displays."
   (let ((denom (jrb-large-screen-or-not 2 1))
         (fringes (window-fringes)))
-    (/ (- (/ (x-display-pixel-width) denom)
+    (/ (- (/ (display-pixel-width) denom)
           (+ (car fringes) (cadr fringes)))
        (frame-char-width))))
 
@@ -58,7 +58,7 @@ large displays."
 Subtract from screen height (for panels, menubars, etc.) and
 divide by the height of a character to get the number of lines.
 See <http://stackoverflow.com/questions/92971/>."
-  (/ (- (x-display-pixel-height) 50)
+  (/ (- (display-pixel-height) 50)
      (frame-char-height)))
 
 ;; Set frame geometry according to display resolution.
@@ -75,7 +75,10 @@ See <http://stackoverflow.com/questions/92971/>."
 ;; Disable scroll bar, tool bar, and menu bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode (jrb-mac-or-not 1 0)))
+(if (fboundp 'menu-bar-mode)
+    (if (display-graphic-p)
+        (menu-bar-mode (jrb-mac-or-not 1 0))
+      (menu-bar-mode -1)))
 
 ;; Increase garbage collection threshold
 (setq gc-cons-threshold (* 16 1024 1024))
@@ -101,7 +104,9 @@ See <http://stackoverflow.com/questions/92971/>."
       select-enable-clipboard   t       ; Sync kill ring and clipboard
       scroll-step               1       ; Smooth scrolling
       scroll-margin             3       ; Some context when recentering
-      column-number-mode        1       ; Show column number in mode line
+      column-number-mode        0       ; Hide column number in mode line
+      line-number-mode          0       ; Hide line number in mode line
+      mode-line-position        nil     ; Hide position (C-x =, M-x what-line)
       split-height-threshold    nil     ; Window splitting thresholds
       split-width-threshold     140)    ; Minimum side-by-side split is 70 char
 
@@ -150,7 +155,7 @@ See <http://stackoverflow.com/questions/92971/>."
 (show-paren-mode 1)
 
 ;; Show the date and time in 24-hour format.
-(display-time-mode 1)
+(display-time-mode 0)
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 
