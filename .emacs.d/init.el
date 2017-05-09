@@ -290,7 +290,6 @@ regexp.")
         ado-date-format "%Y-%m-%d"))
 
 (use-package ampl-mode
-  :disabled t
   :mode (("\\.ampl\\'" . ampl-mode)
          ("\\.mod\\'" . ampl-mode)
          ("\\.dat\\'" . ampl-mode))
