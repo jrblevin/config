@@ -396,6 +396,11 @@ regexp.")
   (setq deft-directory "~/gtd/")
 
   :config
+  (defun jrb-deft-mode-hook ()
+    (turn-on-olivetti-mode)
+    (deft-refresh-browser))
+  (add-hook 'deft-mode-hook 'jrb-deft-mode-hook)
+
   (defun deft-reload ()
     "Reload Deft from source (for development)."
     (interactive)
