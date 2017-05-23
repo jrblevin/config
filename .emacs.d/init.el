@@ -174,11 +174,11 @@ See <http://stackoverflow.com/questions/92971/>."
 (when (display-graphic-p)
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
-;; Modifier keys
+;; Modifier keys: command sends meta, option sends super
 (setq mac-option-key-is-meta nil)
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
+(setq mac-option-modifier 'super)
 
 
 ;;; Package management
