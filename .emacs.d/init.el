@@ -106,9 +106,7 @@ See <http://stackoverflow.com/questions/92971/>."
       scroll-margin             3       ; Some context when recentering
       column-number-mode        0       ; Hide column number in mode line
       line-number-mode          0       ; Hide line number in mode line
-      mode-line-position        nil     ; Hide position (C-x =, M-x what-line)
-      split-height-threshold    nil     ; Window splitting thresholds
-      split-width-threshold     140)    ; Minimum side-by-side split is 70 char
+      mode-line-position        nil)    ; Hide position (C-x =, M-x what-line)
 
 ;; Suppress beeps
 (setq visible-bell nil ring-bell-function 'jrb-flash-mode-line)
@@ -180,6 +178,10 @@ See <http://stackoverflow.com/questions/92971/>."
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
+;; Enable narrowing functions
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+
 
 ;;; Package management
 
@@ -236,11 +238,27 @@ See <http://stackoverflow.com/questions/92971/>."
 
 (global-set-key (kbd "C-h C-r") 'describe-char)
 
-(global-set-key (kbd "C-c i") 'imenu)
 (global-set-key (kbd "C-c l") 'my-quick-log)
 (global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
 (global-set-key (kbd "C-c f") 'send-region-to-fantastical)
 (global-set-key (kbd "C-c e") 'jrb-evaluate-template)
+
+(global-set-key (kbd "S-C-o") 'jrb-separate-line)
+
+;; Windows and buffers
+(global-set-key (kbd "C-x O") 'swap-windows)
+(global-set-key (kbd "C-x M-b") 'bury-buffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer) ; Replace buffer-menu with ibuffer
+
+;; Shell
+(global-set-key (kbd "s-s") 'shell)
+(global-set-key (kbd "s-S") 'ansi-term)
+
+;; Imenu
+(global-set-key (kbd "M-i") 'imenu)
+
+;; Region and mark
+(global-set-key (kbd "M-`") 'transient-mark-mode)
 
 
 ;;; auto-minor-mode-alist
@@ -472,6 +490,12 @@ regexp.")
   :if (jrb-mac-or-not t nil)
   :config (exec-path-from-shell-initialize))
 
+(use-package expand-region
+  :ensure t
+  :defer 1
+  :config (setq er--show-expansion-message t)
+  :bind ("C-c =" . er/expand-region))
+
 (use-package flycheck
   :ensure t
   :defer t
@@ -519,11 +543,11 @@ regexp.")
     (setq ispell-program-name "aspell"
           ispell-really-aspell t
           ispell-extra-args '("--sug-mode=ultra")))
-  ;; Fix slow calls to flyspell-small-region
-  ;; http://www.brool.com/post/speeding-up-flyspell-region/
-  (defadvice flyspell-region (around fast-flyspell-region)
-    (flet ((sit-for (x) t)) ad-do-it))
-  (ad-activate 'flyspell-region)
+  ;; ;; Fix slow calls to flyspell-small-region
+  ;; ;; http://www.brool.com/post/speeding-up-flyspell-region/
+  ;; (defadvice flyspell-region (around fast-flyspell-region)
+  ;;   (flet ((sit-for (x) t)) ad-do-it))
+  ;; (ad-activate 'flyspell-region)
   ;; spell-checking in text modes and in comments for programming modes
   (hook-into-modes #'flyspell-prog-mode
                    'prog-mode-hook
@@ -642,6 +666,7 @@ regexp.")
   :commands (markdown-mode gfm-mode)
   :mode (("\\.text\\'" . markdown-mode)
          ("\\.md\\'" . markdown-mode)
+         ("/projects/markdown-mode.*\\.txt\\'" . markdown-mode)
          ("/gtd/.*\\.txt\\'" . markdown-mode))
   :init
   (setq markdown-header-scaling t)
@@ -649,7 +674,7 @@ regexp.")
   (use-package org-table
     :commands orgtbl-mode)
 
-  (setq markdown-command "multimarkdown"
+  (setq markdown-command "multimarkdown --snippet --smart --notes"
         markdown-open-command "mark"
         markdown-enable-wiki-links t
         markdown-link-space-sub-char "-"
@@ -1288,6 +1313,46 @@ Avoids visual bell issues in Emacs 24.5 on OS X."
   (abbrev-mode 0)
   (display-time-mode 0))
 
+(defun jrb-separate-line ()
+  "Add blank lines before and after current line."
+  (interactive "*")
+  (save-excursion
+    (beginning-of-line)
+    (insert "\n")
+    (end-of-line)
+    (insert "\n")))
+
+(defun swap-windows ()
+  "If you have two windows, it swaps them.
+From <https://sites.google.com/site/steveyegge2/my-dot-emacs-file>."
+  (interactive)
+  (cond
+   ((not (= (count-windows) 2))
+    (message "You need exactly 2 windows to do this."))
+   (t
+    (let* ((w1 (first (window-list)))
+           (w2 (second (window-list)))
+           (b1 (window-buffer w1))
+           (b2 (window-buffer w2))
+           (s1 (window-start w1))
+           (s2 (window-start w2)))
+      (set-window-buffer w1 b2)
+      (set-window-buffer w2 b1)
+      (set-window-start w1 s2)
+      (set-window-start w2 s1)))))
+
+(defun rename-file-and-buffer (new-name)
+ "Renames both current buffer and file it's visiting to NEW-NAME.
+From <https://sites.google.com/site/steveyegge2/my-dot-emacs-file>."
+ (interactive "sNew name: ")
+ (let ((name (buffer-name))
+       (filename (buffer-file-name)))
+   (if (not filename)
+       (message "Buffer '%s' is not visiting a file!" name)
+     (if (get-buffer new-name)
+	 (message "A buffer named '%s' already exists!" new-name)
+       (progn (rename-file filename new-name 1) (rename-buffer new-name))))))
+
 
 ;;; Abbreviations
 
@@ -1315,6 +1380,11 @@ most recent kill ring contents and leaves the cursor at %|."
   ;; email addresses
   ("eem1" "jrblevin@sdf.org" nil 0)
   ("eem2" "blevins.141@osu.edu" nil 0)
+
+  ;; common shortcuts
+  ("xmd" "markdown" nil 0)
+  ("xmm" "markdown-mode" nil 0)
+  ("xMd" "Markdown" nil 0)
 
   ;; signatures
   ("ssig1" "Best,\n\nJason" nil 0)
@@ -1363,6 +1433,9 @@ most recent kill ring contents and leaves the cursor at %|."
   ("wtih" "with" nil 0)
   ("yoru" "your" nil 0)
   ("yuor" "your" nil 0)
+
+  ;; Fill text
+  ("llipsum" "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." nil 0)
   ))
 
 ;; Don't ask whether to save new abbrevs
