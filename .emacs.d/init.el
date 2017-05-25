@@ -26,7 +26,7 @@
   "Return LARGE if system has a large (wide) screen and NOT otherwise."
   (if (and (display-graphic-p) (> (x-display-pixel-width) 1280)) large not))
 
-(defconst jrb-default-face-height (jrb-mac-or-not 18 15))
+(defconst jrb-default-face-height (jrb-mac-or-not 15 15))
 
 
 ;;; GUI Elements
