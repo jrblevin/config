@@ -589,6 +589,10 @@ regexp.")
   :bind ("C-x g !" . git-messenger:popup-message)
   :init (setq git-messenger:show-detail t))
 
+(use-package gnuplot
+  :ensure t
+  :mode (("\\.gnuplot\\'" . gnuplot-mode)))
+
 (use-package hippie-expand
   :config
   (setq hippie-expand-try-functions-list
