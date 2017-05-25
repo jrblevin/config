@@ -1390,6 +1390,9 @@ most recent kill ring contents and leaves the cursor at %|."
   ("xmm" "markdown-mode" nil 0)
   ("xMd" "Markdown" nil 0)
 
+  ;; typography
+  ("xdot" "…" nil 0)
+
   ;; signatures
   ("ssig1" "Best,\n\nJason" nil 0)
   ("ssig2" "Best,\n\nProf. Blevins" nil 0)
