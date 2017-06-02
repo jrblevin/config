@@ -884,11 +884,11 @@ regexp.")
   (require 'sublimity-attractive)
   (setq sublimity-attractive-centering-width 90))
 
-(use-package taskpaper
-  :mode (("\\.taskpaper\\'" . taskpaper-mode)))
-
 (use-package swift
   :mode (("\\.swift\\'" . swift-mode)))
+
+(use-package taskpaper
+  :mode (("\\.taskpaper\\'" . taskpaper-mode)))
 
 (use-package tex
   :ensure auctex
