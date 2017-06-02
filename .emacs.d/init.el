@@ -293,6 +293,11 @@ regexp.")
 
 ;;; Simple package configuration
 
+;; Notes on use-package declarations:
+;;
+;;     :init          Code to run BEFORE package has been loaded.
+;;     :config        Code to run AFTER package has been loaded.
+
 (defsubst hook-into-modes (func &rest modes)
   "Add FUNC to hook functions given by MODES."
   (dolist (mode-hook modes) (add-hook mode-hook func)))
