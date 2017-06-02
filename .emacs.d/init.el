@@ -618,6 +618,7 @@ regexp.")
   :config (setq graphviz-dot-indent-width 4))
 
 (use-package guide-key
+  :disabled t
   :defer 5
   :diminish guide-key-mode
   :config
@@ -971,6 +972,12 @@ regexp.")
 
 (use-package titlecase
   :bind (("C-c T" . titlecase-dwim)))
+
+(use-package which-key
+  :defer 5
+  :diminish which-key-mode
+  :config
+  (which-key-mode))
 
 
 ;;; Margins:
