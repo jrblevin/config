@@ -699,11 +699,14 @@ regexp.")
     ;; For MultiMarkdown tables
     (make-local-variable 'org-table-automatic-realign)
     (setq org-table-automatic-realign nil)
+    ;; Automatically keep imenu index up to date
+    (setq imenu-auto-rescan t)
     ;; Enable math mode based on file metadata
     (save-excursion
       (when (re-search-forward "^math:\\s-*itex$" nil t)
         (markdown-enable-math 1))))
   (add-hook 'markdown-mode-hook 'jrb-markdown-mode-hook)
+  (add-hook 'markdown-mode-hook 'imenu-add-menubar-index)
 
   (defun jrb-gfm-mode-hook ()
     (visual-line-mode 1))
