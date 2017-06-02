@@ -681,6 +681,7 @@ regexp.")
   (setq markdown-command "multimarkdown --snippet --smart --notes"
         markdown-open-command "mark"
         markdown-enable-wiki-links t
+        markdown-indent-on-enter 'indent-and-new-item
         markdown-link-space-sub-char "-"
         markdown-footnote-location 'end
         markdown-reference-location 'header
