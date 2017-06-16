@@ -214,8 +214,12 @@ function chpwd() {
   fi
 }
 
+# zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions.zsh
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=1'
+
 # k
-source ~/.zsh/k/k.sh
+source ~/.zsh/k.sh
 
 # Archival
 compress_and_delete () { tar zcvf "$1.tar.gz" "$1" && rm -rf "$1" }

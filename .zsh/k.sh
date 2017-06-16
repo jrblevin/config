@@ -85,6 +85,7 @@ k () {
 
   # Setup array of directories to print
   typeset -a base_dirs
+  typeset base_dir
 
   if [[ "$@" == "" ]]; then
     base_dirs=.
@@ -306,6 +307,7 @@ k () {
       HAS_UID_BIT=0
       HAS_GID_BIT=0
       HAS_STICKY_BIT=0
+      IS_WRITABLE_BY_OTHERS=0
 
          PERMISSIONS="${sv[mode]}"
        HARDLINKCOUNT="${sv[nlink]}"
