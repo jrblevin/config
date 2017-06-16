@@ -7,6 +7,7 @@
 # Parts taken from the following sources:
 # * http://texnatse.blogsome.com/2005/09/01/my-screenrc/
 # * http://planet.gentoo.org/developers/dams/2006/09/22/screenrc
+# * https://serverfault.com/questions/3740/what-are-useful-screenrc-settings
 
 # Use visual bell.
 vbell on
@@ -15,10 +16,13 @@ vbell on
 startup_message off
 
 # Use a large scrolling buffer.
-defscrollback 100000
+defscrollback 1000000
 
 # Change the escape character to `.
 #escape ``
+
+# Change the escape character to C-z.
+escape ^za
 
 # Detach on hangup.
 autodetach on
@@ -37,3 +41,6 @@ backtick 1 0 30 sh -c "pwd | sed -e 's|/Users/jblevins|~|;s|/home/jblevins|~|;s|
 
 # use this for the hard status string
 hardstatus string "%H"
+
+# Make vim, etc, go away after closing
+altscreen on
