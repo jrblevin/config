@@ -34,8 +34,9 @@
 (when (display-graphic-p)
   ;; Set fonts first so widths and heights below are correct
   (require 'fira-code-ligatures)
-  (setq jrb-default-line-spacing 0.25)
+  (setq jrb-default-line-spacing 0.0)   ; was 0.25
   (setq-default line-spacing jrb-default-line-spacing)
+  (setq inhibit-compacting-font-caches t)
   (set-face-attribute 'default nil :family "Fira Code" :weight 'light
                       ;; face height is 10 * point size
                       :height (* jrb-default-face-height 10))
