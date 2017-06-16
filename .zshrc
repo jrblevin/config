@@ -36,6 +36,31 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Default: WORDCHARS="*?_-.[]~=&;!#$%^(){}<>/"
 WORDCHARS="*?[]~&;!%^(){}<>"
 
+### Git
+
+alias ga='git add'
+alias gapa='git add --patch'
+alias gb='git branch -a'
+alias gc='git commit -v'
+alias gcm='git commit -m'
+alias gca='git commit -v --amend'
+alias gcb='git checkout -b'
+alias gcm='git checkout master'
+alias gcn='git checkout next'
+alias gd='git diff'
+alias gdca='git diff --cached'
+alias gdw='git diff --word-diff'
+alias gitx='open -a GitX .'
+alias gpl='git plog'
+alias grl='git rlog'
+alias gst='git status'
+alias gm='git merge'
+alias gri='git rebase -i'
+alias grim='git rebase -i master'
+alias gsts='git stash show --patch'
+alias gstp='git stash pop'
+alias gstd='git stash drop'
+
 ### Useful Commands and Aliases
 
 if ls -F --color=auto >&/dev/null; then
@@ -55,15 +80,6 @@ alias ee="emacs -nw"
 alias ec="emacsclient"
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
-alias gd='git diff'
-alias gdc='git diff --cached'
-alias grl='git rlog'
-alias gst='git status'
-alias gci='git commit'
-alias gca='git commit --amend'
-alias gcm='git commit -m'
-alias gplog='git plog'
-alias gitx='open -a GitX .'
 alias mutt="cd ~/inbox; mutt"
 alias sdr="screen -d -R"
 alias tma="tmux attach -t default || tmux new -s default"
