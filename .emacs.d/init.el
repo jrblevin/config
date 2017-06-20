@@ -12,6 +12,8 @@
 ;; ~/.emacs.d/site-lisp          manually installed packages
 ;; ~/.emacs.d/themes             custom themes
 
+;;; Code:
+
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
@@ -26,7 +28,7 @@
   "Return LARGE if system has a large (wide) screen and NOT otherwise."
   (if (and (display-graphic-p) (> (x-display-pixel-width) 1280)) large not))
 
-(defconst jrb-default-face-height (jrb-mac-or-not 15 15))
+(defconst jrb-default-face-height (jrb-large-screen-or-not 16 15))
 
 
 ;;; GUI Elements
@@ -34,7 +36,7 @@
 (when (display-graphic-p)
   ;; Set fonts first so widths and heights below are correct
   (require 'fira-code-ligatures)
-  (setq jrb-default-line-spacing 0.0)   ; was 0.25
+  (defconst jrb-default-line-spacing 0.25) ; default is nil
   (setq-default line-spacing jrb-default-line-spacing)
   (setq inhibit-compacting-font-caches t)
   (set-face-attribute 'default nil :family "Fira Code" :weight 'light
@@ -46,7 +48,7 @@
 (defun jrb-default-frame-width ()
   "Default width for frames.
 Subtract from screen width and divide by the width of a character
-to get the number of columns. Only use half screen width for
+to get the number of columns.  Only use half screen width for
 large displays."
   (let ((denom (jrb-large-screen-or-not 2 1))
         (fringes (window-fringes)))
@@ -81,6 +83,9 @@ See <http://stackoverflow.com/questions/92971/>."
         (menu-bar-mode (jrb-mac-or-not 1 0))
       (menu-bar-mode -1)))
 
+
+;;; Fundamental Settings
+
 ;; Increase garbage collection threshold
 (setq gc-cons-threshold (* 16 1024 1024))
 
@@ -103,8 +108,6 @@ See <http://stackoverflow.com/questions/92971/>."
       initial-scratch-message   nil     ; No scratch buffer message
       transient-mark-mode       nil     ; Disable transient-mark-mode
       select-enable-clipboard   t       ; Sync kill ring and clipboard
-      scroll-step               1       ; Smooth scrolling
-      scroll-margin             3       ; Some context when recentering
       column-number-mode        0       ; Hide column number in mode line
       line-number-mode          0       ; Hide line number in mode line
       mode-line-position        nil)    ; Hide position (C-x =, M-x what-line)
@@ -177,15 +180,28 @@ See <http://stackoverflow.com/questions/92971/>."
 (when (display-graphic-p)
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
+;; Fix trackpad scrolling
+(setq scroll-preserve-screen-position 'always
+      mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control))))
+(dolist (multiple '("" "double-" "triple-"))
+  (dolist (direction '("right" "left"))
+    (global-set-key (read-kbd-macro (concat "<" multiple "wheel-" direction ">")) 'ignore)))
+
+;; Set undo limits
+(setq undo-limit (* 16 1024 1024)
+      undo-strong-limit (* 24 1024 1024)
+      undo-outer-limit (* 64 1024 1024))
+
 ;; Modifier keys: command sends meta, option sends super
 (setq mac-option-key-is-meta nil)
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
+(global-set-key (kbd "M-`") 'ns-next-frame)
+(global-set-key (kbd "M-h") 'ns-do-hide-emacs)
 
-;; Enable narrowing functions
-(put 'narrow-to-region 'disabled nil)
-(put 'narrow-to-page 'disabled nil)
+;; Don't disable commands
+(setq disabled-command-function nil)
 
 
 ;;; Package management
@@ -684,7 +700,10 @@ regexp.")
          ("/projects/markdown-mode.*\\.txt\\'" . markdown-mode)
          ("/gtd/.*\\.txt\\'" . markdown-mode))
   :init
-  (setq markdown-header-scaling t)
+  (setq markdown-header-scaling t
+        markdown-hide-urls t
+        markdown-hide-markup t
+        markdown-fontify-code-blocks-natively t)
   :config
   (use-package org-table
     :commands orgtbl-mode)
@@ -694,6 +713,7 @@ regexp.")
         markdown-enable-wiki-links t
         markdown-indent-on-enter 'indent-and-new-item
         markdown-link-space-sub-char "-"
+        markdown-unordered-list-item-prefix "*   "
         markdown-footnote-location 'end
         markdown-reference-location 'header
         markdown-asymmetric-header t
@@ -729,11 +749,10 @@ regexp.")
     (interactive)
     (when (eq major-mode 'markdown-mode)
       (fundamental-mode))
-    (when (featurep 'markdown-test) (unload-feature 'markdown-test))
-    (when (featurep 'markdown-mode) (unload-feature 'markdown-mode))
-    (load-library (expand-file-name "~/projects/markdown-mode/markdown-mode.el"))
-    (load-library (expand-file-name "~/projects/markdown-mode/tests/markdown-test.el"))
-    ;;(setq debug-on-quit t)
+    (when (featurep 'markdown-test) (unload-feature 'markdown-test 'force))
+    (when (featurep 'markdown-mode) (unload-feature 'markdown-mode 'force))
+    (load-library "~/projects/markdown-mode/markdown-mode.el")
+    (load-library "~/projects/markdown-mode/tests/markdown-test.el")
     (markdown-mode)))
 
 (use-package mma
@@ -799,7 +818,9 @@ regexp.")
   :bind (("C-c w" . olivetti-mode)))
 
 (use-package org
-  :mode (("\\.org\\'" . org-mode)))
+  :mode (("\\.org\\'" . org-mode))
+  :init
+  (setq org-hide-emphasis-markers t))
 
 (use-package rainbow-mode
   :commands rainbow-mode
@@ -979,6 +1000,7 @@ regexp.")
   :bind (("C-c T" . titlecase-dwim)))
 
 (use-package which-key
+  :disabled t
   :defer 5
   :diminish which-key-mode
   :config
