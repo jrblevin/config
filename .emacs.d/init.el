@@ -72,8 +72,7 @@ See <http://stackoverflow.com/questions/92971/>."
         (height . ,(jrb-default-frame-height))
         (vertical-scroll-bars . 0)
         (menu-bar-lines . 0)
-        (tool-bar-lines . 0)
-        (alpha 94 90)))
+        (tool-bar-lines . 0)))
 
 ;; Disable scroll bar, tool bar, and menu bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -198,7 +197,6 @@ See <http://stackoverflow.com/questions/92971/>."
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 (global-set-key (kbd "M-`") 'ns-next-frame)
-(global-set-key (kbd "M-h") 'ns-do-hide-emacs)
 
 ;; Don't disable commands
 (setq disabled-command-function nil)
@@ -228,14 +226,31 @@ See <http://stackoverflow.com/questions/92971/>."
 ;;; Color themes:
 
 (setq custom-theme-directory "~/.emacs.d/themes")
+
+(use-package less-theme
+  :init (load-theme 'less 'no-confirm 'no-enable))
+
+(use-package twilight-theme
+  :init (load-theme 'twilight 'no-confirm 'no-enable))
+
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :init
+  (load-theme 'sanityinc-tomorrow-night 'no-confirm 'no-enable)
+  (load-theme 'sanityinc-tomorrow-eighties 'no-confirm 'no-enable))
+
+(use-package darktooth-theme
+  :init (load-theme 'darktooth 'no-confirm 'no-enable))
+
 (if (display-graphic-p)
     (let ((hour (string-to-number (substring (current-time-string) 11 13))))
-      (if (member hour (number-sequence 6 22))
-          (use-package twilight-theme
-            :init (load-theme 'twilight 'no-confirm))
-        (use-package color-theme-sanityinc-tomorrow
-          :ensure t
-          :init (load-theme 'sanityinc-tomorrow-night 'no-confirm))))
+      (cond
+       ((memq hour (number-sequence 7 17))
+        (enable-theme 'twilight))
+       ((memq hour (number-sequence 18 22))
+        (enable-theme 'sanityinc-tomorrow-eighties))
+       (t
+        (enable-theme 'sanityinc-tomorrow-night))))
   (load-theme 'less t))
 
 
@@ -572,18 +587,7 @@ regexp.")
 
   (use-package flyspell-lazy
     :ensure t
-    :config (flyspell-lazy-mode))
-
-  ;; spell-checking in text modes and in comments for programming modes
-  (hook-into-modes #'flyspell-prog-mode
-                   'prog-mode-hook
-                   'nxml-mode-hook)
-  (hook-into-modes #'turn-on-flyspell
-                   'LaTeX-mode-hook
-                   'markdown-mode-hook)
-  (hook-into-modes #'flyspell-buffer
-                   'LaTeX-mode-hook
-                   'markdown-mode-hook))
+    :config (flyspell-lazy-mode)))
 
 (use-package f90
   :mode (("\\.[Ff]\\(?:90\\|95\\|03\\|08\\|15\\)\\'" . f90-mode)
@@ -1000,7 +1004,6 @@ regexp.")
   :bind (("C-c T" . titlecase-dwim)))
 
 (use-package which-key
-  :disabled t
   :defer 5
   :diminish which-key-mode
   :config
@@ -1434,7 +1437,9 @@ most recent kill ring contents and leaves the cursor at %|."
   ("xMd" "Markdown" nil 0)
 
   ;; typography
-  ("xdot" "…" nil 0)
+  (";dot" "…" nil 0)
+  (";en" "–" nil 0)
+  (";em" "—" nil 0)
 
   ;; signatures
   ("ssig1" "Best,\n\nJason" nil 0)
