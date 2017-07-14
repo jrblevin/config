@@ -26,7 +26,7 @@ fi
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # Provide a more convenient PATH
-export PATH=${HOME}/bin:${PATH}
+export PATH=${HOME}/bin:/usr/local/bin:${PATH}
 
 # Enable color output of some common commands
 if [ -x /usr/bin/dircolors ]; then
