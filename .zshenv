@@ -85,3 +85,6 @@ if [[ $OS == "Darwin" ]]; then
     EMACS25=/Applications/Emacs\ 25.app/Contents/MacOS/Emacs-x86_64-10_9
     EMACS24=/Applications/Emacs\ 24.5.app/Contents/MacOS/Emacs
 fi
+
+# Private settings
+source $HOME/.zsh_private
