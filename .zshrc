@@ -134,7 +134,7 @@ prompt_context() {
   local user=`whoami`
   local context="%m"
   if [[ $UID -ne 0 && "$user" != "$DEFAULT_USER" ]]; then
-    context="$user$context"
+    context="$user@$context"
   fi
   echo -n "$context"
 }
