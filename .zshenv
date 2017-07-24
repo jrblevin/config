@@ -67,19 +67,6 @@ elif [[ $OS == "Linux" ]]; then
     export LD_LIBRARY_PATH
 fi
 
-# Host-specific settings
-FQDN=`hostname -f`
-HOST=`hostname -s`
-if [[ $FQDN =~ "econ.ohio-state.edu" ]]; then
-    # mpd
-    export MPD_HOST=localhost
-    export MPD_PORT=6600
-else
-    # mpd
-    export MPD_HOST=192.168.1.2
-    export MPD_PORT=6600
-fi
-
 # Emacs
 if [[ $OS == "Darwin" ]]; then
     EMACS25=/Applications/Emacs\ 25.app/Contents/MacOS/Emacs-x86_64-10_9
