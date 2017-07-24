@@ -8,13 +8,13 @@ set organization "The Ohio State University"
 set signature "/home/jblevins/.signature"
 
 % Server
-server "localhost" ".jnewsrc"
+server "news.sdf.org" ".jnewsrc"
 set server_object "nntp"
 set post_object "nntp"
 set generate_message_id 0
 
 % External programs
-set editor_command "emacsclient"
+set editor_command "vim"
 set non_Xbrowser "elinks '%s'"
 set Xbrowser "sensible-browser '%s' &"
 set printer_name "lpr"
@@ -26,8 +26,9 @@ set save_replies "News/My_Replies"
 set scorefile "News/score"
 
 % Character mapping / MIME support
-charset display "utf8"
-charset outgoing "utf8"
+charset display "utf-8"
+charset editor "utf-8"
+charset outgoing "utf-8"
 
 % General usage
 
