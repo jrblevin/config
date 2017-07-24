@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 #
-# Jason Blevins <jrblevin@sdf.org>
+# Jason Blevins <jblevins@xbeta.org>
 # Columbus, June 6, 2017
 
 # Basic $PATH

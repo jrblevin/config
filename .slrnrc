@@ -1,8 +1,8 @@
 % -*- slang -*-
 
 % Identity
-set username "jrblevin"
-set hostname "sdf.org"
+set username "jblevins"
+set hostname "xbeta.org"
 set realname "Jason Blevins"
 set organization "The Ohio State University"
 set signature "/home/jblevins/.signature"

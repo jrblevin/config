@@ -1,6 +1,6 @@
 ## ~/.lbdbrc: Little Brother Database Configuration                  -*-conf-*-
 #
-# Jason Blevins <jrblevin@sdf.org>
+# Jason Blevins <jblevins@xbeta.org>
 # Last Modified: July 8, 2013 22:44 EDT
 
 METHODS="m_muttalias m_osx_addressbook"

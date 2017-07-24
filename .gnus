@@ -1,16 +1,18 @@
 ;;; ~/.gnus: Gnus configuration file.                        -*-emacs-lisp-*-
 ;;
-;; Jason Blevins <jrblevin@sdf.lonestar.org>
+;; Jason Blevins <jblevins@xbeta.org>
 ;; Created: Durham, August 28, 2006
 ;; Last Modified: September 9, 2009 12:38 EDT
 
 ;; Profile
 (setq user-full-name "Jason Blevins")
-(setq user-mail-address "jrblevin@sdf.lonestar.org")
+(setq user-mail-address "jblevins@xbeta.org")
 
 (setq message-alternative-emails
       (regexp-opt (cons user-mail-address
-                        '("jrblevin@sdf.lonestar.org"
+                        '("jblevins@xbeta.org"
+                          "jrblevin@sdf.org"
+                          "jrblevin@sdf.lonestar.org"
                           "jrb11@duke.edu"
                           "jrblevin@gmail.com"
                           "jason.r.blevins@duke.edu"))))
@@ -18,14 +20,19 @@
 (setq gnus-posting-styles
       '((".*" ;; default
          (name "Jason Blevins")
-         (address "jrb11@duke.edu")
-         (signature-file "~/config/common/signature"))
-        ;; For mail sent to SDF account
+         (address "blevins.141@osu.edu")
+         (signature-file "~/.signature"))
+        ;; For mail sent to Xbeta
+        ((header "to" "jblevins@xbeta.org")
+         (address "jblevins@xbeta.org"))
+        ;; For mail sent to SDF
         ((header "to" "jrblevin@sdf.lonestar.org")
-         (address "jrblevin@sdf.lonestar.org"))
+         (address "jblevins@xbeta.org"))
+        ((header "to" "jrblevin@sdf.org")
+         (address "jblevins@xbeta.org"))
         ;; Usenet news
         ((message-news-p)
-         (address "jrblevin@sdf.lonestar.org"))))
+         (address "jblevins@xbeta.org"))))
 
 
 ;; News

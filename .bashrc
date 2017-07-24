@@ -1,6 +1,6 @@
 ## ~/.bashrc                                      -*-shell-script-*-
 #
-# Jason Blevins <jrblevin@sdf.org>
+# Jason Blevins <jblevins@xbeta.org>
 #
 # Created: Raleigh, June 4, 2004
 # Last Modified: June 10, 2010 14:58 EDT

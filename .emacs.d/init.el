@@ -1,6 +1,6 @@
 ;;; ~/.emacs.d/init.el: Emacs configuration
 ;;
-;; Jason Blevins <jrblevin@sdf.org>
+;; Jason Blevins <jblevins@xbeta.org>
 ;; Raleigh, May 29, 2004
 
 ;; Directory Structure:
@@ -94,7 +94,7 @@ See <http://stackoverflow.com/questions/92971/>."
 
 ;; Personal information
 (setq user-full-name "Jason Blevins")
-(setq user-mail-address "jrblevin@sdf.org")
+(setq user-mail-address "jblevins@xbeta.org")
 
 ;; Load newer version of .el and .elc if both are available
 (setq load-prefer-newer t)
@@ -1427,8 +1427,8 @@ most recent kill ring contents and leaves the cursor at %|."
   ("iiso" "" my-insert-date-iso 0)
 
   ;; email addresses
-  ("eem1" "jrblevin@sdf.org" nil 0)
-  ("eem2" "blevins.141@osu.edu" nil 0)
+  ("hhem" "jblevins@xbeta.org" nil 0)
+  ("wwem" "blevins.141@osu.edu" nil 0)
 
   ;; common shortcuts
   ("xmd" "markdown" nil 0)
@@ -1443,7 +1443,7 @@ most recent kill ring contents and leaves the cursor at %|."
   ;; signatures
   ("ssig1" "Best,\n\nJason" nil 0)
   ("ssig2" "Best,\n\nProf. Blevins" nil 0)
-  ("ssig3" "Best,\n\nJason\n\n-- \nJason R. Blevins\nAssistant Professor of Economics\nThe Ohio State University\nhttp://jblevins.org/\n" nil 0)
+  ("ssig3" "Best,\n\nJason\n\n-- \nJason R. Blevins\nAssociate Professor of Economics\nThe Ohio State University\nhttp://jblevins.org/\n" nil 0)
 
   ;; common phrases
   ("afaict" "as far as I can tell" nil 0)
@@ -1518,7 +1518,7 @@ most recent kill ring contents and leaves the cursor at %|."
   "Description: "
   "! " (buffer-name) " --- " str "\n"
   "!\n"
-  "! Copyright (C) " (my-insert-year) " Jason R. Blevins <jrblevin@sdf.org>\n"
+  "! Copyright (C) " (my-insert-year) " Jason R. Blevins <jblevins@xbeta.org>\n"
   "! All rights reserved.\n"
   "!\n"
   "! Redistribution and use in source and binary forms, with or without\n"

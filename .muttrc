@@ -1,6 +1,6 @@
 # ~/.muttrc: Main Mutt configuration.                     -*-muttrc-*-
 #
-# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Jason Blevins <jblevins@xbeta.org>
 # Durham, January 14, 2006
 
 # Identity
@@ -8,7 +8,7 @@
 
 set realname="Jason Blevins"
 set from="blevins.141@osu.edu"
-alternates "jrb11@duke.edu|jrblevin@sdf.org|jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
+alternates "jblevins@xbeta.org|jrb11@duke.edu|jrblevin@sdf.org|jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
 
 # Read alias file
 set alias_file="~/.mutt-aliases"

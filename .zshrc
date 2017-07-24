@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 #
-# Jason Blevins <jrblevin@sdf.org>
+# Jason Blevins <jblevins@xbeta.org>
 # Carrboro, November 16, 2008
 
 ### Basic ZSH Configuration

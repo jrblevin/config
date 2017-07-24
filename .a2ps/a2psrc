@@ -1,6 +1,6 @@
 # ~/.a2ps/a2psrc: Customized a2ps configuration.
 #
-# Jason Blevins <jrblevin@sdf.lonestar.org>
+# Jason Blevins <jblevins@xbeta.org>
 
 # Default Behavior
 Options: --medium=Letter
