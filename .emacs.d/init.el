@@ -706,7 +706,6 @@ regexp.")
   :init
   (setq markdown-header-scaling t
         markdown-hide-urls t
-        markdown-hide-markup t
         markdown-fontify-code-blocks-natively t)
   :config
   (use-package org-table
@@ -731,7 +730,7 @@ regexp.")
 
   (defun jrb-markdown-mode-hook ()
     ;; Olivetti
-    (turn-on-olivetti-mode)
+    ;(turn-on-olivetti-mode)
     ;; For MultiMarkdown tables
     (make-local-variable 'org-table-automatic-realign)
     (setq org-table-automatic-realign nil)
