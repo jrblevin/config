@@ -3,8 +3,8 @@
 ;; Copyright (C) 2007-2017 Jason R. Blevins and markdown-mode
 ;; contributors (see the commit log for details).
 
-;; Author: Jason R. Blevins <jrblevin@sdf.org>
-;; Maintainer: Jason R. Blevins <jrblevin@sdf.org>
+;; Author: Jason R. Blevins <jblevins@xbeta.org>
+;; Maintainer: Jason R. Blevins <jblevins@xbeta.org>
 ;; Created: May 24, 2007
 ;; Version: 2.3-dev
 ;; Package-Requires: ((emacs "24") (cl-lib "0.5"))
@@ -4873,6 +4873,15 @@ if three backquotes inserted at the beginning of line."
   (setq markdown-gfm-used-languages
           (cons lang (remove lang markdown-gfm-used-languages))))
 
+(defcustom markdown-spaces-after-code-fence 1
+  "Number of space characters to insert after a code fence.
+\\<gfm-mode-map>\\[markdown-insert-gfm-code-block] inserts this many spaces between an
+opening code fence and an info string."
+  :group 'markdown
+  :type 'integer
+  :safe #'natnump
+  :package-version '(markdown-mode . "2.3"))
+
 (defun markdown-insert-gfm-code-block (&optional lang)
   "Insert GFM code block for language LANG.
 If LANG is nil, the language will be queried from user.  If a
@@ -4890,7 +4899,9 @@ automatically in order to have the correct markup."
                  'markdown-gfm-language-history))
              (quit "")))))
   (unless (string= lang "") (markdown-gfm-add-used-language lang))
-  (when (> (length lang) 0) (setq lang (concat " " lang)))
+  (when (> (length lang) 0)
+    (setq lang (concat (make-string markdown-spaces-after-code-fence ?\s)
+                       lang)))
   (if (markdown-use-region-p)
       (let ((b (region-beginning)) (e (region-end)))
         (goto-char e)
