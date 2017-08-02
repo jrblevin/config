@@ -261,7 +261,7 @@ See <http://stackoverflow.com/questions/92971/>."
 
 (global-set-key (kbd "<f3>") 'my-insert-date-time)
 (global-set-key (kbd "<f4>") 'revert-buffer-no-confirm)
-(global-set-key (kbd "<f5>") 'my-quick-log)
+(global-set-key (kbd "<f5>") 'jrb-log-post)
 (global-set-key (kbd "<f6>") 'calendar)
 (global-set-key (kbd "<f10>") 'jrb-write-mode)
 (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
@@ -274,7 +274,7 @@ See <http://stackoverflow.com/questions/92971/>."
 
 (global-set-key (kbd "C-h C-r") 'describe-char)
 
-(global-set-key (kbd "C-c l") 'my-quick-log)
+(global-set-key (kbd "C-c l") 'jrb-log-post)
 (global-set-key (kbd "C-c o") 'send-region-to-omnifocus)
 (global-set-key (kbd "C-c f") 'send-region-to-fantastical)
 (global-set-key (kbd "C-c e") 'jrb-evaluate-template)
@@ -1078,9 +1078,9 @@ regexp.")
 
 ;;; Website:
 
-(defun my-quick-log (slug)
+(defun jrb-log-post (slug)
   (interactive "sSlug: ")
-  (find-file (concat "~/projects/jblevins.org/htdocs/log/" slug ".text"))
+  (find-file (concat "~/work/jblevins.org/htdocs/log/" slug ".text"))
   (skeleton-webpage-header))
 
 
@@ -1509,7 +1509,7 @@ most recent kill ring contents and leaves the cursor at %|."
   "feed: true\n"
   "guid: tag:jblevins.org," (my-insert-year) ":"
   (replace-regexp-in-string
-   "/\\(home\\|Users\\)/jblevins/projects/jblevins.org/htdocs\\(.*?\\)\\(main\\)*\\.text" "\\2"
+   "/\\(home\\|Users\\)/jblevins/work/jblevins.org/htdocs\\(.*?\\)\\(main\\)*\\.text" "\\2"
    (buffer-file-name))
   "\n\n")
 
