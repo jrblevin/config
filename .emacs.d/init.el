@@ -652,6 +652,7 @@ regexp.")
   (guide-key-mode 1))
 
 (use-package ido
+  :disabled t
   :init
   (ido-mode t)
   (add-to-list 'ido-ignore-files "\\.DS_Store")
@@ -673,6 +674,30 @@ regexp.")
   (setq imenu-list-focus-after-activation t
         imenu-list-auto-resize nil))
 
+(use-package ivy
+  :demand
+  :ensure t
+  :diminish (ivy-mode)
+  :bind
+  (("C-s" . swiper)
+   ("M-x" . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("<f1> f" . counsel-describe-function)
+   ("<f1> v" . counsel-describe-variable)
+   ("<f1> l" . counsel-find-library)
+   ("<f2> i" . counsel-info-lookup-symbol)
+   ("<f2> u" . counsel-unicode-char))
+  :init
+  (use-package flx :ensure t)
+  (use-package avy)
+  :config
+  (setq ivy-use-virtual-buffers t
+        ivy-count-format "%d/%d "
+        ivy-initial-inputs-alist nil
+        ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+        magit-completing-read-function 'ivy-completing-read)
+  (ivy-mode 1))
+
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
   :interpreter ("lua" . lua-mode))
@@ -690,7 +715,6 @@ regexp.")
   :init
   (add-hook 'magit-mode-hook 'hl-line-mode)
   :config
-  (setq magit-completing-read-function 'magit-ido-completing-read)
   (add-hook 'magit-log-edit-mode-hook
             #'(lambda ()
                 (set-fill-column 72)
