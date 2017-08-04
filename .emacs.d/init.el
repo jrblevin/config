@@ -201,6 +201,9 @@ See <http://stackoverflow.com/questions/92971/>."
 ;; Don't disable commands
 (setq disabled-command-function nil)
 
+;; Save window configuration
+(winner-mode 1)
+
 
 ;;; Package management
 
