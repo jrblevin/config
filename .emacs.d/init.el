@@ -617,6 +617,15 @@ regexp.")
     (auto-fill-mode 0))
   (add-hook 'f90-mode-hook 'jrb-f90-mode-hook))
 
+(use-package gscholar-bibtex
+  :commands gscholar-bibtex
+  :init
+  (setq gscholar-bibtex-database-file "~/gtd/research.bib")
+  :config
+  (dolist (source '("ACM Digital Library" "IEEE Xplore" "DBLP"))
+    (gscholar-bibtex-source-on-off :off source))
+  (setq gscholar-bibtex-default-source "Google Scholar"))
+
 (use-package google-this
   :commands google-this
   :bind ("C-c g" . google-this))
