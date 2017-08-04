@@ -345,6 +345,13 @@ regexp.")
   ;; Turn on abbrev mode globally
   (setq-default abbrev-mode t))
 
+(use-package ace-window
+  :ensure t
+  :defer t
+  :bind (("M-o" . ace-window))
+  :init
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
 (use-package ado-mode
   :disabled t
   :defer t
