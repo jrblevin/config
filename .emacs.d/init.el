@@ -933,7 +933,8 @@ regexp.")
         powerline-display-mule-info nil
         powerline-gui-use-vcs-glyph t
         powerline-height 24
-        powerline-default-separator 'slant))
+        powerline-default-separator 'slant)
+  :init (powerline-default-theme))
 
 (use-package cc-mode
   :mode (("\\.leg\\'" . c-mode))
