@@ -924,6 +924,17 @@ regexp.")
     (post-goto-body))
   (add-hook 'post-mode-hook 'jrb-post-mode-hook))
 
+(use-package powerline
+  :ensure t
+  :if (display-graphic-p)
+  :config
+  (setq powerline-display-hud nil
+        powerline-display-buffer-size nil
+        powerline-display-mule-info nil
+        powerline-gui-use-vcs-glyph t
+        powerline-height 24
+        powerline-default-separator 'slant))
+
 (use-package cc-mode
   :mode (("\\.leg\\'" . c-mode))
   :config
