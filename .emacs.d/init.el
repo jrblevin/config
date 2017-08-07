@@ -203,7 +203,6 @@ See <http://stackoverflow.com/questions/92971/>."
 
 ;; Save window configuration
 (winner-mode 1)
-(global-set-key (kbd "C-c u") 'winner-undo)
 
 
 ;;; Package management
