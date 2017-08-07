@@ -4,3 +4,4 @@
 .emacs.d/tramp
 .emacs.d/backups/*
 .emacs.d/history/*
+.emacs.d/recentf
