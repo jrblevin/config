@@ -204,6 +204,10 @@ See <http://stackoverflow.com/questions/92971/>."
 ;; Save window configuration
 (winner-mode 1)
 
+;; Global auto revert mode
+(global-auto-revert-mode 1)
+(diminish 'auto-revert-mode)
+
 
 ;;; Package management
 
