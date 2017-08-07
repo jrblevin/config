@@ -64,6 +64,13 @@ See <http://stackoverflow.com/questions/92971/>."
   (/ (- (display-pixel-height) 50)
      (frame-char-height)))
 
+(defun jrb-setup-windows ()
+  "Open two 80 column windows and a smaller window on the right."
+  (interactive)
+  (delete-other-windows)
+  (split-window-right -49)
+  (split-window-horizontally))
+
 ;; Set frame geometry according to display resolution.
 (setq default-frame-alist
       `((top . 1)
