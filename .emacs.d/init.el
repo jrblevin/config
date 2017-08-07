@@ -204,10 +204,6 @@ See <http://stackoverflow.com/questions/92971/>."
 ;; Save window configuration
 (winner-mode 1)
 
-;; Global auto revert mode
-(global-auto-revert-mode 1)
-(diminish 'auto-revert-mode)
-
 
 ;;; Package management
 
@@ -377,6 +373,10 @@ regexp.")
 
 (use-package auto-compile :disabled t
   :config (auto-compile-on-load-mode))
+
+(use-package autorevert
+  :diminish
+  :init (global-auto-revert-mode 1))
 
 (use-package bibtex
   :defer t
