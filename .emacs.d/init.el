@@ -179,13 +179,6 @@ See <http://stackoverflow.com/questions/92971/>."
 (when (display-graphic-p)
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
-;; Fix trackpad scrolling
-(setq scroll-preserve-screen-position 'always
-      mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control))))
-(dolist (multiple '("" "double-" "triple-"))
-  (dolist (direction '("right" "left"))
-    (global-set-key (read-kbd-macro (concat "<" multiple "wheel-" direction ">")) 'ignore)))
-
 ;; Set undo limits
 (setq undo-limit (* 16 1024 1024)
       undo-strong-limit (* 24 1024 1024)
