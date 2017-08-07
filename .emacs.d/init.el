@@ -714,7 +714,7 @@ regexp.")
   (setq ivy-use-virtual-buffers t
         ivy-count-format "%d/%d "
         ivy-initial-inputs-alist nil
-        ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+        ;ivy-re-builders-alist '((t . ivy--regex-fuzzy))
         magit-completing-read-function 'ivy-completing-read)
   (ivy-mode 1))
 
@@ -951,6 +951,7 @@ regexp.")
 
 (use-package smex
   :ensure t
+  :after ivy
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands)
          ("C-c C-c M-x" . execute-extended-command))
