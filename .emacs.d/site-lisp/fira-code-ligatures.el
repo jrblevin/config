@@ -57,15 +57,14 @@
     ;; ~ -> ~~>, ~~~, ~>, ~=, ~@, ~~, ~-
     (126 . ".\\(?:~[>~]\\|[>=@~-]\\)")))
 
-;; Enable ligatures in GNU Emacs
-(dolist (char-regexp fira-code-char-regexp-alist)
-  (set-char-table-range composition-function-table (car char-regexp)
-                        `([,(cdr char-regexp) 0 font-shape-gstring])))
-
-;; Enable automatic ligatures in Mitsuharu Yamamoto's Mac port of Emacs
-;; <http://www.math.s.chiba-u.ac.jp/~mituharu/emacs-mac.git>
 (if (fboundp 'mac-auto-operator-composition-mode)
-    (mac-auto-operator-composition-mode))
+    ;; Enable automatic ligatures in Mitsuharu Yamamoto's Mac port of Emacs
+    ;; <http://www.math.s.chiba-u.ac.jp/~mituharu/emacs-mac.git>
+    (mac-auto-operator-composition-mode)
+  ;; Enable ligatures in GNU Emacs
+  (dolist (char-regexp fira-code-char-regexp-alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
 ;; Use Fira Code as default font
 (set-face-attribute 'default nil :family "Fira Code")
