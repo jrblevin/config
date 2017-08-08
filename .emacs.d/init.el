@@ -42,7 +42,7 @@
   (set-face-attribute 'default nil :family "Fira Code" :weight 'light
                       ;; face height is 10 * point size
                       :height (* jrb-default-face-height 10))
-  (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
+  (set-face-attribute 'fixed-pitch nil :family "CamingoCode")
   (set-face-attribute 'variable-pitch nil :family "Fira Sans"))
 
 (defun jrb-default-frame-width ()
