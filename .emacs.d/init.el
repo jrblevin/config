@@ -411,6 +411,15 @@ regexp.")
         bibtex-autokey-titlewords 1
         bibtex-align-at-equal-sign t))
 
+(use-package cc-mode
+  :mode (("\\.leg\\'" . c-mode))
+  :config
+  (defun jrb-c-mode-common-hook ()
+    (c-set-style "k&r")
+    (setq c-basic-offset 4)
+    (c-toggle-auto-hungry-state -1))
+  (add-hook 'c-mode-common-hook 'jrb-c-mode-common-hook))
+
 (use-package company
   :defer 1
   :ensure t
@@ -433,6 +442,16 @@ regexp.")
       (message "Compilation exited abnormally: %s" string))))
   (setq compilation-finish-functions 'jrb-autoclose-compile-window)
   (setq compilation-window-height 15))
+
+(use-package cperl-mode
+  :mode (("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
+  :interpreter (("perl" . cperl-mode)
+                ("perl5" . cperl-mode)
+                ("miniperl" . cperl-mode))
+  :config
+  (setq cperl-indent-level 4)
+  (setq cperl-continued-statement-offset 2)
+  (setq cperl-extra-newline-before-brace nil))
 
 (use-package deft
   :bind
@@ -650,6 +669,19 @@ regexp.")
   :ensure t
   :mode (("\\.gnuplot\\'" . gnuplot-mode)))
 
+(use-package graphviz-dot-mode
+  :ensure t :defer t
+  :config (setq graphviz-dot-indent-width 4))
+
+(use-package guide-key
+  :disabled t
+  :defer 5
+  :diminish guide-key-mode
+  :config
+  (setq guide-key/guide-key-sequence '("C-x" "C-c"))
+  (setq guide-key/recursive-key-sequence-flag t)
+  (guide-key-mode 1))
+
 (use-package hippie-expand
   :config
   (setq hippie-expand-try-functions-list
@@ -664,19 +696,6 @@ regexp.")
           try-complete-lisp-symbol-partially
           try-complete-lisp-symbol))
   :bind ("M-/" . hippie-expand))
-
-(use-package graphviz-dot-mode
-  :ensure t :defer t
-  :config (setq graphviz-dot-indent-width 4))
-
-(use-package guide-key
-  :disabled t
-  :defer 5
-  :diminish guide-key-mode
-  :config
-  (setq guide-key/guide-key-sequence '("C-x" "C-c"))
-  (setq guide-key/recursive-key-sequence-flag t)
-  (guide-key-mode 1))
 
 (use-package ido
   :disabled t
@@ -724,6 +743,29 @@ regexp.")
         ;ivy-re-builders-alist '((t . ivy--regex-fuzzy))
         magit-completing-read-function 'ivy-completing-read)
   (ivy-mode 1))
+
+(use-package latex
+  :ensure auctex
+  :mode (("\\.tex\\'" . latex-mode))
+  :commands (latex-mode LaTeX-mode)
+  :config
+  (setq font-latex-match-slide-title-keywords '("foilhead" "fhead"))
+
+  (defun jrb-LaTeX-hook-fn ()
+    (setq TeX-command-default "latexmk")
+    (setq LaTeX-font-list (append
+                           LaTeX-font-list
+                           '((?c "\\ccode{" "}")
+                             (?f "\\fcode{" "}")
+                             (?s "\\scode{" "}")
+                             (?C "\\ccode|" "|")
+                             (?F "\\fcode|" "|")
+                             (?S "\\scode|" "|"))))
+    ;; (setq reftex-plug-into-AUCTeX t)
+    ;; (turn-on-reftex)
+    (LaTeX-math-mode 1)
+    (jrb-LaTeX-setup-code))
+  (add-hook 'LaTeX-mode-hook 'jrb-LaTeX-hook-fn))
 
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
@@ -876,18 +918,6 @@ regexp.")
   :init
   (setq org-hide-emphasis-markers t))
 
-(use-package rainbow-mode
-  :commands rainbow-mode
-  :init
-  (add-to-list 'auto-minor-mode-alist '("-theme\\.el\\'" . rainbow-mode))
-  (add-to-list 'auto-minor-mode-alist '("\\.s?css\\'" . rainbow-mode))
-  (setq rainbow-x-colors nil)
-  (defun jrb-rainbow-mode-hook ()
-    "Disable hl-line-mode when rainbow-mode is active."
-    (setq-local global-hl-line-mode nil)
-    (hl-line-mode -1))
-  (add-hook 'rainbow-mode-hook 'jrb-rainbow-mode-hook))
-
 (use-package page-break-lines
   :ensure t
   :diminish page-break-lines-mode
@@ -940,24 +970,17 @@ regexp.")
         powerline-default-separator 'slant)
   :init (powerline-default-theme))
 
-(use-package cc-mode
-  :mode (("\\.leg\\'" . c-mode))
-  :config
-  (defun jrb-c-mode-common-hook ()
-    (c-set-style "k&r")
-    (setq c-basic-offset 4)
-    (c-toggle-auto-hungry-state -1))
-  (add-hook 'c-mode-common-hook 'jrb-c-mode-common-hook))
-
-(use-package cperl-mode
-  :mode (("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
-  :interpreter (("perl" . cperl-mode)
-                ("perl5" . cperl-mode)
-                ("miniperl" . cperl-mode))
-  :config
-  (setq cperl-indent-level 4)
-  (setq cperl-continued-statement-offset 2)
-  (setq cperl-extra-newline-before-brace nil))
+(use-package rainbow-mode
+  :commands rainbow-mode
+  :init
+  (add-to-list 'auto-minor-mode-alist '("-theme\\.el\\'" . rainbow-mode))
+  (add-to-list 'auto-minor-mode-alist '("\\.s?css\\'" . rainbow-mode))
+  (setq rainbow-x-colors nil)
+  (defun jrb-rainbow-mode-hook ()
+    "Disable hl-line-mode when rainbow-mode is active."
+    (setq-local global-hl-line-mode nil)
+    (hl-line-mode -1))
+  (add-hook 'rainbow-mode-hook 'jrb-rainbow-mode-hook))
 
 (use-package scss-mode
   :mode (("\\.scss\\'" . scss-mode)))
@@ -1016,29 +1039,6 @@ regexp.")
 
   (use-package company-auctex
     :config (company-auctex-init)))
-
-(use-package latex
-  :ensure auctex
-  :mode (("\\.tex\\'" . latex-mode))
-  :commands (latex-mode LaTeX-mode)
-  :config
-  (setq font-latex-match-slide-title-keywords '("foilhead" "fhead"))
-
-  (defun jrb-LaTeX-hook-fn ()
-    (setq TeX-command-default "latexmk")
-    (setq LaTeX-font-list (append
-                           LaTeX-font-list
-                           '((?c "\\ccode{" "}")
-                             (?f "\\fcode{" "}")
-                             (?s "\\scode{" "}")
-                             (?C "\\ccode|" "|")
-                             (?F "\\fcode|" "|")
-                             (?S "\\scode|" "|"))))
-    ;; (setq reftex-plug-into-AUCTeX t)
-    ;; (turn-on-reftex)
-    (LaTeX-math-mode 1)
-    (jrb-LaTeX-setup-code))
-  (add-hook 'LaTeX-mode-hook 'jrb-LaTeX-hook-fn))
 
 (use-package tex-site
   :defer t
