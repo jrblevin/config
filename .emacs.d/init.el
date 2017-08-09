@@ -500,6 +500,10 @@ regexp.")
                 "\\|^#\\+[[:upper:]_]+:.*$" ; org-mode metadata
                 "\\)")))
 
+(use-package dired
+  :init
+  (hook-into-modes #'dired-hide-details-mode 'dired-mode-hook))
+
 (use-package ebib
   :commands ebib
   :config
