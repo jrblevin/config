@@ -35,13 +35,18 @@
 
 (when (display-graphic-p)
   ;; Set fonts first so widths and heights below are correct
-  (require 'fira-code-ligatures)
   (defconst jrb-default-line-spacing 0.25) ; default is nil
   (setq-default line-spacing jrb-default-line-spacing)
   (setq inhibit-compacting-font-caches t)
-  (set-face-attribute 'default nil :family "Fira Code" :weight 'light
+  ;; (require 'fira-code-ligatures)
+  ;; (set-face-attribute 'default nil :family "Fira Code" :weight 'light
+  ;;                     ;; face height is 10 * point size
+  ;;                     :height (* jrb-default-face-height 10))
+  (set-face-attribute 'default nil :family "Operator Mono" :weight 'light
                       ;; face height is 10 * point size
                       :height (* jrb-default-face-height 10))
+  ;; (setq-default line-spacing nil)
+  ;; (set-face-attribute 'default nil :family "Nitti WM2" :weight 'light :height 180)
   (set-face-attribute 'fixed-pitch nil :family "CamingoCode")
   (set-face-attribute 'variable-pitch nil :family "Fira Sans"))
 
@@ -965,7 +970,7 @@ regexp.")
   (setq powerline-display-hud nil
         powerline-display-buffer-size nil
         powerline-display-mule-info nil
-        powerline-gui-use-vcs-glyph t
+        ;; powerline-gui-use-vcs-glyph t
         powerline-height 24
         powerline-default-separator 'slant)
   :init (powerline-default-theme))
@@ -1004,7 +1009,17 @@ regexp.")
   :load-path "site-lisp/sublimity"
   :config
   (require 'sublimity-attractive)
-  (setq sublimity-attractive-centering-width 90))
+  (require 'sublimity-map)
+  (setq sublimity-attractive-centering-width 120)
+  (sublimity-attractive-hide-vertical-border)
+  (sublimity-attractive-hide-fringes)
+  (defun jrb-setup-sublimity-map ()
+    "Set face and line spacing for sublimity-mode minimap."
+    (sublimity-map-set-delay 0)
+    (setq-local line-spacing nil)
+    (setq buffer-face-mode-face '(:family "Nitti WM2"))
+    (buffer-face-mode))
+  (add-hook 'sublimity-map-setup-hook #'jrb-setup-sublimity-map))
 
 (use-package swift
   :mode (("\\.swift\\'" . swift-mode)))
@@ -1571,6 +1586,7 @@ most recent kill ring contents and leaves the cursor at %|."
   "city: Columbus\n"
   "markup: markdown\n"
   "feed: true\n"
+  "link: DELETE IF NOT USED\n"
   "guid: tag:jblevins.org," (my-insert-year) ":"
   (replace-regexp-in-string
    "/\\(home\\|Users\\)/jblevins/work/jblevins.org/htdocs\\(.*?\\)\\(main\\)*\\.text" "\\2"
