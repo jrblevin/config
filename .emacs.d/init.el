@@ -380,8 +380,10 @@ regexp.")
   :config (auto-compile-on-load-mode))
 
 (use-package autorevert
-  :diminish
-  :init (global-auto-revert-mode 1))
+  :init
+  (global-auto-revert-mode 1)
+  (diminish 'global-auto-revert-mode nil)
+  (diminish 'auto-revert-mode nil))
 
 (use-package bibtex
   :defer t
