@@ -766,6 +766,11 @@
 ;;      interactively by pressing `C-c C-x C-f`
 ;;      (`markdown-toggle-fontify-code-blocks-natively').
 ;;
+;;   * `markdown-gfm-uppercase-checkbox' - When non-nil, complete GFM
+;;     task list items with `[X]` instead of `[x]` (default: `nil').
+;;     This is useful for compatibility with `org-mode', which doesn't
+;;     recognize the lowercase variant.
+;;
 ;; Additionally, the faces used for syntax highlighting can be modified to
 ;; your liking by issuing `M-x customize-group RET markdown-faces`
 ;; or by using the "Markdown Faces" link at the bottom of the mode
@@ -1346,6 +1351,12 @@ This applies to insertions done with
 `markdown-electric-backquote'."
   :group 'markdown
   :type 'boolean)
+
+(defcustom markdown-gfm-uppercase-checkbox nil
+  "If non-nil, use [X] for completed checkboxes, [x] otherwise."
+  :group 'markdown
+  :type 'boolean
+  :safe 'booleanp)
 
 (defcustom markdown-hide-urls nil
   "Hide URLs of inline links and reference tags of reference links.
@@ -4903,12 +4914,14 @@ automatically in order to have the correct markup."
     (setq lang (concat (make-string markdown-spaces-after-code-fence ?\s)
                        lang)))
   (if (markdown-use-region-p)
-      (let ((b (region-beginning)) (e (region-end)))
+      (let* ((b (region-beginning)) (e (region-end))
+             (indent (progn (goto-char b) (current-indentation))))
         (goto-char e)
         ;; if we're on a blank line, don't newline, otherwise the ```
         ;; should go on its own line
         (unless (looking-back "\n" nil)
           (newline))
+        (indent-to indent)
         (insert "```")
         (markdown-ensure-blank-line-after)
         (goto-char b)
@@ -4918,11 +4931,19 @@ automatically in order to have the correct markup."
           (newline)
           (forward-line -1))
         (markdown-ensure-blank-line-before)
+        (indent-to indent)
         (insert "```" lang))
-    (markdown-ensure-blank-line-before)
-    (insert "```" lang "\n\n```")
-    (markdown-ensure-blank-line-after)
-    (forward-line -1)))
+    (let ((indent (current-indentation)))
+      (delete-horizontal-space :backward-only)
+      (markdown-ensure-blank-line-before)
+      (indent-to indent)
+      (insert "```" lang "\n")
+      (indent-to indent)
+      (insert ?\n)
+      (indent-to indent)
+      (insert "```")
+      (markdown-ensure-blank-line-after))
+    (end-of-line 0)))
 
 (defun markdown-code-block-lang (&optional pos-prop)
   "Return the language name for a GFM or tilde fenced code block.
@@ -6575,7 +6596,7 @@ the surrounding context in light of Markdown syntax.  For that, see
   "Move the point to the start of the current paragraph.
 With argument ARG, do it ARG times; a negative argument ARG = -N
 means move forward N blocks."
-  (interactive "p")
+  (interactive "^p")
   (or arg (setq arg 1))
   (if (< arg 0)
       (markdown-forward-paragraph (- arg))
@@ -6629,7 +6650,7 @@ means move forward N blocks."
   "Move forward to the next end of a paragraph.
 With argument ARG, do it ARG times; a negative argument ARG = -N
 means move backward N blocks."
-  (interactive "p")
+  (interactive "^p")
   (or arg (setq arg 1))
   (if (< arg 0)
       (markdown-backward-paragraph (- arg))
@@ -6680,7 +6701,7 @@ Moves across complete code blocks, list items, and blockquotes,
 but otherwise stops at blank lines, headers, and horizontal
 rules.  With argument ARG, do it ARG times; a negative argument
 ARG = -N means move forward N blocks."
-  (interactive "p")
+  (interactive "^p")
   (or arg (setq arg 1))
   (if (< arg 0)
       (markdown-forward-block (- arg))
@@ -6727,7 +6748,7 @@ Moves across complete code blocks, list items, and blockquotes,
 but otherwise stops at blank lines, headers, and horizontal
 rules.  With argument ARG, do it ARG times; a negative argument
 ARG = -N means move backward N blocks."
-  (interactive "p")
+  (interactive "^p")
   (or arg (setq arg 1))
   (if (< arg 0)
       (markdown-backward-block (- arg))
@@ -8485,7 +8506,9 @@ Returns nil if there is no task list item at the point."
           ;; Advance to column of first non-whitespace after marker
           (forward-char (cl-fourth bounds))
           (cond ((looking-at "\\[ \\]")
-                 (replace-match "[x]" nil t)
+                 (replace-match
+                  (if markdown-gfm-uppercase-checkbox "[X]" "[x]")
+                  nil t)
                  (match-string-no-properties 0))
                 ((looking-at "\\[[xX]\\]")
                  (replace-match "[ ]" nil t)
@@ -8861,8 +8884,6 @@ position."
   ;; Inhibiting line-breaking:
   ;; Separating out each condition into a separate function so that users can
   ;; override if desired (with remove-hook)
-  (add-hook 'fill-nobreak-predicate
-            #'markdown-inside-link-p nil t)
   (add-hook 'fill-nobreak-predicate
             #'markdown-line-is-reference-definition-p nil t)
   (add-hook 'fill-nobreak-predicate
