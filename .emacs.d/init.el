@@ -28,6 +28,7 @@
   "Return LARGE if system has a large (wide) screen and NOT otherwise."
   (if (and (display-graphic-p) (> (x-display-pixel-width) 1280)) large not))
 
+;; Face height is 10 * point size
 (defconst jrb-default-face-height 15)
 
 
@@ -40,14 +41,10 @@
   (setq inhibit-compacting-font-caches t)
   ;; (require 'fira-code-ligatures)
   ;; (set-face-attribute 'default nil :family "Fira Code" :weight 'light
-  ;;                     ;; face height is 10 * point size
   ;;                     :height (* jrb-default-face-height 10))
   (set-face-attribute 'default nil :family "Operator Mono" :weight 'light
-                      ;; face height is 10 * point size
                       :height (* jrb-default-face-height 10))
-  ;; (setq-default line-spacing nil)
-  ;; (set-face-attribute 'default nil :family "Nitti WM2" :weight 'light :height 180)
-  (set-face-attribute 'fixed-pitch nil :family "CamingoCode")
+  (set-face-attribute 'fixed-pitch nil :family "Courier Prime")
   (set-face-attribute 'variable-pitch nil :family "Fira Sans"))
 
 (defun jrb-default-frame-width ()
