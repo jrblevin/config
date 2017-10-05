@@ -1029,7 +1029,8 @@ regexp.")
 (use-package swift
   :mode (("\\.swift\\'" . swift-mode)))
 
-(use-package taskpaper
+(use-package taskpaper-mode
+  :commands (taskpaper-mode)
   :mode (("\\.taskpaper\\'" . taskpaper-mode)))
 
 (use-package tex
