@@ -855,6 +855,17 @@ regexp.")
     (load-library "~/projects/markdown-mode/tests/markdown-test.el")
     (markdown-mode)))
 
+(defun jrb-convert-reference-to-inline-link ()
+  "Convert reference link at point to an inline link."
+  (interactive)
+  (when (thing-at-point-looking-at markdown-regex-link-reference)
+    (let ((beg (match-beginning 0))
+          (end (match-end 0))
+          (text (match-string 3))
+          (url (markdown-link-url)))
+      (delete-region beg end)
+      (markdown-insert-inline-link text url))))
+
 (use-package mma
   :commands mma-mode)
 
