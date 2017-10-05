@@ -118,6 +118,7 @@ See <http://stackoverflow.com/questions/92971/>."
       select-enable-clipboard   t       ; Sync kill ring and clipboard
       column-number-mode        0       ; Hide column number in mode line
       line-number-mode          0       ; Hide line number in mode line
+      x-stretch-cursor          t       ; Make cursor full width of character
       mode-line-position        nil)    ; Hide position (C-x =, M-x what-line)
 
 ;; Suppress beeps
