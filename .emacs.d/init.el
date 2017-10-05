@@ -778,14 +778,8 @@ regexp.")
 
 (use-package magit
   :ensure t
-  :bind (("C-x g b" . magit-blame)
-         ("C-x g c" . magit-commit)
-         ("C-x g d" . magit-diff)
-         ("C-x g g" . magit-dispatch-popup)
-         ("C-x g l" . magit-log-buffer-file)
-         ("C-x g p" . magit-push)
-         ("C-x g f" . magit-pull-from-upstream)
-         ("C-x g s" . magit-status))
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch-popup))
   :init
   (add-hook 'magit-mode-hook 'hl-line-mode)
   :config
