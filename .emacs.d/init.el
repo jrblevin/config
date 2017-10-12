@@ -639,6 +639,11 @@ regexp.")
     (setq f90-beginning-ampersand nil
           f90-font-lock-keywords f90-font-lock-keywords-3
           comment-column 50)
+    ;; Font lock for selector operator and OpenMP directives
+    (font-lock-add-keywords
+     'f90-mode
+     '(("%" . font-lock-keyword-face)
+       ("^[\t ]*!\\($OMP[\t ].*\\)$" 1 font-lock-builtin-face prepend)))
     (make-local-variable 'completion-ignored-extensions)
     (add-to-list 'completion-ignored-extensions ".mod")
     ;; Make Backslash non-special (not an escape character).
