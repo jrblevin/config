@@ -1,3 +1,12 @@
 [submodule ".emacs.d/site-lisp/sublimity"]
 	path = .emacs.d/site-lisp/sublimity
 	url = https://github.com/zk-phi/sublimity.git
+[submodule ".emacs.d/site-lisp/font-lock-studio"]
+	path = .emacs.d/site-lisp/font-lock-studio
+	url = https://github.com/Lindydancer/font-lock-studio.git
+[submodule ".emacs.d/site-lisp/highlight-refontification"]
+	path = .emacs.d/site-lisp/highlight-refontification
+	url = https://github.com/Lindydancer/highlight-refontification.git
+[submodule ".emacs.d/site-lisp/font-lock-profiler"]
+	path = .emacs.d/site-lisp/font-lock-profiler
+	url = https://github.com/Lindydancer/font-lock-profiler.git
