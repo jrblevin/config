@@ -256,10 +256,12 @@ See <http://stackoverflow.com/questions/92971/>."
 (if (display-graphic-p)
     (let ((hour (string-to-number (substring (current-time-string) 11 13))))
       (cond
-       ((memq hour (number-sequence 7 17))
+       ((memq hour (number-sequence 7 11))
+        (enable-theme 'sanityinc-tomorrow-day))
+       ((memq hour (number-sequence 12 17))
         (enable-theme 'twilight))
        ((memq hour (number-sequence 18 22))
-        (enable-theme 'sanityinc-tomorrow-eighties))
+        (enable-theme 'sanityinc-tomorrow-bright))
        (t
         (enable-theme 'sanityinc-tomorrow-night))))
   (load-theme 'less t))
