@@ -709,6 +709,16 @@ regexp.")
   (setq guide-key/recursive-key-sequence-flag t)
   (guide-key-mode 1))
 
+(use-package helpful
+  :bind (("C-h f" . helpful-callable)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key)
+         ("C-h ." . helpful-at-point)))
+
+(use-package highlight-refontification
+  :commands  (highlight-refontification-mode)
+  :load-path "site-lisp/highlight-refontification")
+
 (use-package hippie-expand
   :config
   (setq hippie-expand-try-functions-list
