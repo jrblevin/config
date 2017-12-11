@@ -1004,6 +1004,16 @@ regexp.")
         powerline-default-separator 'slant)
   :init (powerline-default-theme))
 
+(use-package profiler
+  :bind (("C-c p s" . profiler-start)
+         ("C-c p r" . profiler-report)
+         ("C-c p q" . profiler-stop))
+  :init
+  (setq profiler-report-cpu-line-format
+        '((100 left)
+          (24 right ((19 right)
+                     (5 right))))))
+
 (use-package rainbow-mode
   :commands rainbow-mode
   :init
