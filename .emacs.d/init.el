@@ -631,6 +631,18 @@ regexp.")
     :ensure t
     :config (flyspell-lazy-mode)))
 
+(use-package font-lock-profiler
+  :defer t
+  :commands (font-lock-profiler-buffer
+             font-lock-profiler-region
+             font-lock-profiler-start)
+  :load-path "site-lisp/font-lock-profiler/")
+
+(use-package font-lock-studio
+  :defer t
+  :commands (font-lock-studio)
+  :load-path "site-lisp/font-lock-studio/")
+
 (use-package f90
   :mode (("\\.[Ff]\\(?:90\\|95\\|03\\|08\\|15\\)\\'" . f90-mode)
          ("\\.inc\\'" . f90-mode))
