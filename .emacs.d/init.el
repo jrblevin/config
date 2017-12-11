@@ -815,6 +815,8 @@ regexp.")
   :init
   (setq markdown-header-scaling t
         markdown-hide-urls t
+        markdown-marginalize-headers t
+        markdown-marginalize-headers-margin-width 4
         markdown-fontify-code-blocks-natively t)
   :config
   (use-package org-table
@@ -831,6 +833,7 @@ regexp.")
         markdown-asymmetric-header t
         markdown-nested-imenu-heading-index t
         markdown-live-preview-delete-export 'delete-on-destroy
+        markdown-max-image-size '(640 . 480)
         markdown-hr-strings
         '("------------------------------------------------------------------------------"
           "*** *** ***"
@@ -861,10 +864,14 @@ regexp.")
     (interactive)
     (when (eq major-mode 'markdown-mode)
       (fundamental-mode))
-    (when (featurep 'markdown-test) (unload-feature 'markdown-test 'force))
-    (when (featurep 'markdown-mode) (unload-feature 'markdown-mode 'force))
-    (load-library "~/projects/markdown-mode/markdown-mode.el")
-    (load-library "~/projects/markdown-mode/tests/markdown-test.el")
+    (let ((features '(markdown-test markdown-mode markdown)))
+      (dolist (feature features)
+        (when (featurep feature) (unload-feature feature 'force))))
+    (let ((files '("~/work/markdown-mode/markdown.el"
+                   "~/work/markdown-mode/markdown-mode.el")))
+      (dolist (file files)
+        (when (file-exists-p file)
+          (load-library file))))
     (markdown-mode)))
 
 (defun jrb-convert-reference-to-inline-link ()
