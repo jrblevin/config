@@ -1026,6 +1026,7 @@ regexp.")
     (server-start)))
 
 (use-package smex
+  :disabled t
   :ensure t
   :after ivy
   :bind (("M-x" . smex)
