@@ -247,7 +247,9 @@ See <http://stackoverflow.com/questions/92971/>."
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :init
+  (load-theme 'sanityinc-tomorrow-day 'no-confirm 'no-enable)
   (load-theme 'sanityinc-tomorrow-night 'no-confirm 'no-enable)
+  (load-theme 'sanityinc-tomorrow-bright 'no-confirm 'no-enable)
   (load-theme 'sanityinc-tomorrow-eighties 'no-confirm 'no-enable))
 
 (use-package darktooth-theme
