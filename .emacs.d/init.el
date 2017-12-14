@@ -1033,6 +1033,11 @@ regexp.")
           (24 right ((19 right)
                      (5 right))))))
 
+(use-package python
+  :init
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "--simple-prompt -i"))
+
 (use-package rainbow-mode
   :commands rainbow-mode
   :init
