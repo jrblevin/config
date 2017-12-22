@@ -1546,6 +1546,25 @@ From <https://sites.google.com/site/steveyegge2/my-dot-emacs-file>."
 	 (message "A buffer named '%s' already exists!" new-name)
        (progn (rename-file filename new-name 1) (rename-buffer new-name))))))
 
+(defun jrb-report-properties-in-region (begin end)
+  "Report positions, characters, and text properties from BEGIN to END."
+  (interactive "r")
+  (unless (region-active-p)
+    (setq begin (point-min) end (point-max)))
+  (let* ((report (format "Properties in region (%d, %d) are as follows:\n" begin end))
+         (bufname "*Properties*")
+         (buf (get-buffer-create bufname)))
+    (dolist (loc (number-sequence begin (1- end)))
+      (setq report
+            (concat report (format "%4d %c: %s\n" loc
+                                   (char-after loc) (text-properties-at loc)))))
+    (with-current-buffer buf
+      (read-only-mode -1)
+      (erase-buffer)
+      (insert report)
+      (goto-char (point-min)))
+    (view-buffer-other-window buf)))
+
 
 ;;; Abbreviations
 
