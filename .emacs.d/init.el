@@ -95,7 +95,7 @@ See <http://stackoverflow.com/questions/92971/>."
 ;;; Fundamental Settings
 
 ;; Increase garbage collection threshold
-(setq gc-cons-threshold (* 16 1024 1024))
+(setq gc-cons-threshold (* 1 1024 1024))
 
 ;; Don't show so many messages on startup
 (setq inhibit-startup-message t
