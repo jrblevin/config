@@ -778,6 +778,14 @@ regexp.")
   (use-package flx :ensure t)
   (use-package avy)
   :config
+  ;; Exclude temporary files from completion
+  (setq completion-ignored-extensions
+        (append completion-ignored-extensions
+                '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
+                  ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz"
+                  ".ind" ".ilg" ".lol" ".minted")))
+  (setq counsel-find-file-ignore-regexp
+        (regexp-opt completion-ignored-extensions))
   (setq ivy-use-virtual-buffers t
         ivy-count-format "%d/%d "
         ivy-initial-inputs-alist nil
@@ -1128,14 +1136,7 @@ regexp.")
 
 (use-package tex-site
   :defer t
-  :ensure auctex
-  :config
-  ;; Exclude temporary files from completion
-  (setq completion-ignored-extensions
-        (append completion-ignored-extensions
-                '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
-                  ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz"
-                  ".ind" ".ilg" ".lol" ".minted"))))
+  :ensure auctex)
 
 (use-package time-stamp
   :defer t
