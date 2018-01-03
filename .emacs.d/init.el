@@ -1090,7 +1090,13 @@ regexp.")
 
 (use-package taskpaper-mode
   :commands (taskpaper-mode)
-  :mode (("\\.taskpaper\\'" . taskpaper-mode)))
+  :mode (("\\.taskpaper\\'" . taskpaper-mode))
+  :config
+  (defun jrb-taskpaper-mode-hook ()
+    (setq-local indent-tabs-mode t)
+    (setq-local tab-width 4)
+    (setq-local indent-line-function 'insert-tab))
+  (add-hook 'taskpaper-mode-hook #'jrb-taskpaper-mode-hook))
 
 (use-package tex
   :ensure auctex
