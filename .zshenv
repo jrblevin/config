@@ -31,14 +31,7 @@ if [[ $OS == "Darwin" ]]; then
     # Completion dump file
     ZCOMPDUMP=$HOME/.zcompdump.osx
     # PGI
-    export PGI="/Applications/Free PGI.app/Contents/Resources/pgi"
-    export PGI_VERSION=16.3
-    export PATH="$PGI/osx86-64/$PGI_VERSION/bin:$PATH"
-    export MANPATH="$MANPATH:$PGI/linux86-64/$PGI_VERSION/man"
-    export PGI_MINOSX=$(sw_vers -productVersion)
-    export PGI_MINOSXNUM="1011"
-    export PGI_ISCLANG31="703"
-    export PGI_GCCDIR64="/Applications/Xcode.app/Contents/Developer/usr/lib/llvm-gcc/4.2.1"
+    export PATH=/opt/pgi/osx86-64/2017/bin:/opt/pgi/osx86-64/2017/mpi/mpich/bin:${PATH}
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
