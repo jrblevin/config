@@ -32,10 +32,6 @@ elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
     ZCOMPDUMP=$HOME/.zcompdump.linux
-    # Intel Compilers
-    if [ -f /opt/intel/bin/compilervars.sh ]; then
-        source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
-    fi
     # GFortran
     export PATH=/opt/gcc-trunk/bin:${PATH}
     # PGI
@@ -54,6 +50,11 @@ elif [[ $OS == "Linux" ]]; then
         LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/opt/openmpi/lib:$LD_LIBRARY_PATH"
     fi
     export LD_LIBRARY_PATH
+fi
+
+# Intel Compilers
+if [ -f /opt/intel/bin/compilervars.sh ]; then
+    source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
 fi
 
 # Emacs
