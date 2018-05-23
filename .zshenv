@@ -20,10 +20,6 @@ OS=`uname -s`
 if [[ $OS == "Darwin" ]]; then
     # MacTeX
     export PATH=/Library/TeX/texbin:$PATH
-    # MacPorts
-    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-    export MANPATH=/opt/local/share/man:$MANPATH
-    export DISPLAY=:0.0
     # Color ls
     export CLICOLOR=1
     # Use Spotlight database for locate
