@@ -1011,7 +1011,9 @@ regexp.")
 (use-package page-break-lines
   :ensure t
   :diminish page-break-lines-mode
-  :init (hook-into-modes #'page-break-lines-mode 'emacs-lisp-mode-hook))
+  :init (hook-into-modes #'page-break-lines-mode
+                         'emacs-lisp-mode-hook
+                         'python-mode-hook))
 
 (use-package post
   :mode (("mutt-" . post-mode))
