@@ -221,8 +221,8 @@ See <http://stackoverflow.com/questions/92971/>."
         ("MELPA"        . "https://melpa.org/packages/")
         ("GNU ELPA"     . "http://elpa.gnu.org/packages/"))
       package-archive-priorities
-      '(("MELPA Stable" . 10)
-        ("MELPA"        . 5)
+      '(("MELPA"        . 10)
+        ("MELPA Stable" . 5)
         ("GNU ELPA"     . 0)))
 (eval-when-compile (package-initialize))
 
