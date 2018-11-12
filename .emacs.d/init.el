@@ -1072,6 +1072,9 @@ regexp.")
           (24 right ((19 right)
                      (5 right))))))
 
+(use-package counsel-projectile
+  :defer t)
+
 (use-package python
   :init
   (setq python-shell-interpreter "ipython"
@@ -1097,6 +1100,12 @@ regexp.")
   (setq server-kill-new-buffers t)
   (unless (server-running-p)
     (server-start)))
+
+(use-package smartparens
+  :config
+  ;;(setq sp-show-pair-from-inside nil)
+  (require 'smartparens-config)
+  :diminish smartparens-mode)
 
 (use-package smex
   :disabled t
