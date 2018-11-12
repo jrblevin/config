@@ -162,6 +162,12 @@ See <http://stackoverflow.com/questions/92971/>."
   (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
 (add-hook 'kill-emacs-hook 'jrb-clean-kill-ring)
 
+;; Ignored files
+(setq jrb-ignored-extensions
+      '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
+        ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz"
+        ".ind" ".ilg" ".lol" ".minted"))
+
 ;; Show matching parentheses.
 (show-paren-mode 1)
 
@@ -780,10 +786,7 @@ regexp.")
   :config
   ;; Exclude temporary files from completion
   (setq completion-ignored-extensions
-        (append completion-ignored-extensions
-                '(".aux" ".nav" ".bbl" ".blg" ".dvi" ".brf" ".snm" ".toc"
-                  ".fls" ".rel" "_region_." ".fdb_latexmk" ".synctex.gz"
-                  ".ind" ".ilg" ".lol" ".minted")))
+        (append completion-ignored-extensions jrb-ignored-extensions))
   (setq counsel-find-file-ignore-regexp
         (regexp-opt completion-ignored-extensions))
   (setq ivy-use-virtual-buffers t
@@ -965,6 +968,20 @@ regexp.")
 (use-package muttrc-mode
   :mode (("\\.muttrc\\'" . muttrc-mode)
          ("\\.mutt-aliases\\'" . muttrc-mode)))
+
+(use-package neotree
+  :ensure t
+  :bind
+  ("C-c n" . neotree-toggle)
+  :init
+  (use-package all-the-icons)
+  :config
+  (setq neo-theme 'icons
+        neo-smart-open t)
+  (setq neo-hidden-regexp-list
+        (append neo-hidden-regexp-list
+                (mapcar (lambda (ext) (concat (regexp-quote ext) "$"))
+                        jrb-ignored-extensions))))
 
 (use-package olivetti
   :ensure t
