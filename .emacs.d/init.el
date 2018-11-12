@@ -508,6 +508,7 @@ regexp.")
 
   :init
   (setq deft-directory "~/gtd/")
+  (setq deft-time-format " %y-%m-%d")
 
   :config
   (defun jrb-deft-mode-hook ()
@@ -521,6 +522,17 @@ regexp.")
     (quit-window)
     (load-library "/Users/jblevins/projects/deft/deft.el")
     (deft))
+
+  (defun deft-sidebar ()
+    "Open Deft in a small window on the side."
+    (interactive)
+    (delete-other-windows)
+    (split-window-horizontally 30)
+    (deft)
+    (switch-to-buffer-other-window
+     (or (buffer-name (car deft-auto-save-buffers))
+         "*scratch*"))
+    (other-window 1))
 
   (setq deft-auto-save-interval 2
         deft-recursive t
