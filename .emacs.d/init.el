@@ -67,11 +67,18 @@ See <http://stackoverflow.com/questions/92971/>."
      (frame-char-height)))
 
 (defun jrb-setup-windows ()
-  "Open two 80 column windows and a smaller window on the right."
+  "Open two 80 column window on the right and two evenly-spaced
+larger ones to the left.  Open `ansi-term' in the lower-right
+window."
   (interactive)
   (delete-other-windows)
-  (split-window-right -49)
-  (split-window-horizontally))
+  (split-window-right -80)
+  (split-window-horizontally)
+  (other-window 2)
+  (split-window-vertically)
+  (other-window 1)
+  (ansi-term "/bin/zsh")
+  (other-window 1))
 
 ;; Set frame geometry according to display resolution.
 (setq default-frame-alist
