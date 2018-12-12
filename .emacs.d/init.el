@@ -984,6 +984,11 @@ regexp.")
   (jrb-mmm-latex-auto-class "C" 'c-mode)
   (jrb-mmm-latex-auto-class "Fortran" 'f90-mode))
 
+(use-package multiple-cursors
+  :ensure t
+  :bind
+  ("C-s-c C-s-c" . mc/edit-lines))
+
 (use-package muttrc-mode
   :mode (("\\.muttrc\\'" . muttrc-mode)
          ("\\.mutt-aliases\\'" . muttrc-mode)))
