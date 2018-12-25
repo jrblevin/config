@@ -3,8 +3,16 @@
 # Jason Blevins <jblevins@xbeta.org>
 # Columbus, June 6, 2017
 
-# Basic $PATH
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+# Basic $PATH. Anything in ~/bin has priority.
+PATH=${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+
+# Library path: add /usr/local/lib
+if [ -z "$LD_LIBRARY_PATH" ]; then
+  LD_LIBRARY_PATH="/usr/local/lib"
+else
+  LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+fi
+export LD_LIBRARY_PATH
 
 # Architecture-specific settings
 ARCH=`uname -m`
@@ -64,6 +72,20 @@ fi
 if [[ $OS == "Darwin" ]]; then
     EMACS25=/Applications/Emacs\ 25.app/Contents/MacOS/Emacs-x86_64-10_9
     EMACS24=/Applications/Emacs\ 24.5.app/Contents/MacOS/Emacs
+fi
+
+# Ruby
+if [[ $OS == "Darwin" ]]; then
+    if [[ ! -z $(which rbenv) ]]; then
+        eval "$(rbenv init -)"
+    fi
+fi
+
+# Python
+if [[ $OS == "Darwin" ]]; then
+    if [[ ! -z $(which python2.7) ]]; then
+        export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}
+    fi
 fi
 
 # Private settings

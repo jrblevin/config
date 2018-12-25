@@ -94,10 +94,8 @@ alias cp=/bin/cp
 # SSH shortcuts
 alias ss1="ssh ap-jb01"
 alias ssm="ssh blevins-mac"
-alias ssn="ssh newton"
-alias ssl="ssh newton.local"
 alias ssg="ssh gauss"
-alias ssr="ssh roark"
+alias ssl="ssh leibniz"
 
 # duf: human readable, sorted disk usage
 # http://www.earthinfo.org/linux-disk-usage-sorted-by-size-and-human-readable/
@@ -161,36 +159,6 @@ prompt_symbol() {
 }
 
 PROMPT='%{$fg[green]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_color%}%$(prompt_symbol) '
-
-
-### Specific Programs
-
-# Ruby
-if [[ $OS == "Darwin" ]]; then
-    if [[ ! -z $(which rbenv) ]]; then
-        eval "$(rbenv init -)"
-    fi
-fi
-
-# Python
-if [[ $OS == "Darwin" ]]; then
-    if [[ ! -z $(which python2.7) ]]; then
-        export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}
-    fi
-fi
-
-### Paths
-
-# Library path
-if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH="/usr/local/lib"
-else
-  LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
-fi
-export LD_LIBRARY_PATH
-
-# Anything in ~/bin has priority
-export PATH=${HOME}/bin:${PATH}
 
 # Set the xterm title
 if [[ $TERM == "xterm" ]]; then
