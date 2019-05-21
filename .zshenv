@@ -37,7 +37,10 @@ if [[ $OS == "Darwin" ]]; then
     # Intel compilers
     export LM_LICENSE_FILE=${LM_LICENSE_FILE}:28518@license5.osc.edu
     # PGI
-    export PATH=/opt/pgi/osx86-64/2018/bin:/opt/pgi/osx86-64/2018/mpi/mpich/bin:${PATH}
+    export PGI_TOP=/opt/pgi
+    export PGI_VERSION=2019
+    export PATH=$PGI_TOP/osx86-64/$PGI_VERSION/bin:$PGI_TOP/osx86-64/$PGI_VERSION/mpi/mpich/bin:$PATH
+    export MANPATH=$MANPATH:$PGI/osx86-64/$PGI_VERSION/man
     export LM_LICENSE_FILE=${LM_LICENSE_FILE}:/opt/pgi/license.dat
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
