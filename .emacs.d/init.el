@@ -1027,6 +1027,13 @@ regexp.")
                          'emacs-lisp-mode-hook
                          'python-mode-hook))
 
+(use-package persistent-scratch
+  :ensure t
+  :config
+  (persistent-scratch-setup-default)
+  (setq persistent-scratch-save-file
+        (concat user-emacs-directory (system-name))))
+
 (use-package post
   :mode (("mutt-" . post-mode))
   ;:bind (("C-c i" . mutt-alias-insert))
