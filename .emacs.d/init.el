@@ -220,6 +220,11 @@ window."
 ;; Save window configuration
 (winner-mode 1)
 
+
+;; Remote connections with tramp
+(customize-set-variable 'tramp-encoding-shell "/bin/zsh")
+(setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
+
 
 ;;; Package management
 
