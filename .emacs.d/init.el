@@ -270,20 +270,21 @@ window."
   (load-theme 'sanityinc-tomorrow-bright 'no-confirm 'no-enable)
   (load-theme 'sanityinc-tomorrow-eighties 'no-confirm 'no-enable))
 
-(use-package darktooth-theme
-  :init (load-theme 'darktooth 'no-confirm 'no-enable))
+;; (use-package darktooth-theme
+;;   :init (load-theme 'darktooth 'no-confirm 'no-enable))
 
 (if (display-graphic-p)
-    (let ((hour (string-to-number (substring (current-time-string) 11 13))))
-      (cond
-       ((memq hour (number-sequence 7 11))
-        (enable-theme 'sanityinc-tomorrow-day))
-       ((memq hour (number-sequence 12 17))
-        (enable-theme 'twilight))
-       ((memq hour (number-sequence 18 22))
-        (enable-theme 'sanityinc-tomorrow-bright))
-       (t
-        (enable-theme 'sanityinc-tomorrow-night))))
+    ;; (let ((hour (string-to-number (substring (current-time-string) 11 13))))
+    ;;   (cond
+    ;;    ((memq hour (number-sequence 7 11))
+    ;;     (enable-theme 'sanityinc-tomorrow-day))
+    ;;    ((memq hour (number-sequence 12 17))
+    ;;     (enable-theme 'twilight))
+    ;;    ((memq hour (number-sequence 18 22))
+    ;;     (enable-theme 'sanityinc-tomorrow-bright))
+    ;;    (t
+    ;;     (enable-theme 'sanityinc-tomorrow-night))))
+    (enable-theme 'sanityinc-tomorrow-eighties)
   (load-theme 'less t))
 
 
