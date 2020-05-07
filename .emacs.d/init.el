@@ -1036,10 +1036,11 @@ regexp.")
 
 (use-package persistent-scratch
   :ensure t
-  :config
-  (persistent-scratch-setup-default)
+  :init
   (setq persistent-scratch-save-file
-        (concat user-emacs-directory (system-name))))
+        (concat user-emacs-directory ".scratch-" (system-name)))
+  :config
+  (persistent-scratch-setup-default))
 
 (use-package post
   :mode (("mutt-" . post-mode))
