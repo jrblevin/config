@@ -1915,6 +1915,26 @@ and subsequent lines as the event note."
              (applescript-quote-string notes)))))
 
 
+;;; Smart Punctuation:
+
+(defcustom smart-to-ascii '(("\x201C" . "\"")
+                            ("\x201D" . "\"")
+                            ("\x2018" . "'")
+                            ("\x2019" . "'")
+                            ;; en-dash
+                            ("\x2013" . "-")
+                            ;; em-dash
+                            ("\x2014" . "--"))
+  ""
+  :type '(repeat (cons (string :tag "Smart Character  ")
+                       (string :tag "ASCII Replacement"))))
+
+(defun replace-smart-to-ascii (beg end)
+  (interactive "r")
+  (format-replace-strings smart-to-ascii
+                          nil beg end))
+
+
 ;;; Local configuration
 
 (load-file "~/.emacs.d/init-local.el")
