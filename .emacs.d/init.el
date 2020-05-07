@@ -694,7 +694,8 @@ regexp.")
     (font-lock-add-keywords
      'f90-mode
      '(("%" . font-lock-keyword-face)
-       ("^[\t ]*!\\($OMP[\t ].*\\)$" 1 font-lock-builtin-face prepend)))
+       ("^[\t ]*!\\($OMP[\t ].*\\)$" 1 font-lock-builtin-face prepend)
+       ("^[#@$]:\\(?:\\sw\\|\\s_\\)+" (0 font-lock-preprocessor-face t))))
     (make-local-variable 'completion-ignored-extensions)
     (add-to-list 'completion-ignored-extensions ".mod")
     ;; Make Backslash non-special (not an escape character).
