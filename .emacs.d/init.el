@@ -1815,7 +1815,7 @@ most recent kill ring contents and leaves the cursor at %|."
 
 ;;; TaskPaper Templates:
 
-(defconst jrb-template-dir "~/gtd/templates/")
+(defconst jrb-template-dir "~/Documents/GTD/Notes/Templates/")
 (defconst jrb-template-buffer-name "*Template*")
 
 (defun jrb-find-template ()
