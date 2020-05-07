@@ -840,6 +840,8 @@ regexp.")
     ;; (setq reftex-plug-into-AUCTeX t)
     ;; (turn-on-reftex)
     (LaTeX-math-mode 1)
+    (setq TeX-PDF-mode t)
+    (setq auctex-latexmk-inherit-TeX-PDF-mode t)
     (jrb-LaTeX-setup-code))
   (add-hook 'LaTeX-mode-hook 'jrb-LaTeX-hook-fn))
 
