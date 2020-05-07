@@ -871,7 +871,7 @@ regexp.")
          ("/projects/markdown-mode.*\\.txt\\'" . markdown-mode)
          ("/gtd/.*\\.txt\\'" . markdown-mode))
   :init
-  (setq markdown-header-scaling t
+  (setq markdown-header-scaling nil
         markdown-hide-urls t
         markdown-marginalize-headers t
         markdown-marginalize-headers-margin-width 4
