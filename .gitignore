@@ -5,3 +5,4 @@
 .emacs.d/backups/*
 .emacs.d/history/*
 .emacs.d/recentf
+.emacs.d/.scratch*
