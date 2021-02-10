@@ -894,7 +894,7 @@ regexp.")
   (use-package org-table
     :commands orgtbl-mode)
 
-  (setq markdown-command "multimarkdown --snippet --smart --notes"
+  (setq markdown-command "multimarkdown --snippet"
         markdown-open-command "mark"
         markdown-enable-wiki-links t
         markdown-indent-on-enter 'indent-and-new-item
