@@ -27,7 +27,9 @@ fi
 OS=`uname -s`
 if [[ $OS == "Darwin" ]]; then
     # MacTeX
-    export PATH=/Library/TeX/texbin:$PATH
+    export PATH="/Library/TeX/texbin:$PATH"
+    # ARM Homebrew
+    export PATH="/opt/homebrew/bin:$PATH"
     # Color ls
     export CLICOLOR=1
     # Use Spotlight database for locate
