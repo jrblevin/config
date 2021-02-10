@@ -809,8 +809,10 @@ regexp.")
    ("<f2> i" . counsel-info-lookup-symbol)
    ("<f2> u" . counsel-unicode-char))
   :init
+  (use-package counsel :ensure t)
   (use-package flx :ensure t)
   (use-package avy)
+  (use-package swiper :ensure t)
   :config
   ;; Exclude temporary files from completion
   (setq completion-ignored-extensions
