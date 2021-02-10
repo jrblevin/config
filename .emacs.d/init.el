@@ -43,7 +43,7 @@
   ;; (set-face-attribute 'default nil :family "Fira Code" :weight 'light
   ;;                     :height (* jrb-default-face-height 10))
   (set-face-attribute 'default nil :family "Operator Mono" :weight 'light
-                      :height (* jrb-default-face-height 10))
+                      :height (* jrb-default-face-height 12))
   (set-face-attribute 'fixed-pitch nil :family "Courier Prime")
   (set-face-attribute 'variable-pitch nil :family "Fira Sans"))
 
