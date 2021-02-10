@@ -76,6 +76,7 @@ alias l='ls -l'
 alias ll='ls -l'
 alias lh='ls -alh'
 alias lr='ls -talr'
+alias lsd='ls -d */'
 alias bc='bc -l'
 alias ee="emacs -nw"
 alias ec="emacsclient"
