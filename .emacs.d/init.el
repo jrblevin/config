@@ -843,6 +843,16 @@ regexp.")
                              (?C "\\ccode|" "|")
                              (?F "\\fcode|" "|")
                              (?S "\\scode|" "|"))))
+    (setq LaTeX-math-list
+          (quote (("C-(" (lambda ()(interactive)(LaTeX-my-leftright "(" ")")) "" nil)
+                  ("C-{" (lambda ()(interactive)(LaTeX-my-leftright "\\{" "\\}")) "" nil))))
+
+    ;; (setq LaTeX-math-list
+    ;;       '((?8 "infty" "Misc Symbol" 8734)
+    ;;         (?I "int" "Var Symbol" 8747)
+    ;;         ("C-T" "text" "" nil)
+    ;;         ("C-(" (lambda ()(interactive)(LaTeX-my-leftright "(" ")")) "" nil)
+    ;;         ("C-{" (lambda ()(interactive)(LaTeX-my-leftright "\\{" "\\}")) "" nil)))
     ;; (setq reftex-plug-into-AUCTeX t)
     ;; (turn-on-reftex)
     (LaTeX-math-mode 1)
@@ -1192,6 +1202,9 @@ regexp.")
          '(("latexmk" "latexmk -g -synctex=1 -pdf %s"
             TeX-run-TeX nil (latex-mode)
             :help "Run latexmk on file")
+           ("XeLaTeX" "%`xelatex%(mode)%' %t"
+            TeX-run-TeX nil t
+            :help "Run xelatex on file")
            ("bibtool" "bibtool -x %s.aux > %s.bib"
             TeX-run-command nil t
             :help "Run bibtool on aux file to produce bib file"))
