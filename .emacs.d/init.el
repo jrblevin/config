@@ -570,6 +570,12 @@ regexp.")
   :init
   (hook-into-modes #'dired-hide-details-mode 'dired-mode-hook))
 
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-buffer-state-icon nil))
+
 (use-package ebib
   :commands ebib
   :config
@@ -1095,13 +1101,14 @@ regexp.")
   (add-hook 'post-mode-hook 'jrb-post-mode-hook))
 
 (use-package powerline
+  :disabled t
   :ensure t
   :if (display-graphic-p)
   :config
   (setq powerline-display-hud nil
         powerline-display-buffer-size nil
-        powerline-display-mule-info nil
-        ;; powerline-gui-use-vcs-glyph t
+        powerline-display-mule-info t
+        powerline-gui-use-vcs-glyph nil
         powerline-height 24
         powerline-default-separator 'slant)
   :init (powerline-default-theme))
