@@ -521,12 +521,12 @@ regexp.")
     (deft-daily (format-time-string "%Y-%m-%d" (tomorrow-time))))
 
   :init
-  (setq deft-directory "~/gtd/")
+  (setq deft-directory "~/Documents/GTD/")
   (setq deft-time-format " %y-%m-%d")
 
   :config
   (defun jrb-deft-mode-hook ()
-    (turn-on-olivetti-mode)
+    (olivetti-mode)
     (deft-refresh-browser))
   (add-hook 'deft-mode-hook 'jrb-deft-mode-hook)
 
@@ -550,10 +550,11 @@ regexp.")
 
   (setq deft-auto-save-interval 2
         deft-recursive t
-        deft-extensions '("txt" "text" "tex" "taskpaper" "org")
+        deft-extensions '("md" "txt" "text" "tex" "taskpaper" "org")
+        deft-default-extension "md"
         deft-use-filter-string-for-filename nil
         deft-markdown-mode-title-level 1
-        deft-use-filename-as-title nil
+        deft-use-filename-as-title t
         deft-generation-rules nil
         deft-file-naming-rules '((noslash . "-")
                                  (nospace . "-")
