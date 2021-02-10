@@ -1021,7 +1021,8 @@ regexp.")
   :bind
   ("C-c n" . neotree-toggle)
   :init
-  (use-package all-the-icons)
+  ;; Run M-x all-the-icons-install-fonts
+  (use-package all-the-icons :ensure t)
   :config
   (setq neo-theme 'icons
         neo-smart-open t)
