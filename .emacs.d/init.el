@@ -500,14 +500,15 @@ regexp.")
   :init
   (defun deft-daily (iso)
     (interactive)
-    (let ((filename (concat deft-directory iso ".txt"))
+    (let ((filename (concat deft-directory iso ".md"))
           (deft-filter-regexp nil))
       (if (file-exists-p filename)
           (deft-open-file filename t t)
         (deft-new-file-named iso)
         (goto-char (point-min))
-        (unless (looking-at (concat "^" iso))
-          (insert "# " iso "\n\n<!-- #pending -->\n\n")))))
+        (insert-file "~/Documents/GTD/Templates/daily.md")
+        (when (search-forward "{{date:MMMM D, YYYY}}" nil t)
+          (replace-match (format-time-string "%B %e, %Y"))))))
 
   (defun deft-today ()
     "Create or open a Deft note for today."
