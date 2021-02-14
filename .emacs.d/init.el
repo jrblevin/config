@@ -895,6 +895,7 @@ regexp.")
         markdown-hide-urls t
         markdown-marginalize-headers t
         markdown-marginalize-headers-margin-width 4
+        markdown-wiki-link-search-type '(project sub-directories)
         markdown-fontify-code-blocks-natively t)
   :config
   (use-package org-table
@@ -1122,6 +1123,25 @@ regexp.")
         '((100 left)
           (24 right ((19 right)
                      (5 right))))))
+
+(use-package project
+  :config
+  ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=41955#26
+  (defvar project-root-markers
+    '(".dir-locals.el")
+    "Files or directories that indicate the root of a project.")
+
+  (defun project-find-nomono (dir)
+    (let ((root
+           (locate-dominating-file
+            dir
+            (lambda (d)
+              (let ((default-directory d))
+                (seq-some #'file-expand-wildcards
+                          project-root-markers))))))
+      (cons 'transient root)))
+
+  (add-hook 'project-find-functions #'project-find-nomono))
 
 (use-package counsel-projectile
   :defer t)
