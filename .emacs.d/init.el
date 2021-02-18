@@ -490,6 +490,7 @@ regexp.")
   :bind
   (("<f8>" . deft)
    ("C-c d" . deft)
+   ("C-c Y" . deft-yesterday)
    ("C-c D" . deft-today)
    ("C-c M" . deft-tomorrow)
    ("C-x C-g" . deft-find-file))
@@ -514,6 +515,11 @@ regexp.")
     "Create or open a Deft note for today."
     (interactive)
     (deft-daily (format-time-string "%Y-%m-%d")))
+
+  (defun deft-yesterday ()
+    "Create or open a Deft note for yesterday."
+    (interactive)
+    (deft-daily (format-time-string "%Y-%m-%d" (yesterday-time))))
 
   (defun deft-tomorrow ()
     "Create or open a Deft note for tomorrow."
@@ -1533,18 +1539,12 @@ regexp.")
         (replace-match " " nil nil)))))
 
 (defun tomorrow-time ()
- "Provide the time 24 hours from now in the same format as `current-time'.
-Modified slightly from <http://www.emacswiki.org/emacs/Journal>."
- (let* ((now-time (current-time))          ; get the time now
-        (hi (car now-time))                ; save off the high word
-        (lo (car (cdr now-time)))          ; save off the low word
-        (msecs (nth 2 now-time)))          ; save off the milliseconds
-    (if (> lo 44671)                       ; If low word too big for adding to,
-        (setq hi (+ hi 2)                  ; carry 2 to the high word,
-              lo (- lo 44672))             ; subtract from the low
-      (setq hi (+ hi 1)                    ; else, add 86400 seconds
-            lo (+ lo 20864)))              ; (in two parts)
-    (list hi lo msecs)))
+ "Provide the time 24 hours from now in the same format as `current-time'."
+ (time-add (current-time) (seconds-to-time 86400)))
+
+(defun yesterday-time ()
+ "Provide the time 24 hours before now in the same format as `current-time'."
+ (time-subtract (current-time) (seconds-to-time 86400)))
 
 ;; Open files in dired mode using 'open'
 (eval-after-load "dired"
