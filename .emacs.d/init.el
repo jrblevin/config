@@ -396,6 +396,17 @@ regexp.")
         ado-site-template-dir "~/.emacs.d/site-lisp/ado-mode/templates/"
         ado-date-format "%Y-%m-%d"))
 
+(use-package all-the-icons
+  ;; Run M-x all-the-icons-install-fonts
+  :ensure t
+  :config
+  ;; (add-to-list 'all-the-icons-icon-alist
+  ;;              '("\\.f90$" all-the-icons-faicon "bar-chart"
+  ;;                :v-adjust -0.9 :face all-the-icons-lpurple))
+  (add-to-list 'all-the-icons-icon-alist
+               '("\\.f90$" all-the-icons-faicon "calculator"
+                 :v-adjust -0.9 :face all-the-icons-lpurple)))
+
 (use-package ampl-mode
   :mode (("\\.ampl\\'" . ampl-mode)
          ("\\.mod\\'" . ampl-mode)
@@ -1031,11 +1042,9 @@ regexp.")
 
 (use-package neotree
   :ensure t
+  :after all-the-icons
   :bind
   ("C-c n" . neotree-toggle)
-  :init
-  ;; Run M-x all-the-icons-install-fonts
-  (use-package all-the-icons :ensure t)
   :config
   (setq neo-theme 'icons
         neo-smart-open t)
