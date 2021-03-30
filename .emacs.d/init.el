@@ -501,7 +501,7 @@ regexp.")
   :init
   (defun deft-daily (iso)
     (interactive)
-    (let ((filename (concat deft-directory iso ".md"))
+    (let ((filename (concat deft-directory "/Daily/" iso ".md"))
           (deft-filter-regexp nil))
       (if (file-exists-p filename)
           (deft-open-file filename t t)
