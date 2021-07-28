@@ -520,7 +520,11 @@ regexp.")
         (goto-char (point-min))
         (insert-file "~/Documents/GTD/Templates/daily.md")
         (when (search-forward "{{date:MMMM D, YYYY}}" nil t)
-          (replace-match (format-time-string "%B %e, %Y"))))))
+          (replace-match (format-time-string "%B %e, %Y")))
+        (when (search-forward "{{yesterday-iso}}" nil t)
+          (replace-match (format-time-string "%Y-%m-%d" (yesterday-time))))
+        (when (search-forward "{{tomorrow-iso}}" nil t)
+          (replace-match (format-time-string "%Y-%m-%d" (tomorrow-time)))))))
 
   (defun deft-today ()
     "Create or open a Deft note for today."
@@ -569,10 +573,12 @@ regexp.")
         deft-recursive t
         deft-extensions '("md" "txt" "text" "tex" "taskpaper" "org")
         deft-default-extension "md"
+        deft-archive-directory "Archive"
         deft-use-filter-string-for-filename nil
         deft-markdown-mode-title-level 1
         deft-use-filename-as-title t
         deft-generation-rules nil
+        deft-file-limit 200
         deft-file-naming-rules '((noslash . "-")
                                  (nospace . "-")
                                  (case-fn . downcase))
@@ -908,7 +914,7 @@ regexp.")
          ("/projects/markdown-mode.*\\.txt\\'" . markdown-mode)
          ("/gtd/.*\\.txt\\'" . markdown-mode))
   :init
-  (setq markdown-header-scaling nil
+  (setq markdown-header-scaling t
         markdown-hide-urls t
         markdown-marginalize-headers t
         markdown-marginalize-headers-margin-width 4
@@ -1142,24 +1148,27 @@ regexp.")
 (use-package project
   :config
   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=41955#26
-  (defvar project-root-markers
-    '(".dir-locals.el")
+  (defvar jrb-project-root-markers
+    '(".dir-locals.el" ".obsidian" "README.md")
     "Files or directories that indicate the root of a project.")
 
-  (defun project-find-nomono (dir)
+  (defun jrb-project-find-local (dir)
+    "Determine if DIR is a project root directory.
+DIR must one of `project-root-markers' to be considered a project."
     (let ((root
            (locate-dominating-file
             dir
             (lambda (d)
               (let ((default-directory d))
                 (seq-some #'file-expand-wildcards
-                          project-root-markers))))))
-      (cons 'transient root)))
+                          jrb-project-root-markers))))))
+      (when root
+        (cons 'transient root))))
 
-  (add-hook 'project-find-functions #'project-find-nomono))
+  (add-hook 'project-find-functions #'jrb-project-find-local))
 
-(use-package counsel-projectile
-  :defer t)
+;; (use-package counsel-projectile
+;;   :defer t)
 
 (use-package python
   :init
