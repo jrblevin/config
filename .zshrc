@@ -61,6 +61,7 @@ alias grim='git rebase -i master'
 alias gsts='git stash show --patch'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
+alias gli='git ls-files . --ignored --exclude-standard --others'
 
 ### Useful Commands and Aliases
 
