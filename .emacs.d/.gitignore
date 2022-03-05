@@ -14,3 +14,8 @@ ado-mode
 init-local.el
 init-junk.el
 custom.el
+forge-database.sqlite
+smex-items
+transient
+emojis
+srecode-map.el

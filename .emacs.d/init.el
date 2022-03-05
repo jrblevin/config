@@ -329,6 +329,7 @@ window."
 
 ;; Region and mark
 (global-set-key (kbd "M-`") 'transient-mark-mode)
+(global-set-key (kbd "C-c DEL") 'delete-region)
 
 
 ;;; auto-minor-mode-alist
@@ -521,7 +522,7 @@ regexp.")
         ;; Insert the template and replace dates
         (find-file-noselect filename)
         (with-current-buffer (get-file-buffer filename)
-          (insert-file-contents "~/Documents/GTD/Templates/daily.md")
+          (insert-file-contents "~/gtd/Templates/daily.md")
           (goto-char (point-min))
           (when (search-forward "{{date:MMMM D, YYYY}}" nil t)
             (replace-match (format-time-string "%B %e, %Y")))
@@ -552,8 +553,31 @@ regexp.")
     (interactive)
     (deft-daily (format-time-string "%Y-%m-%d" (tomorrow-time))))
 
+  (defun deft-previous ()
+    "Find previous daily file"
+    (interactive)
+    (let* ((default-directory (concat deft-directory "/Daily/"))
+           (pattern "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md")
+           (files (file-expand-wildcards pattern))
+           ;; Today
+           (today (format-time-string "%Y-%m-%d.md"))
+           ;; Remove the current day
+           (files (delete today files))
+           ;; Most recent daily file
+           (prev (car (reverse files))))
+      (deft-open-file (concat default-directory prev) t nil)))
+
+  (defun deft-plan ()
+    "Open today's daily note and the most recent previous note."
+    (interactive)
+    (deft)
+    (deft-today)
+    (delete-other-windows)
+    (split-window-right)
+    (deft-previous))
+
   :init
-  (setq deft-directory "~/Documents/GTD/")
+  (setq deft-directory "~/gtd/")
   (setq deft-time-format " %y-%m-%d")
 
   :config
@@ -1892,7 +1916,7 @@ most recent kill ring contents and leaves the cursor at %|."
 
 ;;; TaskPaper Templates:
 
-(defconst jrb-template-dir "~/Documents/GTD/Templates/")
+(defconst jrb-template-dir "~/gtd/Templates/")
 (defconst jrb-template-buffer-name "*Template*")
 
 (defun jrb-find-template ()
