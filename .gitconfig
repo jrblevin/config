@@ -14,6 +14,7 @@
         df = diff
         dc = diff --cached
         ldiff = difftool -t latex
+        lsi = ls-files . --ignored --exclude-standard --others
 
 [color]
         ui = auto
@@ -48,3 +49,5 @@
 [mergetool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
+[init]
+	defaultBranch = main
