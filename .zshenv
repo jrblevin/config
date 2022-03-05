@@ -69,7 +69,9 @@ elif [[ $OS == "Linux" ]]; then
 fi
 
 # Intel Compilers
-if [ -f /opt/intel/bin/compilervars.sh ]; then
+if [ -f /opt/intel/oneapi/setvars.sh ]; then
+    source /opt/intel/oneapi/setvars.sh > /dev/null
+elif [ -f /opt/intel/bin/compilervars.sh ]; then
     source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
 fi
 
