@@ -163,7 +163,7 @@ prompt_symbol() {
 PROMPT='%{$fg[green]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_color%}%$(prompt_symbol) '
 
 # Fix for TRAMP
-[ $TERM = "dumb" ] && unsetopt zle && PS1='$ '
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
 
 # Set the xterm title
 if [[ $TERM == "xterm" ]]; then
