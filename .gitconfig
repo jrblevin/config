@@ -14,7 +14,7 @@
         df = diff
         dc = diff --cached
         ldiff = difftool -t latex
-        lsi = ls-files . --ignored --exclude-standard --others
+        li = ls-files . --ignored --exclude-standard --others
 
 [color]
         ui = auto
