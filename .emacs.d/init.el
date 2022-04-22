@@ -1200,7 +1200,9 @@ DIR must one of `project-root-markers' to be considered a project."
       (when root
         (cons 'transient root))))
 
-  (add-hook 'project-find-functions #'jrb-project-find-local))
+  ;; This is a fallback to `project-try-vc', and it is slow, so use
+  ;; depth = 10 to give this hook a lower priority.
+  (add-hook 'project-find-functions #'jrb-project-find-local 10))
 
 ;; (use-package counsel-projectile
 ;;   :defer t)
