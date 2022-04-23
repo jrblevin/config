@@ -836,6 +836,9 @@ regexp.")
           try-complete-lisp-symbol))
   :bind ("M-/" . hippie-expand))
 
+(use-package html-mode
+  :mode (("\\.leaf\\'" . html-mode)))
+
 (use-package ido
   :disabled t
   :init
