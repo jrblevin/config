@@ -72,6 +72,7 @@ else
   alias ls="ls -F"
 fi
 alias grep='grep --color=auto'
+alias less='less -R'
 alias make='make -j'
 alias l='ls -l'
 alias ll='ls -l'
