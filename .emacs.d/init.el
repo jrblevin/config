@@ -262,6 +262,9 @@ window."
 (use-package twilight-theme
   :init (load-theme 'twilight 'no-confirm 'no-enable))
 
+(use-package twilight-anti-bright-theme
+  :init (load-theme 'twilight-anti-bright 'no-confirm 'no-enable))
+
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :init
@@ -284,7 +287,8 @@ window."
     ;;     (enable-theme 'sanityinc-tomorrow-bright))
     ;;    (t
     ;;     (enable-theme 'sanityinc-tomorrow-night))))
-    (enable-theme 'sanityinc-tomorrow-eighties)
+    ;(enable-theme 'sanityinc-tomorrow-eighties)
+    (enable-theme 'twilight-anti-bright)
   (load-theme 'less t))
 
 
@@ -522,7 +526,7 @@ regexp.")
         ;; Insert the template and replace dates
         (find-file-noselect filename)
         (with-current-buffer (get-file-buffer filename)
-          (insert-file-contents "~/gtd/Templates/daily.md")
+          (insert-file-contents "~/git/gtd/Templates/daily.md")
           (goto-char (point-min))
           (when (search-forward "{{date:MMMM D, YYYY}}" nil t)
             (replace-match (format-time-string "%B %e, %Y")))
@@ -577,7 +581,7 @@ regexp.")
     (deft-previous))
 
   :init
-  (setq deft-directory "~/gtd/")
+  (setq deft-directory "~/git/gtd/")
   (setq deft-time-format " %y-%m-%d")
 
   :config
@@ -638,7 +642,7 @@ regexp.")
   :commands ebib
   :config
   (setq ebib-file-search-dirs '("~/references/articles" "~/references/books")
-        ebib-search-dirs '("~/gtd")
+        ebib-search-dirs '("~/git/gtd")
         ebib-preload-bib-files '("research.bib")
         ebib-index-display-fields '("title")
         ebib-file-associations '(("pdf" . "pdfexpert"))
@@ -684,6 +688,20 @@ regexp.")
   :defer 1
   :config (setq er--show-expansion-message t)
   :bind ("C-c =" . er/expand-region))
+
+(use-package f90
+  :ensure t
+  :defer 1
+  :config
+  (setq f90-indent-level 4
+        f90-do-indent 4
+        f90-if-indent 4
+        f90-type-indent 4
+        f90-program-indent 4
+        f90-associate-indent 4
+        f90-critical-indent 4
+        f90-continuation-indent 4
+        f90-tab-indent 4))
 
 (use-package flycheck
   :ensure t
@@ -779,7 +797,7 @@ regexp.")
 (use-package gscholar-bibtex
   :commands gscholar-bibtex
   :init
-  (setq gscholar-bibtex-database-file "~/gtd/research.bib")
+  (setq gscholar-bibtex-database-file "~/git/gtd/research.bib")
   :config
   (dolist (source '("ACM Digital Library" "IEEE Xplore" "DBLP"))
     (gscholar-bibtex-source-on-off :off source))
@@ -950,7 +968,7 @@ regexp.")
   :mode (("\\.text\\'" . markdown-mode)
          ("\\.md\\'" . markdown-mode)
          ("/projects/markdown-mode.*\\.txt\\'" . markdown-mode)
-         ("/gtd/.*\\.txt\\'" . markdown-mode))
+         ("/git/gtd/.*\\.txt\\'" . markdown-mode))
   :init
   (setq markdown-header-scaling t
         markdown-hide-urls t
@@ -1921,7 +1939,7 @@ most recent kill ring contents and leaves the cursor at %|."
 
 ;;; TaskPaper Templates:
 
-(defconst jrb-template-dir "~/gtd/Templates/")
+(defconst jrb-template-dir "~/git/gtd/Templates/")
 (defconst jrb-template-buffer-name "*Template*")
 
 (defun jrb-find-template ()

@@ -15,8 +15,8 @@ vbell on
 # Suppress the startup message.
 startup_message off
 
-# Use a large scrolling buffer.
-defscrollback 1000000
+# Scrolling buffer.
+defscrollback 10000
 
 # Change the escape character to `.
 #escape ``
