@@ -95,5 +95,10 @@ if [[ $OS == "Darwin" ]]; then
     fi
 fi
 
+# Coreutils
+if [[ $OS == "Darwin" ]]; then
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi
+
 # Private settings
 source $HOME/.zsh_private
