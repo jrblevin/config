@@ -251,7 +251,6 @@ window."
 (setq custom-theme-directory "~/.emacs.d/themes")
 
 (use-package less-theme
-  :defer t
   :init (load-theme 'less 'no-confirm 'no-enable))
 
 (use-package twilight-theme
@@ -264,7 +263,7 @@ window."
 
 (use-package color-theme-sanityinc-tomorrow
   :defer t
-  :config
+  :init
   (load-theme 'sanityinc-tomorrow-day 'no-confirm 'no-enable)
   (load-theme 'sanityinc-tomorrow-night 'no-confirm 'no-enable)
   (load-theme 'sanityinc-tomorrow-bright 'no-confirm 'no-enable)
@@ -272,6 +271,28 @@ window."
 
 ;; (use-package darktooth-theme
 ;;   :init (load-theme 'darktooth 'no-confirm 'no-enable))
+
+;; (use-package gruvbox-theme
+;;   :defer t
+;;   :config
+;;   (load-theme 'gruvbox-dark-hard 'no-confirm 'no-enable)
+;;   (load-theme 'gruvbox-dark-medium 'no-confirm 'no-enable))
+
+;; (use-package modus-themes
+;;   :defer t
+;;   :ensure t
+;;   :config
+;;   ;; Add all your customizations prior to loading the themes
+;;   (setq modus-themes-italic-constructs t
+;;         modus-themes-bold-constructs nil)
+
+;;   ;; Maybe define some palette overrides, such as by using our presets
+;;   (setq modus-themes-common-palette-overrides
+;;         modus-themes-preset-overrides-intense)
+
+;;   ;; Load the theme of your choice.
+;;   ;(load-theme 'modus-vivendi)
+;;   (load-theme 'modus-vivendi-tinted))
 
 (if (display-graphic-p)
     ;; (let ((hour (string-to-number (substring (current-time-string) 11 13))))
@@ -284,8 +305,10 @@ window."
     ;;     (enable-theme 'sanityinc-tomorrow-bright))
     ;;    (t
     ;;     (enable-theme 'sanityinc-tomorrow-night))))
+    (enable-theme 'sanityinc-tomorrow-bright)
     ;(enable-theme 'sanityinc-tomorrow-eighties)
-    (enable-theme 'twilight-anti-bright)
+    ;(enable-theme 'twilight-anti-bright)
+    ;(enable-theme 'gruvbox-dark-hard)
   (load-theme 'less t))
 
 
