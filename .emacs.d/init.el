@@ -12,6 +12,11 @@
 ;; ~/.emacs.d/site-lisp          manually installed packages
 ;; ~/.emacs.d/themes             custom themes
 
+;;; Setup:
+
+;; M-x all-the-icons-install-fonts
+;; M-x nerd-icons-install-fonts
+
 ;;; Code:
 
 ;; Set the load path
@@ -257,17 +262,20 @@ window."
 (setq custom-theme-directory "~/.emacs.d/themes")
 
 (use-package less-theme
+  :defer t
   :init (load-theme 'less 'no-confirm 'no-enable))
 
 (use-package twilight-theme
+  :defer t
   :init (load-theme 'twilight 'no-confirm 'no-enable))
 
 (use-package twilight-anti-bright-theme
+  :defer t
   :init (load-theme 'twilight-anti-bright 'no-confirm 'no-enable))
 
 (use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :init
+  :defer t
+  :config
   (load-theme 'sanityinc-tomorrow-day 'no-confirm 'no-enable)
   (load-theme 'sanityinc-tomorrow-night 'no-confirm 'no-enable)
   (load-theme 'sanityinc-tomorrow-bright 'no-confirm 'no-enable)
@@ -378,7 +386,7 @@ regexp.")
   (dolist (mode-hook modes) (add-hook mode-hook func)))
 
 (use-package abbrev
-  :defer 1
+  :defer t
   :diminish abbrev-mode
   :config
   ;; Turn on abbrev mode globally
@@ -387,8 +395,8 @@ regexp.")
 (use-package ace-window
   :ensure t
   :defer t
-  :bind (("M-o" . ace-window))
-  :init
+  :bind ("M-o" . ace-window)
+  :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 (use-package ado-mode
@@ -403,6 +411,7 @@ regexp.")
 
 (use-package all-the-icons
   ;; Run M-x all-the-icons-install-fonts
+  :defer t
   :ensure t
   :config
   ;; (add-to-list 'all-the-icons-icon-alist
@@ -422,10 +431,10 @@ regexp.")
   :config (auto-compile-on-load-mode))
 
 (use-package autorevert
+  :diminish global-auto-revert-mode
+  :diminish auto-revert-mode
   :init
-  (global-auto-revert-mode 1)
-  (diminish 'global-auto-revert-mode nil)
-  (diminish 'auto-revert-mode nil))
+  (global-auto-revert-mode 1))
 
 (use-package bibtex
   :defer t
@@ -629,12 +638,11 @@ regexp.")
                 "\\)")))
 
 (use-package dired
-  :init
-  (hook-into-modes #'dired-hide-details-mode 'dired-mode-hook))
+  :hook ((dired-mode . dired-hide-details-mode)))
 
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1)
+  :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-buffer-state-icon nil))
 
@@ -678,8 +686,7 @@ regexp.")
   (add-hook 'ess-mode-hook 'jrb-ess-mode-hook))
 
 (use-package exec-path-from-shell
-  :ensure t
-  :defer 1
+  :defer t
   :if (jrb-mac-or-not t nil)
   :config (exec-path-from-shell-initialize))
 
@@ -717,43 +724,18 @@ regexp.")
 
 (use-package flyspell
   :defer t
-  :diminish flyspell-mode
-  :init
-  (use-package ispell
-    :config
-    ;; ignore LaTeX commands and environments
-    (setq ispell-tex-skip-alists
-          (list
-           (append (car ispell-tex-skip-alists)
-                   '(("\\\\cite" ispell-tex-arg-end)
-                     ("\\\\nocite" ispell-tex-arg-end)
-                     ("\\\\includegraphics" ispell-tex-arg-end)
-                     ("\\\\author" ispell-tex-arg-end)
-                     ("\\\\ref" ispell-tex-arg-end)
-                     ("\\\\eqref" ispell-tex-arg-end)
-                     ("\\\\pageref" ispell-tex-arg-end)
-                     ("\\\\label" ispell-tex-arg-end)
-                     ("\\\\mathit" ispell-tex-arg-end)
-                     ("\\\\mathrm" ispell-tex-arg-end)
-                     ("\\\\url" ispell-tex-arg-end)
-                     ("\\\\lstinputlisting" ispell-tex-arg-end 2)
-                     ("\\\\mint" ispell-tex-arg-end 2)
-                     ("\\\\inputminted" ispell-tex-arg-end 2)
-                     ("\\\\code" ispell-tex-arg-end 2)
-                     ("\\\\example" ispell-tex-arg-end 2)))
-           (append (cadr ispell-tex-skip-alists)
-                   '(("tabular" ispell-tex-arg-end))
-                   (mapcar
-                    (lambda (env)
-                      (cons env (format "\\\\end[ \t\n]*{[ \t\n]*%s[ \t\n]*}" env)))
-                    '("equation\\*" "minted" "listing" "lstlisting" "pre" "interface")))))
-    (setq ispell-program-name "aspell"
-          ispell-really-aspell t
-          ispell-extra-args '("--sug-mode=ultra")))
+  :after ispell
+  :diminish flyspell-mode)
 
-  (use-package flyspell-lazy
-    :ensure t
-    :config (flyspell-lazy-mode)))
+(use-package flyspell-lazy
+  :after flyspell
+  :commands (flyspell-lazy-mode)
+  :defines (flyspell-lazy-idle-seconds
+            flyspell-lazy-window-idle-seconds)
+  :config
+  (setq flyspell-lazy-idle-seconds 1
+        flyspell-lazy-window-idle-seconds 3)
+  (flyspell-lazy-mode +1))
 
 (use-package font-lock-profiler
   :defer t
@@ -880,10 +862,43 @@ regexp.")
   (setq imenu-list-focus-after-activation t
         imenu-list-auto-resize nil))
 
+(use-package ispell
+  :config
+  ;; ignore LaTeX commands and environments
+  (setq ispell-tex-skip-alists
+        (list
+         (append (car ispell-tex-skip-alists)
+                 '(("\\\\cite" ispell-tex-arg-end)
+                   ("\\\\nocite" ispell-tex-arg-end)
+                   ("\\\\includegraphics" ispell-tex-arg-end)
+                   ("\\\\author" ispell-tex-arg-end)
+                   ("\\\\ref" ispell-tex-arg-end)
+                   ("\\\\eqref" ispell-tex-arg-end)
+                   ("\\\\pageref" ispell-tex-arg-end)
+                   ("\\\\label" ispell-tex-arg-end)
+                   ("\\\\mathit" ispell-tex-arg-end)
+                   ("\\\\mathrm" ispell-tex-arg-end)
+                   ("\\\\url" ispell-tex-arg-end)
+                   ("\\\\lstinputlisting" ispell-tex-arg-end 2)
+                   ("\\\\mint" ispell-tex-arg-end 2)
+                   ("\\\\inputminted" ispell-tex-arg-end 2)
+                   ("\\\\code" ispell-tex-arg-end 2)
+                   ("\\\\example" ispell-tex-arg-end 2)))
+         (append (cadr ispell-tex-skip-alists)
+                 '(("tabular" ispell-tex-arg-end))
+                 (mapcar
+                  (lambda (env)
+                    (cons env (format "\\\\end[ \t\n]*{[ \t\n]*%s[ \t\n]*}" env)))
+                  '("equation\\*" "minted" "listing" "lstlisting" "pre" "interface")))))
+  (setq ispell-program-name "aspell"
+        ispell-really-aspell t
+        ispell-extra-args '("--sug-mode=ultra")))
+
 (use-package ivy
-  :demand
-  :ensure t
-  :diminish (ivy-mode)
+  ;;:demand
+  ;;:ensure t
+  :defer t
+  :diminish ivy-mode
   :bind
   (("C-s" . swiper)
    ("M-x" . counsel-M-x)
@@ -893,11 +908,6 @@ regexp.")
    ("<f1> l" . counsel-find-library)
    ("<f2> i" . counsel-info-lookup-symbol)
    ("<f2> u" . counsel-unicode-char))
-  :init
-  (use-package counsel :ensure t)
-  (use-package flx :ensure t)
-  (use-package avy)
-  (use-package swiper :ensure t)
   :config
   ;; Exclude temporary files from completion
   (setq completion-ignored-extensions
@@ -1136,12 +1146,11 @@ regexp.")
                          'python-mode-hook))
 
 (use-package persistent-scratch
-  :ensure t
-  :init
-  (setq persistent-scratch-save-file
-        (concat user-emacs-directory ".scratch-" (system-name)))
-  :config
-  (persistent-scratch-setup-default))
+  :diminish
+  :hook ((after-init . persistent-scratch-autosave-mode))
+  :init (setq persistent-scratch-save-file
+              (concat user-emacs-directory ".scratch-" (system-name)))
+  :config (persistent-scratch-setup-default))
 
 (use-package post
   :mode (("mutt-" . post-mode))
@@ -1192,16 +1201,18 @@ regexp.")
   :init (powerline-default-theme))
 
 (use-package profiler
+  :defer t
   :bind (("C-c p s" . profiler-start)
          ("C-c p r" . profiler-report)
          ("C-c p q" . profiler-stop))
-  :init
+  :config
   (setq profiler-report-cpu-line-format
         '((100 left)
           (24 right ((19 right)
                      (5 right))))))
 
 (use-package project
+  :defer t
   :config
   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=41955#26
   (defvar jrb-project-root-markers
@@ -1229,6 +1240,7 @@ DIR must one of `project-root-markers' to be considered a project."
 ;;   :defer t)
 
 (use-package python
+  :defer t
   :init
   (setq python-shell-interpreter "ipython"
         python-shell-interpreter-args "--simple-prompt -i"))
@@ -1255,6 +1267,8 @@ DIR must one of `project-root-markers' to be considered a project."
     (server-start)))
 
 (use-package smartparens
+  :defer t
+  :ensure t
   :config
   ;;(setq sp-show-pair-from-inside nil)
   (require 'smartparens-config)
