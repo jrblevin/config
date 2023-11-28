@@ -9,6 +9,8 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=1000
+setopt SHARE_HISTORY
+setopt HIST_SAVE_NO_DUPS
 
 # Emacs keybindings (-v for vi)
 bindkey -e
@@ -66,8 +68,15 @@ alias gli='git ls-files . --ignored --exclude-standard --others'
 ### Useful Commands and Aliases
 
 if ls -F --color=auto >&/dev/null; then
-  eval `dircolors -b`
-  alias ls="ls --color=auto -F"
+  if whence dircolors >/dev/null; then
+    eval "$(dircolors -b)"
+    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+    alias ls="ls --color=auto -F"
+  else
+    export CLICOLOR=1
+    zstyle ':completion:*:default' list-colors ''
+    alias ls="ls -F"
+  fi
 else
   alias ls="ls -F"
 fi
