@@ -159,17 +159,6 @@ window."
       auto-save-file-name-transforms `((".*" ,jrb-backup-directory t))
       auto-save-list-file-prefix jrb-backup-directory)
 
-;; Save history
-(defvar jrb-history-directory (expand-file-name "history/" user-emacs-directory))
-(unless (file-exists-p jrb-history-directory)
-  (make-directory jrb-history-directory t))
-(setq savehist-file (expand-file-name "history" jrb-history-directory))
-(setq history-length 100
-      history-delete-duplicates t
-      savehist-save-minibuffer-history 1)
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-(savehist-mode 1)
-
 (defun jrb-clean-kill-ring ()
   (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
 (add-hook 'kill-emacs-hook 'jrb-clean-kill-ring)
@@ -1256,6 +1245,20 @@ DIR must one of `project-root-markers' to be considered a project."
     (setq-local global-hl-line-mode nil)
     (hl-line-mode -1))
   (add-hook 'rainbow-mode-hook 'jrb-rainbow-mode-hook))
+
+;; Save history
+(use-package savehist
+  :init
+  (setq jrb-history-directory (expand-file-name "history/" user-emacs-directory))
+  (unless (file-exists-p jrb-history-directory)
+    (make-directory jrb-history-directory t))
+  (setq savehist-file (expand-file-name "history" jrb-history-directory))
+  (savehist-mode 1)
+  :config
+  (setq history-length 100
+        history-delete-duplicates t
+        savehist-save-minibuffer-history 1)
+  (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring)))
 
 (use-package scss-mode
   :mode (("\\.scss\\'" . scss-mode)))
