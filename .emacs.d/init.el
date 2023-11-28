@@ -1043,6 +1043,13 @@ DIR must one of `project-root-markers' to be considered a project."
   ;; (setq consult-project-function nil)
 )
 
+(use-package consult-dir
+  :ensure t
+  :bind (("M-g d"   . consult-dir)
+         :map minibuffer-local-completion-map
+         ("M-s f" . consult-dir-jump-file)
+         ("M-g d" . consult-dir)))
+
 (use-package marginalia
   :ensure t
   :after vertico
@@ -1058,6 +1065,112 @@ DIR must one of `project-root-markers' to be considered a project."
   (completion-styles '(orderless basic))
   (completion-category-overrides
    '((file (styles basic partial-completion)))))
+
+(use-package corfu
+  :ensure t
+  :demand t
+  :bind (("M-/" . completion-at-point)
+         :map corfu-map
+         ("C-n"      . corfu-next)
+         ("C-p"      . corfu-previous)
+         ("<escape>" . corfu-quit)
+         ("<return>" . corfu-insert)
+         ("M-d"      . corfu-info-documentation)
+         ("M-l"      . corfu-info-location)
+         ("M-."      . corfu-move-to-minibuffer))
+  :custom
+  ;; Works with `indent-for-tab-command'. Make sure tab doesn't indent when you
+  ;; want to perform completion
+  (tab-always-indent 'complete)
+  (completion-cycle-threshold nil)      ; Always show candidates in menu
+
+  ;; Only use `corfu' when calling `completion-at-point' or
+  ;; `indent-for-tab-command'
+  (corfu-auto nil)
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.25)
+
+  (corfu-min-width 80)
+  (corfu-max-width corfu-min-width)     ; Always have the same width
+  (corfu-count 14)
+  (corfu-scroll-margin 4)
+  (corfu-cycle nil)
+
+  ;; `nil' means to ignore `corfu-separator' behavior, that is, use the older
+  ;; `corfu-quit-at-boundary' = nil behavior. Set this to separator if using
+  ;; `corfu-auto' = `t' workflow (in that case, make sure you also set up
+  ;; `corfu-separator' and a keybind for `corfu-insert-separator', which my
+  ;; configuration already has pre-prepared). Necessary for manual corfu usage with
+  ;; orderless, otherwise first component is ignored, unless `corfu-separator'
+  ;; is inserted.
+  (corfu-quit-at-boundary nil)
+  (corfu-separator ?\s)            ; Use space
+  (corfu-quit-no-match 'separator) ; Don't quit if there is `corfu-separator' inserted
+  (corfu-preview-current 'insert)  ; Preview first candidate. Insert on input if only one
+  (corfu-preselect-first t)        ; Preselect first candidate?
+
+  ;; Other
+  ;(corfu-echo-documentation nil)        ; Already use corfu-popupinfo
+  :preface
+  (defun corfu-enable-always-in-minibuffer ()
+    "Enable Corfu in the minibuffer if Vertico/Mct are not active."
+    (unless (or (bound-and-true-p mct--active) ; Useful if I ever use MCT
+                (bound-and-true-p vertico--input))
+      (setq-local corfu-auto nil)       ; Ensure auto completion is disabled
+      (corfu-mode 1)))
+
+  (defun corfu-move-to-minibuffer ()
+    (interactive)
+    (let (completion-cycle-threshold completion-cycling)
+      (apply #'consult-completion-in-region completion-in-region--data)))
+  :config
+  (global-corfu-mode)
+
+  ;; Enable Corfu more generally for every minibuffer, as long as no other
+  ;; completion UI is active. If you use Mct or Vertico as your main
+  ;; minibuffer completion UI. From
+  ;; https://github.com/minad/corfu#completing-with-corfu-in-the-minibuffer
+  (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1))
+
+;; (use-package corfu-popupinfo
+;;   :after corfu
+;;   :hook (corfu-mode . corfu-popupinfo-mode)
+;;   :bind (:map corfu-map
+;;               ("M-n" . corfu-popupinfo-scroll-up)
+;;               ("M-p" . corfu-popupinfo-scroll-down)
+;;               ([remap corfu-show-documentation] . corfu-popupinfo-toggle))
+;;   :custom
+;;   (corfu-popupinfo-delay 0.5)
+;;   (corfu-popupinfo-max-width 70)
+;;   (corfu-popupinfo-max-height 20)
+;;   ;; Also here to be extra-safe that this is set when `corfu-popupinfo' is
+;;   ;; loaded. I do not want documentation shown in both the echo area and in
+;;   ;; the `corfu-popupinfo' popup.
+;;   (corfu-echo-documentation nil))
+
+(use-package cape
+  :ensure t
+  :demand t
+  :bind (("C-c . p" . completion-at-point)
+         ("C-c . t" . complete-tag)
+         ("C-c . d" . cape-dabbrev)
+         ("C-c . h" . cape-history)
+         ("C-c . f" . cape-file)
+         ("C-c . k" . cape-keyword)
+         ("C-c . s" . cape-symbol)
+         ("C-c . a" . cape-abbrev)
+         ("C-c . l" . cape-line)
+         ("C-c . w" . cape-dict)
+         ("C-c . \\" . cape-tex)
+         ("C-c . _" . cape-tex)
+         ("C-c . ^" . cape-tex)
+         ("C-c . &" . cape-sgml)
+         ("C-c . r" . cape-rfc1345))
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev))
 
 (use-package vertico
   :ensure t
@@ -1117,6 +1230,7 @@ DIR must one of `project-root-markers' to be considered a project."
   (global-company-mode))
 
 (use-package hippie-expand
+  :disabled t
   :config
   (setq hippie-expand-try-functions-list
         '(try-complete-file-name-partially
