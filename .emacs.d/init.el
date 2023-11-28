@@ -664,6 +664,7 @@ regexp.")
   (guide-key-mode 1))
 
 (use-package helpful
+  :ensure t
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
          ("C-h k" . helpful-key)
