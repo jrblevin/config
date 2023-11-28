@@ -363,7 +363,7 @@ regexp.")
 (add-hook 'find-file-hook 'enable-minor-mode-based-on-extension)
 
 
-;;; Simple package configuration
+;;; General Packages
 
 ;; Notes on use-package declarations:
 ;;
@@ -374,29 +374,12 @@ regexp.")
   "Add FUNC to hook functions given by MODES."
   (dolist (mode-hook modes) (add-hook mode-hook func)))
 
-(use-package abbrev
-  :defer t
-  :diminish abbrev-mode
-  :config
-  ;; Turn on abbrev mode globally
-  (setq-default abbrev-mode t))
-
 (use-package ace-window
   :ensure t
   :defer t
   :bind ("M-o" . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
-
-(use-package ado-mode
-  :disabled t
-  :defer t
-  :load-path "site-lisp/ado-mode/lisp"
-  :config
-  (setq ado-claim-name "Jason Blevins"
-        ado-signature-file "~/.emacs.d/.ado-signature"
-        ado-site-template-dir "~/.emacs.d/site-lisp/ado-mode/templates/"
-        ado-date-format "%Y-%m-%d"))
 
 (use-package all-the-icons
   ;; Run M-x all-the-icons-install-fonts
@@ -410,12 +393,6 @@ regexp.")
                '("\\.f90$" all-the-icons-faicon "calculator"
                  :v-adjust -0.9 :face all-the-icons-lpurple)))
 
-(use-package ampl-mode
-  :mode (("\\.ampl\\'" . ampl-mode)
-         ("\\.mod\\'" . ampl-mode)
-         ("\\.dat\\'" . ampl-mode))
-  :interpreter ("ampl" . ampl-mode))
-
 (use-package auto-compile :disabled t
   :config (auto-compile-on-load-mode))
 
@@ -424,58 +401,6 @@ regexp.")
   :diminish auto-revert-mode
   :init
   (global-auto-revert-mode 1))
-
-(use-package bibtex
-  :defer t
-  :init
-  (defun bibtex-open-file ()
-    "Search for and open PDF file corresponding to BibTeX entry at point."
-    (interactive)
-    (save-excursion
-      (bibtex-beginning-of-entry)
-      (let ((key (cdr (assoc-string "=key=" (bibtex-parse-entry))))
-            (dirs '("/Users/jblevins/references/articles"
-                    "/Users/jblevins/references/books"))
-            (filename nil))
-        (while dirs
-          (setq filename (concat (car dirs) "/" key ".pdf"))
-          (if (not (file-exists-p filename))
-              (setq dirs (cdr dirs))
-            (shell-command (format "open \"%s\"" filename))
-            (setq dirs nil))))))
-  :config
-  (bind-key "C-c C-v" 'bibtex-open-file bibtex-mode-map)
-  (bind-key "C-M-a" 'beginning-of-defun bibtex-mode-map)
-  (bind-key "C-M-e" 'end-of-defun bibtex-mode-map)
-  (setq bibtex-user-optional-fields '(("keywords" "Entry keywords"))
-        bibtex-autokey-names 5
-        bibtex-autokey-name-separator "-"
-        bibtex-autokey-name-year-separator "-"
-        bibtex-autokey-year-title-separator "-"
-        bibtex-autokey-year-length 4
-        bibtex-autokey-titleword-ignore '("The" "A" "If" "An")
-        bibtex-autokey-titleword-length 30
-        bibtex-autokey-titlewords 1
-        bibtex-align-at-equal-sign t))
-
-(use-package cc-mode
-  :mode (("\\.leg\\'" . c-mode))
-  :config
-  (defun jrb-c-mode-common-hook ()
-    (c-set-style "k&r")
-    (setq c-basic-offset 4)
-    (c-toggle-auto-hungry-state -1))
-  (add-hook 'c-mode-common-hook 'jrb-c-mode-common-hook))
-
-(use-package company
-  :defer 1
-  :ensure t
-  :diminish company-mode
-  :config
-  (setq company-backends
-        '((company-dabbrev-code company-abbrev company-capf)
-          (company-files company-keywords)))
-  (global-company-mode))
 
 (use-package compile
   :bind ("<f9>" . compile)
@@ -489,16 +414,6 @@ regexp.")
       (message "Compilation exited abnormally: %s" string))))
   (setq compilation-finish-functions 'jrb-autoclose-compile-window)
   (setq compilation-window-height 15))
-
-(use-package cperl-mode
-  :mode (("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
-  :interpreter (("perl" . cperl-mode)
-                ("perl5" . cperl-mode)
-                ("miniperl" . cperl-mode))
-  :config
-  (setq cperl-indent-level 4)
-  (setq cperl-continued-statement-offset 2)
-  (setq cperl-extra-newline-before-brace nil))
 
 (use-package deft
   :bind
@@ -648,32 +563,6 @@ regexp.")
         ebib-save-keywords-on-exit 'always
         ebib-keywords-use-only-file t))
 
-(use-package elisp-mode
-  :defer t
-  :init
-  (defun jrb-emacs-lisp-hook ()
-    ;; Skip past ^L, headings marked by `;;;`, and subsequent comments
-    ;; <http://endlessparentheses.com/improving-page-navigation.html>
-    (make-local-variable 'page-delimiter)
-    (setq page-delimiter
-          (rx bol (or "\f" ";;;")
-              (not (any "#")) (* not-newline) "\n"
-              (* (* blank) (opt ";" (* not-newline)) "\n"))))
-  (add-hook 'emacs-lisp-mode-hook 'jrb-emacs-lisp-hook))
-
-(use-package ess-site
-  :load-path "/opt/local/share/emacs/site-lisp/ess/"
-  :commands R
-  :mode (("\\.a?do\\'" . stata-mode)
-         ("\\.[Rr]\\'" . r-mode)
-         ("\\.[Rr]out\\'" . r-transcript-mode)
-         ("\\.[Ss][Aa][Ss]\\'" . sas-mode))
-  :init
-  (defun jrb-ess-mode-hook()
-    (when (string-equal ess-language "STA")
-      (define-key ess-mode-map (kbd "_") nil)))
-  (add-hook 'ess-mode-hook 'jrb-ess-mode-hook))
-
 (use-package exec-path-from-shell
   :defer t
   :if (jrb-mac-or-not t nil)
@@ -684,20 +573,6 @@ regexp.")
   :defer 1
   :config (setq er--show-expansion-message t)
   :bind ("C-c =" . er/expand-region))
-
-(use-package f90
-  :ensure t
-  :defer 1
-  :config
-  (setq f90-indent-level 4
-        f90-do-indent 4
-        f90-if-indent 4
-        f90-type-indent 4
-        f90-program-indent 4
-        f90-associate-indent 4
-        f90-critical-indent 4
-        f90-continuation-indent 4
-        f90-tab-indent 4))
 
 (use-package flycheck
   :ensure t
@@ -738,33 +613,6 @@ regexp.")
   :commands (font-lock-studio)
   :load-path "site-lisp/font-lock-studio/")
 
-(use-package f90
-  :mode (("\\.[Ff]\\(?:90\\|95\\|03\\|08\\|15\\)\\'" . f90-mode)
-         ("\\.inc\\'" . f90-mode))
-  :config
-  (defun jrb-f90-mode-hook ()
-    (setq f90-beginning-ampersand nil
-          f90-font-lock-keywords f90-font-lock-keywords-3
-          comment-column 50)
-    ;; Font lock for selector operator and OpenMP directives
-    (font-lock-add-keywords
-     'f90-mode
-     '(("%" . font-lock-keyword-face)
-       ("^[\t ]*!\\($OMP[\t ].*\\)$" 1 font-lock-builtin-face prepend)
-       ("^[#@$]:\\(?:\\sw\\|\\s_\\)+" (0 font-lock-preprocessor-face t))))
-    (make-local-variable 'completion-ignored-extensions)
-    (add-to-list 'completion-ignored-extensions ".mod")
-    ;; Make Backslash non-special (not an escape character).
-    ;; With newer versions of f90.el, use `f90-backslash-not-special`.
-    (when (equal (char-syntax ?\\ ) ?\\ )
-      (modify-syntax-entry ?\\ "."))
-    (define-abbrev f90-mode-abbrev-table "`rw" "real(wp)")
-    (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
-    (abbrev-mode 1)			; turn on abbreviation mode
-    (turn-on-font-lock)			; for highlighting
-    (auto-fill-mode 0))
-  (add-hook 'f90-mode-hook 'jrb-f90-mode-hook))
-
 (use-package gscholar-bibtex
   :commands gscholar-bibtex
   :init
@@ -782,14 +630,6 @@ regexp.")
   :commands git-messenger:popup-message
   :bind ("C-x !" . git-messenger:popup-message)
   :init (setq git-messenger:show-detail t))
-
-(use-package gnuplot
-  :ensure t
-  :mode (("\\.gnuplot\\'" . gnuplot-mode)))
-
-(use-package graphviz-dot-mode
-  :ensure t :defer t
-  :config (setq graphviz-dot-indent-width 4))
 
 (use-package guide-key
   :disabled t
@@ -810,39 +650,8 @@ regexp.")
   :commands  (highlight-refontification-mode)
   :load-path "site-lisp/highlight-refontification")
 
-(use-package hippie-expand
-  :config
-  (setq hippie-expand-try-functions-list
-        '(try-complete-file-name-partially
-          try-complete-file-name
-          try-expand-dabbrev
-          try-expand-dabbrev-all-buffers
-          try-expand-dabbrev-from-kill
-          try-expand-all-abbrevs
-          try-expand-list
-          try-expand-line
-          try-complete-lisp-symbol-partially
-          try-complete-lisp-symbol))
-  :bind ("M-/" . hippie-expand))
-
 (use-package html-mode
   :mode (("\\.leaf\\'" . html-mode)))
-
-(use-package ido
-  :disabled t
-  :init
-  (ido-mode t)
-  (add-to-list 'ido-ignore-files "\\.DS_Store")
-  :config
-  (use-package ido-ubiquitous
-    :ensure t
-    :defer 1
-    :config (ido-ubiquitous-mode 1))
-  (setq ido-enable-flex-matching t
-        ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el")
-        read-file-name-function 'ido-read-file-name
-        ido-ignore-extensions t
-        ido-everywhere t))
 
 (use-package imenu-list
   :ensure t
@@ -883,6 +692,238 @@ regexp.")
         ispell-really-aspell t
         ispell-extra-args '("--sug-mode=ultra")))
 
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch-popup))
+  :init
+  (add-hook 'magit-mode-hook 'hl-line-mode)
+  :config
+  (add-hook 'magit-log-edit-mode-hook
+            #'(lambda ()
+                (set-fill-column 72)
+                (flyspell-mode))))
+
+(use-package multiple-cursors
+  :ensure t
+  :bind
+  ("C-s-c C-s-c" . mc/edit-lines))
+
+(use-package neotree
+  :ensure t
+  :after all-the-icons
+  :bind
+  ("C-c n" . neotree-toggle)
+  :config
+  (setq neo-theme 'icons
+        neo-smart-open t)
+  (setq neo-hidden-regexp-list
+        (append neo-hidden-regexp-list
+                (mapcar (lambda (ext) (concat (regexp-quote ext) "$"))
+                        jrb-ignored-extensions))))
+
+(use-package olivetti
+  :ensure t
+  :diminish (olivetti-mode visual-line-mode)
+  :init
+  (setq olivetti-body-width (jrb-large-screen-or-not 90 80)
+        olivetti-hide-mode-line nil)
+  :bind (("C-c w" . olivetti-mode)))
+
+(use-package page-break-lines
+  :ensure t
+  :diminish page-break-lines-mode
+  :init (hook-into-modes #'page-break-lines-mode
+                         'emacs-lisp-mode-hook
+                         'python-mode-hook))
+
+(use-package persistent-scratch
+  :diminish
+  :hook ((after-init . persistent-scratch-autosave-mode))
+  :init (setq persistent-scratch-save-file
+              (concat user-emacs-directory ".scratch-" (system-name)))
+  :config (persistent-scratch-setup-default))
+
+(use-package powerline
+  :disabled t
+  :ensure t
+  :if (display-graphic-p)
+  :config
+  (setq powerline-display-hud nil
+        powerline-display-buffer-size nil
+        powerline-display-mule-info t
+        powerline-gui-use-vcs-glyph nil
+        powerline-height 24
+        powerline-default-separator 'slant)
+  :init (powerline-default-theme))
+
+(use-package profiler
+  :defer t
+  :bind (("C-c p s" . profiler-start)
+         ("C-c p r" . profiler-report)
+         ("C-c p q" . profiler-stop))
+  :config
+  (setq profiler-report-cpu-line-format
+        '((100 left)
+          (24 right ((19 right)
+                     (5 right))))))
+
+(use-package project
+  :defer t
+  :config
+  ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=41955#26
+  (defvar jrb-project-root-markers
+    '(".dir-locals.el" ".obsidian" "README.md")
+    "Files or directories that indicate the root of a project.")
+
+  (defun jrb-project-find-local (dir)
+    "Determine if DIR is a project root directory.
+DIR must one of `project-root-markers' to be considered a project."
+    (let ((root
+           (locate-dominating-file
+            dir
+            (lambda (d)
+              (let ((default-directory d))
+                (seq-some #'file-expand-wildcards
+                          jrb-project-root-markers))))))
+      (when root
+        (cons 'transient root))))
+
+  ;; This is a fallback to `project-try-vc', and it is slow, so use
+  ;; depth = 10 to give this hook a lower priority.
+  (add-hook 'project-find-functions #'jrb-project-find-local 10))
+
+;; (use-package counsel-projectile
+;;   :defer t)
+
+(use-package rainbow-mode
+  :commands rainbow-mode
+  :init
+  (add-to-list 'auto-minor-mode-alist '("-theme\\.el\\'" . rainbow-mode))
+  (add-to-list 'auto-minor-mode-alist '("\\.s?css\\'" . rainbow-mode))
+  (setq rainbow-x-colors nil)
+  (defun jrb-rainbow-mode-hook ()
+    "Disable hl-line-mode when rainbow-mode is active."
+    (setq-local global-hl-line-mode nil)
+    (hl-line-mode -1))
+  (add-hook 'rainbow-mode-hook 'jrb-rainbow-mode-hook))
+
+;; Save history
+(use-package savehist
+  :init
+  (setq jrb-history-directory (expand-file-name "history/" user-emacs-directory))
+  (unless (file-exists-p jrb-history-directory)
+    (make-directory jrb-history-directory t))
+  (setq savehist-file (expand-file-name "history" jrb-history-directory))
+  (savehist-mode 1)
+  :config
+  (setq history-length 100
+        history-delete-duplicates t
+        savehist-save-minibuffer-history 1)
+  (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring)))
+
+(use-package server
+  :config
+  (setq server-kill-new-buffers t)
+  (unless (server-running-p)
+    (server-start)))
+
+(use-package smartparens
+  :defer t
+  :ensure t
+  :config
+  ;;(setq sp-show-pair-from-inside nil)
+  (require 'smartparens-config)
+  :diminish smartparens-mode)
+
+(use-package sublimity
+  :load-path "site-lisp/sublimity"
+  :config
+  (require 'sublimity-attractive)
+  (require 'sublimity-map)
+  (setq sublimity-attractive-centering-width 120)
+  (sublimity-attractive-hide-vertical-border)
+  (sublimity-attractive-hide-fringes)
+  (defun jrb-setup-sublimity-map ()
+    "Set face and line spacing for sublimity-mode minimap."
+    (sublimity-map-set-delay 0)
+    (setq-local line-spacing nil)
+    (setq buffer-face-mode-face '(:family "Nitti WM2"))
+    (buffer-face-mode))
+  (add-hook 'sublimity-map-setup-hook #'jrb-setup-sublimity-map))
+
+(use-package time-stamp
+  :defer t
+  :bind ("C-c t" . time-stamp)
+  :init
+  ;;(add-hook 'write-file-hooks 'time-stamp)
+  :config
+  (setq time-stamp-active t)
+  (setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
+  (setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|^modified:[ \t]+\\)")
+  (setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
+  (setq time-stamp-line-limit 15))
+
+(use-package titlecase
+  :bind (("C-c T" . titlecase-dwim)))
+
+(use-package which-key
+  :defer 5
+  :diminish which-key-mode
+  :config
+  (which-key-mode))
+
+
+;;; Completion
+
+(use-package abbrev
+  :defer t
+  :diminish abbrev-mode
+  :config
+  ;; Turn on abbrev mode globally
+  (setq-default abbrev-mode t))
+
+(use-package company
+  :defer 1
+  :ensure t
+  :diminish company-mode
+  :config
+  (setq company-backends
+        '((company-dabbrev-code company-abbrev company-capf)
+          (company-files company-keywords)))
+  (global-company-mode))
+
+(use-package hippie-expand
+  :config
+  (setq hippie-expand-try-functions-list
+        '(try-complete-file-name-partially
+          try-complete-file-name
+          try-expand-dabbrev
+          try-expand-dabbrev-all-buffers
+          try-expand-dabbrev-from-kill
+          try-expand-all-abbrevs
+          try-expand-list
+          try-expand-line
+          try-complete-lisp-symbol-partially
+          try-complete-lisp-symbol))
+  :bind ("M-/" . hippie-expand))
+
+(use-package ido
+  :disabled t
+  :init
+  (ido-mode t)
+  (add-to-list 'ido-ignore-files "\\.DS_Store")
+  :config
+  (use-package ido-ubiquitous
+    :ensure t
+    :defer 1
+    :config (ido-ubiquitous-mode 1))
+  (setq ido-enable-flex-matching t
+        ido-file-extensions-order '(".tex" ".bib" ".sty" ".f90" ".txt" ".text" ".el")
+        read-file-name-function 'ido-read-file-name
+        ido-ignore-extensions t
+        ido-everywhere t))
+
 (use-package ivy
   ;;:demand
   ;;:ensure t
@@ -907,8 +948,165 @@ regexp.")
         ivy-count-format "%d/%d "
         ivy-initial-inputs-alist nil
         ;ivy-re-builders-alist '((t . ivy--regex-fuzzy))
-        magit-completing-read-function 'ivy-completing-read)
+        magit-completing-read-function 'completing-read)
   (ivy-mode 1))
+
+(use-package smex
+  :disabled t
+  :ensure t
+  :after ivy
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)
+         ("C-c C-c M-x" . execute-extended-command))
+  :init (setq smex-save-file (concat jrb-history-directory "smex"))
+  :config (smex-initialize))
+
+
+
+;;; Languages
+
+(use-package ado-mode
+  :disabled t
+  :defer t
+  :load-path "site-lisp/ado-mode/lisp"
+  :config
+  (setq ado-claim-name "Jason Blevins"
+        ado-signature-file "~/.emacs.d/.ado-signature"
+        ado-site-template-dir "~/.emacs.d/site-lisp/ado-mode/templates/"
+        ado-date-format "%Y-%m-%d"))
+
+(use-package ampl-mode
+  :mode (("\\.ampl\\'" . ampl-mode)
+         ("\\.mod\\'" . ampl-mode)
+         ("\\.dat\\'" . ampl-mode))
+  :interpreter ("ampl" . ampl-mode))
+
+(use-package bibtex
+  :defer t
+  :init
+  (defun bibtex-open-file ()
+    "Search for and open PDF file corresponding to BibTeX entry at point."
+    (interactive)
+    (save-excursion
+      (bibtex-beginning-of-entry)
+      (let ((key (cdr (assoc-string "=key=" (bibtex-parse-entry))))
+            (dirs '("/Users/jblevins/references/articles"
+                    "/Users/jblevins/references/books"))
+            (filename nil))
+        (while dirs
+          (setq filename (concat (car dirs) "/" key ".pdf"))
+          (if (not (file-exists-p filename))
+              (setq dirs (cdr dirs))
+            (shell-command (format "open \"%s\"" filename))
+            (setq dirs nil))))))
+  :config
+  (bind-key "C-c C-v" 'bibtex-open-file bibtex-mode-map)
+  (bind-key "C-M-a" 'beginning-of-defun bibtex-mode-map)
+  (bind-key "C-M-e" 'end-of-defun bibtex-mode-map)
+  (setq bibtex-user-optional-fields '(("keywords" "Entry keywords"))
+        bibtex-autokey-names 5
+        bibtex-autokey-name-separator "-"
+        bibtex-autokey-name-year-separator "-"
+        bibtex-autokey-year-title-separator "-"
+        bibtex-autokey-year-length 4
+        bibtex-autokey-titleword-ignore '("The" "A" "If" "An")
+        bibtex-autokey-titleword-length 30
+        bibtex-autokey-titlewords 1
+        bibtex-align-at-equal-sign t))
+
+(use-package cc-mode
+  :mode (("\\.leg\\'" . c-mode))
+  :config
+  (defun jrb-c-mode-common-hook ()
+    (c-set-style "k&r")
+    (setq c-basic-offset 4)
+    (c-toggle-auto-hungry-state -1))
+  (add-hook 'c-mode-common-hook 'jrb-c-mode-common-hook))
+
+(use-package cperl-mode
+  :mode (("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
+  :interpreter (("perl" . cperl-mode)
+                ("perl5" . cperl-mode)
+                ("miniperl" . cperl-mode))
+  :config
+  (setq cperl-indent-level 4)
+  (setq cperl-continued-statement-offset 2)
+  (setq cperl-extra-newline-before-brace nil))
+
+(use-package elisp-mode
+  :defer t
+  :init
+  (defun jrb-emacs-lisp-hook ()
+    ;; Skip past ^L, headings marked by `;;;`, and subsequent comments
+    ;; <http://endlessparentheses.com/improving-page-navigation.html>
+    (make-local-variable 'page-delimiter)
+    (setq page-delimiter
+          (rx bol (or "\f" ";;;")
+              (not (any "#")) (* not-newline) "\n"
+              (* (* blank) (opt ";" (* not-newline)) "\n"))))
+  (add-hook 'emacs-lisp-mode-hook 'jrb-emacs-lisp-hook))
+
+(use-package ess-site
+  :load-path "/opt/local/share/emacs/site-lisp/ess/"
+  :commands R
+  :mode (("\\.a?do\\'" . stata-mode)
+         ("\\.[Rr]\\'" . r-mode)
+         ("\\.[Rr]out\\'" . r-transcript-mode)
+         ("\\.[Ss][Aa][Ss]\\'" . sas-mode))
+  :init
+  (defun jrb-ess-mode-hook()
+    (when (string-equal ess-language "STA")
+      (define-key ess-mode-map (kbd "_") nil)))
+  (add-hook 'ess-mode-hook 'jrb-ess-mode-hook))
+
+(use-package f90
+  :ensure t
+  :defer 1
+  :config
+  (setq f90-indent-level 4
+        f90-do-indent 4
+        f90-if-indent 4
+        f90-type-indent 4
+        f90-program-indent 4
+        f90-associate-indent 4
+        f90-critical-indent 4
+        f90-continuation-indent 4
+        f90-tab-indent 4))
+
+(use-package f90
+  :mode (("\\.[Ff]\\(?:90\\|95\\|03\\|08\\|15\\)\\'" . f90-mode)
+         ("\\.inc\\'" . f90-mode))
+  :config
+  (defun jrb-f90-mode-hook ()
+    (setq f90-beginning-ampersand nil
+          f90-font-lock-keywords f90-font-lock-keywords-3
+          comment-column 50)
+    ;; Font lock for selector operator and OpenMP directives
+    (font-lock-add-keywords
+     'f90-mode
+     '(("%" . font-lock-keyword-face)
+       ("^[\t ]*!\\($OMP[\t ].*\\)$" 1 font-lock-builtin-face prepend)
+       ("^[#@$]:\\(?:\\sw\\|\\s_\\)+" (0 font-lock-preprocessor-face t))))
+    (make-local-variable 'completion-ignored-extensions)
+    (add-to-list 'completion-ignored-extensions ".mod")
+    ;; Make Backslash non-special (not an escape character).
+    ;; With newer versions of f90.el, use `f90-backslash-not-special`.
+    (when (equal (char-syntax ?\\ ) ?\\ )
+      (modify-syntax-entry ?\\ "."))
+    (define-abbrev f90-mode-abbrev-table "`rw" "real(wp)")
+    (define-abbrev f90-mode-abbrev-table "f90h" "" 'skeleton-f90-header)
+    (abbrev-mode 1)			; turn on abbreviation mode
+    (turn-on-font-lock)			; for highlighting
+    (auto-fill-mode 0))
+  (add-hook 'f90-mode-hook 'jrb-f90-mode-hook))
+
+(use-package gnuplot
+  :ensure t
+  :mode (("\\.gnuplot\\'" . gnuplot-mode)))
+
+(use-package graphviz-dot-mode
+  :ensure t :defer t
+  :config (setq graphviz-dot-indent-width 4))
 
 (use-package latex
   :ensure auctex
@@ -948,18 +1146,6 @@ regexp.")
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
   :interpreter ("lua" . lua-mode))
-
-(use-package magit
-  :ensure t
-  :bind (("C-x g" . magit-status)
-         ("C-x M-g" . magit-dispatch-popup))
-  :init
-  (add-hook 'magit-mode-hook 'hl-line-mode)
-  :config
-  (add-hook 'magit-log-edit-mode-hook
-            #'(lambda ()
-                (set-fill-column 72)
-                (flyspell-mode))))
 
 (use-package markdown-mode
   :bind (("<f7>" . markdown-mode))
@@ -1092,54 +1278,14 @@ regexp.")
   (jrb-mmm-latex-auto-class "C" 'c-mode)
   (jrb-mmm-latex-auto-class "Fortran" 'f90-mode))
 
-(use-package multiple-cursors
-  :ensure t
-  :bind
-  ("C-s-c C-s-c" . mc/edit-lines))
-
 (use-package muttrc-mode
   :mode (("\\.muttrc\\'" . muttrc-mode)
          ("\\.mutt-aliases\\'" . muttrc-mode)))
-
-(use-package neotree
-  :ensure t
-  :after all-the-icons
-  :bind
-  ("C-c n" . neotree-toggle)
-  :config
-  (setq neo-theme 'icons
-        neo-smart-open t)
-  (setq neo-hidden-regexp-list
-        (append neo-hidden-regexp-list
-                (mapcar (lambda (ext) (concat (regexp-quote ext) "$"))
-                        jrb-ignored-extensions))))
-
-(use-package olivetti
-  :ensure t
-  :diminish (olivetti-mode visual-line-mode)
-  :init
-  (setq olivetti-body-width (jrb-large-screen-or-not 90 80)
-        olivetti-hide-mode-line nil)
-  :bind (("C-c w" . olivetti-mode)))
 
 (use-package org
   :mode (("\\.org\\'" . org-mode))
   :init
   (setq org-hide-emphasis-markers t))
-
-(use-package page-break-lines
-  :ensure t
-  :diminish page-break-lines-mode
-  :init (hook-into-modes #'page-break-lines-mode
-                         'emacs-lisp-mode-hook
-                         'python-mode-hook))
-
-(use-package persistent-scratch
-  :diminish
-  :hook ((after-init . persistent-scratch-autosave-mode))
-  :init (setq persistent-scratch-save-file
-              (concat user-emacs-directory ".scratch-" (system-name)))
-  :config (persistent-scratch-setup-default))
 
 (use-package post
   :mode (("mutt-" . post-mode))
@@ -1176,132 +1322,14 @@ regexp.")
     (post-goto-body))
   (add-hook 'post-mode-hook 'jrb-post-mode-hook))
 
-(use-package powerline
-  :disabled t
-  :ensure t
-  :if (display-graphic-p)
-  :config
-  (setq powerline-display-hud nil
-        powerline-display-buffer-size nil
-        powerline-display-mule-info t
-        powerline-gui-use-vcs-glyph nil
-        powerline-height 24
-        powerline-default-separator 'slant)
-  :init (powerline-default-theme))
-
-(use-package profiler
-  :defer t
-  :bind (("C-c p s" . profiler-start)
-         ("C-c p r" . profiler-report)
-         ("C-c p q" . profiler-stop))
-  :config
-  (setq profiler-report-cpu-line-format
-        '((100 left)
-          (24 right ((19 right)
-                     (5 right))))))
-
-(use-package project
-  :defer t
-  :config
-  ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=41955#26
-  (defvar jrb-project-root-markers
-    '(".dir-locals.el" ".obsidian" "README.md")
-    "Files or directories that indicate the root of a project.")
-
-  (defun jrb-project-find-local (dir)
-    "Determine if DIR is a project root directory.
-DIR must one of `project-root-markers' to be considered a project."
-    (let ((root
-           (locate-dominating-file
-            dir
-            (lambda (d)
-              (let ((default-directory d))
-                (seq-some #'file-expand-wildcards
-                          jrb-project-root-markers))))))
-      (when root
-        (cons 'transient root))))
-
-  ;; This is a fallback to `project-try-vc', and it is slow, so use
-  ;; depth = 10 to give this hook a lower priority.
-  (add-hook 'project-find-functions #'jrb-project-find-local 10))
-
-;; (use-package counsel-projectile
-;;   :defer t)
-
 (use-package python
   :defer t
   :init
   (setq python-shell-interpreter "ipython"
         python-shell-interpreter-args "--simple-prompt -i"))
 
-(use-package rainbow-mode
-  :commands rainbow-mode
-  :init
-  (add-to-list 'auto-minor-mode-alist '("-theme\\.el\\'" . rainbow-mode))
-  (add-to-list 'auto-minor-mode-alist '("\\.s?css\\'" . rainbow-mode))
-  (setq rainbow-x-colors nil)
-  (defun jrb-rainbow-mode-hook ()
-    "Disable hl-line-mode when rainbow-mode is active."
-    (setq-local global-hl-line-mode nil)
-    (hl-line-mode -1))
-  (add-hook 'rainbow-mode-hook 'jrb-rainbow-mode-hook))
-
-;; Save history
-(use-package savehist
-  :init
-  (setq jrb-history-directory (expand-file-name "history/" user-emacs-directory))
-  (unless (file-exists-p jrb-history-directory)
-    (make-directory jrb-history-directory t))
-  (setq savehist-file (expand-file-name "history" jrb-history-directory))
-  (savehist-mode 1)
-  :config
-  (setq history-length 100
-        history-delete-duplicates t
-        savehist-save-minibuffer-history 1)
-  (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring)))
-
 (use-package scss-mode
   :mode (("\\.scss\\'" . scss-mode)))
-
-(use-package server
-  :config
-  (setq server-kill-new-buffers t)
-  (unless (server-running-p)
-    (server-start)))
-
-(use-package smartparens
-  :defer t
-  :ensure t
-  :config
-  ;;(setq sp-show-pair-from-inside nil)
-  (require 'smartparens-config)
-  :diminish smartparens-mode)
-
-(use-package smex
-  :disabled t
-  :ensure t
-  :after ivy
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c C-c M-x" . execute-extended-command))
-  :init (setq smex-save-file (concat jrb-history-directory "smex"))
-  :config (smex-initialize))
-
-(use-package sublimity
-  :load-path "site-lisp/sublimity"
-  :config
-  (require 'sublimity-attractive)
-  (require 'sublimity-map)
-  (setq sublimity-attractive-centering-width 120)
-  (sublimity-attractive-hide-vertical-border)
-  (sublimity-attractive-hide-fringes)
-  (defun jrb-setup-sublimity-map ()
-    "Set face and line spacing for sublimity-mode minimap."
-    (sublimity-map-set-delay 0)
-    (setq-local line-spacing nil)
-    (setq buffer-face-mode-face '(:family "Nitti WM2"))
-    (buffer-face-mode))
-  (add-hook 'sublimity-map-setup-hook #'jrb-setup-sublimity-map))
 
 (use-package swift
   :mode (("\\.swift\\'" . swift-mode)))
@@ -1350,27 +1378,6 @@ DIR must one of `project-root-markers' to be considered a project."
 (use-package tex-site
   :defer t
   :ensure auctex)
-
-(use-package time-stamp
-  :defer t
-  :bind ("C-c t" . time-stamp)
-  :init
-  ;;(add-hook 'write-file-hooks 'time-stamp)
-  :config
-  (setq time-stamp-active t)
-  (setq time-stamp-format "%:b %:d, %:y %02H:%02M %Z")
-  (setq time-stamp-start "\\(Time-stamp:[ \t]+\\\\?[\"<]+\\|Last Modified:[ \t]+\\|@modified[ ]+\\|^modified:[ \t]+\\)")
-  (setq time-stamp-end "\\(\n\\|\\\\?[\">]\\)")
-  (setq time-stamp-line-limit 15))
-
-(use-package titlecase
-  :bind (("C-c T" . titlecase-dwim)))
-
-(use-package which-key
-  :defer 5
-  :diminish which-key-mode
-  :config
-  (which-key-mode))
 
 
 ;;; Margins:
