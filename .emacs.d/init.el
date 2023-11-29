@@ -1111,12 +1111,11 @@ DIR must one of `project-root-markers' to be considered a project."
 
   ;; Only use `corfu' when calling `completion-at-point' or
   ;; `indent-for-tab-command'
-  (corfu-auto nil)
+  (corfu-auto t)
+  (corfu-quit-no-match 'separator)
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.25)
 
-  (corfu-min-width 80)
-  (corfu-max-width corfu-min-width)     ; Always have the same width
   (corfu-count 14)
   (corfu-scroll-margin 4)
   (corfu-cycle nil)
@@ -1135,7 +1134,7 @@ DIR must one of `project-root-markers' to be considered a project."
   (corfu-preselect-first t)        ; Preselect first candidate?
 
   ;; Other
-  ;(corfu-echo-documentation nil)        ; Already use corfu-popupinfo
+  (corfu-echo-documentation nil)        ; Already use corfu-popupinfo
   :preface
   (defun corfu-enable-always-in-minibuffer ()
     "Enable Corfu in the minibuffer if Vertico/Mct are not active."
@@ -1157,21 +1156,21 @@ DIR must one of `project-root-markers' to be considered a project."
   ;; https://github.com/minad/corfu#completing-with-corfu-in-the-minibuffer
   (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1))
 
-;; (use-package corfu-popupinfo
-;;   :after corfu
-;;   :hook (corfu-mode . corfu-popupinfo-mode)
-;;   :bind (:map corfu-map
-;;               ("M-n" . corfu-popupinfo-scroll-up)
-;;               ("M-p" . corfu-popupinfo-scroll-down)
-;;               ([remap corfu-show-documentation] . corfu-popupinfo-toggle))
-;;   :custom
-;;   (corfu-popupinfo-delay 0.5)
-;;   (corfu-popupinfo-max-width 70)
-;;   (corfu-popupinfo-max-height 20)
-;;   ;; Also here to be extra-safe that this is set when `corfu-popupinfo' is
-;;   ;; loaded. I do not want documentation shown in both the echo area and in
-;;   ;; the `corfu-popupinfo' popup.
-;;   (corfu-echo-documentation nil))
+(use-package corfu-popupinfo
+  :after corfu
+  :hook (corfu-mode . corfu-popupinfo-mode)
+  :bind (:map corfu-map
+              ("M-n" . corfu-popupinfo-scroll-up)
+              ("M-p" . corfu-popupinfo-scroll-down)
+              ([remap corfu-show-documentation] . corfu-popupinfo-toggle))
+  :custom
+  (corfu-popupinfo-delay 0.5)
+  ;(corfu-popupinfo-max-width nil)
+  ;(corfu-popupinfo-max-height nil)
+  ;; Also here to be extra-safe that this is set when `corfu-popupinfo' is
+  ;; loaded. I do not want documentation shown in both the echo area and in
+  ;; the `corfu-popupinfo' popup.
+  (corfu-echo-documentation nil))
 
 (use-package cape
   :ensure t
@@ -1197,6 +1196,17 @@ DIR must one of `project-root-markers' to be considered a project."
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-abbrev))
 
+(use-package kind-icon
+  :ensure t
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter) ; Enable `kind-icon'
+  :custom
+  (kind-icon-use-icons t)
+  (kind-icon-default-face 'corfu-default) ; Have background color be the same as `corfu' face background
+  (kind-icon-blend-background nil)  ; Use midpoint color between foreground and background colors ("blended")?
+  (kind-icon-blend-frac 0.08))
+
 (use-package vertico
   :ensure t
   :custom
@@ -1207,6 +1217,7 @@ DIR must one of `project-root-markers' to be considered a project."
   (vertico-mode))
 
 (use-package embark
+  :disabled t
   :ensure t
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
@@ -1228,6 +1239,7 @@ DIR must one of `project-root-markers' to be considered a project."
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
+  :disabled t
   :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
