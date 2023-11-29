@@ -421,7 +421,6 @@ regexp.")
 
 (use-package all-the-icons
   ;; Run M-x all-the-icons-install-fonts
-  :defer t
   :ensure t
   :config
   ;; (add-to-list 'all-the-icons-icon-alist
@@ -751,11 +750,16 @@ regexp.")
 (use-package neotree
   :ensure t
   :after all-the-icons
-  :bind
-  ("C-c n" . neotree-toggle)
+  :bind (("C-c n" . neotree-toggle))
+  :init
+  (setq neo-theme 'nerd
+        neo-autorefresh t
+        neo-smart-open t
+        neo-show-hidden-files t
+        neo-window-width 30
+        neo-cwd-line-style 'text
+        neo-vc-integration '(face char))
   :config
-  (setq neo-theme 'icons
-        neo-smart-open t)
   (setq neo-hidden-regexp-list
         (append neo-hidden-regexp-list
                 (mapcar (lambda (ext) (concat (regexp-quote ext) "$"))
