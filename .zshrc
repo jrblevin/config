@@ -83,11 +83,20 @@ fi
 alias grep='grep --color=auto'
 alias less='less -R'
 alias make='make -j'
-alias l='ls -l'
-alias ll='ls -l'
-alias lh='ls -alh'
-alias lr='ls -talr'
-alias lsd='ls -d */'
+alias k='exa -algh --git'
+if whence exa >/dev/null; then
+    alias l='exa -algh --git'
+    alias ll='exa -algh --git'
+    alias lh='exa -algh --git'
+    alias lr='exa -alghr --git'
+    alias lsd='exa -alghrd --git */'
+else
+    alias l='ls -l'
+    alias ll='ls -l'
+    alias lh='ls -alh'
+    alias lr='ls -talr'
+    alias lsd='ls -d */'
+fi
 alias bc='bc -l'
 alias ee="emacs -nw"
 alias ec="emacsclient"
