@@ -1,5 +1,5 @@
 ;;; -*- lisp-data -*-
-(("/Users/jblevins/work/ODB/")
- ("~/work/ODB/")
- ("~/gtd/")
- ("~/work/XBCommon/"))
+(("~/git/ODB/")
+ ("~/git/gtd/")
+ ("~/git/KeepaDB")
+ ("~/git/XBCommon/"))

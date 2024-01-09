@@ -480,6 +480,7 @@ regexp.")
    ("C-c Y" . deft-yesterday)
    ("C-c D" . deft-today)
    ("C-c M" . deft-tomorrow)
+   ("C-c F" . jrb-git-autocommit-and-push)
    ("C-x C-g" . deft-find-file))
 
   :commands
@@ -551,6 +552,17 @@ regexp.")
     (split-window-right)
     (deft-previous))
 
+  (defun jrb-git-autocommit-and-push ()
+    "Automatically commit all changes and push to the remote repository."
+    (interactive)
+    ;; Stage all changes
+    (magit-stage-modified t)
+    ;; Commit with a standard message
+    (let ((message (format-time-string "gtd commit (Emacs): %Y-%m-%d %02H:%02M:%02S %Z")))
+      (magit-commit-create (list "--all" "-m" message)))
+    ;; Push to remote
+    (magit-push-current-to-pushremote nil))
+
   :init
   (setq deft-directory "~/git/gtd/")
   (setq deft-time-format " %y-%m-%d")
@@ -599,6 +611,9 @@ regexp.")
                 "\\|^#\\+[[:upper:]_]+:.*$" ; org-mode metadata
                 "\\)")))
 
+(use-package devdocs
+  :bind (("C-h D" . devdocs-lookup)))
+
 (use-package dired
   :hook ((dired-mode . dired-hide-details-mode)))
 
@@ -607,6 +622,16 @@ regexp.")
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-buffer-state-icon nil))
+
+(use-package dumb-jump
+  :ensure t
+  :init
+  ;; Use ag due to bug with git-grep on macOS: https://github.com/jacktasia/dumb-jump/issues/428
+  ;; brew install the_silver_searcher
+  (setq dumb-jump-force-searcher 'ag)
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
+  (setq dumb-jump-selector 'completing-read))
 
 (use-package ebib
   :commands ebib
@@ -682,7 +707,7 @@ regexp.")
 
 (use-package google-this
   :commands google-this
-  :bind ("C-c g" . google-this))
+  :bind ("C-c s" . google-this))
 
 (use-package git-messenger
   :commands git-messenger:popup-message
@@ -1244,26 +1269,26 @@ DIR must one of `project-root-markers' to be considered a project."
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-(use-package codeium
-  :init
-  (slot/vc-install :fetcher "github" :repo "Exafunction/codeium.el")
-  (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
-  :config
-  (setq use-dialog-box nil) ;; do not use popup boxes
-  (setq codeium-mode-line-enable
-        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
-  (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
-  ;; You can overwrite all the codeium configs!
-  ;; for example, we recommend limiting the string sent to codeium for better performance
-  (defun my-codeium/document/text ()
-    (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
-  ;; if you change the text, you should also change the cursor_offset
-  ;; warning: this is measured by UTF-8 encoded bytes
-  (defun my-codeium/document/cursor_offset ()
-    (codeium-utf8-byte-length
-     (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
-  (setq codeium/document/text 'my-codeium/document/text)
-  (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
+;;(use-package codeium
+;;  :init
+;;  (slot/vc-install :fetcher "github" :repo "Exafunction/codeium.el")
+;;  (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
+;;  :config
+;;  (setq use-dialog-box nil) ;; do not use popup boxes
+;;  (setq codeium-mode-line-enable
+;;        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
+;;  (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
+;;  ;; You can overwrite all the codeium configs!
+;;  ;; for example, we recommend limiting the string sent to codeium for better performance
+;;  (defun my-codeium/document/text ()
+;;    (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
+;;  ;; if you change the text, you should also change the cursor_offset
+;;  ;; warning: this is measured by UTF-8 encoded bytes
+;;  (defun my-codeium/document/cursor_offset ()
+;;    (codeium-utf8-byte-length
+;;     (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
+;;  (setq codeium/document/text 'my-codeium/document/text)
+;;  (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
 
 
 ;;; Completion: Ivy/Swiper/Counsel
@@ -1891,9 +1916,9 @@ DIR must one of `project-root-markers' to be considered a project."
                   '("pre" current-indentation))
      (add-to-list 'LaTeX-indent-environment-list
                   '("interface" current-indentation))
-     (make-local-variable 'LaTeX-verbatim-regexp)
-     (setq LaTeX-verbatim-regexp
-           (concat LaTeX-verbatim-regexp "\\|pre\\|interface"))
+     ;; (make-local-variable 'LaTeX-verbatim-regexp)
+     ;; (setq LaTeX-verbatim-regexp
+     ;;      (concat (or LaTeX-verbatim-regexp nil) "\\|pre\\|interface"))
      (add-to-list 'LaTeX-verbatim-environments-local "pre")
      (add-to-list 'LaTeX-verbatim-environments-local "interface")
      (add-to-list 'LaTeX-verbatim-macros-with-delims-local "code")

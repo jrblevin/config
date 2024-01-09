@@ -27,6 +27,7 @@
 
 [diff]
         tool = Kaleidoscope
+	submodule = log
 
 [difftool]
         prompt = false
