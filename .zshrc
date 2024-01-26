@@ -83,19 +83,20 @@ fi
 alias grep='grep --color=auto'
 alias less='less -R'
 alias make='make -j'
-alias k='exa -algh --git'
-if whence exa >/dev/null; then
-    alias l='exa -algh --git'
-    alias ll='exa -algh --git'
-    alias lh='exa -algh --git'
-    alias lr='exa -alghr --git'
-    alias lsd='exa -alghrd --git */'
+if whence lsd >/dev/null; then
+    alias l='lsd -alh --git'
+    alias ll='lsd -alh --git'
+    alias lh='lsd -alh --git'
+    alias lr='lsd -talhr --git'
+    alias lsd='lsd -alhd --git */'
+    alias k='lsd -alh --git'
 else
     alias l='ls -l'
     alias ll='ls -l'
     alias lh='ls -alh'
     alias lr='ls -talr'
     alias lsd='ls -d */'
+    alias k='ls -alh'
 fi
 alias bc='bc -l'
 alias ee="emacs -nw"
@@ -225,9 +226,6 @@ function chpwd() {
 # zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=1'
-
-# k
-source ~/.zsh/k.sh
 
 # Archival
 compress_and_delete () { tar zcvf "$1.tar.gz" "$1" && rm -rf "$1" }
