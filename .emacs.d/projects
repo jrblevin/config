@@ -1,5 +1,6 @@
 ;;; -*- lisp-data -*-
-(("~/git/ODB/")
+(("~/git/plain-text-markdown/")
+ ("~/git/ODB/")
  ("~/git/gtd/")
  ("~/git/KeepaDB")
  ("~/git/XBCommon/"))

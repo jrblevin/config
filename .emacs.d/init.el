@@ -1587,7 +1587,7 @@ DIR must one of `project-root-markers' to be considered a project."
         markdown-open-command "mark"
         markdown-enable-wiki-links t
         markdown-indent-on-enter 'indent-and-new-item
-        markdown-link-space-sub-char "-"
+        markdown-link-space-sub-char " "
         markdown-unordered-list-item-prefix "*   "
         markdown-footnote-location 'end
         markdown-reference-location 'header
@@ -2041,6 +2041,30 @@ DIR must one of `project-root-markers' to be considered a project."
     (call-interactively #'fill-paragraph)))
 
 (global-set-key [remap fill-paragraph] #'fill-paragraph-dwim)
+
+(defun fill-paragraph-and-double-space ()
+  "Fill paragraph at point, ensuring double spaces at sentence boundaries."
+  (interactive)
+  (save-excursion
+    (let ((end-marker (make-marker))
+          (sentence-end-double-space nil))  ; Recognize single space as sentence end
+      (set-marker end-marker (progn
+                               (forward-paragraph)
+                               (skip-syntax-backward "-")
+                               (point)))
+      (forward-paragraph -1)
+      (while (and (< (point) end-marker)
+                  (not (eobp)))
+        (forward-sentence)
+        (forward-char) ; Move past end punctuation
+        (unless (>= (point) end-marker)
+          ;; Check and add an additional space if there's only one space
+          (when (and (equal (char-before) ?\s)
+                     (not (equal (char-after) ?\s)))
+            (insert " "))
+          ;; Skip any extra whitespace or newline
+          (skip-syntax-forward "-")))))
+  (fill-paragraph))
 
 (defun make-row-vector (begin end)
   (interactive "*r")
