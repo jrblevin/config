@@ -144,7 +144,7 @@ window."
 (setq tab-width 8)
 
 ;; Store backup files in one place.  Do the same for auto save files.
-(defvar jrb-backup-directory (expand-file-name "backups/" user-emacs-directory))
+(defvar jrb-backup-directory (expand-file-name "~/.backups/"))
 (unless (file-exists-p jrb-backup-directory)
   (make-directory jrb-backup-directory t))
 (setq make-backup-files t
@@ -152,7 +152,7 @@ window."
       backup-by-copying t
       version-control t
       delete-old-versions t
-      vc-make-backup-files t
+      vc-make-backup-files nil
       kept-old-versions 6
       kept-new-versions 9)
 (setq auto-save-default t
