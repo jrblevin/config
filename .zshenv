@@ -38,28 +38,19 @@ if [[ $OS == "Darwin" ]]; then
     ZCOMPDUMP=$HOME/.zcompdump.osx
     # Intel compilers
     export LM_LICENSE_FILE=${LM_LICENSE_FILE}:28518@license5.osc.edu
-    # PGI
-    export PGI_TOP=/opt/pgi
-    export PGI_VERSION=2019
-    export PATH=$PGI_TOP/osx86-64/$PGI_VERSION/bin:$PGI_TOP/osx86-64/$PGI_VERSION/mpi/mpich/bin:$PATH
-    export MANPATH=$MANPATH:$PGI/osx86-64/$PGI_VERSION/man
-    export LM_LICENSE_FILE=${LM_LICENSE_FILE}:/opt/pgi/license.dat
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
     ZCOMPDUMP=$HOME/.zcompdump.linux
+    # CUDA
+    NVHPCSDK=/opt/nvidia/hpc_sdk; export NVHPCSDK
+    MANPATH=$MANPATH:$NVHPCSDK/Linux_x86_64/24.1/compilers/man; export MANPATH
+    PATH=$NVHPCSDK/Linux_x86_64/24.1/compilers/bin:$PATH; export PATH
     # GFortran
     export PATH=/opt/gcc-trunk/bin:${PATH}
-    # PGI
-    export PGI=/opt/pgi
-    export PGI_VERSION=15.10
-    export PATH=$PGI/linux86-64/$PGI_VERSION/bin:$PATH
-    export MANPATH=$MANPATH:$PGI/linux86-64/$PGI_VERSION/man
-    export LM_PROJECT=PAS0501
-    export LM_LICENSE_FILE=$LM_LICENSE_FILE:7496@license2.osc.edu
     # Open MPI
     export PATH=/opt/openmpi/bin:${PATH}
-    # Library path
+    # Gfortran and OpenMPI Library Path
     if [ -z "$LD_LIBRARY_PATH" ]; then
         LD_LIBRARY_PATH="/opt/gcc-trunk/lib${LIB64}:/opt/openmpi/lib:"
     else
