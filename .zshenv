@@ -29,7 +29,8 @@ if [[ $OS == "Darwin" ]]; then
     # MacTeX
     export PATH="/usr/local/texlive/2023/bin/universal-darwin:/Library/TeX/texbin:$PATH"
     # Homebrew
-    export PATH="/usr/local/sbin:/opt/homebrew/bin:$PATH"
+    export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+    export PATH="$(brew --prefix python)/libexec/bin:$PATH"
     # Color ls
     export CLICOLOR=1
     # Use Spotlight database for locate
