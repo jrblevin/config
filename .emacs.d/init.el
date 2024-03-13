@@ -860,6 +860,8 @@ regexp.")
 (use-package project
   :defer t
   :config
+  (setq project-list-file "~/.emacs.d.private/projects")
+
   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=41955#26
   (defvar jrb-project-root-markers
     '(".dir-locals.el" ".obsidian" "README.md")
@@ -2527,7 +2529,7 @@ and subsequent lines as the event note."
 
 ;;; Local configuration
 
-(load-file "~/.emacs.d/init-local.el")
+(load-file "~/.emacs.d.private/init-local.el")
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
