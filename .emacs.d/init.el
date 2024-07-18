@@ -1109,6 +1109,10 @@ DIR must one of `project-root-markers' to be considered a project."
   :after vertico
   :custom
   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :config
+  ;; Exclude temporary files from completion
+  (setq completion-ignored-extensions
+        (append completion-ignored-extensions jrb-ignored-extensions))
   :init
   (marginalia-mode))
 
