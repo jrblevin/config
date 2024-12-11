@@ -73,6 +73,11 @@ if [[ $OS == "Darwin" ]]; then
     EMACS24=/Applications/Emacs\ 24.5.app/Contents/MacOS/Emacs
 fi
 
+# Visual Studio Code
+if [[ $OS == "Darwin" ]]; then
+    export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+
 # Ruby
 if [[ $OS == "Darwin" ]]; then
     if [[ ! -z $(which rbenv) ]]; then

@@ -9,7 +9,9 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=1000
-setopt SHARE_HISTORY
+unsetopt SHARE_HISTORY
+unsetopt INC_APPEND_HISTORY
+setopt APPEND_HISTORY # Append commands to history when a shell exits
 setopt HIST_SAVE_NO_DUPS
 
 # Emacs keybindings (-v for vi)
@@ -229,3 +231,17 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=1'
 
 # Archival
 compress_and_delete () { tar zcvf "$1.tar.gz" "$1" && rm -rf "$1" }
+
+# History search
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^P" up-line-or-beginning-search
+bindkey "^N" down-line-or-beginning-search
+bindkey "\e[A" up-line-or-beginning-search
+bindkey "\e[B" down-line-or-beginning-search
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/jblevins/.cache/lm-studio/bin"

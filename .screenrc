@@ -9,6 +9,11 @@
 # * http://planet.gentoo.org/developers/dams/2006/09/22/screenrc
 # * https://serverfault.com/questions/3740/what-are-useful-screenrc-settings
 
+# UTF-8
+defutf8 on
+utf8 on on
+term "screen-256color"
+
 # Use visual bell.
 vbell on
 
