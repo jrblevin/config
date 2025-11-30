@@ -26,7 +26,6 @@ print.line.length       = 77
 
 # Remove extraneous fields
 delete.field {keywords}
-delete.field {doi}
 delete.field {url}
 
 # Remove duplicate entries
