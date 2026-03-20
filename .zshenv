@@ -4,7 +4,7 @@
 # Columbus, June 6, 2017
 
 # Basic $PATH. Anything in ~/bin has priority.
-PATH=${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+PATH=${HOME}/bin:${HOME}/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 # Library path: add /usr/local/lib
 if [ -z "$LD_LIBRARY_PATH" ]; then
@@ -27,18 +27,16 @@ fi
 OS=`uname -s`
 if [[ $OS == "Darwin" ]]; then
     # MacTeX
-    export PATH="/usr/local/texlive/2023/bin/universal-darwin:/Library/TeX/texbin:$PATH"
+    export PATH="/Library/TeX/texbin:$PATH"
     # Homebrew
     export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
     export PATH="$(brew --prefix python)/libexec/bin:$PATH"
     # Color ls
     export CLICOLOR=1
     # Use Spotlight database for locate
-    function locate { mdfind "kMDItemDisplayName == '$@'wc"; }
+    function locate { mdfind "kMDItemDisplayName == '$@'"; }
     # Completion dump file
     ZCOMPDUMP=$HOME/.zcompdump.osx
-    # Intel compilers
-    export LM_LICENSE_FILE=${LM_LICENSE_FILE}:28518@license5.osc.edu
 elif [[ $OS == "Linux" ]]; then
     # less input preprocessor
     eval `lessfile`
@@ -67,12 +65,6 @@ elif [ -f /opt/intel/bin/compilervars.sh ]; then
     source /opt/intel/bin/compilervars.sh ${ICS_ARCH}
 fi
 
-# Emacs
-if [[ $OS == "Darwin" ]]; then
-    EMACS25=/Applications/Emacs\ 25.app/Contents/MacOS/Emacs-x86_64-10_9
-    EMACS24=/Applications/Emacs\ 24.5.app/Contents/MacOS/Emacs
-fi
-
 # Visual Studio Code
 if [[ $OS == "Darwin" ]]; then
     export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -85,16 +77,9 @@ if [[ $OS == "Darwin" ]]; then
     fi
 fi
 
-# Python
-if [[ $OS == "Darwin" ]]; then
-    if [[ ! -z $(which python2.7) ]]; then
-        export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}
-    fi
-fi
-
 # Coreutils
 if [[ $OS == "Darwin" ]]; then
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
 # LM Studio CLI (lms)

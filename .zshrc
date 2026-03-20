@@ -123,10 +123,9 @@ alias mv=/bin/mv
 alias cp=/bin/cp
 
 # SSH shortcuts
-alias ss1="ssh ap-jb01"
-alias ssm="ssh blevins-mac"
 alias ssg="ssh gauss"
 alias ssl="ssh leibniz"
+alias ssm="ssh macpro"
 
 # duf: human readable, sorted disk usage
 # http://www.earthinfo.org/linux-disk-usage-sorted-by-size-and-human-readable/
