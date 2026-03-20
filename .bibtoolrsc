@@ -33,4 +33,4 @@ check.double 		= on
 check.double.delete 	= on
 
 # Include my main bibtex database by default
-input {/Users/jblevins/gtd/research.bib}
+input {~/gtd/research.bib}
