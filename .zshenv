@@ -80,7 +80,7 @@ fi
 
 # Ruby
 if [[ $OS == "Darwin" ]]; then
-    if [[ ! -z $(which rbenv) ]]; then
+    if whence rbenv >/dev/null; then
         eval "$(rbenv init -)"
     fi
 fi
