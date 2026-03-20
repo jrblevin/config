@@ -6,7 +6,7 @@ fish_add_path ~/.local/bin
 starship init fish | source
 
 # Set default editor
-set -x EDITOR /usr/local/bin/code
+set -x EDITOR $HOME/bin/EDITOR
 
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH $HOME/.cache/lm-studio/bin
