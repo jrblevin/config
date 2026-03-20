@@ -107,8 +107,15 @@ alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
 alias mutt="cd ~/inbox; mutt"
 alias sdr="screen -d -R"
-alias tma="tmux attach -t default || tmux new -s default"
 alias latexmk="latexmk -g -synctex=1 -pdf -pvc"
+
+tma() {
+    if tmux list-sessions 2>/dev/null; then
+        tmux -CC attach
+    else
+        tmux -CC
+    fi
+}
 
 # Protect OS X tags
 # http://brettterpstra.com/2014/07/03/mavericks-tags-and-coreutils-a-warning/
