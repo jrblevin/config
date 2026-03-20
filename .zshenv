@@ -97,5 +97,10 @@ if [[ $OS == "Darwin" ]]; then
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
+# LM Studio CLI (lms)
+if [[ $OS == "Linux" ]]; then
+    export PATH="$PATH:$HOME/.cache/lm-studio/bin"
+fi
+
 # Private settings
 source $HOME/.zsh_private

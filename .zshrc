@@ -204,5 +204,3 @@ bindkey "^N" down-line-or-beginning-search
 bindkey "\e[A" up-line-or-beginning-search
 bindkey "\e[B" down-line-or-beginning-search
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/jblevins/.cache/lm-studio/bin"
