@@ -144,53 +144,7 @@ alias -s org=elinks
 
 ### Prompt
 
-autoload -U colors
-colors
-setopt prompt_subst
-
-# Configuration
-DEFAULT_USER='jblevins'
-
-# Context: user@hostname
-prompt_context() {
-  local user=`whoami`
-  local context="%m"
-  if [[ $UID -ne 0 && "$user" != "$DEFAULT_USER" ]]; then
-    context="$user@$context"
-  fi
-  echo -n "$context"
-}
-
-# Git branch and status
-prompt_git() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  branch="${ref/refs\/heads\//}$dirty"
-  echo -n "%{$fg[yellow]%} :$branch"
-  # if [[ -n $(git status -s 2> /dev/null) ]]; then
-  #   echo -n "%{$fg[red]%} :$branch"
-  # else
-  #   echo -n "%{$fg[yellow]%} :$branch"
-  # fi
-}
-
-# Prompt symbol
-prompt_symbol() {
-  if [[ $UID -ne 0 ]]; then
-      echo -n "%"
-  else
-      echo -n "#"
-  fi
-}
-
-PROMPT='%{$fg[green]%}$(prompt_context) %{$fg[blue]%}%~$(prompt_git) %{$reset_color%}%$(prompt_symbol) '
-
-# Fix for TRAMP
-[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
-
-# Set the xterm title
-if [[ $TERM == "xterm" ]]; then
-    print -Pn "\e]2;$USER@$HOST\a"
-fi
+eval "$(starship init zsh)"
 
 
 ### SSH
