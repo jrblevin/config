@@ -204,3 +204,34 @@ bindkey "^N" down-line-or-beginning-search
 bindkey "\e[A" up-line-or-beginning-search
 bindkey "\e[B" down-line-or-beginning-search
 
+### Git Python Projects
+
+# Activate a Python project by name: cd, source venv, rename tmux window
+activate() {
+    [[ -z "$1" ]] && echo "Please provide a project name" && return 1
+    local project="$1" project_dir=""
+    for base in ~/git ~/git/*; do
+        project_dir=$(find "$base" -maxdepth 3 -type d -name "$project" 2>/dev/null | while read dir; do
+            [[ -d "$dir/.git" && ( -d "$dir/.venv" || -d "$dir/venv" ) ]] && echo "$dir" && break
+        done)
+        [[ -n "$project_dir" ]] && break
+    done
+    [[ -z "$project_dir" ]] && echo "Project $project not found" && return 1
+    cd "$project_dir"
+    [[ -d .venv ]] && source .venv/bin/activate
+    [[ -d venv ]] && source venv/bin/activate
+    tmux rename-window "$project"
+}
+
+# Completion for activate: projects under ~/git with .git and a venv
+_activate() {
+    local -a projects
+    for dir in ~/git/*/; do
+        [[ -d "$dir/.git" && ( -d "$dir/.venv" || -d "$dir/venv" ) ]] && projects+=(${dir:h:t})
+    done
+    for dir in ~/git/*/*/; do
+        [[ -d "$dir/.git" && ( -d "$dir/.venv" || -d "$dir/venv" ) ]] && projects+=(${dir:h:t})
+    done
+    _describe 'project' projects
+}
+compdef _activate activate
