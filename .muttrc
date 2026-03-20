@@ -3,23 +3,14 @@
 # Jason Blevins <jblevins@xbeta.org>
 # Durham, January 14, 2006
 
-# Identity
-# --------
-
-set realname="Jason Blevins"
-set from="blevins.141@osu.edu"
-alternates "jblevins@xbeta.org|jrb11@duke.edu|jrblevin@sdf.org|jrblevin@sdf.lonestar.org|jrblevin@gmail.com"
+# Identity, credentials, and server settings
+source ~/.muttrc_private
 
 # Read alias file
 set alias_file="~/.mutt-aliases"
 set sort_alias= alias
 set reverse_alias=yes
 source $alias_file
-
-# Usernames and passwords
-set my_user = jrblevin@fastmail.fm
-set my_pass = `security find-internet-password -w -a jrblevin@fastmail.fm -s mail.messagingengine.com`
-set my_server = mail.messagingengine.com
 
 
 # Mailboxes
@@ -332,7 +323,7 @@ set crypt_replysignencrypted=yes
 # %r - Expands to a list of key IDs.
 
 set pgp_autosign=no
-set pgp_sign_as=0x7F569169
+set pgp_sign_as=$my_pgp_key
 set pgp_replyencrypt=yes
 set pgp_timeout=1800
 set pgp_verify_sig=yes
