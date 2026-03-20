@@ -6,3 +6,4 @@
 .emacs.d/history/*
 .emacs.d/recentf
 .emacs.d/.scratch*
+.config/fish/fish_variables
