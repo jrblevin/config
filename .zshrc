@@ -7,12 +7,14 @@
 
 # history
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=1000
+HISTSIZE=100000
+SAVEHIST=100000
 unsetopt SHARE_HISTORY
-unsetopt INC_APPEND_HISTORY
+setopt INC_APPEND_HISTORY # Write each command immediately
 setopt APPEND_HISTORY # Append commands to history when a shell exits
 setopt HIST_SAVE_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS
 
 # Emacs keybindings (-v for vi)
 bindkey -e
